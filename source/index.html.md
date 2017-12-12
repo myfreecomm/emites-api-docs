@@ -13,6 +13,7 @@ includes:
   - emission_notes
   - consult_note
   - cancel_note
+  - disabled_note
 
 search: true
 ---
