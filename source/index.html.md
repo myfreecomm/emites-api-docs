@@ -12,6 +12,7 @@ includes:
   - basic_information
   - emission_notes
   - consult_note
+  - cancel_note
 
 search: true
 ---
