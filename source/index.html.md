@@ -11,6 +11,7 @@ toc_footers:
 includes:
   - basic_information
   - emission_notes
+  - consult_note
 
 search: true
 ---
