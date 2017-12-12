@@ -10,20 +10,6 @@ toc_footers:
 
 includes:
   - basic_information
-  - payees
-  - payers
-  - bank_accounts
-  - charge_configs
-  - charge_templates
-  - charges
-  - payment_configs
-  - payments
-  - credit_cards
-  - remittance_cnabs
-  - regress_cnabs
-  - webhook
-  - payloads
-  - charging_types
 
 search: true
 ---
