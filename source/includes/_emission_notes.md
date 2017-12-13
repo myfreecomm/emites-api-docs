@@ -1,8 +1,15 @@
 # Emissão de notas
 
 Para emitir notas, é necessário realizar uma requisição POST para o seguinte endereço:  
+
 POST /api/v1/organizations/{organization_id}/nfe_batch  
-Exemplo do corpo da requisição:
+
+Veja ao lado um exemplo do corpo da requisição:  
+
+<aside class="warning">
+Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo "á", "é", "â", "ã" etc. Também não aceitam "ç".
+</aside>
+
   
 
   ```shell
