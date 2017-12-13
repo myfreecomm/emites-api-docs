@@ -1,5 +1,5 @@
 ---
-title: API Cobrato
+title: API Emites
 
 language_tabs:
   - Shell: cURL
