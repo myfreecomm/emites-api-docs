@@ -11,6 +11,7 @@ toc_footers:
 includes:
   - basic_information
   - emission_notes
+  - fields_api
   - consult_note
   - cancel_note
   - disabled_note
