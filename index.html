@@ -1,0 +1,5815 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Emites</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;Shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img style="margin: 15px 0 0 15px;" src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="Shell">cURL</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li>Este projeto é mantido por</li>
+            <li><a href='#'>Myfreecomm</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="informa-es-b-sicas">Informaçães básicas</h1>
+
+<!-- ## Introdução
+
+
+O Emites possui uma API REST para interagir com seus recursos, através de objetos JSON sobre HTTP, usando todos principais verbos HTTP (GET, POST, PATCH, DELETE). Cada recurso possui sua própria URL e pode ser manipulado de maneira isolada, tentando assim seguir os princípios REST ao máximo. -->
+
+<h2 id="autentica-o">Autenticação</h2>
+
+<p>Todo acesso à API é feito do ponto de vista de uma conta existente no Emites. Assim sendo, toda requisição à API deverá ser autenticada. A autenticação é feita via token, que deve ser informado no header de cada requisição efetuada.</p>
+
+<p>Para todas as requisições são necessários os seguintes Headers:</p>
+
+<p>&ldquo;Authorization&rdquo;: &ldquo;Token token=123&rdquo;,<br>
+&ldquo;Content-Type&rdquo;: &ldquo;application/json&rdquo;</p>
+<pre class="highlight shell"><code>    Formato JSON
+
+    EXEMPLO DE REQUISIÇÃO
+
+      curl -X GET <span class="se">\</span>
+        http://localhost:3000/api/v1/organizations <span class="se">\</span>
+        -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec7101010'</span> <span class="se">\</span>
+        -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+        -H <span class="s1">'content-type: application/json'</span> 
+
+    EXEMPLO DE RESPOSTA
+
+    <span class="o">{</span>
+      <span class="s2">"chave"</span>: <span class="s2">"valor"</span>
+    <span class="o">}</span>
+
+</code></pre>
+
+          <h1 id="emiss-o-de-notas">Emissão de notas</h1>
+
+<p>Para emitir notas, é necessário realizar uma requisição POST para o seguinte endereço:  </p>
+
+<p>POST /api/v1/organizations/{organization_id}/nfe_batch  </p>
+
+<p>Veja ao lado um exemplo do corpo da requisição:  </p>
+
+<aside class="warning">
+Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo &ldquo;á&rdquo;, &ldquo;é&rdquo;, &ldquo;â&rdquo;, &ldquo;ã&rdquo; etc. Também não aceitam &ldquo;ç&rdquo;.
+</aside>
+<pre class="highlight shell"><code>    curl -X POST <span class="se">\</span>
+  http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe_batch <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05as'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -H <span class="s1">'postman-token: 82f01e8f-9fe6-e89c-b4fe-c3e24b9d2853'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+        "nfe_batch":  {
+            "lote": 1,
+            "sincronicidade": 0,
+            "uf": 35,
+            "nfes": [{
+                "dados_gerais": {
+                    "uf": 35,
+                    "serie": "1",
+                    "codigo_mun_ocorrencia": "3525904",
+                    "nfe_numero": "123",
+                    "natureza_operacao": "Venda merc. adq. rec. terc. efet. fora estab.",
+                    "data_saida_entrada": "2017-09-24T17:07:35-03:00",
+                    "tipo_operacao": "1",
+                    "indicador_consumidor_final": "0",
+                    "indicador_presenca": "9",
+                    "finalidade_nfe": "1",
+                    "valor_total_nota": 989.69,
+                    "destino_operacao": "1",
+                    "indicador_incentivo_fiscal": "FALSE"
+                },
+                "emitente": {
+                    "cnpj": "12313314000123",
+                    "razao_social": "Nexaas LTDA",
+                    "nome_fantasia": "Nexaas LTDA",
+                    "inscricao_estadual": "123456789",
+                    "inscricao_municipal": "",
+                    "inscricao_estadual_st": "",
+                    "telefone": "99999999",
+                    "cnae": 2017123,
+                    "codigo_regime_tributario": 3,
+                    "endereco": {
+                        "telefone": 99999999,
+                        "codigo_estado": "35",
+                        "logradouro": "Rua do Rócio",
+                        "numero": "199",
+                        "complemento": "-",
+                        "bairro": "Vila Olimpia",
+                        "codigo_municipio": "3525904",
+                        "nome_municipio": "São Paulo",
+                        "uf": "SP",
+                        "cep": "12345123"
+                    }
+                },
+                "cliente": {
+                    "cpf_cnpj": "46728754000163",
+                    "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                    "pessoa_fisica_juridica": "company",
+                    "telefone": "99999999",
+                    "inscricao_estadual": "407056228113",
+                    "inscricao_municipal": "",
+                    "inscricao_suframa": "",
+                    "indicador_inscricao_estadual": 1,
+                    "email": "teste@nexaas.com.br",
+                    "endereco": {
+                        "logradouro": "AV GUILHERME PORCARI",
+                        "complemento": "",
+                        "numero": "S N",
+                        "bairro": "MEDEIROS",
+                        "codigo_municipio": "3525904",
+                        "nome_municipio": "JUNDIAI",
+                        "codigo_pais": "1058",
+                        "nome_pais": "BRASIL",
+                        "uf": "SP",
+                        "cep": "13212255"
+                    }
+                },
+                "lista_autorizacao": [],
+                "produtos": [
+                {
+                    "codigo_ean": "",
+                    "codigo_produto": "123456",
+                    "descricao": "NITROGENIO CIL 50L 10M3",
+                    "cfop": 5104,
+                    "valor_unitario_comercial": 16.49485,
+                    "valor_unitario_tributario": 16.49485,
+                    "valor_desconto": 0.0,
+                    "quantidade_tributaria": 6,
+                    "quantidade_comercial": 6,
+                    "unidade_tributaria": "M3",
+                    "unidade_comercial": "M3",
+                    "num_pedido": "S0100249134",
+                    "num_item_pedido": 1,
+                    "ean_unidade_trib": "",
+                    "ncm": 28043000,
+                    "cest": "",
+                    "producao_escala": "",
+                    "cnpj_fabricante_mercadoria": "",
+                    "codigo_beneficio_fiscal": "",
+                    "valor_frete": 0.0,
+                    "valor_seguro": 0.0,
+                    "outras_despesas": 0.0,
+                    "informacoes_adicionais": "",
+                    "tributacao": {
+                        "valor_aproximado_total": 269.64,
+                        "icms": {
+                            "situacao_tributaria": "00",
+                            "modalidade_base_calculo": 3,
+                            "codigo_origem_produto": 3,
+                            "valor_base_calculo": 989.69,
+                            "perc_reducao_base_calculo": 0.0,
+                            "aliquota_icms": "18.00",
+                            "valor_icms": 178.14,
+                            "valor_icms_desonerado": 0.0,
+                            "motivo_desoneracao": "",
+                            "modalidade_base_calculo_st": "3",
+                            "valor_base_calculo_st": 0.0,
+                            "perc_reducao_base_calculo_st": 0.0,
+                            "perc_mva_icms_st": 0.0,
+                            "aliquota_icms_st": 0.0,
+                            "valor_icms_st": 0.0,
+                            "aliquota_interestadual": 0.0,
+                            "aliquota_interna_interestadual": 0.0,
+                            "valor_uf_remetente_interestadual": 0.0,
+                            "valor_uf_destinatario_interestadual": 0.0,
+                            "perc_provisorio_interestadual": 0.0,
+                            "valor_base_calculo_uf_dest": 0.0,
+                            "valor_uf_rementente": 0.0,
+                            "perc_fcp_interestadual": 0.0,
+                            "valor_fcp_interestadual": 0.0,
+                            "valor_icms_operacao": 0.0,
+                            "perc_diferimento": 0.0,
+                            "valor_icms_diferido": 0.0,
+                            "situacao_simples_nacional": 0,
+                            "aliquota_icms_simples_nacional": 0,
+                            "credito_icms_simples_nacional": 0,
+                            "motivo_desoneracao_icms": 0,
+                            "valor_icmsst_retido": 0,
+                            "base_icmsst_retido": 0
+                        },
+                        "ipi": {
+                            "situacao_tributaria": "01",
+                            "cod_enquadramento": 999,
+                            "classe_enquadramento": "",
+                            "cnpj_produtor": "",
+                            "codigo_selo_controle": 0,
+                            "quantidade_selo_controle": 0,
+                            "valor_ipi": "0.00",
+                            "aliquota_ipi": "0.00",
+                            "valor_base_calculo": "989.69"
+                        },
+                        "pis": {
+                            "situacao_tributaria": "01",
+                            "valor_base_calculo": 989.69,
+                            "aliquota_pis": 1.65,
+                            "aliquota_pis_reais": 0,
+                            "valor_pis": 16.3,
+                            "valor_base_calculo_st": 0.0,
+                            "aliquota_st": 0.0,
+                            "valor_pis_st": 0.0,
+                            "aliquota_pis_reais_st": 0
+                        },
+                        "cofins": {
+                            "situacao_tributaria": "01",
+                            "valor_base_calculo": 989.69,
+                            "aliquota_cofins": "7.60",
+                            "aliquota_cofins_reais": 0,
+                            "valor_cofins": 75.2,
+                            "valor_base_calculo_st": 0.0,
+                            "aliquota_st": 0.0,
+                            "valor_cofins_st": 0.0,
+                            "aliquota_cofins_st_reais": 0
+                        }
+                    }
+                }
+                ],
+                "cobranca": {
+                    "fatura": {
+                        "numero_fatura": "",
+                        "valor_original": 0,
+                        "valor_desconto": 0,
+                        "valor_liquido": 0
+                    },
+                    "duplicatas": [{
+                        "numero": "",
+                        "data_vencimento": "",
+                        "valor": ""
+                    }]
+                },
+                "forma_de_pagamento": [{
+                    "tipo_de_pagamento": "01",
+                    "valor_do_pagamento": 989.69
+                }],
+                "transporte": {
+                    "valor_total_frete": 0.0,
+                    "codigo_modalidade": 9,
+                    "transportadora": {
+                        "cnpj_cpf": "",
+                        "razao_social": "",
+                        "inscricao_estadual": "",
+                        "endereco_completo": "",
+                        "municipio": "",
+                        "uf": ""
+                    },
+                    "veiculo": {
+                        "placa": "",
+                        "uf": "",
+                        "rntc": ""
+                    },
+                    "retencao_icms": {
+                        "valor_servico": 0.0,
+                        "valor_base_calculo": 0.0,
+                        "aliquota_retencao": 0.0,
+                        "valor_retido": 0.0,
+                        "uf": "",
+                        "codigo_municipio": "",
+                        "cfop": ""
+                    },
+                    "endereco_entrega": {
+                        "cpf_cnpj": "",
+                        "pessoa_fisica_juridica": "",
+                        "logradouro": "",
+                        "cep": "",
+                        "numero": "",
+                        "complemento": "",
+                        "bairro": "",
+                        "uf": "",
+                        "nome_municipio": "",
+                        "codigo_municipio": ""
+                    },
+                    "volume_transportado": [{
+                        "quantidade_volumes": 1,
+                        "numeracao_volumes": 0,
+                        "marca": 0,
+                        "especie": "Cilindro",
+                        "peso_liquido": "66.780",
+                        "peso_bruto": "450.780"
+                    }]
+                },
+                "retencao_tributos": {
+                    "valor_retido_pis": 0.00,
+                    "valor_retido_cofins": 0.00,
+                    "valor_retido_csll": 0.00,
+                    "valor_base_calculo_irrf": 0.00,
+                    "valor_irrf": 0.00,
+                    "base_calculo_retencao_previdencia": 0.00,
+                    "valor_retencao_previdencia": 0.00
+                },
+                "informacoes_adicionais": {
+                    "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123",
+                    "informacoes_contribuinte": ""
+                }
+            }]
+        }
+    }'</span>
+
+</code></pre>
+
+          <h1 id="campos-da-api">Campos da API</h1>
+
+<h2 id="dados_gerais-xml-ide">dados_gerais (XML: ide)</h2>
+
+<p>Contém informações gerais e metadados sobre a NF-e. Seus atributos são:</p>
+
+<h3 id="uf">uf</h3>
+
+<p>Código da UF do emitente do Documento Fiscal.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cUF</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="serie">serie</h3>
+
+<p>Série do Documento Fiscal. Informar 0 (zero) para série única.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>serie</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>Até 3 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_mun_ocorrencia">codigo_mun_ocorrencia</h3>
+
+<p>Código do Município de Ocorrência do Fato Gerador.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cMunFG</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>7 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="nfe_numero">nfe_numero</h3>
+
+<p>Número do Documento Fiscal.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nNF</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="data_saida_entrada">data_saida_entrada</h3>
+
+<p>Data e hora de Saída ou da Entrada da Mercadoria/Produto.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dhSaiEnt</td>
+<td>Não</td>
+<td>Data</td>
+<td>aaaa-mm-ddThh:mm:ss-03:00</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="tipo_operacao">tipo_operacao</h3>
+
+<p>Tipo de Operação, sendo 0 = Entrada e 1 = Saída.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tpNF</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="tipo_emiss-o">tipo_emissão</h3>
+
+<p>Forma de Emissão da NF-e. Seleção entre:<br>
+1 = Emissão normal (não em contingência);<br>
+2 = Contingência FS-IA, com impressão do DANFE em formulário de segurança;<br>
+3 = Contingência SCAN (Sistema de Contingência do Ambiente Nacional);<br>
+4 = Contingência DPEC (Declaração Prévia da Emissão em Contingência);<br>
+5 = Contingência FS-DA, com impressão do DANFE em formulário de segurança; 
+6 = Contingência SVC-AN (SEFAZ Virtual de Contingência do AN);<br>
+7 = Contingência SVC-RS (SEFAZ Virtual de Contingência do RS);<br>
+9 = Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e).  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tpEmiss</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="destino_operacao">destino_operacao</h3>
+
+<p>Identificador de Local de destino da operação (1 - Interna; 2 - Interestadual; 3 - Exterior).</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>idDest</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="natureza_operacao">natureza_operacao</h3>
+
+<p>Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea &lsquo;i&rsquo;, inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970. </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>natOp</td>
+<td>Sim</td>
+<td>Texto  e/ou número</td>
+<td>1 a 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="indicador_pagamento">indicador_pagamento</h3>
+
+<p>Indicador da forma de pagamento. Seleção entre:   0 = pagamento a vista   1 = pagamento a prazo   2 = outros. </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>indPag</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="indicador_consumidor_final">indicador_consumidor_final</h3>
+
+<p>Indica se a NF-e foi emitida para consumidor final, sendo 0 = Não e 1 = Sim.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>indFinal</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="indicador_presenca">indicador_presenca</h3>
+
+<p>Indicador de presença do comprador no estabelecimento comercial no momento da operação. Seleção entre:  </p>
+
+<p>0 = Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);<br>
+1 = Operação presencial;<br>
+2 = Operação não presencial, pela Internet;<br>
+3   = Operação não presencial, Teleatendimento;<br>
+4 = NFC-e em operação com entrega a domicílio;<br>
+9 = Operação não presencial, outros.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>indPres</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="finalidade_nfe">finalidade_nfe</h3>
+
+<p>Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>finNFe</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_total_nota">valor_total_nota</h3>
+
+<p>Somatória do Valor Total dos Produtos ou Serviços e determinados impostos. Calculado automaticamente pelo Emites.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vNF</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="indicador_incentivo_fiscal">indicador_incentivo_fiscal</h3>
+
+<p>Indicador de incentivo fiscal, sendo 1 = Sim, 2 = Não.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>indIncentivo</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="emitente-xml-emit">emitente (XML: emit)</h2>
+
+<p>Contém informações sobre a empresa emitente da NF-e. Seus atributos são:  </p>
+
+<h3 id="cnpj">cnpj</h3>
+
+<p>CNPJ da empresa emitente, somente números.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CNPJ</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>14 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="razao_social">razao_social</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xNome</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="nome_fantasia">nome_fantasia</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xFant</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="inscricao_estadual">inscricao_estadual</h3>
+
+<p>Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>IE</td>
+<td>sim</td>
+<td>Texto</td>
+<td>Até 14 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="inscricao_estadual_st">inscricao_estadual_st</h3>
+
+<p>Inscrição Estadual do Substituto Tributário do estado de destino da mercadoria, quando houver a retenção de ICMS ST para o estado de destino.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>IEST</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>Até 14 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="inscricao_municipal">inscricao_municipal</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>IM</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 15 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="cnae">cnae</h3>
+
+<p>CNAE fiscal que pode ser informado quando a inscrição municipal for informada.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CNAE</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>7 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_regime_tributario">codigo_regime_tributario</h3>
+
+<p>Seleção entre:  </p>
+
+<p>1 = Simples Nacional;
+2 = Simples Nacional, excesso sublimite de receita bruta;
+3 = Regime Normal.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CRT</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="endereco-xml-enderemit">endereco (XML: enderEmit)</h3>
+
+<p>Grupo de informações relacionadas ao endereço do emitente. Seus atributos são:  </p>
+
+<h3 id="logradouro">logradouro</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xLgr</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="numero">numero</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="complemento">complemento</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xCpl</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="bairro">bairro</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xBairro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_municipio">codigo_municipio</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cMun</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>7 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="nome_municipio">nome_municipio</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xMun</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="cep">cep</h3>
+
+<p>Campo no XML</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CEP</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>8 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="uf">uf</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UF</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_pais">codigo_pais</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cPais</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>4 dígitos</td>
+<td>1058 = Brasil</td>
+</tr>
+</tbody></table>
+
+<h3 id="nome_pais">nome_pais</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xPais</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td>Brasil ou BRASIL</td>
+</tr>
+</tbody></table>
+
+<h3 id="telefone">telefone</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fone</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>De 6 a 14 carateres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="cliente-xml-dest">cliente (XML: dest)</h2>
+
+<p>Contém informações sobre o destinatário da aquisição dos produtos do emitente (nota de saída) ou venda dos produtos para o emitente (nota de entrada). Seus atributos são:  </p>
+
+<h3 id="cpf_cnpj">cpf_cnpj</h3>
+
+<p>CPF ou CNPJ do destinatário, somente números.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CPF ou CNPJ</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>11 ou 14 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="nome">nome</h3>
+
+<p>Razão social ou nome do destinatário  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xNome</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="pessoa_fisica_juridica">pessoa_fisica_juridica</h3>
+
+<p>Campo de controle do Emites para indicar se o destinatário é pessoa física (“person”) ou jurídica (“company”).</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>-</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="inscricao_estadual">inscricao_estadual</h3>
+
+<p>Informar somente os algarismos, sem ponto, hífen, barra, etc.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>IE</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>Até 14 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="inscricao_suframa">inscricao_suframa</h3>
+
+<p>Obrigatório nas operações que se beneficiam de incentivos fiscais existentes nas áreas sob controle da SUFRAMA. A omissão desta informação impede o processamento da operação pelo Sistema de Mercadoria Nacional da SUFRAMA e a liberação da Declaração de Ingresso, prejudicando a comprovação do ingresso / internamento da mercadoria nestas áreas.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ISUF</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>De 8 a 9 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="inscricao_municipal">inscricao_municipal</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>IM</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 15 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="indicador_inscricao_estadual">indicador_inscricao_estadual</h3>
+
+<p>Indica se o destinatário é contribuinte do ICMS. Seleção entre:  </p>
+
+<p>1 = Contribuinte ICMS (informar a IE do destinatário);<br>
+2 = Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS;<br>
+9 = Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>indIEDest</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="email">email</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="endereco-xml-enderdest">endereco (XML: enderDest)</h3>
+
+<p>Grupo de informações relacionadas ao endereço do destinatário. Seus atributos são:  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xLgr</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="numero">numero</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="complemento">complemento</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xCpl</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="bairro">bairro</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xBairro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_municipio">codigo_municipio</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cMun</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>7 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="nome_municipio">nome_municipio</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xMun</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="cep">cep</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CEP</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>8 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="uf">uf</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UF</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_pais">codigo_pais</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cPais</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>4 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="nome_pais">nome_pais</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xPais</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="telefone">telefone</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fone</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>De 6 a 14 carateres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="endereco-xml-enderdest">endereco (XML: enderDest)</h3>
+
+<p>Grupo de informações relacionadas ao endereço do destinatário. Seus atributos são:</p>
+
+<h3 id="logradouro">logradouro</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xLgr</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="numero">numero</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="complemento">complemento</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xCpl</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="bairro">bairro</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xBairro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_municipio">codigo_municipio</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cMun</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>7 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="nome_municipio">nome_municipio</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xMun</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="cep">cep</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CEP</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>8 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="uf">uf</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UF</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td>Sigla do estado</td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_pais">codigo_pais</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cPais</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>4 dígitos</td>
+<td>1058 = Brasil</td>
+</tr>
+</tbody></table>
+
+<h3 id="nome_pais">nome_pais</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xPais</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td>Brasil ou BRASIL</td>
+</tr>
+</tbody></table>
+
+<h3 id="telefone">telefone</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fone</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>De 6 a 14 carateres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="produto-xml-prod">produto (XML: prod)</h2>
+
+<p>Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:  </p>
+
+<h3 id="codigo_produto">codigo_produto</h3>
+
+<p>Codificação própria da empresa. Preencher com CFOP, caso se trate de itens não relacionados com mercadorias/produtos e se o contribuinte não possuir codificação própria. Caso preenchido com CFOP, utilizar o formato &ldquo;CFOP9999&rdquo;.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cProd</td>
+<td>Sim</td>
+<td>Texto e/ou número</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_ean">codigo_ean</h3>
+
+<p>Código de barras. Preencher com o código de barra GTIN-8, GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN- 14). Não informar este campo se o produto não possuir este código.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cEAN</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>8, 12, 13 ou 14 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="descricao">descricao</h3>
+
+<p>Descrição do produto.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xProd</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 120 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="ncm">ncm</h3>
+
+<p>Nomenclatura comum do Mercosul.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NCM</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>8 dígitos</td>
+<td>Itens específicos que não possuem NCM podem informar somente o código “00”.</td>
+</tr>
+</tbody></table>
+
+<h3 id="cest">cest</h3>
+
+<p>Código Especificador de Substituição Tributária.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CEST</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="extipi">extipi</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EXTIPI</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>De 2 a 3 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="cfop">cfop</h3>
+
+<p>Código Fiscal de Operações e Prestações.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CFOP</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>4 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="produto_especifico">produto_especifico</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+
+<h3 id="idade_comercial">idade_comercial</h3>
+
+<p>Unidade de comercialização do produto.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uCom</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 6 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="qantidade_comercial">qantidade_comercial</h3>
+
+<p>Quantidade de comercialização do produto.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>qCom</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_unitario_comercial">valor_unitario_comercial</h3>
+
+<p>Valor unitário de comercialização.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vUnCom</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="ean_unidade_trib">ean_unidade_trib</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cEANTrib</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>8, 12, 13 ou 14 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="unidade_tributaria">unidade_tributaria</h3>
+
+<p>Unidade tributável do produto.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uTrib</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 6 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="qantidade_tributaria">qantidade_tributaria</h3>
+
+<p>Quantidade tributável do produto.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>qTrib</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_unitario_tributario">valor_unitario_tributario</h3>
+
+<p>Valor unitário de tributação.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vUnTrib</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, 10 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_frete">valor_frete</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vFrete</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_seguro">valor_seguro</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vSeg</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_desconto">valor_desconto</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vDesc</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="outras_despesas">outras_despesas</h3>
+
+<p>Outras despesas acessórias.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vOutro</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="num_pedido">num_pedido</h3>
+
+<p>Número do pedido de compra, se houver.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xPed</td>
+<td>Não</td>
+<td>Texto e/ou número</td>
+<td>Até 15 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="num_item_pedido">num_item_pedido</h3>
+
+<p>Item do pedido de compra.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nItemPed</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>Até 6 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="num_controle_fci">num_controle_fci</h3>
+
+<p>Número de controle da FCI - Ficha de Conteúdo de Importação.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nFCI</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 36 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="ind_valor_total">ind_valor_total</h3>
+
+<p>Informa se o valor dos produtos compõem o valor total da nota. Seleção entre:
+0 = Valor do item não compõem o valor total da NF-e;
+1 = Valor do item compõem o valor total da NF-e.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>indTotal</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="tributa-o-xml-imposto">tributação (XML: imposto)</h2>
+
+<p>Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.</p>
+
+<h3 id="valor_aproximado_total">valor_aproximado_total</h3>
+
+<p>Valor aproximado total de tributos federais, estaduais e municipais.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vTotalTrib</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="icms-xml-icms">icms (XML: ICMS)</h3>
+
+<p>Informações relacionadas ao ICMS. O atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias</p>
+
+<h3 id="situacao_tributaria">situacao_tributaria</h3>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_origem_produto">codigo_origem_produto</h3>
+
+<p>Origem da mercadoria. Seleção entre:<br>
+0 = Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8;<br>
+1 = Estrangeira - Importação direta, exceto a indicada no código 6;<br>
+2 = Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7;<br>
+3 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%;<br>
+4 = Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes;<br>
+5 = Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%;<br>
+6 = Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e gás natural;<br>
+7 = Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CAMEX e gás natural.<br>
+8 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%.  </p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orig</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="icms-interestadual-xml-icmsufdest">ICMS interestadual (XML: ICMSUFDest)</h3>
+
+<p>Grupo a ser informado nas vendas interestaduais para consumidor final, não contribuinte de ICMS.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_base_calculo_uf_dest</td>
+<td>vBCUFDest</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_interna_interestadual</td>
+<td>pICMSUFDest</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_interestadual</td>
+<td>pICMSInter</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_provisorio_interestadual</td>
+<td>pICMSInterPart</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_uf_remetente_interestadual</td>
+<td>vICMSUFRemet</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_uf_destinatario_interestadual</td>
+<td>vICMSUFDest</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_fcp_interestadual</td>
+<td>pFCPUFDest</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_interestadual</td>
+<td>vFCPUFDest</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-00">situacao_tributaria = 00</h3>
+
+<p>Tributada integralmente.</p>
+
+<table><thead>
+<tr>
+<th>Campo no XML</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>modalidade_base_calculo</td>
+<td>modBC</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Margem Valor Agregado (%);  <br>1=Pauta (Valor);  <br>2=Preço Tabelado Máx. (valor);  <br>3=Valor da operação.</td>
+</tr>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms</td>
+<td>pICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms</td>
+<td>vICMS</td>
+<td>SIm</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-10">situacao_tributaria = 10</h3>
+
+<p>Tributada com cobrança de ICMS por ST.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>modalidade_base_calculo</td>
+<td>modBC</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>Numérico</td>
+<td>1 dígito 0=Margem Valor Agregado (%); <br>1=Pauta (Valor); <br>2=Preço Tabelado Máx. (valor); <br>3=Valor da operação.</td>
+</tr>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms</td>
+<td>pICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms</td>
+<td>vICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>modalidade_base_calculo_st</td>
+<td>modBCST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Preço tabelado ou máximo sugerido; <br>1=Lista Negativa (valor); <br>2=Lista Positiva (valor); <br>3=Lista Neutra (valor);  4=Margem Valor Agregado (%); 5=Pauta (valor).</td>
+</tr>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBCST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo_st</td>
+<td>pRedBCST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_mva_icms_st</td>
+<td>pMVAST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_st</td>
+<td>pICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_st</td>
+<td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>base_calculo_operacao_propria</td>
+<td>pBCOp</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td>Percentual para determinação do valor da Base de Cálculo da operação própria.</td>
+</tr>
+<tr>
+<td>uf_icmsst_devido</td>
+<td>UFST</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 carac.</td>
+<td>Sigla da UF para qual é devido o ICMS ST da operação.</td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-20">situacao_tributaria = 20</h3>
+
+<p>Com redução de base de cálculo.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>modalidade_base_calculo</td>
+<td>modBC</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Margem Valor Agregado (%);<br>1=Pauta (Valor);<br>2=Preço Tabelado Máx. (valor);<br>3=Valor da operação.</td>
+</tr>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo</td>
+<td>pRedBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms</td>
+<td>pICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms</td>
+<td>vICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_desonerado</td>
+<td>vICMSDeson</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>motivo_desoneracao</td>
+<td>motDesICMS</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>Informar o motivo da desoneração: <br>1 = Táxi<br> 3 = Produto Agropecuário <br>4 = Frotista/Locadora <br>5 = Diplomático/Consular <br>6 = Utilitários e Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio <br>7 = SUFRAMA <br>8 = Venda a Órgão Público <br>9 = Outros <br>10 = Deficiente Condutor <br>11 = Deficiente Não Condutor <br>12 = Órgão de fomento e desenvolvimento agropecuário</td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-30">situacao_tributaria = 30</h3>
+
+<p>Isenta e não tributada e com cobrança de ICMS por ST.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_icms_desonerado</td>
+<td>vICMSDeson</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>motivo_desoneracao</td>
+<td>motDesICMS</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>Informar o motivo da desoneração: <br>1 = Táxi <br>3 = Produto Agropecuário <br>4 = Frotista/Locadora <br>5 = Diplomático/Consular <br>6 = Utilitários e  Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio <br>7 = SUFRAMA <br>8 = Venda a Órgão Público <br>9 = Outros <br>10 = Deficiente Condutor <br>11 = Deficiente Não Condutor <br>12 = Órgão de fomento e desenvolvimento agropecuário</td>
+</tr>
+<tr>
+<td>modalidade_base_calculo_st</td>
+<td>modBCST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Preço tabelado ou máximo sugerido;<br>1=Lista Negativa (valor);<br>2=Lista Positiva (valor);<br>3=Lista Neutra (valor);<br>4=Margem Valor Agregado (%);<br>5=Pauta (valor).</td>
+</tr>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBCST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo_st</td>
+<td>pRedBCST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_mva_icms_st</td>
+<td>pMVAST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_st</td>
+<td>pICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_st</td>
+<td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-40-41-e-50">situacao_tributaria = 40, 41 e 50</h3>
+
+<p>40 =  Isenta
+41 =  Não tributada
+50 =  Suspensão</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_icms_desonerado</td>
+<td>vICMSDeson</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>motivo_desoneracao</td>
+<td>motDesICMS</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>Informar o motivo da desoneração:<br>1 = Táxi<br>3 = Produto Agropecuário<br>4 = Frotista/Locadora<br>5 = Diplomático/Consular<br>6 = Utilitários e Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio<br>7 = SUFRAMA<br>8 = Venda a Órgão Público<br>9 = Outros<br>10 = Deficiente Condutor<br>11 = Deficiente Não Condutor<br>12 = Órgão de fomento e desenvolvimento agropecuário<br></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-41-e-icmsst-devido-para-a-uf-de-destino">situacao_tributaria = 41 e ICMSST devido para a UF de destino</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>base_calculo_icmsst_remetente</td>
+<td>vBCSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icmsst_retido_remetente</td>
+<td>vICMSSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>base_calculo_icmsst_destino</td>
+<td>vBCSTDest</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icmsst_retido_destino</td>
+<td>vICMSSTDest</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-51">situacao_tributaria = 51</h3>
+
+<p>Diferido.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>modalidade_base_calculo</td>
+<td>modBC</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Margem Valor Agregado (%);<br>1=Pauta (Valor);<br>2=Preço Tabelado Máx. (valor);<br>3=Valor da operação.<br></td>
+</tr>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo</td>
+<td>pRedBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms</td>
+<td>pICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms</td>
+<td>vICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_operacao</td>
+<td>vICMSOp</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td>Valor como se não tivesse o diferimento.</td>
+</tr>
+<tr>
+<td>perc_diferimento</td>
+<td>pDif</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td>No caso de diferimento total, informar o percentual de diferimento &ldquo;100&rdquo;.</td>
+</tr>
+<tr>
+<td>valor_icms_diferido</td>
+<td>vICMSDif</td>
+<td>Não</td>
+<td></td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-60">situacao_tributaria = 60</h3>
+
+<p>Cobrado anteriormente por ST.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>base_icmsst_retido</td>
+<td>vBCSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td>Valor da Base de Cálculo do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.</td>
+</tr>
+<tr>
+<td>valor_icmsst_retido</td>
+<td>vICMSSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td>Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.</td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-70-e-90">situacao_tributaria = 70 e 90</h3>
+
+<p>70 = Com redução da base de cálculo e cobrança por ST<br>
+90 = Outras  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>modalidade_base_calculo</td>
+<td>modBC</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Margem Valor Agregado (%);<br>1=Pauta (Valor);<br>2=Preço Tabelado Máx. (valor);<br>3=Valor da operação.</td>
+</tr>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo</td>
+<td>pRedBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms</td>
+<td>pICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms</td>
+<td>vICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_desonerado</td>
+<td>vICMSDeson</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>motivo_desoneracao</td>
+<td>motDesICMS</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>Informar o motivo da desoneração: <br>1 = Táxi<br>3 = Produto Agropecuário<br>4 = Frotista/Locadora<br>5 = Diplomático/Consular<br>6 = Utilitários e Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio<br>7 = SUFRAMA<br>8 = Venda a Órgão Público<br>9 = Outros<br>10 = Deficiente Condutor<br>11 = Deficiente Não Condutor<br>12 = Órgão de fomento e desenvolvimento agropecuário<br></td>
+</tr>
+<tr>
+<td>modalidade_base_calculo_st</td>
+<td>modBCST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Preço tabelado ou máximo sugerido;<br>1=Lista Negativa (valor);<br>2=Lista Positiva (valor);<br>3=Lista Neutra (valor);<br>4=Margem Valor Agregado (%);<br>5=Pauta (valor).<br></td>
+</tr>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBCST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo_st</td>
+<td>pRedBCST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_mva_icms_st</td>
+<td>pMVAST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_st</td>
+<td>pICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_st</td>
+<td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>base_calculo_operacao_propria</td>
+<td>pBCOp</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td>Percentual para determinação do valor da Base de Cálculo da operação própria.</td>
+</tr>
+<tr>
+<td>uf_icmsst_devido</td>
+<td>UFST</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 carac.</td>
+<td>Sigla da UF para qual é devido o ICMS ST da operação.</td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-101">situacao_tributaria = 101</h3>
+
+<p>Tributada com permissão de crédito.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td>situacao_simples_nacional</td>
+</tr>
+<tr>
+<td>aliquota_icms_simples_nacional</td>
+<td>pCredSN</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td>aliquota_icms_simples_nacional</td>
+</tr>
+<tr>
+<td>credito_icms_simples_nacional</td>
+<td>vCredICMSSN</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td>credito_icms_simples_nacional</td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-102">situacao_tributaria = 102</h3>
+
+<p>Tributada sem permissão de crédito.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-103">situacao_tributaria = 103</h3>
+
+<p>Isenção de ICMS.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-201">situacao_tributaria = 201</h3>
+
+<p>Tributada com permissão de crédito e com cobrança de ICMS por ST.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_simples_nacional</td>
+<td>pCredSN</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>credito_icms_simples_nacional</td>
+<td>vCredICMSSN</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>modalidade_base_calculo_st</td>
+<td>modBCST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Preço tabelado ou máximo sugerido;<br>1=Lista Negativa (valor);<br>2=Lista Positiva (valor);<br>3=Lista Neutra (valor);<br>4=Margem Valor Agregado (%);<br>5=Pauta (valor).</td>
+</tr>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBCST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo_st</td>
+<td>pRedBCST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_mva_icms_st</td>
+<td>pMVAST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_st</td>
+<td>pICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_st</td>
+<td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-202">situacao_tributaria = 202</h3>
+
+<p>Tributada sem permissão de crédito e com cobrança de ICMS por ST.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>modalidade_base_calculo_st</td>
+<td>modBCST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Preço tabelado ou máximo sugerido;<br>1=Lista Negativa (valor);<br>2=Lista Positiva (valor);<br>3=Lista Neutra (valor);<br>4=Margem Valor Agregado (%);<br>5=Pauta (valor).</td>
+</tr>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBCST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo_st</td>
+<td>pRedBCST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_mva_icms_st</td>
+<td>pMVAST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_st</td>
+<td>pICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_st</td>
+<td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-203">situacao_tributaria = 203</h3>
+
+<p>Isenção de ICMS pela faixa de receita bruta e com cobrança de ICMS por ST.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>modalidade_base_calculo_st</td>
+<td>modBCST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Preço tabelado ou máximo sugerido;<br>1=Lista Negativa (valor);<br>2=Lista Positiva (valor);<br>3=Lista Neutra (valor);<br>4=Margem Valor Agregado (%);<br>5=Pauta (valor).</td>
+</tr>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBCST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo_st</td>
+<td>pRedBCST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_mva_icms_st</td>
+<td>pMVAST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_st</td>
+<td>pICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_st</td>
+<td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-300">situacao_tributaria = 300</h3>
+
+<p>Imune.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-400">situacao_tributaria = 400</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-500">situacao_tributaria = 500</h3>
+
+<p>ICMS cobrado anteriormente por ST ou antecipação.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>base_icmsst_retido</td>
+<td>vBCSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td>Valor da Base de Cálculo do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.</td>
+</tr>
+<tr>
+<td>valor_icmsst_retido</td>
+<td>vICMSSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td>Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.</td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-900">situacao_tributaria = 900</h3>
+
+<p>Outros.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>situacao_simples_nacional</td>
+<td>CSOSN</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_simples_nacional</td>
+<td>pCredSN</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>credito_icms_simples_nacional</td>
+<td>vCredICMSSN</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>modalidade_base_calculo</td>
+<td>modBC</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Margem Valor Agregado (%);<br>1=Pauta (Valor);<br>2=Preço Tabelado Máx. (valor);<br>3=Valor da operação.</td>
+</tr>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo</td>
+<td>pRedBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms</td>
+<td>pICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms</td>
+<td>vICMS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>modalidade_base_calculo_st</td>
+<td>modBCST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>0=Preço tabelado ou máximo sugerido;<br>1=Lista Negativa (valor);<br>2=Lista Positiva (valor);<br>3=Lista Neutra (valor);<br>4=Margem Valor Agregado (%);<br>5=Pauta (valor).</td>
+</tr>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBCST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_reducao_base_calculo_st</td>
+<td>pRedBCST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>perc_mva_icms_st</td>
+<td>pMVAST</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_st</td>
+<td>pICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_st</td>
+<td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_icms_operacao</td>
+<td>vICMSOp</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td>Valor como se não tivesse o diferimento.</td>
+</tr>
+</tbody></table>
+
+<h3 id="ipi-xml-ipi">ipi (XML: IPI)</h3>
+
+<p>Atributos comuns a todas as situações tributárias</p>
+
+<h3 id="situacao_tributaria">situacao_tributaria</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="clss_enquadramento">clss_enquadramento</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>clEnq</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 5 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="cnpj_produtor">cnpj_produtor</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CNPJProd</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>14 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_selo_controle">codigo_selo_controle</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cSelo</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="qtd_selo_controle">qtd_selo_controle</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>qSelo</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>Até 12 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_enquadramento">codigo_enquadramento</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cEnq</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>Até 3 dígitos</td>
+<td>Geralmente o valor informado é 999</td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-00-49-50-e-99">situacao_tributaria = 00, 49, 50 e 99</h3>
+
+<p>00 = Entrada com recuperação de crédito.<br>
+49 = Outras entradas<br>
+50 = Saída tributada<br>
+99 = Outra saídas  </p>
+
+<h3 id="c-lculo-por-al-quota">Cálculo por alíquota</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+</tr>
+</tbody></table>
+
+<h3 id="aliquota_ipi">aliquota_ipi</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_ipi">valor_ipi</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="c-lculo-por-valor">Cálculo por valor</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>quantidade_unidade_tributavel</td>
+<td>qUnid</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, de 0 a 4 casas decimais</td>
+<td>Quantidade total na unidade padrão para tributação (somente para os produtos tributados por unidade)</td>
+</tr>
+<tr>
+<td>valor_unidade_tributavel</td>
+<td>vUnid</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_ipi</td>
+<td>vIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-01">situacao_tributaria = 01</h3>
+
+<p>Entrada tributada com alíquota zero. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-02">situacao_tributaria = 02</h3>
+
+<p>Entrada Isenta. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-03">situacao_tributaria = 03</h3>
+
+<p>Entrada não-tributada. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-04">situacao_tributaria = 04</h3>
+
+<p>Entrada imune. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-05">situacao_tributaria = 05</h3>
+
+<p>Entrada com suspensão. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-51">situacao_tributaria = 51</h3>
+
+<p>Saída tributada com alíquota zero. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-52">situacao_tributaria = 52</h3>
+
+<p>Saída isenta. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-53">situacao_tributaria = 53</h3>
+
+<p>Saída não-tributada. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-54">situacao_tributaria = 54</h3>
+
+<p>Saída imune. Não possui campos para informar alíquota.</p>
+
+<h3 id="situacao_tributaria-55">situacao_tributaria = 55</h3>
+
+<p>Saída com suspensão. Não possui campos para informar alíquota.</p>
+
+<h3 id="imposto_devolvido-xml-impostodevol">imposto_devolvido (XML: impostoDevol)</h3>
+
+<p>O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto.  </p>
+
+<h3 id="perc_mercadoria_devolvida">perc_mercadoria_devolvida</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pDevol</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_ipi_devolvido">valor_ipi_devolvido</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vIPIDevol</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="pis-xml-pis">pis (XML: PIS)</h3>
+
+<p>Atributos comuns a todas as situações tributárias</p>
+
+<h3 id="situacao_tributaria">situacao_tributaria</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-01-e-02">situacao_tributaria = 01 e 02</h3>
+
+<p>01 = Operação Tributável com Alíquota Básica<br>
+02 = Operação Tributável com Alíquota Diferenciada  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_pis</td>
+<td>pPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_pis</td>
+<td>vIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-03">situacao_tributaria = 03</h3>
+
+<p>Operação Tributável com Alíquota por Unidade de Medida de Produto.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>aliquota_pis_reais</td>
+<td>vAliqProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>quantidade_vendida</td>
+<td>qBCProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_pis</td>
+<td>vPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-04-06-07-08-09">situacao_tributaria = 04, 06, 07, 08, 09</h3>
+
+<p>04 = Operação Tributável Monofásica - Revenda a Alíquota Zero<br>
+06 = Operação Tributável a Alíquota Zero<br>
+07 = Operação Isenta da Contribuição<br>
+08 = Operação sem Incidência da Contribuição<br>
+09 = Operação com Suspensão da Contribuição  </p>
+
+<p>Não há campos para informar alíquota.  </p>
+
+<h3 id="situacao_tributaria-05">situacao_tributaria = 05</h3>
+
+<p>Operação Tributável por Substituição Tributária.</p>
+
+<h3 id="c-lculo-por-percentual">Cálculo por percentual</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_st</td>
+<td>pPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_pis_st</td>
+<td>vIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="c-lculo-por-valor">Cálculo por valor</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>aliquota_pis_reais_st</td>
+<td>vAliqProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>quantidade_vendida_st</td>
+<td>qBCProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_pis_st</td>
+<td>vPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99  </p>
+
+<p>49 = Outras Operações de Saída<br>
+50 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
+51 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno<br>
+52 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação<br>
+53 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno<br>
+54 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação<br>
+55 = Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação<br>
+56 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação<br>
+60 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
+61 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno<br>
+62 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação<br>
+63 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno<br>
+64 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação<br>
+65 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação<br>
+66 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação<br>
+67 = Crédito Presumido - Outras Operações<br>
+70 = Operação de Aquisição sem Direito a Crédito<br>
+71 = Operação de Aquisição com Isenção<br>
+72 = Operação de Aquisição com Suspensão<br>
+73 = Operação de Aquisição a Alíquota Zero<br>
+74 = Operação de Aquisição sem Incidência da Contribuição<br>
+75 = Operação de Aquisição por Substituição Tributária<br>
+98 = Outras Operações de Entrada<br>
+99 = Outras Operações  </p>
+
+<h3 id="c-lculo-por-percentual">Cálculo por percentual</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_pis</td>
+<td>pPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_pis</td>
+<td>vIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="c-lculo-por-valor">Cálculo por valor</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>aliquota_pis_reais</td>
+<td>vAliqProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>quantidade_vendida</td>
+<td>qBCProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_pis</td>
+<td>vPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="cofins-xml-cofins">cofins (XML: COFINS)</h3>
+
+<p>Atributos comuns a todas as situações tributárias</p>
+
+<h3 id="situacao_tributaria">situacao_tributaria</h3>
+
+<table><thead>
+<tr>
+<th>Campo XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CST</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-01-e-02">situacao_tributaria = 01 e 02</h3>
+
+<p>01 = Operação Tributável com Alíquota Básica<br>
+02 = Operação Tributável com Alíquota Diferenciada  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_cofins</td>
+<td>pPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_cofins</td>
+<td>vIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-03">situacao_tributaria = 03</h3>
+
+<p>Operação Tributável com Alíquota por Unidade de Medida de Produto.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>aliquota_cofins_reais</td>
+<td>vAliqProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>quantidade_vendida</td>
+<td>qBCProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_cofins</td>
+<td>vPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-04-06-07-08-09">situacao_tributaria = 04, 06, 07, 08, 09</h3>
+
+<p>04 = Operação Tributável Monofásica - Revenda a Alíquota Zero<br>
+06 = Operação Tributável a Alíquota Zero<br>
+07 = Operação Isenta da Contribuição<br>
+08 = Operação sem Incidência da Contribuição<br>
+09 = Operação com Suspensão da Contribuição  </p>
+
+<p>Não há campos para informar alíquota.  </p>
+
+<h3 id="situacao_tributaria-05">situacao_tributaria = 05</h3>
+
+<p>Operação Tributável por Substituição Tributária.</p>
+
+<h3 id="c-lculo-por-percentual">Cálculo por percentual</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_base_calculo_st</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_st</td>
+<td>pPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_cofins_st</td>
+<td>vIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="c-lculo-por-valor">Cálculo por valor</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>aliquota_cofins_reais_st</td>
+<td>vAliqProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>quantidade_vendida_st</td>
+<td>qBCProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_cofins_st</td>
+<td>vPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="situacao_tributaria-49-50-51-52-53-54-55-56-60-61-62-63-64-65-66-67-70-71-72-73-74-75-98-99">situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99</h3>
+
+<p>49 = Outras Operações de Saída<br>
+50 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
+51 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno<br>
+52 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação<br>
+53 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno<br>
+54 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação<br>
+55 = Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação<br>
+56 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação<br>
+60 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
+61 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno<br>
+62 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação<br>
+63 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno<br>
+64 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação<br>
+65 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação<br>
+66 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação<br>
+67 = Crédito Presumido - Outras Operações<br>
+70 = Operação de Aquisição sem Direito a Crédito<br>
+71 = Operação de Aquisição com Isenção<br>
+72 = Operação de Aquisição com Suspensão<br>
+73 = Operação de Aquisição a Alíquota Zero<br>
+74 = Operação de Aquisição sem Incidência da Contribuição<br>
+75 = Operação de Aquisição por Substituição Tributária<br>
+98 = Outras Operações de Entrada<br>
+99 = Outras Operações  </p>
+
+<h3 id="c-lculo-por-percentual">Cálculo por percentual</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>valor_base_calculo</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_cofins</td>
+<td>pPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_cofins</td>
+<td>vIPI</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="c-lculo-por-valor">Cálculo por valor</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>aliquota_cofins_reais</td>
+<td>vAliqProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 11 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>quantidade_vendida</td>
+<td>qBCProd</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, de 0 a 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_cofins</td>
+<td>vPIS</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="transporte-xml-transp">transporte (XML: transp)</h2>
+
+<p>Contém informações sobre o frete e o transporte dos produtos ou serviços. Seus atributos são:  </p>
+
+<h3 id="modalidade_frete">modalidade_frete</h3>
+
+<p>Seleção entre:
+0 = Por conta do emitente;
+1 = Por conta do destinatário/remetente;
+2 = Por conta de terceiros;
+9 = Sem frete.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>modFrete</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_frete">valor_frete</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vServ</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="transportadora-xml-transporta">transportadora (XML: transporta)</h3>
+
+<p>Grupo de informações relacionadas à transportadora, caso haja frete.</p>
+
+<h3 id="razao_social">razao_social</h3>
+
+<p>Nome (pessoa física) ou Razão Social (Pessoa Jurídica).</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xNome</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="cnpj_cpf">cnpj_cpf</h3>
+
+<p>Campo no XML</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CNPJ ou CPF</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>14 ou 11 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="inscricao_estadual">inscricao_estadual</h3>
+
+<p>Inscrição Estadual do transportador contribuinte do ICMS, sem caracteres de formatação (ponto, barra, hífen, etc.). Pode ser informado o texto “ISENTO” para transportador isento de inscrição no cadastro de contribuintes ICMS. Não informar a tag para não contribuinte do ICMS. A UF deve ser informada se informado uma IE.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>IE</td>
+<td>Não</td>
+<td>Texto e/ou número</td>
+<td>De 2 a 14 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="endereco_completo">endereco_completo</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xEnder</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="uf">uf</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UF</td>
+<td>Não</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td>Sigla da UF</td>
+</tr>
+</tbody></table>
+
+<h3 id="municipio">municipio</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xMun</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="retencao_icms-xml-rettransp">retencao_icms (XML: retTransp)</h3>
+
+<p>Informações de retenção de ICMS de transporte.  </p>
+
+<h3 id="cfop">cfop</h3>
+
+<p>CFOP de serviço de transporte.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CFOP</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>4 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_base_calculo">valor_base_calculo</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vBCRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casa decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="aliquota_retencao">aliquota_retencao</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pICMSRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, de 2 a 4 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_retido">valor_retido</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vICMSRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="uf">uf</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td>Sigla da UF</td>
+</tr>
+</tbody></table>
+
+<h3 id="codigo_municipio">codigo_municipio</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cMunFG</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>7 dígitos</td>
+<td>Código do município de acordo com tabela do IBGE</td>
+</tr>
+</tbody></table>
+
+<h3 id="veiculo-xml-veictransp">veiculo (XML: veicTransp)</h3>
+
+<p>Dados do veículo utilizado para transporte, caso haja frete. O campo pode ser omitido caso não haja frete.
+placa  </p>
+
+<p>Informar em um dos seguintes formatos: XXX9999, XXX999, XX9999 ou XXXX999. Informar a placa em informações complementares quando a placa do veículo tiver lei de formação diversa.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>placa</td>
+<td>Sim</td>
+<td>Texto e/ou número</td>
+<td>7 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="uf">uf</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UF</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td>Sigla da UF</td>
+</tr>
+</tbody></table>
+
+<h3 id="rntc">rntc</h3>
+
+<p>Registro Nacional de Transporte de Carga.   </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RNTC</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 20 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="volume_transportado-xml-vol">volume_transportado (XML: vol)</h3>
+
+<p>Informações dos volumes transportados, se houver. Uma nota comporta até 5.000 volumes. Cada volume deve possuir os conjuntos de campos a seguir:</p>
+
+<h3 id="quantidade_volumes">quantidade_volumes</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>qVol</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>Até 15 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="especie">especie</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>esp</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="marca">marca</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>marca</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="numeracao">numeracao</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nVol</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="peso_liquido">peso_liquido</h3>
+
+<p>Peso líquido em quilogramas (kG).</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>peslL</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, 3 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="peso_bruto">peso_bruto</h3>
+
+<p>Peso bruto em quilogramas (kG).</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pesoB</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 12 dígitos, 3 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="lacres-xml-lacres">lacres (XML: lacres)</h3>
+
+<p>Cada volume transportador pode conter lacres, sendo até 5.000 por volume.  </p>
+
+<h3 id="item-da-cole-o-array-de-lacres">Item da coleção (array) de lacres</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nLacre</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="cobranca-xml-infnfe">cobranca (XML: infNFe)</h2>
+
+<p>Informações opcionais de cobrança. Seus atributos são:  </p>
+
+<h3 id="fatura-xml-fat">fatura (XML: fat)</h3>
+
+<p>Subgrupo de informações relacionadas aos dados da fatura. Possui somente uma ocorrência. Apresenta os seguintes atributos:</p>
+
+<h3 id="numero_fatura">numero_fatura</h3>
+
+<p>Número da fatura.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nFat</td>
+<td>Não</td>
+<td>Texto e/ou número</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_original">valor_original</h3>
+
+<p>Valor original (bruto) da fatura.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vOrig</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_desconto">valor_desconto</h3>
+
+<p>Valor aplicado de desconto.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vDesc</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_liquido">valor_liquido</h3>
+
+<p>Valor líquido da fatura.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vLiq</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="duplicata-xml-dup">duplicata (XML: dup)</h3>
+
+<p>Subgrupo de informações relacionadas às duplicatas (parcelas da compra). Pode conter até 200 ocorrências e possui os seguintes atributos:  </p>
+
+<h3 id="numero">numero</h3>
+
+<p>Número da duplicata.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nDup</td>
+<td>Não</td>
+<td>Texto e/ou número</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="data_vencimento">data_vencimento</h3>
+
+<p>Data de vencimento da duplicata  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dVenc</td>
+<td>Não</td>
+<td>Data</td>
+<td>AAAA-MM-DD</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor">valor</h3>
+
+<p>Valor da duplicata.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vDup</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="documentos_referenciados-xml-infnfe">documentos_referenciados (XML: infNFe)</h2>
+
+<p>Este campo é utilizado para referenciar uma Nota Fiscal, modelo 1 ou 1-A, ou NF-e emitida anteriormente e vinculada à NF-e que está sendo emitida. Cabe observar que esta informação será utilizada quando o regulamento do ICMS determinar indicação dos dados de outra nota fiscal referente àquela operação, como, por exemplo, nos casos de devolução de mercadoria, complementação de imposto etc.   </p>
+
+<p>Seus atributos são:  </p>
+
+<h3 id="tipo_documento">tipo_documento</h3>
+
+<p>Campo interno do Emites para indicar o tipo do documento. Os valores podem ser: NFe, NF ou Cupom.</p>
+
+<h3 id="tipo_documento-nfe">tipo_documento = “NFe”</h3>
+
+<p>Para notas fiscais eletrônicas relacionadas, é necessário somente a chave de acesso.</p>
+
+<h3 id="chave_acesso">chave_acesso</h3>
+
+<p>Referencia uma NF-e (modelo 55) emitida anteriormente, vinculada à NF-e atual, ou uma NFC-e (modelo 65).</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>refNFe</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>44 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="tipo_documento-nf">tipo_documento = “NF”</h3>
+
+<p>Para notas fiscais físicas, os atributos são:  </p>
+
+<h3 id="codigo_uf_emitente">codigo_uf_emitente</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cUF</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>Código de acordo com tabela IBGE</td>
+</tr>
+</tbody></table>
+
+<h3 id="ano_mes_emissao">ano_mes_emissao</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AAMM</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>ano (AA) e mês (MM) de emissão da NF</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="modelo_documento">modelo_documento</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mod</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>01 = modelo 01</td>
+</tr>
+</tbody></table>
+
+<h3 id="numero_documento">numero_documento</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nNF</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>Até 9 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="serie_documento">serie_documento</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>serie</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>Até 3 dígitos</td>
+<td>Informar zero se não utilizada a série do documento fiscal.</td>
+</tr>
+</tbody></table>
+
+<h3 id="cnpj-emitente">cnpj emitente</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CNPJ</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>14 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="tipo_documento-cupom">tipo_documento = “Cupom”</h3>
+
+<p>Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguintes atributos:  </p>
+
+<h3 id="numero_ecf">numero_ecf</h3>
+
+<p>Número de ordem sequencial de ECF.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nECF</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>3 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="numero_coo">numero_coo</h3>
+
+<p>Número do Contador de Ordem de Operação (COO).</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nCOO</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>6 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="retencoes-xml-rettrib">retencoes (XML: retTrib)</h2>
+
+<h3 id="valor_retido_pis">valor_retido_pis</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vRetPIS</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_retido_cofins">valor_retido_cofins</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vRetCOFINS</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_retido_csll">valor_retido_csll</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vRetCSLL</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_base_calculo_irrf">valor_base_calculo_irrf</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vBCIRRF</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_irrf">valor_irrf</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vIRRF</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="base_calculo_retencao_previdencia">base_calculo_retencao_previdencia</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vBCRetPrev</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="valor_retencao_previdencia">valor_retencao_previdencia</h3>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vRetPrev</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="exporta-xml-exporta">exporta (XML: exporta)</h2>
+
+<p>Informações de comércio exterior.</p>
+
+<h3 id="uf_embarque">uf_embarque</h3>
+
+<p>Sigla da UF de Embarque ou de transposição de fronteira.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UFSaidaPais</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td>Sigla da UF</td>
+</tr>
+</tbody></table>
+
+<h3 id="local_embarque">local_embarque</h3>
+
+<p>Descrição do Local de Embarque ou de transposição de fronteira.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xLocExporta</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="local_despacho">local_despacho</h3>
+
+<p>Descrição do local de despacho.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>xLocDespacho</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="informacoes_adicionais-xml-infadic">informacoes_adicionais (XML: infAdic)</h2>
+
+<p>Grupo de informações adicionais da NF-e. Seus atributos são:  </p>
+
+<h3 id="informacoes_contribuinte">informacoes_contribuinte</h3>
+
+<p>Informações complementares de interesse do Contribuinte.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>infCpl</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 2.000 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="informacoes_fisco">informacoes_fisco</h3>
+
+<p>Informações adicionais de interesse do Fisco.  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>infAdFisco</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 2.000 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="consulta-de-nota">Consulta de nota</h1>
+
+<p>Para consultar uma nota é necessário realizar a seguinte requisição:  </p>
+
+<p>GET /api/v1/organizations/{organization_id}/nfe/{nfe_id}  </p>
+<pre class="highlight shell"><code>        curl -X GET <span class="se">\</span>
+            http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/10990 <span class="se">\</span>
+            -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05a'</span> <span class="se">\</span>
+            -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+            -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+            -H <span class="s1">'postman-token: 332205aa-2eec-a72b-c8df-a4381b9142f7'</span>
+</code></pre>
+
+          <h1 id="cancelamento-de-nota">Cancelamento de nota</h1>
+
+<p>Para cancelar uma nota, envie a seguinte requisição:  </p>
+
+<p>PATCH /api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel  </p>
+<pre class="highlight shell"><code>        curl -X PATCH <span class="se">\</span>
+            http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
+            -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05aasas'</span> <span class="se">\</span>
+            -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+            -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+            -H <span class="s1">'postman-token: 065c1276-5de2-c115-11b1-2fa643b500b8'</span>
+</code></pre>
+
+          <h1 id="inutiliza-o-de-n-mero-de-nota">Inutilização de número de nota</h1>
+
+<p>Para inutilizar um número, envie a seguinte requisição:  </p>
+
+<p>POST /api/v1/organizations/{organization_id}/nfe/disable  </p>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05aasas'</span> <span class="se">\</span>
+    -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -H <span class="s1">'postman-token: 79bb907b-95ac-5261-bfc1-d772c6514a0b'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+            "nfe": {
+                "uf": "35",
+                "cnpj_emitente": "12345678912345",
+                "serie": "1",
+                "numero": "9999999999"
+            }
+        }
+'</span>
+</code></pre>
+
+          <h1 id="webhooks">Webhooks</h1>
+
+<p>Os Webhooks são notificações assíncronas enviadas para todos os eventos solicitados ao Emites.<br>
+Sendo assim, ao receber um evento, o sistema envia uma requisição HTTP para a url configurada no Emites com as informações relacionadas ao evento.
+Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
+
+<p>Para adicionar uma nova url, acesse a interface do Emites, clique no ícone do menu, depois em conta, no final da página terá um botão para a adição do novo webhook.  </p>
+
+<p>Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  </p>
+
+<p>Por exemplo, a cada nota emitida será disparado o payload:  </p>
+<pre class="highlight json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">2646</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"succeeded"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="Shell">cURL</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
