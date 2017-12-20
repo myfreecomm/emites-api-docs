@@ -133,21 +133,21 @@ O Emites possui uma API REST para interagir com seus recursos, através de objet
 
 <p>&ldquo;Authorization&rdquo;: &ldquo;Token token=123&rdquo;,<br>
 &ldquo;Content-Type&rdquo;: &ldquo;application/json&rdquo;</p>
-<pre class="highlight shell"><code>    Formato JSON
+<pre class="highlight shell"><code>  Formato JSON
 
-    EXEMPLO DE REQUISIÇÃO
+  EXEMPLO DE REQUISIÇÃO
 
-      curl -X GET <span class="se">\</span>
-        http://localhost:3000/api/v1/organizations <span class="se">\</span>
-        -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec7101010'</span> <span class="se">\</span>
-        -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
-        -H <span class="s1">'content-type: application/json'</span> 
+    curl -X GET <span class="se">\</span>
+      http://localhost:3000/api/v1/organizations <span class="se">\</span>
+      -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec7101010'</span> <span class="se">\</span>
+      -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+      -H <span class="s1">'content-type: application/json'</span> 
 
-    EXEMPLO DE RESPOSTA
+  EXEMPLO DE RESPOSTA
 
-    <span class="o">{</span>
-      <span class="s2">"chave"</span>: <span class="s2">"valor"</span>
-    <span class="o">}</span>
+  <span class="o">{</span>
+    <span class="s2">"chave"</span>: <span class="s2">"valor"</span>
+  <span class="o">}</span>
 
 </code></pre>
 
@@ -5742,12 +5742,12 @@ placa  </p>
 <p>Para consultar uma nota é necessário realizar a seguinte requisição:  </p>
 
 <p>GET /api/v1/organizations/{organization_id}/nfe/{nfe_id}  </p>
-<pre class="highlight shell"><code>        curl -X GET <span class="se">\</span>
-            http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/10990 <span class="se">\</span>
-            -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05a'</span> <span class="se">\</span>
-            -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
-            -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-            -H <span class="s1">'postman-token: 332205aa-2eec-a72b-c8df-a4381b9142f7'</span>
+<pre class="highlight shell"><code>curl -X GET <span class="se">\</span>
+    http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/10990 <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05a'</span> <span class="se">\</span>
+    -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -H <span class="s1">'postman-token: 332205aa-2eec-a72b-c8df-a4381b9142f7'</span>
 </code></pre>
 
           <h1 id="cancelamento-de-nota">Cancelamento de nota</h1>
@@ -5755,12 +5755,12 @@ placa  </p>
 <p>Para cancelar uma nota, envie a seguinte requisição:  </p>
 
 <p>PATCH /api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel  </p>
-<pre class="highlight shell"><code>        curl -X PATCH <span class="se">\</span>
-            http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
-            -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05aasas'</span> <span class="se">\</span>
-            -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
-            -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-            -H <span class="s1">'postman-token: 065c1276-5de2-c115-11b1-2fa643b500b8'</span>
+<pre class="highlight shell"><code>curl -X PATCH <span class="se">\</span>
+    http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05aasas'</span> <span class="se">\</span>
+    -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -H <span class="s1">'postman-token: 065c1276-5de2-c115-11b1-2fa643b500b8'</span>
 </code></pre>
 
           <h1 id="inutiliza-o-de-n-mero-de-nota">Inutilização de número de nota</h1>
@@ -5781,8 +5781,7 @@ placa  </p>
                 "serie": "1",
                 "numero": "9999999999"
             }
-        }
-'</span>
+        }'</span>
 </code></pre>
 
           <h1 id="webhooks">Webhooks</h1>
@@ -5796,12 +5795,12 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 <p>Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  </p>
 
 <p>Por exemplo, a cada nota emitida será disparado o payload:  </p>
-<pre class="highlight json"><code><span class="w">    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">2646</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"succeeded"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">2646</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"succeeded"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
       </div>
