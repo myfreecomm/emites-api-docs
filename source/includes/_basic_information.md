@@ -24,9 +24,8 @@ Para todas as requisições são necessários os seguintes Headers:
   EXEMPLO DE REQUISIÇÃO
 
     curl -X GET \
-      http://localhost:3000/api/v1/organizations \
-      -H 'authorization: Token token=c3b1164e8ae17f6d9712730ec7101010' \
-      -H 'cache-control: no-cache' \
+      https://app.emites.com.br/api/v1/organizations \
+      -H 'authorization: Token token=$YOUR_API_TOKEN' \
       -H 'content-type: application/json' 
 
   EXEMPLO DE RESPOSTA

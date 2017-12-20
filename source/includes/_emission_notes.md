@@ -11,12 +11,10 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </aside>
 
 ```shell
-    curl -X POST \
-  http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe_batch \
-  -H 'authorization: Token token=6f42433270bc61d746556b17605db05as' \
-  -H 'cache-control: no-cache' \
+curl -X POST \
+  https://app.emites.com.br/api/v1/organizations/11/nfe_batch \
+  -H 'authorization: Token token=$YOUR_API_TOKEN' \
   -H 'content-type: application/json' \
-  -H 'postman-token: 82f01e8f-9fe6-e89c-b4fe-c3e24b9d2853' \
   -d '{
         "nfe_batch":  {
             "lote": 1,
