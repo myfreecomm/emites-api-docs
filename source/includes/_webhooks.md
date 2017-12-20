@@ -11,10 +11,10 @@ Após adicionado, a cada requisição efetuada ao Emites, será retornada uma no
 Por exemplo, a cada nota emitida será disparado o payload:  
 
 ```
-    {
-        "object_type":"NFe",
-        "object_id":2646,
-        "organization_id":13,
-        "event":"succeeded"
-    }
+{
+    "object_type":"NFe",
+    "object_id":2646,
+    "organization_id":13,
+    "event":"succeeded"
+}
 ```
