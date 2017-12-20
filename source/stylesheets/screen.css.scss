@@ -625,3 +625,12 @@ html, body {
 .highlight, .highlight .w {
   background-color: $code-bg;
 }
+
+@media (min-width: $tablet-width + $nav-width) {
+  .content > table {
+    display: inline-table;
+    width: 45%;
+    margin: 28px;
+    overflow: auto;
+  }
+}
