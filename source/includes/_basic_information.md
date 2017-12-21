@@ -1,22 +1,17 @@
 # Informações básicas
 
-<!-- ## Introdução
-
-
-O Emites possui uma API REST para interagir com seus recursos, através de objetos JSON sobre HTTP, usando todos principais verbos HTTP (GET, POST, PATCH, DELETE). Cada recurso possui sua própria URL e pode ser manipulado de maneira isolada, tentando assim seguir os princípios REST ao máximo. -->
-
-
 ## Autenticação
-
 
 Todo acesso à API é feito do ponto de vista de uma conta existente no Emites. Assim sendo, toda requisição à API deverá ser autenticada. A autenticação é feita via token, que deve ser informado no header de cada requisição efetuada.
 
 Para todas as requisições são necessários os seguintes Headers:
 
-"Authorization": "Token token=6f42433270bc61d746556b17605db1s4",  
-"Content-Type": "application/json"
-
-
+<div class="api-endpoint">
+  <div class="endpoint-data authentication">
+    "Authorization": "Token token=6f42433270bc61d746556b17605db1s4",<br>
+    "Content-Type": "application/json"
+  </div>
+</div>  
 
   ```shell
   Formato JSON
