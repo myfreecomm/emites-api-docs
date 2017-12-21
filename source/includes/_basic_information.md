@@ -13,7 +13,7 @@ Todo acesso à API é feito do ponto de vista de uma conta existente no Emites. 
 
 Para todas as requisições são necessários os seguintes Headers:
 
-"Authorization": "Token token=123",  
+"Authorization": "Token token=6f42433270bc61d746556b17605db1s4",  
 "Content-Type": "application/json"
 
 
@@ -25,7 +25,7 @@ Para todas as requisições são necessários os seguintes Headers:
 
     curl -X GET \
       https://app.emites.com.br/api/v1/organizations \
-      -H 'authorization: Token token=$YOUR_API_TOKEN' \
+      -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
       -H 'content-type: application/json' 
 
   EXEMPLO DE RESPOSTA

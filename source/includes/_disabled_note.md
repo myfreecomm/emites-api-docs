@@ -13,7 +13,7 @@ Para inutilizar um número, envie a seguinte requisição:
 ```shell
 curl -X POST \
   https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
-    -H 'authorization: Token token=$YOUR_API_TOKEN' \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
             "nfe": {

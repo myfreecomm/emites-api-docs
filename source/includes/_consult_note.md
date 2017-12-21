@@ -14,6 +14,6 @@ Para consultar uma nota é necessário realizar a seguinte requisição:
   ```shell
 curl -X GET \
     https://app.emites.com.br/api/v1/organizations/11/nfe/10990 \
-    -H 'authorization: Token token=$YOUR_API_TOKEN' \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
   ```

@@ -18,7 +18,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 ```shell
 curl -X POST \
   https://app.emites.com.br/api/v1/organizations/11/nfe_batch \
-  -H 'authorization: Token token=$YOUR_API_TOKEN' \
+  -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
         "nfe_batch":  {
