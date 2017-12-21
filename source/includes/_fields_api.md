@@ -1,4 +1,4 @@
-#Campos da API
+# Campos da emissão de nota
 
 ## dados_gerais (XML: ide)  
 
