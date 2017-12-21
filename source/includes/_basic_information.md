@@ -1,4 +1,4 @@
-# Informaçães básicas
+# Informações básicas
 
 <!-- ## Introdução
 
