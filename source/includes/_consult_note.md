@@ -2,7 +2,13 @@
 
 Para consultar uma nota é necessário realizar a seguinte requisição:  
 
-GET /api/v1/organizations/{organization_id}/nfe/{nfe_id}  
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
+    </div>
+</div>
 
 
   ```shell

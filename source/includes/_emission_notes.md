@@ -2,7 +2,12 @@
 
 Para emitir notas, é necessário realizar uma requisição POST para o seguinte endereço:  
 
-POST /api/v1/organizations/{organization_id}/nfe_batch  
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe_batch</h6>
+    </div>
+</div>
 
 Veja ao lado um exemplo do corpo da requisição:  
 

@@ -2,7 +2,13 @@
 
 Para inutilizar um número, envie a seguinte requisição:  
 
-POST /api/v1/organizations/{organization_id}/nfe/disable  
+ 
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/disable</h6>
+    </div>
+</div> 
 
 ```shell
 curl -X POST \

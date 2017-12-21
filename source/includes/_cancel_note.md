@@ -2,7 +2,12 @@
 
 Para cancelar uma nota, envie a seguinte requisição:  
 
-PATCH /api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel  
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH </i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel </h6>
+    </div>
+</div>  
 
   ```shell
 curl -X PATCH \
