@@ -8,7 +8,23 @@ Para adicionar uma nova url, acesse a interface do Emites, clique no ícone do m
 
 Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  
 
-Veja os exemplos.  
+Os webhooks seguem a mesma estrutura com excessão da inutilização rejeitada que possui os campos `uf`, `serie`, `numero`, `errors`. Veja abaixo a descrição de cada campo:
+
+`object_type: tipo do objeto solicitado (NFe/NFeBatch e NFCe/NFCeBatch)`
+
+`object_id: id interno objeto solicitado`
+
+`organization_id: id da organização`
+
+`event: status da nota`
+
+`uf: código do estado de acordo com o IBGE `
+
+`serie: série do lote`
+
+`numero: número da nfe/nfc`
+
+`errors: código de erro seguido de uma breve descrição`
 
 ## Nota Enviada
 
@@ -51,7 +67,7 @@ Emitida: Quando a NF é aceita pela Sefaz. Nesta etapa será enviado o seguinte 
 
 ## Nota Rejeitada
 
-Rejeitada: Quando a NF é rejeitqada pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+Rejeitada: Quando a NF é rejeitada pela Sefaz. Nesta etapa será enviado o seguinte webhook:
 
 ```
 {
