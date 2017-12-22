@@ -8,13 +8,99 @@ Para adicionar uma nova url, acesse a interface do Emites, clique no ícone do m
 
 Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  
 
-Por exemplo, a cada nota emitida será disparado o payload:  
+Veja os exemplos.  
+
+## Nota Enviada
+
+Enviada: Quando é realizado o envio da NF para a Sefaz e a mesma é recebida. Nesta etapa será enviado o seguinte webhook:  
+
+```
+{
+    "object_type":"NFeBatch",
+    "object_id":5,
+    "organization_id":1,
+    "event":"sent"
+}
+```
+
+## Nota sendo processada
+
+Processando: Quando a Sefaz do estado recebe a NF e inicia o processo de autenticação da mesma. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"NFeBatch",
+    "object_id":5,
+    "organization_id":1,
+    "event":"processed"
+}
+```
+
+## Nota Emitida
+
+Emitida: Quando a NF é aceita pela Sefaz. Nesta etapa será enviado o seguinte webhook:
 
 ```
 {
     "object_type":"NFe",
-    "object_id":2646,
-    "organization_id":13,
+    "object_id":5,
+    "organization_id":1,
     "event":"succeeded"
+}
+```
+
+## Nota Rejeitada
+
+Rejeitada: Quando a NF é rejeitqada pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"NFeBatch",
+    "object_id":4,
+    "organization_id":1,
+    "event":"rejected"
+}
+```
+
+## Nota Cancelada  
+
+Cancelada: Quando o cancelamento da NF é aceito pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"NFe",
+    "object_id":5,
+    "organization_id":1,
+    "event":"cancelled"
+}
+```
+
+## Cancelamento Rejeitado 
+
+Cancelamento Rejeitado: Quando o cancelamento da NF é rejeitado pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"NFe",
+    "object_id":5,
+    "organization_id":1,
+    "event":"cancel_rejected"
+}
+```
+
+## Inutilização Rejeitada
+
+Inutilização Rejeitada: Quando o inutilização da NF é rejeitado pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"None",
+    "object_id":"",
+    "organization_id":1,
+    "event":"disablement_rejected",
+    "uf":"35",
+    "serie":"0",
+    "numero":"98080986123",
+    "errors":["215 - Rejeição: Falha no schema XML"]
 }
 ```
