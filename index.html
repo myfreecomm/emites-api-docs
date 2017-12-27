@@ -118,12 +118,7 @@
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="informa-es-b-sicas">Informaçães básicas</h1>
-
-<!-- ## Introdução
-
-
-O Emites possui uma API REST para interagir com seus recursos, através de objetos JSON sobre HTTP, usando todos principais verbos HTTP (GET, POST, PATCH, DELETE). Cada recurso possui sua própria URL e pode ser manipulado de maneira isolada, tentando assim seguir os princípios REST ao máximo. -->
+          <h1 id="informa-es-b-sicas">Informações básicas</h1>
 
 <h2 id="autentica-o">Autenticação</h2>
 
@@ -131,16 +126,19 @@ O Emites possui uma API REST para interagir com seus recursos, através de objet
 
 <p>Para todas as requisições são necessários os seguintes Headers:</p>
 
-<p>&ldquo;Authorization&rdquo;: &ldquo;Token token=123&rdquo;,<br>
-&ldquo;Content-Type&rdquo;: &ldquo;application/json&rdquo;</p>
+<div class="api-endpoint">
+  <div class="endpoint-data authentication">
+    &ldquo;Authorization&rdquo;: &ldquo;Token token=6f42433270bc61d746556b17605db1s4&rdquo;,<br>
+    &ldquo;Content-Type&rdquo;: &ldquo;application/json&rdquo;
+  </div>
+</div>  
 <pre class="highlight shell"><code>  Formato JSON
 
   EXEMPLO DE REQUISIÇÃO
 
     curl -X GET <span class="se">\</span>
-      http://localhost:3000/api/v1/organizations <span class="se">\</span>
-      -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec7101010'</span> <span class="se">\</span>
-      -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+      https://app.emites.com.br/api/v1/organizations <span class="se">\</span>
+      -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
       -H <span class="s1">'content-type: application/json'</span> 
 
   EXEMPLO DE RESPOSTA
@@ -155,19 +153,22 @@ O Emites possui uma API REST para interagir com seus recursos, através de objet
 
 <p>Para emitir notas, é necessário realizar uma requisição POST para o seguinte endereço:  </p>
 
-<p>POST /api/v1/organizations/{organization_id}/nfe_batch  </p>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe_batch</h6>
+    </div>
+</div>
 
 <p>Veja ao lado um exemplo do corpo da requisição:  </p>
 
 <aside class="warning">
 Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo &ldquo;á&rdquo;, &ldquo;é&rdquo;, &ldquo;â&rdquo;, &ldquo;ã&rdquo; etc. Também não aceitam &ldquo;ç&rdquo;.
 </aside>
-<pre class="highlight shell"><code>    curl -X POST <span class="se">\</span>
-  http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe_batch <span class="se">\</span>
-  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05as'</span> <span class="se">\</span>
-  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'postman-token: 82f01e8f-9fe6-e89c-b4fe-c3e24b9d2853'</span> <span class="se">\</span>
   -d <span class="s1">'{
         "nfe_batch":  {
             "lote": 1,
@@ -416,7 +417,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 </code></pre>
 
-          <h1 id="campos-da-api">Campos da API</h1>
+          <h1 id="campos-da-emiss-o-de-nota">Campos da emissão de nota</h1>
 
 <h2 id="dados_gerais-xml-ide">dados_gerais (XML: ide)</h2>
 
@@ -5741,39 +5742,48 @@ placa  </p>
 
 <p>Para consultar uma nota é necessário realizar a seguinte requisição:  </p>
 
-<p>GET /api/v1/organizations/{organization_id}/nfe/{nfe_id}  </p>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
+    </div>
+</div>
 <pre class="highlight shell"><code>curl -X GET <span class="se">\</span>
-    http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/10990 <span class="se">\</span>
-    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05a'</span> <span class="se">\</span>
-    -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+    https://app.emites.com.br/api/v1/organizations/11/nfe/10990 <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-    -H <span class="s1">'postman-token: 332205aa-2eec-a72b-c8df-a4381b9142f7'</span>
 </code></pre>
 
           <h1 id="cancelamento-de-nota">Cancelamento de nota</h1>
 
 <p>Para cancelar uma nota, envie a seguinte requisição:  </p>
 
-<p>PATCH /api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel  </p>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH </i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel </h6>
+    </div>
+</div>  
 <pre class="highlight shell"><code>curl -X PATCH <span class="se">\</span>
-    http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
-    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05aasas'</span> <span class="se">\</span>
-    -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+    https://app.emites.com.br/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-    -H <span class="s1">'postman-token: 065c1276-5de2-c115-11b1-2fa643b500b8'</span>
 </code></pre>
 
           <h1 id="inutiliza-o-de-n-mero-de-nota">Inutilização de número de nota</h1>
 
 <p>Para inutilizar um número, envie a seguinte requisição:  </p>
 
-<p>POST /api/v1/organizations/{organization_id}/nfe/disable  </p>
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/disable</h6>
+    </div>
+</div> 
 <pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
-  http://emites-sandbox.herokuapp.com/api/v1/organizations/11/nfe/disable <span class="se">\</span>
-    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db05aasas'</span> <span class="se">\</span>
-    -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-    -H <span class="s1">'postman-token: 79bb907b-95ac-5261-bfc1-d772c6514a0b'</span> <span class="se">\</span>
     -d <span class="s1">'{
             "nfe": {
                 "uf": "35",
@@ -5794,12 +5804,102 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  </p>
 
-<p>Por exemplo, a cada nota emitida será disparado o payload:  </p>
+<p>Os webhooks seguem a mesma estrutura com excessão da inutilização rejeitada que possui os campos <code class="prettyprint">uf</code>, <code class="prettyprint">serie</code>, <code class="prettyprint">numero</code>, <code class="prettyprint">errors</code>. Veja abaixo a descrição de cada campo:</p>
+
+<p><code class="prettyprint">object_type: tipo do objeto solicitado (NFe/NFeBatch e NFCe/NFCeBatch)</code></p>
+
+<p><code class="prettyprint">object_id: id interno objeto solicitado</code></p>
+
+<p><code class="prettyprint">organization_id: id da organização</code></p>
+
+<p><code class="prettyprint">event: status da nota</code></p>
+
+<p><code class="prettyprint">uf: código do estado de acordo com o IBGE</code></p>
+
+<p><code class="prettyprint">serie: série do lote</code></p>
+
+<p><code class="prettyprint">numero: número da nfe/nfc</code></p>
+
+<p><code class="prettyprint">errors: código de erro seguido de uma breve descrição</code></p>
+
+<h2 id="nota-enviada">Nota Enviada</h2>
+
+<p>Enviada: Quando é realizado o envio da NF para a Sefaz e a mesma é recebida. Nesta etapa será enviado o seguinte webhook:  </p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"sent"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="nota-sendo-processada">Nota sendo processada</h2>
+
+<p>Processando: Quando a Sefaz do estado recebe a NF e inicia o processo de autenticação da mesma. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"processed"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="nota-emitida">Nota Emitida</h2>
+
+<p>Emitida: Quando a NF é aceita pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">2646</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"succeeded"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="nota-rejeitada">Nota Rejeitada</h2>
+
+<p>Rejeitada: Quando a NF é rejeitada pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="nota-cancelada">Nota Cancelada</h2>
+
+<p>Cancelada: Quando o cancelamento da NF é aceito pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"cancelled"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="cancelamento-rejeitado">Cancelamento Rejeitado</h2>
+
+<p>Cancelamento Rejeitado: Quando o cancelamento da NF é rejeitado pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"cancel_rejected"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="inutiliza-o-rejeitada">Inutilização Rejeitada</h2>
+
+<p>Inutilização Rejeitada: Quando o inutilização da NF é rejeitado pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"disablement_rejected"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"uf"</span><span class="p">:</span><span class="s2">"35"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"serie"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numero"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errors"</span><span class="p">:[</span><span class="s2">"215 - Rejeição: Falha no schema XML"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
