@@ -8,7 +8,7 @@ Para adicionar uma nova url, acesse a interface do Emites, clique no ícone do m
 
 Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  
 
-Os webhooks seguem a mesma estrutura com excessão da inutilização rejeitada que possui os campos `uf`, `serie`, `numero`, `errors`. Veja abaixo a descrição de cada campo:
+Os webhooks seguem a mesma estrutura com exceção da inutilização rejeitada que possui os campos `uf`, `serie`, `numero`, `errors`. Veja abaixo a descrição de cada campo:
 
 `object_type: tipo do objeto solicitado (NFe/NFeBatch e NFCe/NFCeBatch)`
 
