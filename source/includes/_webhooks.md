@@ -26,9 +26,9 @@ Os webhooks seguem a mesma estrutura com exceção da inutilização rejeitada q
 
 `errors: código de erro seguido de uma breve descrição`
 
-## Nota Enviada
+## Lote Enviado
 
-Enviada: Quando é realizado o envio da NF para a Sefaz e a mesma é recebida. Nesta etapa será enviado o seguinte webhook:  
+Enviado: Quando é realizado o envio de um lote de NF para a Sefaz e a mesma é recebida. Nesta etapa será enviado o seguinte webhook:  
 
 ```
 {
