@@ -8,9 +8,12 @@ Para adicionar uma nova url, acesse a interface do Emites, clique no ícone do m
 
 Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  
 
-Os webhooks seguem a mesma estrutura com excessão da inutilização rejeitada que possui os campos `uf`, `serie`, `numero`, `errors`. Veja abaixo a descrição de cada campo:
+Os webhooks seguem a mesma estrutura com exceção da inutilização rejeitada que possui os campos `uf`, `serie`, `numero`, `errors`.  
 
-`object_type: tipo do objeto solicitado (NFe/NFeBatch e NFCe/NFCeBatch)`
+Veja abaixo a descrição de cada campo:
+
+`object_type: tipo do objeto solicitado (NFe/NFeBatch e NFCe/NFCeBatch)`  
+
 
 `object_id: id interno objeto solicitado`
 
@@ -26,9 +29,13 @@ Os webhooks seguem a mesma estrutura com excessão da inutilização rejeitada q
 
 `errors: código de erro seguido de uma breve descrição`
 
-## Nota Enviada
+<aside class="notice">
+    OBS.: O tipo de objeto NFeBatch e NFCeBatch é referente a lotes compostos de várias notas e o tipo de objeto NFe ou NFCe é referente à nota avulsa.
+</aside>
 
-Enviada: Quando é realizado o envio da NF para a Sefaz e a mesma é recebida. Nesta etapa será enviado o seguinte webhook:  
+## Lote enviado
+
+É Quando é realizado o envio de um lote de NF para a SEFAZ e o mesmo é recebido. Nesta etapa será enviado o seguinte webhook:  
 
 ```
 {
@@ -39,9 +46,9 @@ Enviada: Quando é realizado o envio da NF para a Sefaz e a mesma é recebida. N
 }
 ```
 
-## Nota sendo processada
+## Lote sendo processado
 
-Processando: Quando a Sefaz do estado recebe a NF e inicia o processo de autenticação da mesma. Nesta etapa será enviado o seguinte webhook:
+Quando a SEFAZ do estado recebe o lote e inicia o processo de autenticação do mesmo. Nesta etapa será enviado o seguinte webhook:
 
 ```
 {
@@ -52,9 +59,9 @@ Processando: Quando a Sefaz do estado recebe a NF e inicia o processo de autenti
 }
 ```
 
-## Nota Emitida
+## Nota emitida
 
-Emitida: Quando a NF é aceita pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+Quando a NF é aceita pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
 
 ```
 {
@@ -65,9 +72,9 @@ Emitida: Quando a NF é aceita pela Sefaz. Nesta etapa será enviado o seguinte 
 }
 ```
 
-## Nota Rejeitada
+## Nota rejeitada
 
-Rejeitada: Quando a NF é rejeitada pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+Quando a NF é rejeitada pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
 
 ```
 {
@@ -78,9 +85,9 @@ Rejeitada: Quando a NF é rejeitada pela Sefaz. Nesta etapa será enviado o segu
 }
 ```
 
-## Nota Cancelada  
+## Nota cancelada  
 
-Cancelada: Quando o cancelamento da NF é aceito pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+Quando o cancelamento da NF é aceito pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
 
 ```
 {
@@ -91,9 +98,9 @@ Cancelada: Quando o cancelamento da NF é aceito pela Sefaz. Nesta etapa será e
 }
 ```
 
-## Cancelamento Rejeitado 
+## Cancelamento rejeitado 
 
-Cancelamento Rejeitado: Quando o cancelamento da NF é rejeitado pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+Quando o cancelamento da NF é rejeitado pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
 
 ```
 {
@@ -104,9 +111,9 @@ Cancelamento Rejeitado: Quando o cancelamento da NF é rejeitado pela Sefaz. Nes
 }
 ```
 
-## Inutilização Rejeitada
+## Inutilização rejeitada
 
-Inutilização Rejeitada: Quando o inutilização da NF é rejeitado pela Sefaz. Nesta etapa será enviado o seguinte webhook:
+Quando uma solicitação de inutilização de um número de NF é rejeitada pela SEFAZ
 
 ```
 {
