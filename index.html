@@ -5804,9 +5804,11 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  </p>
 
-<p>Os webhooks seguem a mesma estrutura com excessão da inutilização rejeitada que possui os campos <code class="prettyprint">uf</code>, <code class="prettyprint">serie</code>, <code class="prettyprint">numero</code>, <code class="prettyprint">errors</code>. Veja abaixo a descrição de cada campo:</p>
+<p>Os webhooks seguem a mesma estrutura com exceção da inutilização rejeitada que possui os campos <code class="prettyprint">uf</code>, <code class="prettyprint">serie</code>, <code class="prettyprint">numero</code>, <code class="prettyprint">errors</code>.  </p>
 
-<p><code class="prettyprint">object_type: tipo do objeto solicitado (NFe/NFeBatch e NFCe/NFCeBatch)</code></p>
+<p>Veja abaixo a descrição de cada campo:</p>
+
+<p><code class="prettyprint">object_type: tipo do objeto solicitado (NFe/NFeBatch e NFCe/NFCeBatch)</code>  </p>
 
 <p><code class="prettyprint">object_id: id interno objeto solicitado</code></p>
 
@@ -5822,9 +5824,13 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p><code class="prettyprint">errors: código de erro seguido de uma breve descrição</code></p>
 
-<h2 id="nota-enviada">Nota Enviada</h2>
+<aside class="notice">
+    OBS.: O tipo de objeto NFeBatch e NFCeBatch é referente a lotes compostos de várias notas e o tipo de objeto NFe ou NFCe é referente à nota avulsa.
+</aside>
 
-<p>Enviada: Quando é realizado o envio da NF para a Sefaz e a mesma é recebida. Nesta etapa será enviado o seguinte webhook:  </p>
+<h2 id="lote-enviado">Lote enviado</h2>
+
+<p>É Quando é realizado o envio de um lote de NF para a SEFAZ e o mesmo é recebido. Nesta etapa será enviado o seguinte webhook:  </p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
@@ -5833,9 +5839,9 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h2 id="nota-sendo-processada">Nota sendo processada</h2>
+<h2 id="lote-sendo-processado">Lote sendo processado</h2>
 
-<p>Processando: Quando a Sefaz do estado recebe a NF e inicia o processo de autenticação da mesma. Nesta etapa será enviado o seguinte webhook:</p>
+<p>Quando a SEFAZ do estado recebe o lote e inicia o processo de autenticação do mesmo. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
@@ -5844,9 +5850,9 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h2 id="nota-emitida">Nota Emitida</h2>
+<h2 id="nota-emitida">Nota emitida</h2>
 
-<p>Emitida: Quando a NF é aceita pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<p>Quando a NF é aceita pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
@@ -5855,9 +5861,9 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h2 id="nota-rejeitada">Nota Rejeitada</h2>
+<h2 id="nota-rejeitada">Nota rejeitada</h2>
 
-<p>Rejeitada: Quando a NF é rejeitada pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<p>Quando a NF é rejeitada pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
@@ -5866,9 +5872,9 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h2 id="nota-cancelada">Nota Cancelada</h2>
+<h2 id="nota-cancelada">Nota cancelada</h2>
 
-<p>Cancelada: Quando o cancelamento da NF é aceito pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<p>Quando o cancelamento da NF é aceito pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
@@ -5877,9 +5883,9 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h2 id="cancelamento-rejeitado">Cancelamento Rejeitado</h2>
+<h2 id="cancelamento-rejeitado">Cancelamento rejeitado</h2>
 
-<p>Cancelamento Rejeitado: Quando o cancelamento da NF é rejeitado pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<p>Quando o cancelamento da NF é rejeitado pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
@@ -5888,9 +5894,9 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h2 id="inutiliza-o-rejeitada">Inutilização Rejeitada</h2>
+<h2 id="inutiliza-o-rejeitada">Inutilização rejeitada</h2>
 
-<p>Inutilização Rejeitada: Quando o inutilização da NF é rejeitado pela Sefaz. Nesta etapa será enviado o seguinte webhook:</p>
+<p>Quando uma solicitação de inutilização de um número de NF é rejeitada pela SEFAZ</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
