@@ -335,7 +335,6 @@ html, body {
   }
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
-    margin-right: $examples-width;
     padding: 0 $main-padding;
     box-sizing: border-box;
     display: block;
@@ -527,7 +526,7 @@ html, body {
 
     padding: 2em $main-padding;
     margin: 0;
-    width: $examples-width;
+    width: 100%;
 
     float:right;
     clear:right;
@@ -629,14 +628,13 @@ html, body {
 @media (min-width: $tablet-width + $nav-width) {
   .content > table {
     display: inline-table;
-    width: 57%;
+    width: 95%;
     margin: 28px;
     overflow: auto;
   }
 }
 
 .api-endpoint {
-  margin-right: 40%;
   padding: 0 28px;
   box-sizing: border-box;
   display: block;
