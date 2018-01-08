@@ -88,25 +88,6 @@ Grupo de informações relacionadas ao endereço do destinatário. Seus atributo
     nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |  
     telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |  
 
-### endereco (XML: enderDest)
-
-Grupo de informações relacionadas ao endereço do destinatário. Seus atributos são:
-
-
-    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------|----------------------------------------------------------- 
-    logradouro                  |  xLgr           |  Sim          |  Texto                  |  Até 60 caracteres           |  
-    numero                      |  nro            |  Sim          |  Texto                  |  Até 60 caracteres           |  
-    complemento                 |  xCpl           |  Não          |  Texto                  |  Até 60 caracteres           |  
-    bairro                      |  xBairro        |  Sim          |  Texto                  |  Até 60 caracteres           |  
-    codigo_municipio            |  cMun           |  Sim          |  Numérico               |  7 dígitos                   |  
-    nome_municipio              |  xMun           |  Sim          |  Texto                  |  Até 60 caracteres           |  
-    cep                         |  CEP            |  Sim          |  Numérico               |  8 dígitos                   |  
-    uf                          |  UF             |  Sim          |  Texto                  |  2 caracteres                |  
-    codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |  
-    nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |  
-    telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |  
-
 ## produto (XML: prod)  
 
 Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:  
