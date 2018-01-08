@@ -422,12 +422,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>Contém informações gerais e metadados sobre a NF-e. Seus atributos são:</p>
 
-<h3 id="uf">uf</h3>
-
-<p>Código da UF do emitente do Documento Fiscal.</p>
-
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -436,334 +433,124 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>uf</td>
 <td>cUF</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>2 dígitos</td>
-<td></td>
+<td>Código da UF do emitente do Documento Fiscal.</td>
 </tr>
-</tbody></table>
-
-<h3 id="serie">serie</h3>
-
-<p>Série do Documento Fiscal. Informar 0 (zero) para série única.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>serie</td>
 <td>serie</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>Até 3 dígitos</td>
-<td></td>
+<td>Série do Documento Fiscal. Informar 0 (zero) para série única.</td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_mun_ocorrencia">codigo_mun_ocorrencia</h3>
-
-<p>Código do Município de Ocorrência do Fato Gerador.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_mun_ocorrencia</td>
 <td>cMunFG</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>7 dígitos</td>
-<td></td>
+<td>Código do Município de Ocorrência do Fato Gerador.</td>
 </tr>
-</tbody></table>
-
-<h3 id="nfe_numero">nfe_numero</h3>
-
-<p>Número do Documento Fiscal.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nfe_numero</td>
 <td>nNF</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td></td>
-<td></td>
+<td>Número do Documento Fiscal.</td>
 </tr>
-</tbody></table>
-
-<h3 id="data_saida_entrada">data_saida_entrada</h3>
-
-<p>Data e hora de Saída ou da Entrada da Mercadoria/Produto.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>data_saida_entrada</td>
 <td>dhSaiEnt</td>
 <td>Não</td>
 <td>Data</td>
 <td>aaaa-mm-ddThh:mm:ss-03:00</td>
-<td></td>
+<td>Data e hora de Saída ou da Entrada da Mercadoria/Produto.</td>
 </tr>
-</tbody></table>
-
-<h3 id="tipo_operacao">tipo_operacao</h3>
-
-<p>Tipo de Operação, sendo 0 = Entrada e 1 = Saída.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>tipo_operacao</td>
 <td>tpNF</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Tipo de Operação, sendo 0 = Entrada e 1 = Saída.</td>
 </tr>
-</tbody></table>
-
-<h3 id="tipo_emiss-o">tipo_emissão</h3>
-
-<p>Forma de Emissão da NF-e. Seleção entre:<br>
-1 = Emissão normal (não em contingência);<br>
-2 = Contingência FS-IA, com impressão do DANFE em formulário de segurança;<br>
-3 = Contingência SCAN (Sistema de Contingência do Ambiente Nacional);<br>
-4 = Contingência DPEC (Declaração Prévia da Emissão em Contingência);<br>
-5 = Contingência FS-DA, com impressão do DANFE em formulário de segurança; 
-6 = Contingência SVC-AN (SEFAZ Virtual de Contingência do AN);<br>
-7 = Contingência SVC-RS (SEFAZ Virtual de Contingência do RS);<br>
-9 = Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e).  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>tipo_emissão</td>
 <td>tpEmiss</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>1 = Emissão normal (não em contingência); <br> 2 = Contingência FS-IA, com impressão do DANFE em formulário de segurança; <br> 3 = Contingência SCAN (Sistema de Contingência do Ambiente Nacional); <br> 4 = Contingência DPEC (Declaração Prévia da Emissão em Contingência); <br> 5 = Contingência FS-DA, com impressão do DANFE em formulário de segurança; <br> 6 = Contingência SVC-AN (SEFAZ Virtual de Contingência do AN); <br> 7 = Contingência SVC-RS (SEFAZ Virtual de Contingência do RS); <br> 9 = Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e).</td>
 </tr>
-</tbody></table>
-
-<h3 id="destino_operacao">destino_operacao</h3>
-
-<p>Identificador de Local de destino da operação (1 - Interna; 2 - Interestadual; 3 - Exterior).</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>destino_operacao</td>
 <td>idDest</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Identificador de Local de destino da operação (1 - Interna; 2 - Interestadual; 3 - Exterior).</td>
 </tr>
-</tbody></table>
-
-<h3 id="natureza_operacao">natureza_operacao</h3>
-
-<p>Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea &lsquo;i&rsquo;, inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970. </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>natureza_operacao</td>
 <td>natOp</td>
 <td>Sim</td>
 <td>Texto  e/ou número</td>
 <td>1 a 60 caracteres</td>
-<td></td>
+<td>Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea &lsquo;i&rsquo;, inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970.</td>
 </tr>
-</tbody></table>
-
-<h3 id="indicador_pagamento">indicador_pagamento</h3>
-
-<p>Indicador da forma de pagamento. Seleção entre:   0 = pagamento a vista   1 = pagamento a prazo   2 = outros. </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>indicador_pagamento</td>
 <td>indPag</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Indicador da forma de pagamento. Seleção entre:   0 = pagamento a vista   1 = pagamento a prazo   2 = outros.</td>
 </tr>
-</tbody></table>
-
-<h3 id="indicador_consumidor_final">indicador_consumidor_final</h3>
-
-<p>Indica se a NF-e foi emitida para consumidor final, sendo 0 = Não e 1 = Sim.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>indicador_consumidor_final</td>
 <td>indFinal</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Indica se a NF-e foi emitida para consumidor final, sendo 0 = Não e 1 = Sim.</td>
 </tr>
-</tbody></table>
-
-<h3 id="indicador_presenca">indicador_presenca</h3>
-
-<p>Indicador de presença do comprador no estabelecimento comercial no momento da operação. Seleção entre:  </p>
-
-<p>0 = Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);<br>
-1 = Operação presencial;<br>
-2 = Operação não presencial, pela Internet;<br>
-3   = Operação não presencial, Teleatendimento;<br>
-4 = NFC-e em operação com entrega a domicílio;<br>
-9 = Operação não presencial, outros.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>indicador_presenca</td>
 <td>indPres</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Indicador de presença do comprador no estabelecimento comercial no momento da operação. Seleção entre:<br>0 = Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);<br>1 = Operação presencial;<br>2 = Operação não presencial, pela Internet;<br>3   = Operação não presencial, Teleatendimento;<br>4 = NFC-e em operação com entrega a domicílio;<br>9 = Operação não presencial, outros.<br></td>
 </tr>
-</tbody></table>
-
-<h3 id="finalidade_nfe">finalidade_nfe</h3>
-
-<p>Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>finalidade_nfe</td>
 <td>finNFe</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_total_nota">valor_total_nota</h3>
-
-<p>Somatória do Valor Total dos Produtos ou Serviços e determinados impostos. Calculado automaticamente pelo Emites.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_total_nota</td>
 <td>vNF</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td></td>
-<td></td>
+<td>Somatória do Valor Total dos Produtos ou Serviços e determinados impostos. Calculado automaticamente pelo Emites.</td>
 </tr>
-</tbody></table>
-
-<h3 id="indicador_incentivo_fiscal">indicador_incentivo_fiscal</h3>
-
-<p>Indicador de incentivo fiscal, sendo 1 = Sim, 2 = Não.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>indicador_incentivo_fiscal</td>
 <td>indIncentivo</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Indicador de incentivo fiscal, sendo 1 = Sim, 2 = Não.</td>
 </tr>
 </tbody></table>
 
@@ -771,12 +558,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>Contém informações sobre a empresa emitente da NF-e. Seus atributos são:  </p>
 
-<h3 id="cnpj">cnpj</h3>
-
-<p>CNPJ da empresa emitente, somente números.  </p>
-
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -785,174 +569,78 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>cnpj</td>
 <td>CNPJ</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>14 dígitos</td>
-<td></td>
+<td>CNPJ da empresa emitente, somente números.</td>
 </tr>
-</tbody></table>
-
-<h3 id="razao_social">razao_social</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>razao_social</td>
 <td>xNome</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="nome_fantasia">nome_fantasia</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nome_fantasia</td>
 <td>xFant</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="inscricao_estadual">inscricao_estadual</h3>
-
-<p>Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>inscricao_estadual</td>
 <td>IE</td>
 <td>sim</td>
 <td>Texto</td>
 <td>Até 14 caracteres</td>
-<td></td>
+<td>Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.</td>
 </tr>
-</tbody></table>
-
-<h3 id="inscricao_estadual_st">inscricao_estadual_st</h3>
-
-<p>Inscrição Estadual do Substituto Tributário do estado de destino da mercadoria, quando houver a retenção de ICMS ST para o estado de destino.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>inscricao_estadual_st</td>
 <td>IEST</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>Até 14 caracteres</td>
-<td></td>
+<td>Inscrição Estadual do Substituto Tributário do estado de destino da mercadoria, quando houver a retenção de ICMS ST para o estado de destino.</td>
 </tr>
-</tbody></table>
-
-<h3 id="inscricao_municipal">inscricao_municipal</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>inscricao_municipal</td>
 <td>IM</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 15 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="cnae">cnae</h3>
-
-<p>CNAE fiscal que pode ser informado quando a inscrição municipal for informada.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cnae</td>
 <td>CNAE</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>7 caracteres</td>
-<td></td>
+<td>CNAE fiscal que pode ser informado quando a inscrição municipal for informada.</td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_regime_tributario">codigo_regime_tributario</h3>
-
-<p>Seleção entre:  </p>
-
-<p>1 = Simples Nacional;
-2 = Simples Nacional, excesso sublimite de receita bruta;
-3 = Regime Normal.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_regime_tributario</td>
 <td>CRT</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.</td>
 </tr>
 </tbody></table>
 
 <h3 id="endereco-xml-enderemit">endereco (XML: enderEmit)</h3>
 
-<p>Grupo de informações relacionadas ao endereço do emitente. Seus atributos são:  </p>
-
-<h3 id="logradouro">logradouro</h3>
+<p>Grupo de informações relacionadas ao endereço do emitente. Seus atributos são: </p>
 
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -961,208 +649,87 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>logradouro</td>
 <td>xLgr</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="numero">numero</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>numero</td>
 <td>nro</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="complemento">complemento</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>complemento</td>
 <td>xCpl</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="bairro">bairro</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>bairro</td>
 <td>xBairro</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_municipio">codigo_municipio</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_municipio</td>
 <td>cMun</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>7 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="nome_municipio">nome_municipio</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nome_municipio</td>
 <td>xMun</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="cep">cep</h3>
-
-<p>Campo no XML</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cep</td>
 <td>CEP</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>8 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="uf">uf</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>uf</td>
 <td>UF</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>2 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_pais">codigo_pais</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_pais</td>
 <td>cPais</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>4 dígitos</td>
 <td>1058 = Brasil</td>
 </tr>
-</tbody></table>
-
-<h3 id="nome_pais">nome_pais</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nome_pais</td>
 <td>xPais</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td>Brasil ou BRASIL</td>
 </tr>
-</tbody></table>
-
-<h3 id="telefone">telefone</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>telefone</td>
 <td>fone</td>
 <td>Não</td>
 <td>Numérico</td>
@@ -1175,12 +742,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>Contém informações sobre o destinatário da aquisição dos produtos do emitente (nota de saída) ou venda dos produtos para o emitente (nota de entrada). Seus atributos são:  </p>
 
-<h3 id="cpf_cnpj">cpf_cnpj</h3>
-
-<p>CPF ou CNPJ do destinatário, somente números.</p>
-
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -1189,160 +753,63 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>cpf_cnpj</td>
 <td>CPF ou CNPJ</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>11 ou 14 dígitos</td>
-<td></td>
+<td>CPF ou CNPJ do destinatário, somente números.</td>
 </tr>
-</tbody></table>
-
-<h3 id="nome">nome</h3>
-
-<p>Razão social ou nome do destinatário  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nome</td>
 <td>xNome</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Razão social ou nome do destinatário</td>
 </tr>
-</tbody></table>
-
-<h3 id="pessoa_fisica_juridica">pessoa_fisica_juridica</h3>
-
-<p>Campo de controle do Emites para indicar se o destinatário é pessoa física (“person”) ou jurídica (“company”).</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>pessoa_fisica_juridica</td>
 <td>-</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>-</td>
-<td></td>
+<td>Campo de controle do Emites para indicar se o destinatário é pessoa física (“person”) ou jurídica (“company”).</td>
 </tr>
-</tbody></table>
-
-<h3 id="inscricao_estadual">inscricao_estadual</h3>
-
-<p>Informar somente os algarismos, sem ponto, hífen, barra, etc.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>inscricao_estadual</td>
 <td>IE</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>Até 14 dígitos</td>
-<td></td>
+<td>Informar somente os algarismos, sem ponto, hífen, barra, etc.</td>
 </tr>
-</tbody></table>
-
-<h3 id="inscricao_suframa">inscricao_suframa</h3>
-
-<p>Obrigatório nas operações que se beneficiam de incentivos fiscais existentes nas áreas sob controle da SUFRAMA. A omissão desta informação impede o processamento da operação pelo Sistema de Mercadoria Nacional da SUFRAMA e a liberação da Declaração de Ingresso, prejudicando a comprovação do ingresso / internamento da mercadoria nestas áreas.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>inscricao_suframa</td>
 <td>ISUF</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>De 8 a 9 dígitos</td>
-<td></td>
+<td>Obrigatório nas operações que se beneficiam de incentivos fiscais existentes nas áreas sob controle da SUFRAMA. A omissão desta informação impede o processamento da operação pelo Sistema de Mercadoria Nacional da SUFRAMA e a liberação da Declaração de Ingresso, prejudicando a comprovação do ingresso / internamento da mercadoria nestas áreas.</td>
 </tr>
-</tbody></table>
-
-<h3 id="inscricao_municipal">inscricao_municipal</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>inscricao_municipal</td>
 <td>IM</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 15 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="indicador_inscricao_estadual">indicador_inscricao_estadual</h3>
-
-<p>Indica se o destinatário é contribuinte do ICMS. Seleção entre:  </p>
-
-<p>1 = Contribuinte ICMS (informar a IE do destinatário);<br>
-2 = Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS;<br>
-9 = Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>indicador_inscricao_estadual</td>
 <td>indIEDest</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Indica se o destinatário é contribuinte do ICMS. Seleção entre:<br>1 = Contribuinte ICMS (informar a IE do destinatário);<br> 2  = Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS;<br>9 = Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS.</td>
 </tr>
-</tbody></table>
-
-<h3 id="email">email</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>email</td>
 <td>email</td>
 <td>Não</td>
 <td>Texto</td>
@@ -1357,6 +824,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -1365,206 +833,87 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>logradouro</td>
 <td>xLgr</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="numero">numero</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>numero</td>
 <td>nro</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="complemento">complemento</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>complemento</td>
 <td>xCpl</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="bairro">bairro</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>bairro</td>
 <td>xBairro</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_municipio">codigo_municipio</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_municipio</td>
 <td>cMun</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>7 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="nome_municipio">nome_municipio</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nome_municipio</td>
 <td>xMun</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="cep">cep</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cep</td>
 <td>CEP</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>8 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="uf">uf</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>uf</td>
 <td>UF</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>2 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_pais">codigo_pais</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_pais</td>
 <td>cPais</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>4 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="nome_pais">nome_pais</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nome_pais</td>
 <td>xPais</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="telefone">telefone</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>telefone</td>
 <td>fone</td>
 <td>Não</td>
 <td>Numérico</td>
@@ -1577,10 +926,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>Grupo de informações relacionadas ao endereço do destinatário. Seus atributos são:</p>
 
-<h3 id="logradouro">logradouro</h3>
-
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -1589,206 +937,87 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>logradouro</td>
 <td>xLgr</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="numero">numero</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>numero</td>
 <td>nro</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="complemento">complemento</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>complemento</td>
 <td>xCpl</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="bairro">bairro</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>bairro</td>
 <td>xBairro</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_municipio">codigo_municipio</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_municipio</td>
 <td>cMun</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>7 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="nome_municipio">nome_municipio</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nome_municipio</td>
 <td>xMun</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="cep">cep</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cep</td>
 <td>CEP</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>8 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="uf">uf</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>uf</td>
 <td>UF</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>2 caracteres</td>
-<td>Sigla do estado</td>
+<td></td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_pais">codigo_pais</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_pais</td>
 <td>cPais</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>4 dígitos</td>
-<td>1058 = Brasil</td>
+<td></td>
 </tr>
-</tbody></table>
-
-<h3 id="nome_pais">nome_pais</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>nome_pais</td>
 <td>xPais</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
-<td>Brasil ou BRASIL</td>
+<td></td>
 </tr>
-</tbody></table>
-
-<h3 id="telefone">telefone</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>telefone</td>
 <td>fone</td>
 <td>Não</td>
 <td>Numérico</td>
