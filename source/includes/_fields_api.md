@@ -756,7 +756,7 @@ aliquota_pis_reais_st           |  vAliqProd    |  Sim          |  Decimal   |  
 quantidade_vendida_st           |  qBCProd      |  Sim          |  Decimal   |  Até 12 dígitos, de 0 a 4 casas decimais
 valor_pis_st                    |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
-situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99  
+### situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99  
 
 49 = Outras Operações de Saída  
 50 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno  
