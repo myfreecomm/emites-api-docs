@@ -538,6 +538,8 @@ situacao_simples_nacional       |  CSOSN        |  Sim          |  Numérico  | 
 
 ### situacao_tributaria = 400
 
+Não tributada
+
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
 situacao_simples_nacional       |  CSOSN        |  Sim          |  Numérico  |  3 dígitos
