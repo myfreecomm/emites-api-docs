@@ -349,7 +349,7 @@ Tributada com cobrança de ICMS por ST.
   aliquota_icms_st              |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |  
   valor_icms_st                 |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |   
 
-com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação  
+#### com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação  
 
   Campo                         |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
@@ -387,9 +387,9 @@ valor_icms_st                   |  vICMSST    |  Sim          |  Decimal   | At�
 
 ### situacao_tributaria = 40, 41 e 50
 
-40 =  Isenta
-41 =  Não tributada
-50 =  Suspensão
+40 =  Isenta  
+41 =  Não tributada  
+50 =  Suspensão  
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
@@ -451,7 +451,7 @@ perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   | 
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
-com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação
+#### com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
