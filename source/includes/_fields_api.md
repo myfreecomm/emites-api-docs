@@ -152,7 +152,7 @@ Código Fiscal de Operações e Prestações.
 ---------------|---------------|----------------------|------------------------------|------------
        -       |       -       |         -            |          -                   |  -
                
-### idade_comercial
+### unidade_comercial
 
 Unidade de comercialização do produto.
 
@@ -160,7 +160,7 @@ Unidade de comercialização do produto.
 ---------------|---------------|----------------------|------------------------------|------------
   uCom         |  Sim          |  Texto               |  Até 6 caracteres            |  
   
-### qantidade_comercial
+### quantidade_comercial
 
 Quantidade de comercialização do produto.
 
@@ -190,7 +190,7 @@ Unidade tributável do produto.
 ---------------|---------------|----------------------|------------------------------|------------
   uTrib        |  Sim          |  Texto               |  Até 6 caracteres            |  
 
-### qantidade_tributaria
+### quantidade_tributaria
 
 Quantidade tributável do produto.
 
