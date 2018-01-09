@@ -22,39 +22,6 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     valor_total_nota            |   vNF           |  Sim          |     Decimal             |                              |   Somatória do Valor Total dos Produtos ou Serviços e determinados impostos. Calculado automaticamente pelo Emites.  
     indicador_incentivo_fiscal  |   indIncentivo  |  Sim          |     Numérico            |    1 dígito                  |   Indicador de incentivo fiscal, sendo 1 = Sim, 2 = Não.  
 
-## emitente (XML: emit)  
-
-Contém informações sobre a empresa emitente da NF-e. Seus atributos são:  
-
-    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
-    cnpj                        |  CNPJ           |  Sim          |     Numérico            |   14 dígitos                 |  CNPJ da empresa emitente, somente números. 
-    razao_social                |  xNome          |  Sim          |     Texto               |   Até 60 caracteres          |  
-    nome_fantasia               |  xFant          |  Não          |     Texto               |   Até 60 caracteres          |  
-    inscricao_estadual          |  IE             |  sim          |     Texto               |   Até 14 caracteres          |  Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.  
-    inscricao_estadual_st       |  IEST           |  Não          |     Numérico            |   Até 14 caracteres          |  Inscrição Estadual do Substituto Tributário do estado de destino da mercadoria, quando houver a retenção de ICMS ST para o estado de destino.  
-    inscricao_municipal         |  IM             |  Não          |     Texto               |   Até 15 caracteres          |  
-    cnae                        |  CNAE           |  Não          |     Numérico            |   7 caracteres               |  CNAE fiscal que pode ser informado quando a inscrição municipal for informada.  
-    codigo_regime_tributario    |  CRT            |  Não          |     Numérico            |   1 dígito                   |  1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.  
- 
-### endereco (XML: enderEmit)  
-
-Grupo de informações relacionadas ao endereço do emitente. Seus atributos são: 
-
-    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------|----------------------------------------------------------- 
-    logradouro                  |   xLgr          |  Sim          |  Texto                  |   Até 60 caracteres          |  
-    numero                      |   nro           |  Sim          |  Texto                  |   Até 60 caracteres          |  
-    complemento                 |   xCpl          |  Não          |  Texto                  |   Até 60 caracteres          |  
-    bairro                      |   xBairro       |  Sim          |  Texto                  |   Até 60 caracteres          |  
-    codigo_municipio            |   cMun          |  Sim          |  Numérico               |   7 dígitos                  |  
-    nome_municipio              |   xMun          |  Sim          |  Texto                  |   Até 60 caracteres          |  
-    cep                         |   CEP           |  Sim          |  Numérico               |  8 dígitos                   |  
-    uf                          |   UF            |  Sim          |  Texto                  |  2 caracteres                |  
-    codigo_pais                 |   cPais         |  Não          |  Numérico               |  4 dígitos                   | 1058 = Brasil  
-    nome_pais                   |   xPais         |  Não          |  Texto                  |  Até 60 caracteres           | Brasil ou BRASIL  
-    telefone                    |   fone          |  Não          |  Numérico               |  De 6 a 14 carateres         |  
-
 ## cliente (XML: dest)  
 
 Contém informações sobre o destinatário da aquisição dos produtos do emitente (nota de saída) ou venda dos produtos para o emitente (nota de entrada). Seus atributos são:  

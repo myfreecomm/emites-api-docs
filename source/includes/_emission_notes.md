@@ -9,7 +9,7 @@ Para emitir notas, é necessário realizar uma requisição POST para o seguinte
     </div>
 </div>
 
-Veja ao lado um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:  
 
 <aside class="warning">
 Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo "á", "é", "â", "ã" etc. Também não aceitam "ç".
@@ -40,29 +40,6 @@ curl -X POST \
                     "valor_total_nota": 989.69,
                     "destino_operacao": "1",
                     "indicador_incentivo_fiscal": "FALSE"
-                },
-                "emitente": {
-                    "cnpj": "12313314000123",
-                    "razao_social": "Nexaas LTDA",
-                    "nome_fantasia": "Nexaas LTDA",
-                    "inscricao_estadual": "123456789",
-                    "inscricao_municipal": "",
-                    "inscricao_estadual_st": "",
-                    "telefone": "99999999",
-                    "cnae": 2017123,
-                    "codigo_regime_tributario": 3,
-                    "endereco": {
-                        "telefone": 99999999,
-                        "codigo_estado": "35",
-                        "logradouro": "Rua do Rócio",
-                        "numero": "199",
-                        "complemento": "-",
-                        "bairro": "Vila Olimpia",
-                        "codigo_municipio": "3525904",
-                        "nome_municipio": "São Paulo",
-                        "uf": "SP",
-                        "cep": "12345123"
-                    }
                 },
                 "cliente": {
                     "cpf_cnpj": "46728754000163",
