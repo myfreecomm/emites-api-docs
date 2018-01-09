@@ -1,5 +1,17 @@
 # Campos da emissão de nota
 
+## Emissão em lote 
+
+Todas as notas fiscais são emitidas em lote, mesmo em caso de emissão de uma única nota. A emissão em lote gera um pacote de transmissão de diversas notas fiscais eletrônicas, que são processadas em conjunto. Isto permite maior agilidade para emissão de um grande volume de notas. Cada lote pode conter até 50 NF-e ou NFC-e. Os atributos do lote da nota são:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    lote                        | idLote          |   Sim         |     Numérico            |    De 1 a 15 dígitos         |    Identificador de controle do envio do lote. Deve ser um número sequencial e autoincremental, sendo um identificador único do lote.
+    sincronicidade              | indSinc         |   Sim         |     Numérico            |    1 dígitos                 |    0 = Não<br>1 = Empresa solicita processamento síncrono do Lote de NF-e (sem a geração de Recibo para consulta futura)<br>O processamento síncrono do Lote corresponde a entrega da resposta do processamento das NF-e do Lote, sem a geração de um Recibo de Lote para consulta futura. A resposta de forma síncrona pela SEFAZ Autorizadora só ocorrerá se:<br>- a empresa solicitar e constar unicamente uma NFe
+    uf                          | -               |   Sim         |     Numérico            |    2 dígitos                 |    Campo interno do Emites para indicar o estado de emissão da NF-e/NFC-e e direcionar ao servidor da SEFAZ correspondente
+    nfes                        | NF-e            |   Sim         |     Array               |    Até 50 itens              |    Conjunto de NF-e transmitidas, máximo de 50 NF-e
+
+
 ## dados_gerais (XML: ide)  
 
 Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
@@ -54,6 +66,16 @@ Grupo de informações relacionadas ao endereço do destinatário. Seus atributo
     codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |  
     nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |  
     telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |  
+
+## lista_autorizacao (XML: autXML)
+
+Conjunto de pessoas ou empresas autorizadas a obter o XML. Seus atributos são:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    Número do CNPJ ou CPF       |   CNPJ          |   Sim         |     Numérico            |    14 dígitos                |    Deve ser informado o CNPJ ou CPF
+                                |   CPF           |   Sim         |     Numérico            |    11 dígitos                |
+
 
 ## produto (XML: prod)  
 
@@ -379,11 +401,11 @@ Atributos comuns a todas as situações tributárias
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
     situacao_tributaria         |  CST            |  Sim          |     Numérico            |  2 dígitos                         |
-    clss_enquadramento          |  clEnq          |  Não          |     Texto               |  Até 5 caracteres                  |                    
+    classe_enquadramento        |  clEnq          |  Não          |     Texto               |  Até 5 caracteres                  |                    
     cnpj_produtor               |  CNPJProd       |  Não          |     Numérico            |  14 dígitos                        |
-    codigo_selo_controle        |  cSelo          |  Não          |     Texto               |  Até 60 caracteres                 |
-    qtd_selo_controle           |  qSelo          |  Não          |     Numérico            |  Até 12 dígitos                    |      
-    codigo_enquadramento        |  cEnq           |  Sim          |     Numérico            |  Até 3 dígitos                     |  Geralmente o valor informado é 999
+    codigo_selo_controle        |  cSelo          |  Não          |     Texto               |  Até 60 caracteres                 |  Código do selo de controle IPI
+    quantidade_selo_controle    |  qSelo          |  Não          |     Numérico            |  Até 12 dígitos                    |  Quantidade de selo de controle
+    cod_enquadramento           |  cEnq           |  Sim          |     Numérico            |  Até 3 dígitos                     |  Geralmente o valor informado é 999
 
 ### situacao_tributaria = 00, 49, 50 e 99
 
@@ -698,6 +720,22 @@ Informações de retenção de ICMS de transporte.
     uf                          |  -              |  Não          |  Texto                  |  2 caracteres                      |  Sigla da UF
     codigo_municipio            |  cMunFG         |  Sim          |  Numérico               |  7 dígitos                         |  Código do município de acordo com tabela do IBGE
 
+### endereco_entrega (XML: entrega) (h3)
+
+Identificação do local de entrega. Informar somente se diferente do endereço destinatário. Seus atributos são:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                    |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-----------------------------|------------------------------|----------------------------------------------------------- 
+    cpf_cnpj                    |  CPF/CNPJ       |  Sim          |     Numérico                |    0, 11 ou 14 caracteres    |    Informar CNPJ ou CPF. Preencher os zeros não significativos.     
+    logradouro                  |  xLgr           |  Sim          |     Texto                   |    Até 60 caracteres         |  
+    numero                      |  nro            |  Sim          |     Texto                   |    Até 60 caracteres         |  
+    complemento                 |  xCpl           |  Não          |     Texto                   |    Até 60 caracteres         |  
+    bairro                      |  xBairro        |  Sim          |     Texto                   |    Até 60 caracteres         |  
+    codigo_municipio            |  cMun           |  Sim          |     Numérico                |    7 dígitos                 |    Informar ‘9999999 ‘para operações com o exterior.
+    nome_municipio              |  xMun           |  Sim          |     Texto                   |    Até 60 caracteres         |    Informar ‘EXTERIOR ‘para operações com o exterior.  
+    uf                          |  UF             |  Sim          |     Texto                   |    2 caracteres              |    Informar ‘EX’ para operações com o exterior.
+
+
 ### veiculo (XML: veicTransp)  
 
 Dados do veículo utilizado para transporte, caso haja frete. O campo pode ser omitido caso não haja frete.
@@ -718,7 +756,7 @@ Informações dos volumes transportados, se houver. Uma nota comporta até 5.000
     quantidade_volumes          |  qVol           |  Não                |  Numérico               |  Até 15 dígitos   
     especie                     |  esp            |  Não                |  Texto                  |  Até 60 caracteres
     marca                       |  marca          |  Não                |  Texto                  |  Até 60 caracteres
-    numeracao                   |  nVol           |  Não                |  Texto                  |  Até 60 caracteres
+    numeracao_volumes           |  nVol           |  Não                |  Texto                  |  Até 60 caracteres                  |  Numeração dos volumes transportados
     peso_liquido                |  peslL          |  Não                |  Decimal                |  Até 12 dígitos, 3 casas decimais   |  Peso líquido em quilogramas (kG).
     peso_bruto                  |  pesoB          |  Não                |  Decimal                |  Até 12 dígitos, 3 casas decimais   |  Peso bruto em quilogramas (kG).
 
@@ -730,7 +768,7 @@ Cada volume transportador pode conter lacres, sendo até 5.000 por volume.
 
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
-                                |  nLacre         |  Sim                |  Texto                  |  Até 60 caracteres                 |
+    Número do lacre             |  nLacre         |  Sim                |  Texto                  |  Até 60 caracteres                 |
 
 ## cobranca (XML: infNFe)
 
