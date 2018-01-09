@@ -148,6 +148,233 @@
 
 </code></pre>
 
+          <h1 id="cria-o-de-organiza-es">Criação de organizações</h1>
+
+<p>Para emissão de NF-e ou NFC-e, é necessário possuir ao menos uma organização criada no Emites. Para realizar a criação de uma organização via API, o processo consiste em dois passos:  </p>
+
+<h3 id="1-passo-cria-o-da-organiza-o">1º Passo: Criação da Organização</h3>
+
+<p>Para criar uma organização, é necessário realizar uma requisição POST para o seguinte endereço:  </p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:  </p>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/ <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+      "organization": {
+        "address": {
+          "address": "Rua Gomes de Carvalho",
+          "city": "São Paulo",
+          "city_code": "812938",
+          "complement": "Apto 74",
+          "district": "Vila Olímpia da Realeza",
+          "number": "55",
+          "phone": "1133333333", 
+          "state": "SP",
+          "zipcode": "04547000" 
+        },
+        "codigo_regime_tributario": 1,
+        "company_name": "The String",
+        "document": "58521175000124", 
+        "email": "foo@bar.com",
+
+        "inscricao_estadual": "787811920",
+        "inscricao_municipal": "13213213",
+        "name": "MyString"
+      }
+    }'</span>
+</code></pre>
+
+<h3 id="organization">organization</h3>
+
+<p>Contém informações sobre a empresa emitente da NF-e. Seus atributos são:  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>codigo_regime_tributario</td>
+<td>CRT</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.</td>
+</tr>
+<tr>
+<td>razao_social</td>
+<td>xNome</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>cnpj</td>
+<td>CNPJ</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>14 dígitos</td>
+<td>CNPJ da empresa emitente, somente números.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>email</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>inscricao_estadual</td>
+<td>IE</td>
+<td>sim</td>
+<td>Texto</td>
+<td>Até 14 caracteres</td>
+<td>Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.</td>
+</tr>
+<tr>
+<td>inscricao_municipal</td>
+<td>IM</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 15 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>nome_fantasia</td>
+<td>xFant</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="address">address</h3>
+
+<p>Grupo de informações relacionadas ao endereço do emitente. Seus atributos são:  </p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>city</td>
+<td>xMun</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>city_code</td>
+<td>cMun</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>7 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>complement</td>
+<td>xCpl</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>district</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>number</td>
+<td>nro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>fone</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>De 6 a 14 carateres</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>UF</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>zipcode</td>
+<td>CEP</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>8 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="2-passo-atualiza-o-upload-do-certificado-da-organiza-o">2º Passo: Atualização/Upload do Certificado da Organização</h3>
+
+<p>A inclusão de certificado digital vigente da organização é obrigatório para a emissão da nota. Para criar ou atualizar um certificado, é necessário realizar uma requisição POST para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{:organization_id}/certificate</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:  </p>
+<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/8/certificate <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+        "password": "senhadocertificado",
+        "file": "código em Base64 do arquivo PFX"
+    }'</span>
+</code></pre>
+
           <h1 id="emiss-o-de-notas">Emissão de notas</h1>
 
 <p>Para emitir notas, é necessário realizar uma requisição POST para o seguinte endereço:  </p>
@@ -159,7 +386,7 @@
     </div>
 </div>
 
-<p>Veja ao lado um exemplo do corpo da requisição:  </p>
+<p>Veja a seguir um exemplo do corpo da requisição:  </p>
 
 <aside class="warning">
 Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo &ldquo;á&rdquo;, &ldquo;é&rdquo;, &ldquo;â&rdquo;, &ldquo;ã&rdquo; etc. Também não aceitam &ldquo;ç&rdquo;.
@@ -188,29 +415,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
                     "valor_total_nota": 989.69,
                     "destino_operacao": "1",
                     "indicador_incentivo_fiscal": "FALSE"
-                },
-                "emitente": {
-                    "cnpj": "12313314000123",
-                    "razao_social": "Nexaas LTDA",
-                    "nome_fantasia": "Nexaas LTDA",
-                    "inscricao_estadual": "123456789",
-                    "inscricao_municipal": "",
-                    "inscricao_estadual_st": "",
-                    "telefone": "99999999",
-                    "cnae": 2017123,
-                    "codigo_regime_tributario": 3,
-                    "endereco": {
-                        "telefone": 99999999,
-                        "codigo_estado": "35",
-                        "logradouro": "Rua do Rócio",
-                        "numero": "199",
-                        "complemento": "-",
-                        "bairro": "Vila Olimpia",
-                        "codigo_municipio": "3525904",
-                        "nome_municipio": "São Paulo",
-                        "uf": "SP",
-                        "cep": "12345123"
-                    }
                 },
                 "cliente": {
                     "cpf_cnpj": "46728754000163",
@@ -254,9 +458,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
                     "ean_unidade_trib": "",
                     "ncm": 28043000,
                     "cest": "",
-                    "producao_escala": "",
-                    "cnpj_fabricante_mercadoria": "",
-                    "codigo_beneficio_fiscal": "",
                     "valor_frete": 0.0,
                     "valor_seguro": 0.0,
                     "outras_despesas": 0.0,
@@ -347,10 +548,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
                         "valor": ""
                     }]
                 },
-                "forma_de_pagamento": [{
-                    "tipo_de_pagamento": "01",
-                    "valor_do_pagamento": 989.69
-                }],
                 "transporte": {
                     "valor_total_frete": 0.0,
                     "codigo_modalidade": 9,
@@ -417,6 +614,54 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </code></pre>
 
           <h1 id="campos-da-emiss-o-de-nota">Campos da emissão de nota</h1>
+
+<h2 id="emiss-o-em-lote">Emissão em lote</h2>
+
+<p>Todas as notas fiscais são emitidas em lote, mesmo em caso de emissão de uma única nota. A emissão em lote gera um pacote de transmissão de diversas notas fiscais eletrônicas, que são processadas em conjunto. Isto permite maior agilidade para emissão de um grande volume de notas. Cada lote pode conter até 50 NF-e ou NFC-e. Os atributos do lote da nota são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>lote</td>
+<td>idLote</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>De 1 a 15 dígitos</td>
+<td>Identificador de controle do envio do lote. Deve ser um número sequencial e autoincremental, sendo um identificador único do lote.</td>
+</tr>
+<tr>
+<td>sincronicidade</td>
+<td>indSinc</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígitos</td>
+<td>0 = Não<br>1 = Empresa solicita processamento síncrono do Lote de NF-e (sem a geração de Recibo para consulta futura)<br>O processamento síncrono do Lote corresponde a entrega da resposta do processamento das NF-e do Lote, sem a geração de um Recibo de Lote para consulta futura. A resposta de forma síncrona pela SEFAZ Autorizadora só ocorrerá se:<br>- a empresa solicitar e constar unicamente uma NFe</td>
+</tr>
+<tr>
+<td>uf</td>
+<td>-</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>Campo interno do Emites para indicar o estado de emissão da NF-e/NFC-e e direcionar ao servidor da SEFAZ correspondente</td>
+</tr>
+<tr>
+<td>nfes</td>
+<td>NF-e</td>
+<td>Sim</td>
+<td>Array</td>
+<td>Até 50 itens</td>
+<td>Conjunto de NF-e transmitidas, máximo de 50 NF-e</td>
+</tr>
+</tbody></table>
 
 <h2 id="dados_gerais-xml-ide">dados_gerais (XML: ide)</h2>
 
@@ -551,190 +796,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Numérico</td>
 <td>1 dígito</td>
 <td>Indicador de incentivo fiscal, sendo 1 = Sim, 2 = Não.</td>
-</tr>
-</tbody></table>
-
-<h2 id="emitente-xml-emit">emitente (XML: emit)</h2>
-
-<p>Contém informações sobre a empresa emitente da NF-e. Seus atributos são:  </p>
-
-<table><thead>
-<tr>
-<th>Campo</th>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>cnpj</td>
-<td>CNPJ</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>14 dígitos</td>
-<td>CNPJ da empresa emitente, somente números.</td>
-</tr>
-<tr>
-<td>razao_social</td>
-<td>xNome</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>nome_fantasia</td>
-<td>xFant</td>
-<td>Não</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>inscricao_estadual</td>
-<td>IE</td>
-<td>sim</td>
-<td>Texto</td>
-<td>Até 14 caracteres</td>
-<td>Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.</td>
-</tr>
-<tr>
-<td>inscricao_estadual_st</td>
-<td>IEST</td>
-<td>Não</td>
-<td>Numérico</td>
-<td>Até 14 caracteres</td>
-<td>Inscrição Estadual do Substituto Tributário do estado de destino da mercadoria, quando houver a retenção de ICMS ST para o estado de destino.</td>
-</tr>
-<tr>
-<td>inscricao_municipal</td>
-<td>IM</td>
-<td>Não</td>
-<td>Texto</td>
-<td>Até 15 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>cnae</td>
-<td>CNAE</td>
-<td>Não</td>
-<td>Numérico</td>
-<td>7 caracteres</td>
-<td>CNAE fiscal que pode ser informado quando a inscrição municipal for informada.</td>
-</tr>
-<tr>
-<td>codigo_regime_tributario</td>
-<td>CRT</td>
-<td>Não</td>
-<td>Numérico</td>
-<td>1 dígito</td>
-<td>1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.</td>
-</tr>
-</tbody></table>
-
-<h3 id="endereco-xml-enderemit">endereco (XML: enderEmit)</h3>
-
-<p>Grupo de informações relacionadas ao endereço do emitente. Seus atributos são: </p>
-
-<table><thead>
-<tr>
-<th>Campo</th>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>logradouro</td>
-<td>xLgr</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>numero</td>
-<td>nro</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>complemento</td>
-<td>xCpl</td>
-<td>Não</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>bairro</td>
-<td>xBairro</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>codigo_municipio</td>
-<td>cMun</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>7 dígitos</td>
-<td></td>
-</tr>
-<tr>
-<td>nome_municipio</td>
-<td>xMun</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>cep</td>
-<td>CEP</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>8 dígitos</td>
-<td></td>
-</tr>
-<tr>
-<td>uf</td>
-<td>UF</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>2 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>codigo_pais</td>
-<td>cPais</td>
-<td>Não</td>
-<td>Numérico</td>
-<td>4 dígitos</td>
-<td>1058 = Brasil</td>
-</tr>
-<tr>
-<td>nome_pais</td>
-<td>xPais</td>
-<td>Não</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td>Brasil ou BRASIL</td>
-</tr>
-<tr>
-<td>telefone</td>
-<td>fone</td>
-<td>Não</td>
-<td>Numérico</td>
-<td>De 6 a 14 carateres</td>
-<td></td>
 </tr>
 </tbody></table>
 
@@ -922,9 +983,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </tbody></table>
 
-<h3 id="endereco-xml-enderdest">endereco (XML: enderDest)</h3>
+<h2 id="lista_autorizacao-xml-autxml">lista_autorizacao (XML: autXML)</h2>
 
-<p>Grupo de informações relacionadas ao endereço do destinatário. Seus atributos são:</p>
+<p>Conjunto de pessoas ou empresas autorizadas a obter o XML. Seus atributos são:</p>
 
 <table><thead>
 <tr>
@@ -937,91 +998,19 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
-<td>logradouro</td>
-<td>xLgr</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>numero</td>
-<td>nro</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>complemento</td>
-<td>xCpl</td>
-<td>Não</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>bairro</td>
-<td>xBairro</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>codigo_municipio</td>
-<td>cMun</td>
+<td>Número do CNPJ ou CPF</td>
+<td>CNPJ</td>
 <td>Sim</td>
 <td>Numérico</td>
-<td>7 dígitos</td>
-<td></td>
+<td>14 dígitos</td>
+<td>Deve ser informado o CNPJ ou CPF</td>
 </tr>
 <tr>
-<td>nome_municipio</td>
-<td>xMun</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
 <td></td>
-</tr>
-<tr>
-<td>cep</td>
-<td>CEP</td>
+<td>CPF</td>
 <td>Sim</td>
 <td>Numérico</td>
-<td>8 dígitos</td>
-<td></td>
-</tr>
-<tr>
-<td>uf</td>
-<td>UF</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>2 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>codigo_pais</td>
-<td>cPais</td>
-<td>Não</td>
-<td>Numérico</td>
-<td>4 dígitos</td>
-<td></td>
-</tr>
-<tr>
-<td>nome_pais</td>
-<td>xPais</td>
-<td>Não</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>telefone</td>
-<td>fone</td>
-<td>Não</td>
-<td>Numérico</td>
-<td>De 6 a 14 carateres</td>
+<td>11 dígitos</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -1030,12 +1019,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:  </p>
 
-<h3 id="codigo_produto">codigo_produto</h3>
-
-<p>Codificação própria da empresa. Preencher com CFOP, caso se trate de itens não relacionados com mercadorias/produtos e se o contribuinte não possuir codificação própria. Caso preenchido com CFOP, utilizar o formato &ldquo;CFOP9999&rdquo;.  </p>
-
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -1044,498 +1030,198 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>codigo_produto</td>
 <td>cProd</td>
 <td>Sim</td>
 <td>Texto e/ou número</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Codificação própria da empresa. Preencher com CFOP, caso se trate de itens não relacionados com mercadorias/produtos e se o contribuinte não possuir codificação própria. Caso preenchido com CFOP, utilizar o formato &ldquo;CFOP9999&rdquo;.</td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_ean">codigo_ean</h3>
-
-<p>Código de barras. Preencher com o código de barra GTIN-8, GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN- 14). Não informar este campo se o produto não possuir este código.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_ean</td>
 <td>cEAN</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>8, 12, 13 ou 14 dígitos</td>
-<td></td>
+<td>Código de barras. Preencher com o código de barra GTIN-8, GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN- 14). Não informar este campo se o produto não possuir este código.</td>
 </tr>
-</tbody></table>
-
-<h3 id="descricao">descricao</h3>
-
-<p>Descrição do produto.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>descricao</td>
 <td>xProd</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 120 caracteres</td>
-<td></td>
+<td>Descrição do produto.</td>
 </tr>
-</tbody></table>
-
-<h3 id="ncm">ncm</h3>
-
-<p>Nomenclatura comum do Mercosul.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>ncm</td>
 <td>NCM</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>8 dígitos</td>
-<td>Itens específicos que não possuem NCM podem informar somente o código “00”.</td>
+<td>Nomenclatura comum do Mercosul. Itens específicos que não possuem NCM podem informar somente o código “00”.</td>
 </tr>
-</tbody></table>
-
-<h3 id="cest">cest</h3>
-
-<p>Código Especificador de Substituição Tributária.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cest</td>
 <td>CEST</td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
+<td>Código Especificador de Substituição Tributária.</td>
 </tr>
-</tbody></table>
-
-<h3 id="extipi">extipi</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>extipi</td>
 <td>EXTIPI</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>De 2 a 3 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="cfop">cfop</h3>
-
-<p>Código Fiscal de Operações e Prestações.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cfop</td>
 <td>CFOP</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>4 dígitos</td>
-<td></td>
+<td>Código Fiscal de Operações e Prestações.</td>
 </tr>
-</tbody></table>
-
-<h3 id="produto_especifico">produto_especifico</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>produto_especifico</td>
 <td>-</td>
 <td>-</td>
 <td>-</td>
 <td>-</td>
 <td>-</td>
 </tr>
-</tbody></table>
-
-<h3 id="idade_comercial">idade_comercial</h3>
-
-<p>Unidade de comercialização do produto.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>unidade_comercial</td>
 <td>uCom</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 6 caracteres</td>
-<td></td>
+<td>Unidade de comercialização do produto.</td>
 </tr>
-</tbody></table>
-
-<h3 id="qantidade_comercial">qantidade_comercial</h3>
-
-<p>Quantidade de comercialização do produto.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>quantidade_comercial</td>
 <td>qCom</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 11 dígitos, 4 casas decimais</td>
-<td></td>
+<td>Quantidade de comercialização do produto.</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_unitario_comercial">valor_unitario_comercial</h3>
-
-<p>Valor unitário de comercialização.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_unitario_comercial</td>
 <td>vUnCom</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 11 dígitos, 4 casas decimais</td>
-<td></td>
+<td>Valor unitário de comercialização.</td>
 </tr>
-</tbody></table>
-
-<h3 id="ean_unidade_trib">ean_unidade_trib</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>ean_unidade_trib</td>
 <td>cEANTrib</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>8, 12, 13 ou 14 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="unidade_tributaria">unidade_tributaria</h3>
-
-<p>Unidade tributável do produto.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>unidade_tributaria</td>
 <td>uTrib</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 6 caracteres</td>
-<td></td>
+<td>Unidade tributável do produto.</td>
 </tr>
-</tbody></table>
-
-<h3 id="qantidade_tributaria">qantidade_tributaria</h3>
-
-<p>Quantidade tributável do produto.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>quantidade_tributaria</td>
 <td>qTrib</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 11 dígitos, 4 casas decimais</td>
-<td></td>
+<td>Quantidade tributável do produto.</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_unitario_tributario">valor_unitario_tributario</h3>
-
-<p>Valor unitário de tributação.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_unitario_tributario</td>
 <td>vUnTrib</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 11 dígitos, 10 casas decimais</td>
-<td></td>
+<td>Valor unitário de tributação.</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_frete">valor_frete</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_frete</td>
 <td>vFrete</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_seguro">valor_seguro</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_seguro</td>
 <td>vSeg</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_desconto">valor_desconto</h3>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_desconto</td>
 <td>vDesc</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="outras_despesas">outras_despesas</h3>
-
-<p>Outras despesas acessórias.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>outras_despesas</td>
 <td>vOutro</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
-<td></td>
+<td>Outras despesas acessórias.</td>
 </tr>
-</tbody></table>
-
-<h3 id="num_pedido">num_pedido</h3>
-
-<p>Número do pedido de compra, se houver.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>num_pedido</td>
 <td>xPed</td>
 <td>Não</td>
 <td>Texto e/ou número</td>
 <td>Até 15 caracteres</td>
-<td></td>
+<td>Número do pedido de compra, se houver.</td>
 </tr>
-</tbody></table>
-
-<h3 id="num_item_pedido">num_item_pedido</h3>
-
-<p>Item do pedido de compra.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>num_item_pedido</td>
 <td>nItemPed</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>Até 6 dígitos</td>
-<td></td>
+<td>Item do pedido de compra.</td>
 </tr>
-</tbody></table>
-
-<h3 id="num_controle_fci">num_controle_fci</h3>
-
-<p>Número de controle da FCI - Ficha de Conteúdo de Importação.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>num_controle_fci</td>
 <td>nFCI</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 36 caracteres</td>
-<td></td>
+<td>Número de controle da FCI - Ficha de Conteúdo de Importação.</td>
 </tr>
-</tbody></table>
-
-<h3 id="ind_valor_total">ind_valor_total</h3>
-
-<p>Informa se o valor dos produtos compõem o valor total da nota. Seleção entre:
-0 = Valor do item não compõem o valor total da NF-e;
-1 = Valor do item compõem o valor total da NF-e.</p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>ind_valor_total</td>
 <td>indTotal</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Informa se o valor dos produtos compõem o valor total da nota. Seleção entre:<br>0 = Valor do item não compõem o valor total da NF-e;<br>1 = Valor do item compõem o valor total da NF-e.<br></td>
 </tr>
 </tbody></table>
 
 <h2 id="tributa-o-xml-imposto">tributação (XML: imposto)</h2>
 
-<p>Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.</p>
-
-<h3 id="valor_aproximado_total">valor_aproximado_total</h3>
-
-<p>Valor aproximado total de tributos federais, estaduais e municipais.</p>
+<p>Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.  </p>
 
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -1544,11 +1230,12 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>valor_aproximado_total</td>
 <td>vTotalTrib</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
-<td></td>
+<td>Valor aproximado total de tributos federais, estaduais e municipais.</td>
 </tr>
 </tbody></table>
 
@@ -1556,10 +1243,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>Informações relacionadas ao ICMS. O atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias</p>
 
-<h3 id="situacao_tributaria">situacao_tributaria</h3>
-
 <table><thead>
 <tr>
+<th>Campo</th>
 <th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
@@ -1568,42 +1254,20 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>situacao_tributaria</td>
 <td>CST</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>2 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_origem_produto">codigo_origem_produto</h3>
-
-<p>Origem da mercadoria. Seleção entre:<br>
-0 = Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8;<br>
-1 = Estrangeira - Importação direta, exceto a indicada no código 6;<br>
-2 = Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7;<br>
-3 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%;<br>
-4 = Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes;<br>
-5 = Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%;<br>
-6 = Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e gás natural;<br>
-7 = Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CAMEX e gás natural.<br>
-8 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%.  </p>
-
-<table><thead>
 <tr>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_origem_produto</td>
 <td>orig</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Origem da mercadoria. Seleção entre:<br>  0 = Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8;  <br>1 = Estrangeira - Importação direta, exceto a indicada no código 6;  <br>2 = Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7;  <br>3 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%;  <br>4 = Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes;  <br>5 = Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%;  <br>6 = Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e gás natural;  <br>7 = Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CAMEX e gás natural.  <br>8 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%.</td>
 </tr>
 </tbody></table>
 
@@ -1831,7 +1495,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </tbody></table>
 
-<p>com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação  </p>
+<h4 id="com-partilha-do-icms-entre-a-uf-de-origem-e-a-uf-de-destino-ou-a-uf-definida-na-legisla-o">com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação</h4>
 
 <table><thead>
 <tr>
@@ -2015,9 +1679,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <h3 id="situacao_tributaria-40-41-e-50">situacao_tributaria = 40, 41 e 50</h3>
 
-<p>40 =  Isenta
-41 =  Não tributada
-50 =  Suspensão</p>
+<p>40 =  Isenta<br>
+41 =  Não tributada<br>
+50 =  Suspensão  </p>
 
 <table><thead>
 <tr>
@@ -2326,7 +1990,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </tbody></table>
 
-<p>com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação</p>
+<h4 id="com-partilha-do-icms-entre-a-uf-de-origem-e-a-uf-de-destino-ou-a-uf-definida-na-legisla-o">com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação</h4>
 
 <table><thead>
 <tr>
@@ -2702,6 +2366,8 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <h3 id="situacao_tributaria-400">situacao_tributaria = 400</h3>
 
+<p>Não tributada</p>
+
 <table><thead>
 <tr>
 <th>Campo</th>
@@ -2900,13 +2566,12 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <h3 id="ipi-xml-ipi">ipi (XML: IPI)</h3>
 
-<p>Atributos comuns a todas as situações tributárias</p>
-
-<h3 id="situacao_tributaria">situacao_tributaria</h3>
+<p>Atributos comuns a todas as situações tributárias  </p>
 
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -2914,106 +2579,47 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>situacao_tributaria</td>
 <td>CST</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>2 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="clss_enquadramento">clss_enquadramento</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>classe_enquadramento</td>
 <td>clEnq</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 5 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="cnpj_produtor">cnpj_produtor</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cnpj_produtor</td>
 <td>CNPJProd</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>14 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_selo_controle">codigo_selo_controle</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_selo_controle</td>
 <td>cSelo</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Código do selo de controle IPI</td>
 </tr>
-</tbody></table>
-
-<h3 id="qtd_selo_controle">qtd_selo_controle</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>quantidade_selo_controle</td>
 <td>qSelo</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>Até 12 dígitos</td>
-<td></td>
+<td>Quantidade de selo de controle</td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_enquadramento">codigo_enquadramento</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cod_enquadramento</td>
 <td>cEnq</td>
 <td>Sim</td>
 <td>Numérico</td>
@@ -3171,11 +2777,10 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto.  </p>
 
-<h3 id="perc_mercadoria_devolvida">perc_mercadoria_devolvida</h3>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -3183,26 +2788,15 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>perc_mercadoria_devolvida</td>
 <td>pDevol</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 3 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_ipi_devolvido">valor_ipi_devolvido</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_ipi_devolvido</td>
 <td>vIPIDevol</td>
 <td>Sim</td>
 <td>Decimal</td>
@@ -3213,13 +2807,10 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <h3 id="pis-xml-pis">pis (XML: PIS)</h3>
 
-<p>Atributos comuns a todas as situações tributárias</p>
-
-<h3 id="situacao_tributaria">situacao_tributaria</h3>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -3227,11 +2818,12 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>situacao_tributaria</td>
 <td>CST</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>2 dígitos</td>
-<td></td>
+<td>Atributos comuns a todas as situações tributárias</td>
 </tr>
 </tbody></table>
 
@@ -3406,7 +2998,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </tbody></table>
 
-<p>situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99  </p>
+<h3 id="situacao_tributaria-49-50-51-52-53-54-55-56-60-61-62-63-64-65-66-67-70-71-72-73-74-75-98-99">situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99</h3>
 
 <p>49 = Outras Operações de Saída<br>
 50 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
@@ -3809,19 +3401,12 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <h2 id="transporte-xml-transp">transporte (XML: transp)</h2>
 
-<p>Contém informações sobre o frete e o transporte dos produtos ou serviços. Seus atributos são:  </p>
-
-<h3 id="modalidade_frete">modalidade_frete</h3>
-
-<p>Seleção entre:
-0 = Por conta do emitente;
-1 = Por conta do destinatário/remetente;
-2 = Por conta de terceiros;
-9 = Sem frete.</p>
+<p>Contém informações sobre o frete e o transporte dos produtos ou serviços.  </p>
 
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -3829,26 +3414,15 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>modalidade_frete</td>
 <td>modFrete</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td></td>
+<td>Seleção entre:<br>0 = Por conta do emitente;<br>1 = Por conta do destinatário/remetente;<br>2 = Por conta de terceiros;<br>9 = Sem frete.<br></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_frete">valor_frete</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_frete</td>
 <td>vServ</td>
 <td>Sim</td>
 <td>Decimal</td>
@@ -3861,13 +3435,10 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>Grupo de informações relacionadas à transportadora, caso haja frete.</p>
 
-<h3 id="razao_social">razao_social</h3>
-
-<p>Nome (pessoa física) ou Razão Social (Pessoa Jurídica).</p>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -3875,110 +3446,47 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>razao_social</td>
 <td>xNome</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Nome (pessoa física) ou Razão Social (Pessoa Jurídica).</td>
 </tr>
-</tbody></table>
-
-<h3 id="cnpj_cpf">cnpj_cpf</h3>
-
-<p>Campo no XML</p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cnpj_cpf</td>
 <td>CNPJ ou CPF</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>14 ou 11 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="inscricao_estadual">inscricao_estadual</h3>
-
-<p>Inscrição Estadual do transportador contribuinte do ICMS, sem caracteres de formatação (ponto, barra, hífen, etc.). Pode ser informado o texto “ISENTO” para transportador isento de inscrição no cadastro de contribuintes ICMS. Não informar a tag para não contribuinte do ICMS. A UF deve ser informada se informado uma IE.  </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>inscricao_estadual</td>
 <td>IE</td>
 <td>Não</td>
 <td>Texto e/ou número</td>
 <td>De 2 a 14 caracteres</td>
-<td></td>
+<td>Inscrição Estadual do transportador contribuinte do ICMS, sem caracteres de formatação (ponto, barra, hífen, etc.). Pode ser informado o texto “ISENTO” para transportador isento de inscrição no cadastro de contribuintes ICMS. Não informar a tag para não contribuinte do ICMS. A UF deve ser informada se informado uma IE.</td>
 </tr>
-</tbody></table>
-
-<h3 id="endereco_completo">endereco_completo</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>endereco_completo</td>
 <td>xEnder</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="uf">uf</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>uf</td>
 <td>UF</td>
 <td>Não</td>
 <td>Texto</td>
 <td>2 caracteres</td>
 <td>Sigla da UF</td>
 </tr>
-</tbody></table>
-
-<h3 id="municipio">municipio</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>municipio</td>
 <td>xMun</td>
 <td>Não</td>
 <td>Texto</td>
@@ -3991,13 +3499,10 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <p>Informações de retenção de ICMS de transporte.  </p>
 
-<h3 id="cfop">cfop</h3>
-
-<p>CFOP de serviço de transporte.  </p>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4005,106 +3510,47 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>cfop</td>
 <td>CFOP</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>4 dígitos</td>
-<td></td>
+<td>CFOP de serviço de transporte.</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_base_calculo">valor_base_calculo</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_base_calculo</td>
 <td>vBCRet</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casa decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="aliquota_retencao">aliquota_retencao</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>aliquota_retencao</td>
 <td>pICMSRet</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 3 dígitos, de 2 a 4 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_retido">valor_retido</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_retido</td>
 <td>vICMSRet</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="uf">uf</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>uf</td>
 <td>-</td>
 <td>Não</td>
 <td>Texto</td>
 <td>2 caracteres</td>
 <td>Sigla da UF</td>
 </tr>
-</tbody></table>
-
-<h3 id="codigo_municipio">codigo_municipio</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>codigo_municipio</td>
 <td>cMunFG</td>
 <td>Sim</td>
 <td>Numérico</td>
@@ -4113,16 +3559,95 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </tbody></table>
 
+<h3 id="endereco_entrega-xml-entrega-h3">endereco_entrega (XML: entrega) (h3)</h3>
+
+<p>Identificação do local de entrega. Informar somente se diferente do endereço destinatário. Seus atributos são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cpf_cnpj</td>
+<td>CPF/CNPJ</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>0, 11 ou 14 caracteres</td>
+<td>Informar CNPJ ou CPF. Preencher os zeros não significativos.</td>
+</tr>
+<tr>
+<td>logradouro</td>
+<td>xLgr</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>numero</td>
+<td>nro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>complemento</td>
+<td>xCpl</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>bairro</td>
+<td>xBairro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>codigo_municipio</td>
+<td>cMun</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>7 dígitos</td>
+<td>Informar ‘9999999 ‘para operações com o exterior.</td>
+</tr>
+<tr>
+<td>nome_municipio</td>
+<td>xMun</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td>Informar ‘EXTERIOR ‘para operações com o exterior.</td>
+</tr>
+<tr>
+<td>uf</td>
+<td>UF</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td>Informar ‘EX’ para operações com o exterior.</td>
+</tr>
+</tbody></table>
+
 <h3 id="veiculo-xml-veictransp">veiculo (XML: veicTransp)</h3>
 
 <p>Dados do veículo utilizado para transporte, caso haja frete. O campo pode ser omitido caso não haja frete.
 placa  </p>
 
-<p>Informar em um dos seguintes formatos: XXX9999, XXX999, XX9999 ou XXXX999. Informar a placa em informações complementares quando a placa do veículo tiver lei de formação diversa.</p>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4135,48 +3660,23 @@ placa  </p>
 <td>Texto e/ou número</td>
 <td>7 caracteres</td>
 <td></td>
+<td>Informar em um dos seguintes formatos: XXX9999, XXX999, XX9999 ou XXXX999. Informar a placa em informações complementares quando a placa do veículo tiver lei de formação diversa.</td>
 </tr>
-</tbody></table>
-
-<h3 id="uf">uf</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>uf</td>
 <td>UF</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>2 caracteres</td>
 <td>Sigla da UF</td>
 </tr>
-</tbody></table>
-
-<h3 id="rntc">rntc</h3>
-
-<p>Registro Nacional de Transporte de Carga.   </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>rntc</td>
 <td>RNTC</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 20 caracteres</td>
-<td></td>
+<td>Registro Nacional de Transporte de Carga.</td>
 </tr>
 </tbody></table>
 
@@ -4184,11 +3684,10 @@ placa  </p>
 
 <p>Informações dos volumes transportados, se houver. Uma nota comporta até 5.000 volumes. Cada volume deve possuir os conjuntos de campos a seguir:</p>
 
-<h3 id="quantidade_volumes">quantidade_volumes</h3>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4196,115 +3695,52 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>quantidade_volumes</td>
 <td>qVol</td>
 <td>Não</td>
 <td>Numérico</td>
 <td>Até 15 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="especie">especie</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>especie</td>
 <td>esp</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="marca">marca</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>marca</td>
 <td>marca</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="numeracao">numeracao</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>numeracao_volumes</td>
 <td>nVol</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Numeração dos volumes transportados</td>
 </tr>
-</tbody></table>
-
-<h3 id="peso_liquido">peso_liquido</h3>
-
-<p>Peso líquido em quilogramas (kG).</p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>peso_liquido</td>
 <td>peslL</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>Até 12 dígitos, 3 casas decimais</td>
-<td></td>
+<td>Peso líquido em quilogramas (kG).</td>
 </tr>
-</tbody></table>
-
-<h3 id="peso_bruto">peso_bruto</h3>
-
-<p>Peso bruto em quilogramas (kG).</p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>peso_bruto</td>
 <td>pesoB</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>Até 12 dígitos, 3 casas decimais</td>
-<td></td>
+<td>Peso bruto em quilogramas (kG).</td>
 </tr>
 </tbody></table>
 
@@ -4317,6 +3753,7 @@ placa  </p>
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4324,6 +3761,7 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>Número do lacre</td>
 <td>nLacre</td>
 <td>Sim</td>
 <td>Texto</td>
@@ -4340,13 +3778,10 @@ placa  </p>
 
 <p>Subgrupo de informações relacionadas aos dados da fatura. Possui somente uma ocorrência. Apresenta os seguintes atributos:</p>
 
-<h3 id="numero_fatura">numero_fatura</h3>
-
-<p>Número da fatura.  </p>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4354,77 +3789,36 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>numero_fatura</td>
 <td>nFat</td>
 <td>Não</td>
 <td>Texto e/ou número</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Número da fatura.</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_original">valor_original</h3>
-
-<p>Valor original (bruto) da fatura.  </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_original</td>
 <td>vOrig</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
-<td></td>
+<td>Valor original (bruto) da fatura.</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_desconto">valor_desconto</h3>
-
-<p>Valor aplicado de desconto.  </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_desconto</td>
 <td>vDesc</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
-<td></td>
+<td>Valor aplicado de desconto.</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_liquido">valor_liquido</h3>
-
-<p>Valor líquido da fatura.  </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_liquido</td>
 <td>vLiq</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
-<td></td>
+<td>Valor líquido da fatura.</td>
 </tr>
 </tbody></table>
 
@@ -4432,13 +3826,10 @@ placa  </p>
 
 <p>Subgrupo de informações relacionadas às duplicatas (parcelas da compra). Pode conter até 200 ocorrências e possui os seguintes atributos:  </p>
 
-<h3 id="numero">numero</h3>
-
-<p>Número da duplicata.  </p>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4446,55 +3837,28 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>numero</td>
 <td>nDup</td>
 <td>Não</td>
 <td>Texto e/ou número</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Número da duplicata.</td>
 </tr>
-</tbody></table>
-
-<h3 id="data_vencimento">data_vencimento</h3>
-
-<p>Data de vencimento da duplicata  </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>data_vencimento</td>
 <td>dVenc</td>
 <td>Não</td>
 <td>Data</td>
 <td>AAAA-MM-DD</td>
-<td></td>
+<td>Data de vencimento da duplicata</td>
 </tr>
-</tbody></table>
-
-<h3 id="valor">valor</h3>
-
-<p>Valor da duplicata.  </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor</td>
 <td>vDup</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
-<td></td>
+<td>Valor da duplicata.</td>
 </tr>
 </tbody></table>
 
@@ -4538,11 +3902,10 @@ placa  </p>
 
 <p>Para notas fiscais físicas, os atributos são:  </p>
 
-<h3 id="codigo_uf_emitente">codigo_uf_emitente</h3>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4550,106 +3913,47 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>codigo_uf_emitente</td>
 <td>cUF</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>2 dígitos</td>
 <td>Código de acordo com tabela IBGE</td>
 </tr>
-</tbody></table>
-
-<h3 id="ano_mes_emissao">ano_mes_emissao</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>ano_mes_emissao</td>
 <td>AAMM</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>ano (AA) e mês (MM) de emissão da NF</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="modelo_documento">modelo_documento</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>modelo_documento</td>
 <td>mod</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>2 dígitos</td>
 <td>01 = modelo 01</td>
 </tr>
-</tbody></table>
-
-<h3 id="numero_documento">numero_documento</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>numero_documento</td>
 <td>nNF</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>Até 9 dígitos</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="serie_documento">serie_documento</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>serie_documento</td>
 <td>serie</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>Até 3 dígitos</td>
 <td>Informar zero se não utilizada a série do documento fiscal.</td>
 </tr>
-</tbody></table>
-
-<h3 id="cnpj-emitente">cnpj emitente</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>cnpj_emitente</td>
 <td>CNPJ</td>
 <td>Sim</td>
 <td>Numérico</td>
@@ -4662,13 +3966,10 @@ placa  </p>
 
 <p>Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguintes atributos:  </p>
 
-<h3 id="numero_ecf">numero_ecf</h3>
-
-<p>Número de ordem sequencial de ECF.</p>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4676,43 +3977,29 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>numero_ecf</td>
 <td>nECF</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>3 dígitos</td>
-<td></td>
+<td>Número de ordem sequencial de ECF.</td>
 </tr>
-</tbody></table>
-
-<h3 id="numero_coo">numero_coo</h3>
-
-<p>Número do Contador de Ordem de Operação (COO).</p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>numero_coo</td>
 <td>nCOO</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>6 dígitos</td>
-<td></td>
+<td>Número do Contador de Ordem de Operação (COO).</td>
 </tr>
 </tbody></table>
 
 <h2 id="retencoes-xml-rettrib">retencoes (XML: retTrib)</h2>
 
-<h3 id="valor_retido_pis">valor_retido_pis</h3>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4720,126 +4007,55 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>valor_retido_pis</td>
 <td>vRetPIS</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_retido_cofins">valor_retido_cofins</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_retido_cofins</td>
 <td>vRetCOFINS</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_retido_csll">valor_retido_csll</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_retido_csll</td>
 <td>vRetCSLL</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_base_calculo_irrf">valor_base_calculo_irrf</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_base_calculo_irrf</td>
 <td>vBCIRRF</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_irrf">valor_irrf</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_irrf</td>
 <td>vIRRF</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="base_calculo_retencao_previdencia">base_calculo_retencao_previdencia</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>base_calculo_retencao_previdencia</td>
 <td>vBCRetPrev</td>
 <td>Não</td>
 <td>Decimal</td>
 <td>13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_retencao_previdencia">valor_retencao_previdencia</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_retencao_previdencia</td>
 <td>vRetPrev</td>
 <td>Não</td>
 <td>Decimal</td>
@@ -4852,13 +4068,10 @@ placa  </p>
 
 <p>Informações de comércio exterior.</p>
 
-<h3 id="uf_embarque">uf_embarque</h3>
-
-<p>Sigla da UF de Embarque ou de transposição de fronteira.  </p>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4866,55 +4079,28 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>uf_embarque</td>
 <td>UFSaidaPais</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>2 caracteres</td>
-<td>Sigla da UF</td>
+<td>Sigla da UF de Embarque ou de transposição de fronteira.</td>
 </tr>
-</tbody></table>
-
-<h3 id="local_embarque">local_embarque</h3>
-
-<p>Descrição do Local de Embarque ou de transposição de fronteira.</p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>local_embarque</td>
 <td>xLocExporta</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Descrição do Local de Embarque ou de transposição de fronteira.</td>
 </tr>
-</tbody></table>
-
-<h3 id="local_despacho">local_despacho</h3>
-
-<p>Descrição do local de despacho.  </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>local_despacho</td>
 <td>xLocDespacho</td>
 <td>Sim</td>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
-<td></td>
+<td>Descrição do local de despacho.</td>
 </tr>
 </tbody></table>
 
@@ -4922,13 +4108,10 @@ placa  </p>
 
 <p>Grupo de informações adicionais da NF-e. Seus atributos são:  </p>
 
-<h3 id="informacoes_contribuinte">informacoes_contribuinte</h3>
-
-<p>Informações complementares de interesse do Contribuinte.</p>
-
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>Campo no XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -4936,33 +4119,20 @@ placa  </p>
 </tr>
 </thead><tbody>
 <tr>
+<td>informacoes_contribuinte</td>
 <td>infCpl</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 2.000 caracteres</td>
-<td></td>
+<td>Informações complementares de interesse do Contribuinte.</td>
 </tr>
-</tbody></table>
-
-<h3 id="informacoes_fisco">informacoes_fisco</h3>
-
-<p>Informações adicionais de interesse do Fisco.  </p>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>informacoes_fisco</td>
 <td>infAdFisco</td>
 <td>Não</td>
 <td>Texto</td>
 <td>Até 2.000 caracteres</td>
-<td></td>
+<td>Informações adicionais de interesse do Fisco.</td>
 </tr>
 </tbody></table>
 
