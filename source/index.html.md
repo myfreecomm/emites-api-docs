@@ -10,6 +10,7 @@ toc_footers:
 
 includes:
   - basic_information
+  - create_organizations
   - emission_notes
   - fields_api
   - consult_note
