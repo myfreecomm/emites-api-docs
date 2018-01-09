@@ -92,219 +92,48 @@ Grupo de informações relacionadas ao endereço do destinatário. Seus atributo
 
 Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:  
 
-### codigo_produto  
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho              |   Observações
+--------------------------------|-----------------|---------------|-------------------------|-----------------------------------|----------------------------------------------------------- 
+    codigo_produto              |    cProd        |  Sim          |     Texto e/ou número   |  Até 60 caracteres                |  Codificação própria da empresa. Preencher com CFOP, caso se trate de itens não relacionados com mercadorias/produtos e se o contribuinte não possuir codificação própria. Caso preenchido com CFOP, utilizar o formato "CFOP9999".  
+    codigo_ean                  |    cEAN         |  Não          |     Numérico            |  8, 12, 13 ou 14 dígitos          |  Código de barras. Preencher com o código de barra GTIN-8, GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN- 14). Não informar este campo se o produto não possuir este código.
+    descricao                   |    xProd        |  Sim          |     Texto               |  Até 120 caracteres               |  Descrição do produto.
+    ncm                         |    NCM          |  Sim          |     Numérico            |  8 dígitos                        |  Nomenclatura comum do Mercosul. Itens específicos que não possuem NCM podem informar somente o código “00”.
+    cest                        |    CEST         |               |                         |                                   |  Código Especificador de Substituição Tributária.
+    extipi                      |    EXTIPI       |  Não          |     Numérico            |  De 2 a 3 dígitos                 |  
+    cfop                        |    CFOP         |  Sim          |     Numérico            |  4 dígitos                        |  Código Fiscal de Operações e Prestações.
+    produto_especifico          |         -       |       -       |            -            |          -                        |  -
+    unidade_comercial           |    uCom         |  Sim          |     Texto               |  Até 6 caracteres                 |  Unidade de comercialização do produto.
+    quantidade_comercial        |    qCom         |  Sim          |     Decimal             |  Até 11 dígitos, 4 casas decimais |  Quantidade de comercialização do produto.
+    valor_unitario_comercial    |    vUnCom       |  Sim          |     Decimal             |  Até 11 dígitos, 4 casas decimais |  Valor unitário de comercialização.
+    ean_unidade_trib            |    cEANTrib     |  Não          |     Numérico            |  8, 12, 13 ou 14 dígitos          |  
+    unidade_tributaria          |    uTrib        |  Sim          |     Texto               |  Até 6 caracteres                 |  Unidade tributável do produto.
+    quantidade_tributaria       |    qTrib        |  Sim          |     Decimal             |  Até 11 dígitos, 4 casas decimais |  Quantidade tributável do produto.
+    valor_unitario_tributario   |    vUnTrib      |  Sim          |     Decimal             |  Até 11 dígitos, 10 casas decimais|  Valor unitário de tributação.
+    valor_frete                 |    vFrete       |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais |   
+    valor_seguro                |  vSeg           |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais |    
+    valor_desconto              |  vDesc          |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais |   
+    outras_despesas             |  vOutro         |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais |  Outras despesas acessórias.
+    num_pedido                  |   xPed          |  Não          |     Texto e/ou número   |  Até 15 caracteres                |  Número do pedido de compra, se houver.
+    num_item_pedido             |  nItemPed       |  Não          |     Numérico            |  Até 6 dígitos                    |  Item do pedido de compra.
+    num_controle_fci            |   nFCI          |  Não          |     Texto               |  Até 36 caracteres                |  Número de controle da FCI - Ficha de Conteúdo de Importação.
+    ind_valor_total             |  indTotal       |  Sim          |     Numérico            |  1 dígito                         |  Informa se o valor dos produtos compõem o valor total da nota. Seleção entre:<br>0 = Valor do item não compõem o valor total da NF-e;<br>1 = Valor do item compõem o valor total da NF-e.<br>
 
-Codificação própria da empresa. Preencher com CFOP, caso se trate de itens não relacionados com mercadorias/produtos e se o contribuinte não possuir codificação própria. Caso preenchido com CFOP, utilizar o formato "CFOP9999".  
+## tributação (XML: imposto)  
 
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  cProd        |  Sim          |  Texto e/ou número   |  Até 60 caracteres           |  
+Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.  
 
-### codigo_ean
-
-Código de barras. Preencher com o código de barra GTIN-8, GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN- 14). Não informar este campo se o produto não possuir este código.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  cEAN         |  Não          |  Numérico            |  8, 12, 13 ou 14 dígitos     |  
-
-### descricao
-
-Descrição do produto.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  xProd        |  Sim          |  Texto               |  Até 120 caracteres          |  
-
-### ncm
-
-Nomenclatura comum do Mercosul.  
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-NCM            |  Sim          |  Numérico            |  8 dígitos                   |  Itens específicos que não possuem NCM podem informar somente o código “00”.
-
-###cest
-
-Código Especificador de Substituição Tributária.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  CEST         |               |                      |                              |  
-  
-### extipi
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  EXTIPI       |  Não          |  Numérico            |  De 2 a 3 dígitos            |  
-
-### cfop
-
-Código Fiscal de Operações e Prestações.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  CFOP         |  Sim          |  Numérico            |  4 dígitos                   |  
-
-### produto_especifico
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-       -       |       -       |         -            |          -                   |  -
-               
-### unidade_comercial
-
-Unidade de comercialização do produto.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  uCom         |  Sim          |  Texto               |  Até 6 caracteres            |  
-  
-### quantidade_comercial
-
-Quantidade de comercialização do produto.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  qCom         |  Sim          |  Decimal             |  Até 11 dígitos, 4 casas decimais |  
-
-### valor_unitario_comercial
-
-Valor unitário de comercialização.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  vUnCom       |  Sim          |  Decimal             |  Até 11 dígitos, 4 casas decimais|  
-
-### ean_unidade_trib
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  cEANTrib     |  Não          |  Numérico            |  8, 12, 13 ou 14 dígitos     |  
-  
-### unidade_tributaria
-
-Unidade tributável do produto.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  uTrib        |  Sim          |  Texto               |  Até 6 caracteres            |  
-
-### quantidade_tributaria
-
-Quantidade tributável do produto.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  qTrib        |  Sim          |  Decimal             |  Até 11 dígitos, 4 casas decimais|  
-
-### valor_unitario_tributario
-
-Valor unitário de tributação.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  vUnTrib      |  Sim          |  Decimal             |  Até 11 dígitos, 10 casas decimais |   
-
-### valor_frete
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  vFrete       |  Não          |  Decimal             |  Até 13 dígitos, 2 casas decimais |   
-
-### valor_seguro
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  vSeg         |  Não          |  Decimal             |  Até 13 dígitos, 2 casas decimais|  
-  
-### valor_desconto
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  vDesc        |  Não          |  Decimal             |  Até 13 dígitos, 2 casas decimais |   
-
-### outras_despesas
-
-Outras despesas acessórias.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  vOutro       |  Não          |  Decimal             |  Até 13 dígitos, 2 casas decimais |  
-
-### num_pedido
-
-Número do pedido de compra, se houver.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  xPed         |  Não          |  Texto e/ou número   |  Até 15 caracteres           |  
-
-### num_item_pedido
-
-Item do pedido de compra.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  nItemPed     |  Não          |  Numérico            |  Até 6 dígitos               |  
-
-### num_controle_fci
-
-Número de controle da FCI - Ficha de Conteúdo de Importação.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  nFCI         |  Não          |  Texto               |  Até 36 caracteres           |  
-
-### ind_valor_total
-
-Informa se o valor dos produtos compõem o valor total da nota. Seleção entre:
-0 = Valor do item não compõem o valor total da NF-e;
-1 = Valor do item compõem o valor total da NF-e.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  indTotal     |  Sim          |  Numérico            |  1 dígito                    |  
-
-## tributação (XML: imposto)
-
-Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.
-
-### valor_aproximado_total
-
-Valor aproximado total de tributos federais, estaduais e municipais.
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  vTotalTrib   |  Não          |  Decimal             |  Até 13 dígitos, 2 casas decimais  |  
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+    valor_aproximado_total      |  vTotalTrib     |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais  |  Valor aproximado total de tributos federais, estaduais e municipais.
 
 ### icms (XML: ICMS)
 
 Informações relacionadas ao ICMS. O atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias
 
-### situacao_tributaria
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  CST          |  Sim          |  Numérico            |  2 dígitos                   |  
-
-### codigo_origem_produto
-
-Origem da mercadoria. Seleção entre:  
-0 = Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8;  
-1 = Estrangeira - Importação direta, exceto a indicada no código 6;  
-2 = Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7;  
-3 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%;  
-4 = Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes;  
-5 = Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%;  
-6 = Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e gás natural;  
-7 = Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CAMEX e gás natural.  
-8 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%.  
-
-  Campo no XML |  Obrigatório  |  Tipo                |  Formato e tamanho           | Observações
----------------|---------------|----------------------|------------------------------|------------
-  orig         |  Sim          |  Numérico            |  1 dígito                    |  
-
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+situacao_tributaria             |  CST            |  Sim          |     Numérico            |    2 dígitos                       |  
+codigo_origem_produto           |  orig           |  Sim          |     Numérico            |    1 dígito                        |  Origem da mercadoria. Seleção entre:<br>  0 = Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8;  <br>1 = Estrangeira - Importação direta, exceto a indicada no código 6;  <br>2 = Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7;  <br>3 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%;  <br>4 = Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes;  <br>5 = Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%;  <br>6 = Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e gás natural;  <br>7 = Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CAMEX e gás natural.  <br>8 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%.  
 
 ### ICMS interestadual (XML: ICMSUFDest)  
 
@@ -578,42 +407,16 @@ valor_icms_operacao             |  vICMSOp      |  Não          |  Decimal   | 
 
 ### ipi (XML: IPI)
 
-Atributos comuns a todas as situações tributárias
+Atributos comuns a todas as situações tributárias  
 
-### situacao_tributaria
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-CST                             |  Sim          |  Numérico  |  2 dígitos                          |
-
-### clss_enquadramento
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-clEnq                           |  Não          |  Texto     |  Até 5 caracteres                    
-
-### cnpj_produtor
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-CNPJProd                        |  Não          |  Numérico  |  14 dígitos        
-
-### codigo_selo_controle
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-cSelo                           |  Não          |  Texto     |  Até 60 caracteres                  |
-
-### qtd_selo_controle
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-qSelo                           |  Não          |  Numérico  |  Até 12 dígitos        
-
-### codigo_enquadramento
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-cEnq                            |  Sim          |  Numérico  |  Até 3 dígitos                      |  Geralmente o valor informado é 999
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+    situacao_tributaria         |  CST            |  Sim          |     Numérico            |  2 dígitos                         |
+    clss_enquadramento          |  clEnq          |  Não          |     Texto               |  Até 5 caracteres                  |                    
+    cnpj_produtor               |  CNPJProd       |  Não          |     Numérico            |  14 dígitos                        |
+    codigo_selo_controle        |  cSelo          |  Não          |     Texto               |  Até 60 caracteres                 |
+    qtd_selo_controle           |  qSelo          |  Não          |     Numérico            |  Até 12 dígitos                    |      
+    codigo_enquadramento        |  cEnq           |  Sim          |     Numérico            |  Até 3 dígitos                     |  Geralmente o valor informado é 999
 
 ### situacao_tributaria = 00, 49, 50 e 99
 
@@ -683,27 +486,16 @@ Saída com suspensão. Não possui campos para informar alíquota.
 
 O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto.  
 
-### perc_mercadoria_devolvida
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-pDevol                          |  Sim          |  Decimal   |  Até 3 dígitos, 2 casas decimais    |
-
-### valor_ipi_devolvido
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-vIPIDevol                       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+    perc_mercadoria_devolvida   |  pDevol         |  Sim          |     Decimal             |  Até 3 dígitos, 2 casas decimais   |
+    valor_ipi_devolvido         |  vIPIDevol      |  Sim          |     Decimal             |  Até 13 dígitos, 2 casas decimais  |
 
 ### pis (XML: PIS)
 
-Atributos comuns a todas as situações tributárias
-
-### situacao_tributaria
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-CST                             |  Sim          |  Numérico  |  2 dígitos   
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+    situacao_tributaria         |  CST            |  Sim          |  Numérico               |  2 dígitos                         |   Atributos comuns a todas as situações tributárias
 
 ### situacao_tributaria = 01 e 02  
 
@@ -906,181 +698,62 @@ valor_cofins                    |  vPIS         |  Sim          |  Decimal   |  
 
 ## transporte (XML: transp)
 
-Contém informações sobre o frete e o transporte dos produtos ou serviços. Seus atributos são:  
+Contém informações sobre o frete e o transporte dos produtos ou serviços.  
 
-### modalidade_frete  
-
-Seleção entre:
-0 = Por conta do emitente;
-1 = Por conta do destinatário/remetente;
-2 = Por conta de terceiros;
-9 = Sem frete.
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-modFrete                        |  Sim          |  Numérico  |  1 dígito
-
-### valor_frete
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-vServ                           |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+    modalidade_frete            |  modFrete       |  Sim          |  Numérico               |  1 dígito                          |  Seleção entre:<br>0 = Por conta do emitente;<br>1 = Por conta do destinatário/remetente;<br>2 = Por conta de terceiros;<br>9 = Sem frete.<br>
+    valor_frete                 |  vServ          |  Sim          |  Decimal                |  Até 13 dígitos, 2 casas decimais
 
 ### transportadora (XML: transporta)
 
 Grupo de informações relacionadas à transportadora, caso haja frete.
 
-### razao_social
-
-Nome (pessoa física) ou Razão Social (Pessoa Jurídica).
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-xNome                           |  Não          |  Texto     |  Até 60 caracteres
-
-### cnpj_cpf
-Campo no XML
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-CNPJ ou CPF                     |  Não          |  Numérico  |  14 ou 11 dígitos
-
-### inscricao_estadual  
-
-Inscrição Estadual do transportador contribuinte do ICMS, sem caracteres de formatação (ponto, barra, hífen, etc.). Pode ser informado o texto “ISENTO” para transportador isento de inscrição no cadastro de contribuintes ICMS. Não informar a tag para não contribuinte do ICMS. A UF deve ser informada se informado uma IE.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-IE                              |  Não          |  Texto e/ou número  |  De 2 a 14 caracteres
-
-### endereco_completo
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-xEnder                          |  Não          |  Texto              |  Até 60 caracteres                  |
-
-### uf
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-UF                              |  Não          |  Texto              |  2 caracteres                       |  Sigla da UF
-
-### municipio
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-xMun                            |  Não          |  Texto              |  Até 60 caracteres
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+    razao_social                |  xNome          |  Não          |  Texto                  |  Até 60 caracteres                 |  Nome (pessoa física) ou Razão Social (Pessoa Jurídica).
+    cnpj_cpf                    |  CNPJ ou CPF    |  Não          |  Numérico               |  14 ou 11 dígitos                  |
+    inscricao_estadual          |  IE             |  Não          |  Texto e/ou número      |  De 2 a 14 caracteres              |  Inscrição Estadual do transportador contribuinte do ICMS, sem caracteres de formatação (ponto, barra, hífen, etc.). Pode ser informado o texto “ISENTO” para transportador isento de inscrição no cadastro de contribuintes ICMS. Não informar a tag para não contribuinte do ICMS. A UF deve ser informada se informado uma IE.  
+    endereco_completo           |  xEnder         |  Não          |  Texto                  |  Até 60 caracteres                 |
+    uf                          |  UF             |  Não          |  Texto                  |  2 caracteres                      |  Sigla da UF
+    municipio                   |  xMun           |  Não          |  Texto                  |  Até 60 caracteres                 |
 
 ### retencao_icms (XML: retTransp)  
 
 Informações de retenção de ICMS de transporte.  
 
-### cfop  
-
-CFOP de serviço de transporte.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-CFOP                            |  Não          |  Numérico           |  4 dígitos                          |
-
-### valor_base_calculo
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vBCRet                          |  Sim          |  Decimal            |  Até 13 dígitos, 2 casa decimais
-
-### aliquota_retencao
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-pICMSRet                        |  Sim          |  Decimal            |  Até 3 dígitos, de 2 a 4 casas decimais
-
-### valor_retido
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vICMSRet                        |  Sim          |  Decimal            |  Até 13 dígitos, 2 casas decimais
-
-### uf
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
--                               |  Não          |  Texto              |  2 caracteres                       |  Sigla da UF
-
-### codigo_municipio
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-cMunFG                          |  Sim          |  Numérico           |  7 dígitos                          |  Código do município de acordo com tabela do IBGE
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    cfop                        |  CFOP           |  Não          |  Numérico               |  4 dígitos                         |  CFOP de serviço de transporte.  
+    valor_base_calculo          |  vBCRet         |  Sim          |  Decimal                |  Até 13 dígitos, 2 casa decimais   |
+    aliquota_retencao           |  pICMSRet       |  Sim          |  Decimal                |  Até 3 dígitos, de 2 a 4 casas decimais|
+    valor_retido                |  vICMSRet       |  Sim          |  Decimal                |  Até 13 dígitos, 2 casas decimais  |
+    uf                          |  -              |  Não          |  Texto                  |  2 caracteres                      |  Sigla da UF
+    codigo_municipio            |  cMunFG         |  Sim          |  Numérico               |  7 dígitos                         |  Código do município de acordo com tabela do IBGE
 
 ### veiculo (XML: veicTransp)  
 
 Dados do veículo utilizado para transporte, caso haja frete. O campo pode ser omitido caso não haja frete.
 placa  
 
-Informar em um dos seguintes formatos: XXX9999, XXX999, XX9999 ou XXXX999. Informar a placa em informações complementares quando a placa do veículo tiver lei de formação diversa.
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-placa                           |  Sim          |  Texto e/ou número  |  7 caracteres
-
-### uf
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-UF                              |  Sim          |  Texto              |  2 caracteres                       |  Sigla da UF
-
-### rntc  
-
-Registro Nacional de Transporte de Carga.   
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-RNTC                            |  Não          |  Texto              |  Até 20 caracteres
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    placa                       |  Sim            |  Texto e/ou número  |  7 caracteres           |                                    |  Informar em um dos seguintes formatos: XXX9999, XXX999, XX9999 ou XXXX999. Informar a placa em informações complementares quando a placa do veículo tiver lei de formação diversa.
+    uf                          |  UF             |  Sim                |  Texto                  |  2 caracteres                      |  Sigla da UF
+    rntc                        |  RNTC           |  Não                |  Texto                  |  Até 20 caracteres                 |  Registro Nacional de Transporte de Carga.   
 
 ### volume_transportado (XML: vol)  
 
 Informações dos volumes transportados, se houver. Uma nota comporta até 5.000 volumes. Cada volume deve possuir os conjuntos de campos a seguir:
 
-### quantidade_volumes
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-qVol                            |  Não          |  Numérico           |  Até 15 dígitos   
-
-### especie
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-esp                             |  Não          |  Texto              |  Até 60 caracteres
-
-### marca
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-marca                           |  Não          |  Texto              |  Até 60 caracteres
-
-### numeracao
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-nVol                            |  Não          |  Texto              |  Até 60 caracteres
-
-### peso_liquido  
-
-Peso líquido em quilogramas (kG).
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-peslL                           |  Não          |  Decimal            |  Até 12 dígitos, 3 casas decimais
-
-### peso_bruto  
-
-Peso bruto em quilogramas (kG).
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-pesoB                           |  Não          |  Decimal            |  Até 12 dígitos, 3 casas decimais
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    quantidade_volumes          |  qVol           |  Não                |  Numérico               |  Até 15 dígitos   
+    especie                     |  esp            |  Não                |  Texto                  |  Até 60 caracteres
+    marca                       |  marca          |  Não                |  Texto                  |  Até 60 caracteres
+    numeracao                   |  nVol           |  Não                |  Texto                  |  Até 60 caracteres
+    peso_liquido                |  peslL          |  Não                |  Decimal                |  Até 12 dígitos, 3 casas decimais   |  Peso líquido em quilogramas (kG).
+    peso_bruto                  |  pesoB          |  Não                |  Decimal                |  Até 12 dígitos, 3 casas decimais   |  Peso bruto em quilogramas (kG).
 
 ### lacres (XML: lacres)  
 
@@ -1088,9 +761,9 @@ Cada volume transportador pode conter lacres, sendo até 5.000 por volume.
 
 ### Item da coleção (array) de lacres  
 
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-nLacre                          |  Sim          |  Texto              |  Até 60 caracteres
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+                                |  nLacre         |  Sim                |  Texto                  |  Até 60 caracteres                 |
 
 ## cobranca (XML: infNFe)
 
@@ -1100,65 +773,22 @@ Informações opcionais de cobrança. Seus atributos são:
 
 Subgrupo de informações relacionadas aos dados da fatura. Possui somente uma ocorrência. Apresenta os seguintes atributos:
 
-### numero_fatura  
-
-Número da fatura.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-nFat                            |  Não          |  Texto e/ou número  |  Até 60 caracteres
-
-### valor_original  
-
-Valor original (bruto) da fatura.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vOrig                           |  Não          |  Decimal            |  13 dígitos, 2 casas decimais       |
-
-### valor_desconto  
-
-Valor aplicado de desconto.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vDesc                           |  Não          |  Decimal            |  13 dígitos, 2 casas decimais
-
-### valor_liquido  
-
-Valor líquido da fatura.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vLiq                            |  Não          |  Decimal            |  13 dígitos, 2 casas decimais       
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |   Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    numero_fatura               |  nFat           |  Não                |  Texto e/ou número      |  Até 60 caracteres                 |  Número da fatura.
+    valor_original              |  vOrig          |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |  Valor original (bruto) da fatura.  
+    valor_desconto              |  vDesc          |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |  Valor aplicado de desconto.  
+    valor_liquido               |  vLiq           |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |  Valor líquido da fatura.  
 
 ### duplicata (XML: dup)  
 
 Subgrupo de informações relacionadas às duplicatas (parcelas da compra). Pode conter até 200 ocorrências e possui os seguintes atributos:  
 
-### numero  
-
-Número da duplicata.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-nDup                            |  Não          |  Texto e/ou número  |  Até 60 caracteres
-
-### data_vencimento  
-
-Data de vencimento da duplicata  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-dVenc                           |  Não          |  Data               |  AAAA-MM-DD                         |
-
-### valor  
-
-Valor da duplicata.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vDup                            |  Sim          |  Decimal            |  13 dígitos, 2 casas decimais
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    numero                      |  nDup           |  Não                |  Texto e/ou número      |  Até 60 caracteres                 |  Número da duplicata.  
+    data_vencimento             |  dVenc          |  Não                |  Data                   |  AAAA-MM-DD                        |  Data de vencimento da duplicata  
+    valor                       |  vDup           |  Sim                |  Decimal                |  13 dígitos, 2 casas decimais      |  Valor da duplicata.  
 
 ## documentos_referenciados (XML: infNFe)
 
@@ -1186,151 +816,53 @@ refNFe                          |  Sim          |  Numérico           |  44 dí
 
 Para notas fiscais físicas, os atributos são:  
 
-### codigo_uf_emitente
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-cUF                             |  Sim          |  Numérico           |  2 dígitos                          |  Código de acordo com tabela IBGE
-
-### ano_mes_emissao
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-AAMM                            |  Sim          |  Numérico           |  ano (AA) e mês (MM) de emissão da NF
-
-### modelo_documento
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-mod                             |  Sim          |  Numérico           |  2 dígitos                          |  01 = modelo 01
-
-### numero_documento
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-nNF                             |  Sim          |  Numérico           |  Até 9 dígitos
-
-### serie_documento
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-serie                           |  Sim          |  Numérico           |  Até 3 dígitos                      |  Informar zero se não utilizada a série do documento fiscal.
-
-### cnpj emitente
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-CNPJ                            |  Sim          |  Numérico           |  14 dígitos
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    codigo_uf_emitente          |  cUF            |  Sim                |  Numérico               |  2 dígitos                         |  Código de acordo com tabela IBGE
+    ano_mes_emissao             |  AAMM           |  Sim                |  Numérico               |  ano (AA) e mês (MM) de emissão da NF
+    modelo_documento            |  mod            |  Sim                |  Numérico               |  2 dígitos                         |  01 = modelo 01
+    numero_documento            |  nNF            |  Sim                |  Numérico               |  Até 9 dígitos                     |
+    serie_documento             |  serie          |  Sim                |  Numérico               |  Até 3 dígitos                     |  Informar zero se não utilizada a série do documento fiscal.
+    cnpj_emitente               |  CNPJ           |  Sim                |  Numérico               |  14 dígitos
 
 ### tipo_documento = “Cupom”
 
 Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguintes atributos:  
 
-### numero_ecf
-
-Número de ordem sequencial de ECF.
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-nECF                            |  Sim          |  Numérico           |  3 dígitos                          |
-
-### numero_coo
-
-Número do Contador de Ordem de Operação (COO).
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-nCOO                            |  Sim          |  Numérico           |  6 dígitos  
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    numero_ecf                  |  nECF           |  Sim                |  Numérico               |  3 dígitos                         |  Número de ordem sequencial de ECF.
+    numero_coo                  |  nCOO           |  Sim                |  Numérico               |  6 dígitos                         |  Número do Contador de Ordem de Operação (COO).
 
 ## retencoes (XML: retTrib)
 
-### valor_retido_pis
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vRetPIS                         |  Não          |  Decimal            |  13 dígitos, 2 casas decimais
-
-### valor_retido_cofins
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vRetCOFINS                      |  Não          |  Decimal            |  13 dígitos, 2 casas decimais
-
-### valor_retido_csll
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vRetCSLL                        |  Não          |  Decimal            |  13 dígitos, 2 casas decimais
-
-### valor_base_calculo_irrf
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vBCIRRF                         |  Não          |  Decimal            |  13 dígitos, 2 casas decimais
-
-### valor_irrf
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vIRRF                           |  Não          |  Decimal            |  13 dígitos, 2 casas decimais 
-
-### base_calculo_retencao_previdencia
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vBCRetPrev                      |  Não          |  Decimal            |  13 dígitos, 2 casas decimais
-
-### valor_retencao_previdencia
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-vRetPrev                        |  Não          |  Decimal            |  13 dígitos, 2 casas decimais
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    valor_retido_pis            |  vRetPIS        |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
+    valor_retido_cofins         |  vRetCOFINS     |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
+    valor_retido_csll           |  vRetCSLL       |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
+    valor_base_calculo_irrf     |  vBCIRRF        |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
+    valor_irrf                  |  vIRRF          |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      | 
+    base_calculo_retencao_previdencia|vBCRetPrev  |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
+    valor_retencao_previdencia  |  vRetPrev       |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
 
 ## exporta (XML: exporta)  
 
 Informações de comércio exterior.
 
-### uf_embarque
-
-Sigla da UF de Embarque ou de transposição de fronteira.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-UFSaidaPais                     |  Sim          |  Texto              |  2 caracteres                       |  Sigla da UF
-
-### local_embarque
-
-Descrição do Local de Embarque ou de transposição de fronteira.
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-xLocExporta                     |  Sim          |  Texto              |  Até 60 caracteres                  |
-
-### local_despacho  
-
-Descrição do local de despacho.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-xLocDespacho                    |  Sim          |  Texto              |  Até 60 caracteres
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    uf_embarque                 |  UFSaidaPais    |  Sim                |  Texto                  |  2 caracteres                      |  Sigla da UF de Embarque ou de transposição de fronteira. 
+    local_embarque              |  xLocExporta    |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do Local de Embarque ou de transposição de fronteira.
+    local_despacho              |  xLocDespacho   |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do local de despacho. 
 
 ## informacoes_adicionais (XML: infAdic)  
 
 Grupo de informações adicionais da NF-e. Seus atributos são:  
 
-### informacoes_contribuinte  
-
-Informações complementares de interesse do Contribuinte.
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-infCpl                          |  Não          |  Texto              |  Até 2.000 caracteres               
-
-### informacoes_fisco  
-
-Informações adicionais de interesse do Fisco.  
-
- Campo                          |  Obrigatório  |  Tipo               |  Formato e tamanho                  |  Observações
---------------------------------|---------------|---------------------|-------------------------------------|------------
-infAdFisco                      |  Não          |  Texto              |  Até 2.000 caracteres
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    informacoes_contribuinte    |  infCpl         |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações complementares de interesse do Contribuinte.
+    informacoes_fisco           |    infAdFisco   |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações adicionais de interesse do Fisco.  
 
 
