@@ -83,9 +83,6 @@ curl -X POST \
                     "ean_unidade_trib": "",
                     "ncm": 28043000,
                     "cest": "",
-                    "producao_escala": "",
-                    "cnpj_fabricante_mercadoria": "",
-                    "codigo_beneficio_fiscal": "",
                     "valor_frete": 0.0,
                     "valor_seguro": 0.0,
                     "outras_despesas": 0.0,
@@ -176,10 +173,6 @@ curl -X POST \
                         "valor": ""
                     }]
                 },
-                "forma_de_pagamento": [{
-                    "tipo_de_pagamento": "01",
-                    "valor_do_pagamento": 989.69
-                }],
                 "transporte": {
                     "valor_total_frete": 0.0,
                     "codigo_modalidade": 9,
