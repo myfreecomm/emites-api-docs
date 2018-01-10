@@ -2,7 +2,7 @@
 
 Para emissão de NF-e ou NFC-e, é necessário possuir ao menos uma organização criada no Emites. Para realizar a criação de uma organização via API, o processo consiste em dois passos:  
 
-### 1º Passo: Criação da Organização  
+## 1º Passo: Criação da Organização  
 
 Para criar uma organização, é necessário realizar uma requisição POST para o seguinte endereço:  
 
@@ -23,15 +23,15 @@ curl -X POST \
   -d '{
       "organization": {
         "address": {
-          "address": "Rua Gomes de Carvalho",
-          "city": "São Paulo",
-          "city_code": "812938",
-          "complement": "Apto 74",
-          "district": "Vila Olímpia da Realeza",
-          "number": "55",
-          "phone": "1133333333", 
-          "state": "SP",
-          "zipcode": "04547000" 
+            "address": "Rua do Rocio",
+            "city": "São Paulo",
+            "city_code": "812938",
+            "complement": "Conj. 91",
+            "district": "Vila Olímpia",
+            "number": "199",
+            "phone": "1133333333", 
+            "state": "SP",
+            "zipcode": "04552000" 
         },
         "codigo_regime_tributario": 1,
         "company_name": "The String",
@@ -44,10 +44,6 @@ curl -X POST \
       }
     }'
 ```
-
-### organization
-
-Contém informações sobre a empresa emitente da NF-e. Seus atributos são:  
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
@@ -65,17 +61,17 @@ Grupo de informações relacionadas ao endereço do emitente. Seus atributos sã
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------|----------------------------------------------------------- 
-    address                     |                 |               |                         |                              |
+    address                     |   xLgr          |  Sim          |  Texto                  |   Até 60 caracteres          |
     city                        |   xMun          |  Sim          |  Texto                  |   Até 60 caracteres          |
     city_code                   |   cMun          |  Sim          |  Numérico               |   7 dígitos                  |  
     complement                  |   xCpl          |  Não          |  Texto                  |   Até 60 caracteres          |  
-    district                    |                 |               |                         |                              |
+    district                    |   xBairro       |  Sim          |  Texto                  |   Até 60 caracteres          |
     number                      |   nro           |  Sim          |  Texto                  |   Até 60 caracteres          |  
-    phone                       |   fone          |  Não          |  Numérico               |  De 6 a 14 carateres         |  
-    state                       |   UF            |  Sim          |  Texto                  |  2 caracteres                |
-    zipcode                     |   CEP           |  Sim          |  Numérico               |  8 dígitos                   |
+    phone                       |   fone          |  Não          |  Numérico               |   De 6 a 14 carateres        |  
+    state                       |   UF            |  Sim          |  Texto                  |   2 caracteres               |
+    zipcode                     |   CEP           |  Sim          |  Numérico               |   8 dígitos                  |
 
-### 2º Passo: Atualização/Upload do Certificado da Organização
+## 2º Passo: Atualização/Upload do Certificado da Organização
 
 A inclusão de certificado digital vigente da organização é obrigatório para a emissão da nota. Para criar ou atualizar um certificado, é necessário realizar uma requisição POST para o seguinte endereço:
 
