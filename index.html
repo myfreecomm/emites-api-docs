@@ -152,7 +152,7 @@
 
 <p>Para emissão de NF-e ou NFC-e, é necessário possuir ao menos uma organização criada no Emites. Para realizar a criação de uma organização via API, o processo consiste em dois passos:  </p>
 
-<h3 id="1-passo-cria-o-da-organiza-o">1º Passo: Criação da Organização</h3>
+<h2 id="1-passo-cria-o-da-organiza-o">1º Passo: Criação da Organização</h2>
 
 <p>Para criar uma organização, é necessário realizar uma requisição POST para o seguinte endereço:  </p>
 
@@ -171,15 +171,15 @@
   -d <span class="s1">'{
       "organization": {
         "address": {
-          "address": "Rua Gomes de Carvalho",
-          "city": "São Paulo",
-          "city_code": "812938",
-          "complement": "Apto 74",
-          "district": "Vila Olímpia da Realeza",
-          "number": "55",
-          "phone": "1133333333", 
-          "state": "SP",
-          "zipcode": "04547000" 
+            "address": "Rua do Rocio",
+            "city": "São Paulo",
+            "city_code": "812938",
+            "complement": "Conj. 91",
+            "district": "Vila Olímpia",
+            "number": "199",
+            "phone": "1133333333", 
+            "state": "SP",
+            "zipcode": "04552000" 
         },
         "codigo_regime_tributario": 1,
         "company_name": "The String",
@@ -192,10 +192,6 @@
       }
     }'</span>
 </code></pre>
-
-<h3 id="organization">organization</h3>
-
-<p>Contém informações sobre a empresa emitente da NF-e. Seus atributos são:  </p>
 
 <table><thead>
 <tr>
@@ -281,10 +277,10 @@
 </thead><tbody>
 <tr>
 <td>address</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>xLgr</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
 <td></td>
 </tr>
 <tr>
@@ -313,10 +309,10 @@
 </tr>
 <tr>
 <td>district</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>xBairro</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
 <td></td>
 </tr>
 <tr>
@@ -353,7 +349,7 @@
 </tr>
 </tbody></table>
 
-<h3 id="2-passo-atualiza-o-upload-do-certificado-da-organiza-o">2º Passo: Atualização/Upload do Certificado da Organização</h3>
+<h2 id="2-passo-atualiza-o-upload-do-certificado-da-organiza-o">2º Passo: Atualização/Upload do Certificado da Organização</h2>
 
 <p>A inclusão de certificado digital vigente da organização é obrigatório para a emissão da nota. Para criar ou atualizar um certificado, é necessário realizar uma requisição POST para o seguinte endereço:</p>
 
