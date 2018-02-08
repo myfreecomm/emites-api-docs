@@ -760,14 +760,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste</td>
 </tr>
 <tr>
-<td>valor_total_nota</td>
-<td>vNF</td>
-<td>Sim</td>
-<td>Decimal</td>
-<td></td>
-<td>Somatória do Valor Total dos Produtos ou Serviços e determinados impostos. Calculado automaticamente pelo Emites.</td>
-</tr>
-<tr>
 <td>indicador_incentivo_fiscal</td>
 <td>indIncentivo</td>
 <td>Sim</td>
@@ -3392,7 +3384,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
-<td>modalidade_frete</td>
+<td>codigo_modalidade</td>
 <td>modFrete</td>
 <td>Sim</td>
 <td>Numérico</td>
@@ -3400,7 +3392,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Seleção entre:<br>0 = Por conta do emitente;<br>1 = Por conta do destinatário/remetente;<br>2 = Por conta de terceiros;<br>9 = Sem frete.<br></td>
 </tr>
 <tr>
-<td>valor_frete</td>
+<td>valor_total_frete</td>
 <td>vServ</td>
 <td>Sim</td>
 <td>Decimal</td>
@@ -3537,7 +3529,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </tbody></table>
 
-<h3 id="endereco_entrega-xml-entrega-h3">endereco_entrega (XML: entrega) (h3)</h3>
+<h3 id="endereco_entrega-xml-entrega">endereco_entrega (XML: entrega)</h3>
 
 <p>Identificação do local de entrega. Informar somente se diferente do endereço destinatário. Seus atributos são:</p>
 
@@ -3558,6 +3550,14 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Numérico</td>
 <td>0, 11 ou 14 caracteres</td>
 <td>Informar CNPJ ou CPF. Preencher os zeros não significativos.</td>
+</tr>
+<tr>
+<td>cep</td>
+<td>CEP</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>8 dígitos</td>
+<td></td>
 </tr>
 <tr>
 <td>logradouro</td>
