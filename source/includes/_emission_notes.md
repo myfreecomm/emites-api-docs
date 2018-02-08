@@ -37,7 +37,6 @@ curl -X POST \
                     "indicador_consumidor_final": "0",
                     "indicador_presenca": "9",
                     "finalidade_nfe": "1",
-                    "valor_total_nota": 989.69,
                     "destino_operacao": "1",
                     "indicador_incentivo_fiscal": "FALSE"
                 },
