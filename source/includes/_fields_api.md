@@ -31,7 +31,6 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     indicador_consumidor_final  |   indFinal      |  Sim          |     Numérico            |    1 dígito                  |   Indica se a NF-e foi emitida para consumidor final, sendo 0 = Não e 1 = Sim.  
     indicador_presenca          |   indPres       |  Sim          |     Numérico            |    1 dígito                  |   Indicador de presença do comprador no estabelecimento comercial no momento da operação. Seleção entre:<br>0 = Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);<br>1 = Operação presencial;<br>2 = Operação não presencial, pela Internet;<br>3   = Operação não presencial, Teleatendimento;<br>4 = NFC-e em operação com entrega a domicílio;<br>9 = Operação não presencial, outros.<br>
     finalidade_nfe              |   finNFe        |  Sim          |     Numérico            |    1 dígito                  |   Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste  
-    valor_total_nota            |   vNF           |  Sim          |     Decimal             |                              |   Somatória do Valor Total dos Produtos ou Serviços e determinados impostos. Calculado automaticamente pelo Emites.  
     indicador_incentivo_fiscal  |   indIncentivo  |  Sim          |     Numérico            |    1 dígito                  |   Indicador de incentivo fiscal, sendo 1 = Sim, 2 = Não.  
 
 ## cliente (XML: dest)  
@@ -691,8 +690,8 @@ Contém informações sobre o frete e o transporte dos produtos ou serviços.
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
-    modalidade_frete            |  modFrete       |  Sim          |  Numérico               |  1 dígito                          |  Seleção entre:<br>0 = Por conta do emitente;<br>1 = Por conta do destinatário/remetente;<br>2 = Por conta de terceiros;<br>9 = Sem frete.<br>
-    valor_frete                 |  vServ          |  Sim          |  Decimal                |  Até 13 dígitos, 2 casas decimais
+    codigo_modalidade           |  modFrete       |  Sim          |  Numérico               |  1 dígito                          |  Seleção entre:<br>0 = Por conta do emitente;<br>1 = Por conta do destinatário/remetente;<br>2 = Por conta de terceiros;<br>9 = Sem frete.<br>
+    valor_total_frete           |  vServ          |  Sim          |  Decimal                |  Até 13 dígitos, 2 casas decimais
 
 ### transportadora (XML: transporta)
 
@@ -720,13 +719,14 @@ Informações de retenção de ICMS de transporte.
     uf                          |  -              |  Não          |  Texto                  |  2 caracteres                      |  Sigla da UF
     codigo_municipio            |  cMunFG         |  Sim          |  Numérico               |  7 dígitos                         |  Código do município de acordo com tabela do IBGE
 
-### endereco_entrega (XML: entrega) (h3)
+### endereco_entrega (XML: entrega)
 
 Identificação do local de entrega. Informar somente se diferente do endereço destinatário. Seus atributos são:
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                    |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-----------------------------|------------------------------|----------------------------------------------------------- 
     cpf_cnpj                    |  CPF/CNPJ       |  Sim          |     Numérico                |    0, 11 ou 14 caracteres    |    Informar CNPJ ou CPF. Preencher os zeros não significativos.     
+    cep                         |  CEP            |  Sim          |     Numérico                |    8 dígitos                     |  
     logradouro                  |  xLgr           |  Sim          |     Texto                   |    Até 60 caracteres         |  
     numero                      |  nro            |  Sim          |     Texto                   |    Até 60 caracteres         |  
     complemento                 |  xCpl           |  Não          |     Texto                   |    Até 60 caracteres         |  
