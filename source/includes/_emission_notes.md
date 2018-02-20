@@ -73,6 +73,7 @@ curl -X POST \
                     "valor_unitario_comercial": 16.49485,
                     "valor_unitario_tributario": 16.49485,
                     "valor_desconto": 0.0,
+                    "valor_total_produto": "98.97",
                     "quantidade_tributaria": 6,
                     "quantidade_comercial": 6,
                     "unidade_tributaria": "M3",

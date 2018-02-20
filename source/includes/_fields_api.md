@@ -100,6 +100,7 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     valor_frete                 |    vFrete       |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais |   
     valor_seguro                |  vSeg           |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais |    
     valor_desconto              |  vDesc          |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais |   
+    valor_total_produto         |        -        |  Sim          |     Decimal             |  Até 13 dígitos, 2 casas decimais |  Campo interno da API para cálculo de totais da nota, não possui correspondência com nó XML da NF-e.
     outras_despesas             |  vOutro         |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais |  Outras despesas acessórias.
     num_pedido                  |   xPed          |  Não          |     Texto e/ou número   |  Até 15 caracteres                |  Número do pedido de compra, se houver.
     num_item_pedido             |  nItemPed       |  Não          |     Numérico            |  Até 6 dígitos                    |  Item do pedido de compra.
