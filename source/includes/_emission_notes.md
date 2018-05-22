@@ -125,7 +125,17 @@ curl -X POST \
                             "credito_icms_simples_nacional": 0,
                             "motivo_desoneracao_icms": 0,
                             "valor_icmsst_retido": 0,
-                            "base_icmsst_retido": 0
+                            "base_icmsst_retido": 0,
+                            "valor_base_calculo_fcp": 0,
+                            "aliquota_fcp": 0,
+                            "valor_fcp": 0.0,
+                            "valor_base_calculo_fcp_st": 0.0,
+                            "aliquota_fcp_st": 0,
+                            "valor_fcp_st": 0.0,
+                            "aliquota_consumidor_final": 0,
+                            "valor_base_calculo_fcp_st_retido": 0.0,
+                            "aliquota_fcp_st_retido": 0,
+                            "valor_fcp_st_retido": 0.0
                         },
                         "ipi": {
                             "situacao_tributaria": "01",

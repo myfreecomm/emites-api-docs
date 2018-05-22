@@ -150,7 +150,9 @@ Tributada integralmente.
   modalidade_base_calculo     | modBC         |  Sim          |  Numérico  |  1 dígito                          | 0=Margem Valor Agregado (%);  <br>1=Pauta (Valor);  <br>2=Preço Tabelado Máx. (valor);  <br>3=Valor da operação.
   valor_base_calculo          | vBC           |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
   aliquota_icms               | pICMS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
-  valor_icms                  | vICMS         |  SIm          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
+  valor_icms                  | vICMS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
+  aliquota_fcp                | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais   |
+  valor_fcp                   | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  |
 
 ### situacao_tributaria = 10
 
@@ -168,6 +170,12 @@ Tributada com cobrança de ICMS por ST.
   perc_mva_icms_st              |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    | 
   aliquota_icms_st              |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |  
   valor_icms_st                 |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |   
+  valor_base_calculo_fcp        | vBCFCP        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+  aliquota_fcp                  | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+  valor_fcp                     | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+  valor_base_calculo_fcp_st     | vBCFCPST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+  aliquota_fcp_st               | pFCPST        |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+  valor_fcp_st                  | vFCPST        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 #### com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação  
 
@@ -189,6 +197,9 @@ aliquota_icms                   |  pICMS        |  Sim          |  Decimal   |  
 valor_icms                      |  vICMS        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 valor_icms_desonerado           |  vICMSDeson   |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 motivo_desoneracao              |  motDesICMS   |  Não          |  Numérico  |  2 dígitos                          |  Informar o motivo da desoneração: <br>1 = Táxi<br> 3 = Produto Agropecuário <br>4 = Frotista/Locadora <br>5 = Diplomático/Consular <br>6 = Utilitários e Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio <br>7 = SUFRAMA <br>8 = Venda a Órgão Público <br>9 = Outros <br>10 = Deficiente Condutor <br>11 = Deficiente Não Condutor <br>12 = Órgão de fomento e desenvolvimento agropecuário
+valor_base_calculo_fcp          | vBCFCP        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp                    | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp                       | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 30
 
@@ -204,6 +215,9 @@ perc_reducao_base_calculo_st    |  pRedBCST   |  Não          |  Decimal   | At
 perc_mva_icms_st                |  pMVAST     |  Não          |  Decimal   | Até 3 dígitos, 4 casas decimais     |  
 aliquota_icms_st                |  pICMSST    |  Sim          |  Decimal   | Até 3 dígitos, 4 casas decimais     |
 valor_icms_st                   |  vICMSST    |  Sim          |  Decimal   | Até 13 dígitos, 2 casas decimais    |
+valor_base_calculo_fcp_st       | vBCFCPST    |  Sim          |  Decimal   | Até 13 dígitos, 2 casas decimais    |
+aliquota_fcp_st                 | pFCPST      |  Sim          |  Decimal   | Até 3 dígitos, 4 casas decimais     |
+valor_fcp_st                    | vFCPST      |  Sim          |  Decimal   | Até 13 dígitos, 2 casas decimais    |
 
 ### situacao_tributaria = 40, 41 e 50
 
@@ -240,6 +254,9 @@ valor_icms                      |  vICMS        |  Sim          |  Decimal   |  
 valor_icms_operacao             |  vICMSOp      |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor como se não tivesse o diferimento.
 perc_diferimento                |  pDif         |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |  No caso de diferimento total, informar o percentual de diferimento "100".
 valor_icms_diferido             |  vICMSDif     |  Não          |            |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp          | vBCFCP        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp                    | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp                       | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 60  
 
@@ -249,6 +266,10 @@ Cobrado anteriormente por ST.
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
 base_icmsst_retido              |  vBCSTRet     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor da Base de Cálculo do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
 valor_icmsst_retido             |  vICMSSTRet   |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
+aliquota_consumidor_final        | pST         | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_base_calculo_fcp_st_retido | vBCFCPSTRet | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st_retido           | pFCPSTRet   | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st_retido              | vFCPSTRet   | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 70 e 90  
 
@@ -270,6 +291,12 @@ perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   | 
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp          |  vBCFCP       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp                    |  pFCP         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp                       |  vFCP         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 #### com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação
 
@@ -319,6 +346,11 @@ perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   | 
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_icms_simples_nacional  |  pCredSN      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+credito_icms_simples_nacional   |  vCredICMSSN  |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 202  
 
@@ -333,6 +365,9 @@ perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   | 
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 203  
 
@@ -347,6 +382,9 @@ perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   | 
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 300  
 
@@ -373,6 +411,10 @@ ICMS cobrado anteriormente por ST ou antecipação.
 situacao_simples_nacional       |  CSOSN        |  Sim          |  Numérico  |  3 dígitos
 base_icmsst_retido              |  vBCSTRet     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor da Base de Cálculo do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
 valor_icmsst_retido             |  vICMSSTRet   |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
+aliquota_consumidor_final       |  pST          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_base_calculo_fcp_st_retido | vBCFCPSTRet | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st_retido           | pFCPSTRet   | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st_retido              | vFCPSTRet   | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 900  
 
@@ -395,6 +437,9 @@ perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   | 
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 valor_icms_operacao             |  vICMSOp      |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor como se não tivesse o diferimento.
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### ipi (XML: IPI)
 
