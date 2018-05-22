@@ -228,6 +228,25 @@ curl -X POST \
                     "base_calculo_retencao_previdencia": 0.00,
                     "valor_retencao_previdencia": 0.00
                 },
+                "forma_de_pagamento": [
+                  {
+                    "tipo_de_pagamento": '01',
+                    "valor_do_pagamento": 50.00
+                  },
+                  {
+                    "tipo_de_pagamento": '03',
+                    "valor_do_pagamento": 8.97,
+                    "tipo_de_integracao": '2'
+                  }
+                  {
+                    "tipo_de_pagamento": '03',
+                    "valor_do_pagamento": 40.00,
+                    "tipo_de_integracao": '1',
+                    "bandeira_operadora": '02',
+                    "cnpj_credenciadora": '99999999999999',
+                    "numero_autorizacao_operacao": '99999999999999999999'
+                  }
+                ],
                 "informacoes_adicionais": {
                     "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123",
                     "informacoes_contribuinte": ""

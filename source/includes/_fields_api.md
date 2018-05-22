@@ -117,7 +117,7 @@ Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e 
 
 ### icms (XML: ICMS)
 
-Informações relacionadas ao ICMS. O atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias
+Informações relacionadas ao ICMS. Os atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
@@ -861,6 +861,26 @@ Informações de comércio exterior.
     uf_embarque                 |  UFSaidaPais    |  Sim                |  Texto                  |  2 caracteres                      |  Sigla da UF de Embarque ou de transposição de fronteira. 
     local_embarque              |  xLocExporta    |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do Local de Embarque ou de transposição de fronteira.
     local_despacho              |  xLocDespacho   |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do local de despacho. 
+
+## forma_de_pagamento (XML: detPag)
+
+Grupo de Detalhamento da Forma de Pagamento. No XML, o nó detPag é subitem do nó pag e pode conter uma ou mais ocorrência. Seus atributos são:
+
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    tipo_de_pagamento           |  tPag           |  Sim                |  Texto                  |  2 caracteres                      |  01=Dinheiro;<br>02=Cheque;<br>03=Cartão de Crédito;<br>04=Cartão de Débito;<br>05=Crédito Loja;<br>10=Vale Alimentação;<br>11=Vale Refeição;<br>12=Vale Presente;<br>13=Vale Combustível;<br>14=Duplicata Mercantil;<br>15=Boleto Bancário;<br>90= Sem pagamento;<br>99=Outros.
+    valor_do_pagamento          |  vPag           |  Sim                |  Decimal                | 13 dígitos, 2 casas decimais       |
+
+## cartao (XML: card)
+
+Grupo de Cartões. No XML, o nó card é subitem do nó detPag e pode conter apenas uma ocorrência. Seus atributos são:
+
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    tipo_de_integracao          |  tpIntegra      |  Sim                |  Texto                  | 1 dígito                           | 1=Pagamento integrado com o sistema de automação da empresa (Ex.: equipamento TEF, Comércio Eletrônico);<br>2= Pagamento não integrado com o sistema de automação da empresa (Ex.: equipamento POS); 
+    cnpj_credenciadora          |  CNPJ           |  Não                |  Decimal                | 14 dígitos                         |
+    bandeira_operadora          |  tBand          |  Não                |  Decimal                | 2 caracteres                       |
+    numero_autorizacao_operacao |  cAut           |  Não                |  Texto                  | Até 20 caracteres                  |
 
 ## informacoes_adicionais (XML: infAdic)  
 
