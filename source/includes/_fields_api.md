@@ -405,7 +405,7 @@ Atributos comuns a todas as situações tributárias
     cnpj_produtor               |  CNPJProd       |  Não          |     Numérico            |  14 dígitos                        |
     codigo_selo_controle        |  cSelo          |  Não          |     Texto               |  Até 60 caracteres                 |  Código do selo de controle IPI
     quantidade_selo_controle    |  qSelo          |  Não          |     Numérico            |  Até 12 dígitos                    |  Quantidade de selo de controle
-    cod_enquadramento           |  cEnq           |  Sim          |     Numérico            |  Até 3 dígitos                     |  Geralmente o valor informado é 999
+    codigo_enquadramento        |  cEnq           |  Sim          |     Numérico            |  Até 3 dígitos                     |  Geralmente o valor informado é 999
 
 ### situacao_tributaria = 00, 49, 50 e 99
 

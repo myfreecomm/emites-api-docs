@@ -126,7 +126,7 @@ curl -X POST \
                         },
                         "ipi": {
                             "situacao_tributaria": "01",
-                            "cod_enquadramento": 999,
+                            "codigo_enquadramento": 999,
                             "classe_enquadramento": "",
                             "cnpj_produtor": "",
                             "codigo_selo_controle": 0,
