@@ -403,7 +403,6 @@ Atributos comuns a todas as situações tributárias
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
     situacao_tributaria         |  CST            |  Sim          |     Numérico            |  2 dígitos                         |
-    classe_enquadramento        |  clEnq          |  Não          |     Texto               |  Até 5 caracteres                  |                    
     cnpj_produtor               |  CNPJProd       |  Não          |     Numérico            |  14 dígitos                        |
     codigo_selo_controle        |  cSelo          |  Não          |     Texto               |  Até 60 caracteres                 |  Código do selo de controle IPI
     quantidade_selo_controle    |  qSelo          |  Não          |     Numérico            |  Até 12 dígitos                    |  Quantidade de selo de controle
