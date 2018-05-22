@@ -85,6 +85,9 @@ curl -X POST \
                     "cest": "",
                     "valor_frete": 0.0,
                     "valor_seguro": 0.0,
+                    "producao_escala": "S",
+                    "cnpj_fabricante_mercadoria": "99999999999999999",
+                    "codigo_beneficio_fiscal": "foo",
                     "outras_despesas": 0.0,
                     "informacoes_adicionais": "",
                     "tributacao": {

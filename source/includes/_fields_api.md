@@ -105,6 +105,9 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     num_item_pedido             |  nItemPed       |  Não          |     Numérico            |  Até 6 dígitos                    |  Item do pedido de compra.
     num_controle_fci            |   nFCI          |  Não          |     Texto               |  Até 36 caracteres                |  Número de controle da FCI - Ficha de Conteúdo de Importação.
     ind_valor_total             |  indTotal       |  Sim          |     Numérico            |  1 dígito                         |  Informa se o valor dos produtos compõem o valor total da nota. Seleção entre:<br>0 = Valor do item não compõem o valor total da NF-e;<br>1 = Valor do item compõem o valor total da NF-e.<br>
+    producao_escala             |  indEscala      |  Não          |     Texto               |  1 dígito                         |  S - Produzido em Escala Relevante;<br>N – Produzido em Escala NÃO Relevante.
+    cnpj_fabricante_mercadoria  |  CNPJFab        |  Não          |     Numérico            |  14 dígitos                       |  S - Produzido em Escala Relevante;<br>N – Produzido em Escala NÃO Relevante.
+    codigo_beneficio_fiscal     |  cBenef         |  Não          |     Texto               |  10 dígitos                       |  Código de Benefício Fiscal utilizado pela UF, aplicado ao item.
 
 ## tributação (XML: imposto)  
 
