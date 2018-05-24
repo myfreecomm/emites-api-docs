@@ -438,6 +438,9 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
                     "cest": "",
                     "valor_frete": 0.0,
                     "valor_seguro": 0.0,
+                    "producao_escala": "S",
+                    "cnpj_fabricante_mercadoria": "99999999999999999",
+                    "codigo_beneficio_fiscal": "foo",
                     "outras_despesas": 0.0,
                     "informacoes_adicionais": "",
                     "tributacao": {
@@ -475,12 +478,21 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
                             "credito_icms_simples_nacional": 0,
                             "motivo_desoneracao_icms": 0,
                             "valor_icmsst_retido": 0,
-                            "base_icmsst_retido": 0
+                            "base_icmsst_retido": 0,
+                            "valor_base_calculo_fcp": 0,
+                            "aliquota_fcp": 0,
+                            "valor_fcp": 0.0,
+                            "valor_base_calculo_fcp_st": 0.0,
+                            "aliquota_fcp_st": 0,
+                            "valor_fcp_st": 0.0,
+                            "aliquota_consumidor_final": 0,
+                            "valor_base_calculo_fcp_st_retido": 0.0,
+                            "aliquota_fcp_st_retido": 0,
+                            "valor_fcp_st_retido": 0.0
                         },
                         "ipi": {
                             "situacao_tributaria": "01",
-                            "cod_enquadramento": 999,
-                            "classe_enquadramento": "",
+                            "codigo_enquadramento": 999,
                             "cnpj_produtor": "",
                             "codigo_selo_controle": 0,
                             "quantidade_selo_controle": 0,
@@ -581,6 +593,25 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
                     "base_calculo_retencao_previdencia": 0.00,
                     "valor_retencao_previdencia": 0.00
                 },
+                "forma_de_pagamento": [
+                  {
+                    "tipo_de_pagamento": '</span>01<span class="s1">',
+                    "valor_do_pagamento": 50.00
+                  },
+                  {
+                    "tipo_de_pagamento": '</span>03<span class="s1">',
+                    "valor_do_pagamento": 8.97,
+                    "tipo_de_integracao": '</span>2<span class="s1">'
+                  }
+                  {
+                    "tipo_de_pagamento": '</span>03<span class="s1">',
+                    "valor_do_pagamento": 40.00,
+                    "tipo_de_integracao": '</span>1<span class="s1">',
+                    "bandeira_operadora": '</span>02<span class="s1">',
+                    "cnpj_credenciadora": '</span>99999999999999<span class="s1">',
+                    "numero_autorizacao_operacao": '</span>99999999999999999999<span class="s1">'
+                  }
+                ],
                 "informacoes_adicionais": {
                     "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123",
                     "informacoes_contribuinte": ""
@@ -726,14 +757,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Texto  e/ou número</td>
 <td>1 a 60 caracteres</td>
 <td>Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea &lsquo;i&rsquo;, inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970.</td>
-</tr>
-<tr>
-<td>indicador_pagamento</td>
-<td>indPag</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>1 dígito</td>
-<td>Indicador da forma de pagamento. Seleção entre:   0 = pagamento a vista   1 = pagamento a prazo   2 = outros.</td>
 </tr>
 <tr>
 <td>indicador_consumidor_final</td>
@@ -1191,6 +1214,30 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>1 dígito</td>
 <td>Informa se o valor dos produtos compõem o valor total da nota. Seleção entre:<br>0 = Valor do item não compõem o valor total da NF-e;<br>1 = Valor do item compõem o valor total da NF-e.<br></td>
 </tr>
+<tr>
+<td>producao_escala</td>
+<td>indEscala</td>
+<td>Não</td>
+<td>Texto</td>
+<td>1 dígito</td>
+<td>S - Produzido em Escala Relevante;<br>N – Produzido em Escala NÃO Relevante.</td>
+</tr>
+<tr>
+<td>cnpj_fabricante_mercadoria</td>
+<td>CNPJFab</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>14 dígitos</td>
+<td>S - Produzido em Escala Relevante;<br>N – Produzido em Escala NÃO Relevante.</td>
+</tr>
+<tr>
+<td>codigo_beneficio_fiscal</td>
+<td>cBenef</td>
+<td>Não</td>
+<td>Texto</td>
+<td>10 dígitos</td>
+<td>Código de Benefício Fiscal utilizado pela UF, aplicado ao item.</td>
+</tr>
 </tbody></table>
 
 <h2 id="tributa-o-xml-imposto">tributação (XML: imposto)</h2>
@@ -1219,7 +1266,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 
 <h3 id="icms-xml-icms">icms (XML: ICMS)</h3>
 
-<p>Informações relacionadas ao ICMS. O atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias</p>
+<p>Informações relacionadas ao ICMS. Os atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias</p>
 
 <table><thead>
 <tr>
@@ -1370,7 +1417,23 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <tr>
 <td>valor_icms</td>
 <td>vICMS</td>
-<td>SIm</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp</td>
+<td>pFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp</td>
+<td>vFCP</td>
+<td>Sim</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td></td>
@@ -1466,6 +1529,54 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <tr>
 <td>valor_icms_st</td>
 <td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_base_calculo_fcp</td>
+<td>vBCFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp</td>
+<td>pFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp</td>
+<td>vFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_base_calculo_fcp_st</td>
+<td>vBCFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st</td>
+<td>pFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st</td>
+<td>vFCPST</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
@@ -1573,6 +1684,30 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>2 dígitos</td>
 <td>Informar o motivo da desoneração: <br>1 = Táxi<br> 3 = Produto Agropecuário <br>4 = Frotista/Locadora <br>5 = Diplomático/Consular <br>6 = Utilitários e Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio <br>7 = SUFRAMA <br>8 = Venda a Órgão Público <br>9 = Outros <br>10 = Deficiente Condutor <br>11 = Deficiente Não Condutor <br>12 = Órgão de fomento e desenvolvimento agropecuário</td>
 </tr>
+<tr>
+<td>valor_base_calculo_fcp</td>
+<td>vBCFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp</td>
+<td>pFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp</td>
+<td>vFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
 </tbody></table>
 
 <h3 id="situacao_tributaria-30">situacao_tributaria = 30</h3>
@@ -1648,6 +1783,30 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <tr>
 <td>valor_icms_st</td>
 <td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_base_calculo_fcp_st</td>
+<td>vBCFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st</td>
+<td>pFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st</td>
+<td>vFCPST</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
@@ -1813,6 +1972,30 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
+<tr>
+<td>valor_base_calculo_fcp</td>
+<td>vBCFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp</td>
+<td>pFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp</td>
+<td>vFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
 </tbody></table>
 
 <h3 id="situacao_tributaria-60">situacao_tributaria = 60</h3>
@@ -1844,6 +2027,38 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td>Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.</td>
+</tr>
+<tr>
+<td>aliquota_consumidor_final</td>
+<td>pST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_base_calculo_fcp_st_retido</td>
+<td>vBCFCPSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st_retido</td>
+<td>pFCPSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st_retido</td>
+<td>vFCPSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -1961,6 +2176,54 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <tr>
 <td>valor_icms_st</td>
 <td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_base_calculo_fcp</td>
+<td>vBCFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp</td>
+<td>pFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp</td>
+<td>vFCP</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_base_calculo_fcp_st</td>
+<td>vBCFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st</td>
+<td>pFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st</td>
+<td>vFCPST</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
@@ -2172,6 +2435,46 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
+<tr>
+<td>valor_base_calculo_fcp_st</td>
+<td>vBCFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st</td>
+<td>pFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st</td>
+<td>vFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_icms_simples_nacional</td>
+<td>pCredSN</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>credito_icms_simples_nacional</td>
+<td>vCredICMSSN</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
 </tbody></table>
 
 <h3 id="situacao_tributaria-202">situacao_tributaria = 202</h3>
@@ -2244,6 +2547,30 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td></td>
 </tr>
+<tr>
+<td>valor_base_calculo_fcp_st</td>
+<td>vBCFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st</td>
+<td>pFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st</td>
+<td>vFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
 </tbody></table>
 
 <h3 id="situacao_tributaria-203">situacao_tributaria = 203</h3>
@@ -2311,6 +2638,30 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <tr>
 <td>valor_icms_st</td>
 <td>vICMSST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_base_calculo_fcp_st</td>
+<td>vBCFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st</td>
+<td>pFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st</td>
+<td>vFCPST</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
@@ -2403,6 +2754,38 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td>Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.</td>
+</tr>
+<tr>
+<td>aliquota_consumidor_final</td>
+<td>pST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_base_calculo_fcp_st_retido</td>
+<td>vBCFCPSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st_retido</td>
+<td>pFCPSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st_retido</td>
+<td>vFCPSTRet</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -2540,6 +2923,30 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Até 13 dígitos, 2 casas decimais</td>
 <td>Valor como se não tivesse o diferimento.</td>
 </tr>
+<tr>
+<td>valor_base_calculo_fcp_st</td>
+<td>vBCFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>aliquota_fcp_st</td>
+<td>pFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 3 dígitos, 4 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_fcp_st</td>
+<td>vFCPST</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
 </tbody></table>
 
 <h3 id="ipi-xml-ipi">ipi (XML: IPI)</h3>
@@ -2562,14 +2969,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Sim</td>
 <td>Numérico</td>
 <td>2 dígitos</td>
-<td></td>
-</tr>
-<tr>
-<td>classe_enquadramento</td>
-<td>clEnq</td>
-<td>Não</td>
-<td>Texto</td>
-<td>Até 5 caracteres</td>
 <td></td>
 </tr>
 <tr>
@@ -2597,7 +2996,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Quantidade de selo de controle</td>
 </tr>
 <tr>
-<td>cod_enquadramento</td>
+<td>codigo_enquadramento</td>
 <td>cEnq</td>
 <td>Sim</td>
 <td>Numérico</td>
@@ -4087,6 +4486,86 @@ placa  </p>
 <td>Texto</td>
 <td>Até 60 caracteres</td>
 <td>Descrição do local de despacho.</td>
+</tr>
+</tbody></table>
+
+<h2 id="forma_de_pagamento-xml-detpag">forma_de_pagamento (XML: detPag)</h2>
+
+<p>Grupo de Detalhamento da Forma de Pagamento. No XML, o nó detPag é subitem do nó pag e pode conter uma ou mais ocorrência. Seus atributos são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tipo_de_pagamento</td>
+<td>tPag</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td>01=Dinheiro;<br>02=Cheque;<br>03=Cartão de Crédito;<br>04=Cartão de Débito;<br>05=Crédito Loja;<br>10=Vale Alimentação;<br>11=Vale Refeição;<br>12=Vale Presente;<br>13=Vale Combustível;<br>14=Duplicata Mercantil;<br>15=Boleto Bancário;<br>90= Sem pagamento;<br>99=Outros.</td>
+</tr>
+<tr>
+<td>valor_do_pagamento</td>
+<td>vPag</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="cartao-xml-card">cartao (XML: card)</h2>
+
+<p>Grupo de Cartões. No XML, o nó card é subitem do nó detPag e pode conter apenas uma ocorrência. Seus atributos são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Campo no XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tipo_de_integracao</td>
+<td>tpIntegra</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>1=Pagamento integrado com o sistema de automação da empresa (Ex.: equipamento TEF, Comércio Eletrônico);<br>2= Pagamento não integrado com o sistema de automação da empresa (Ex.: equipamento POS);</td>
+</tr>
+<tr>
+<td>cnpj_credenciadora</td>
+<td>CNPJ</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>14 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>bandeira_operadora</td>
+<td>tBand</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>2 caracteres</td>
+<td>01=Visa;<br>02=Mastercard;<br>03=American Express;<br>04=Sorocred;<br>05=Diners Club;<br>06=Elo;<br>07=Hipercard;<br>08=Aura;<br>09=Cabal;<br>99=Outros.</td>
+</tr>
+<tr>
+<td>numero_autorizacao_operacao</td>
+<td>cAut</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>Até 20 caracteres</td>
+<td></td>
 </tr>
 </tbody></table>
 
