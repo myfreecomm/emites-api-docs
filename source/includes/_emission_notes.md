@@ -85,6 +85,9 @@ curl -X POST \
                     "cest": "",
                     "valor_frete": 0.0,
                     "valor_seguro": 0.0,
+                    "producao_escala": "S",
+                    "cnpj_fabricante_mercadoria": "99999999999999999",
+                    "codigo_beneficio_fiscal": "foo",
                     "outras_despesas": 0.0,
                     "informacoes_adicionais": "",
                     "tributacao": {
@@ -122,12 +125,21 @@ curl -X POST \
                             "credito_icms_simples_nacional": 0,
                             "motivo_desoneracao_icms": 0,
                             "valor_icmsst_retido": 0,
-                            "base_icmsst_retido": 0
+                            "base_icmsst_retido": 0,
+                            "valor_base_calculo_fcp": 0,
+                            "aliquota_fcp": 0,
+                            "valor_fcp": 0.0,
+                            "valor_base_calculo_fcp_st": 0.0,
+                            "aliquota_fcp_st": 0,
+                            "valor_fcp_st": 0.0,
+                            "aliquota_consumidor_final": 0,
+                            "valor_base_calculo_fcp_st_retido": 0.0,
+                            "aliquota_fcp_st_retido": 0,
+                            "valor_fcp_st_retido": 0.0
                         },
                         "ipi": {
                             "situacao_tributaria": "01",
-                            "cod_enquadramento": 999,
-                            "classe_enquadramento": "",
+                            "codigo_enquadramento": 999,
                             "cnpj_produtor": "",
                             "codigo_selo_controle": 0,
                             "quantidade_selo_controle": 0,
@@ -228,6 +240,25 @@ curl -X POST \
                     "base_calculo_retencao_previdencia": 0.00,
                     "valor_retencao_previdencia": 0.00
                 },
+                "forma_de_pagamento": [
+                  {
+                    "tipo_de_pagamento": '01',
+                    "valor_do_pagamento": 50.00
+                  },
+                  {
+                    "tipo_de_pagamento": '03',
+                    "valor_do_pagamento": 8.97,
+                    "tipo_de_integracao": '2'
+                  }
+                  {
+                    "tipo_de_pagamento": '03',
+                    "valor_do_pagamento": 40.00,
+                    "tipo_de_integracao": '1',
+                    "bandeira_operadora": '02',
+                    "cnpj_credenciadora": '99999999999999',
+                    "numero_autorizacao_operacao": '99999999999999999999'
+                  }
+                ],
                 "informacoes_adicionais": {
                     "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123",
                     "informacoes_contribuinte": ""

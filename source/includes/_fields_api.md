@@ -27,7 +27,6 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     tipo_emissão                |   tpEmiss       |  Sim          |     Numérico            |    1 dígito                  |   1 = Emissão normal (não em contingência); <br> 2 = Contingência FS-IA, com impressão do DANFE em formulário de segurança; <br> 3 = Contingência SCAN (Sistema de Contingência do Ambiente Nacional); <br> 4 = Contingência DPEC (Declaração Prévia da Emissão em Contingência); <br> 5 = Contingência FS-DA, com impressão do DANFE em formulário de segurança; <br> 6 = Contingência SVC-AN (SEFAZ Virtual de Contingência do AN); <br> 7 = Contingência SVC-RS (SEFAZ Virtual de Contingência do RS); <br> 9 = Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e).
     destino_operacao            |   idDest        |  Sim          |     Numérico            |    1 dígito                  |   Identificador de Local de destino da operação (1 - Interna; 2 - Interestadual; 3 - Exterior).
     natureza_operacao           |   natOp         |  Sim          |     Texto  e/ou número  |    1 a 60 caracteres         |   Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea 'i', inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970. 
-    indicador_pagamento         |   indPag        |  Sim          |     Numérico            |    1 dígito                  |   Indicador da forma de pagamento. Seleção entre:   0 = pagamento a vista   1 = pagamento a prazo   2 = outros. 
     indicador_consumidor_final  |   indFinal      |  Sim          |     Numérico            |    1 dígito                  |   Indica se a NF-e foi emitida para consumidor final, sendo 0 = Não e 1 = Sim.  
     indicador_presenca          |   indPres       |  Sim          |     Numérico            |    1 dígito                  |   Indicador de presença do comprador no estabelecimento comercial no momento da operação. Seleção entre:<br>0 = Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);<br>1 = Operação presencial;<br>2 = Operação não presencial, pela Internet;<br>3   = Operação não presencial, Teleatendimento;<br>4 = NFC-e em operação com entrega a domicílio;<br>9 = Operação não presencial, outros.<br>
     finalidade_nfe              |   finNFe        |  Sim          |     Numérico            |    1 dígito                  |   Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste  
@@ -106,6 +105,9 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     num_item_pedido             |  nItemPed       |  Não          |     Numérico            |  Até 6 dígitos                    |  Item do pedido de compra.
     num_controle_fci            |   nFCI          |  Não          |     Texto               |  Até 36 caracteres                |  Número de controle da FCI - Ficha de Conteúdo de Importação.
     ind_valor_total             |  indTotal       |  Sim          |     Numérico            |  1 dígito                         |  Informa se o valor dos produtos compõem o valor total da nota. Seleção entre:<br>0 = Valor do item não compõem o valor total da NF-e;<br>1 = Valor do item compõem o valor total da NF-e.<br>
+    producao_escala             |  indEscala      |  Não          |     Texto               |  1 dígito                         |  S - Produzido em Escala Relevante;<br>N – Produzido em Escala NÃO Relevante.
+    cnpj_fabricante_mercadoria  |  CNPJFab        |  Não          |     Numérico            |  14 dígitos                       |  S - Produzido em Escala Relevante;<br>N – Produzido em Escala NÃO Relevante.
+    codigo_beneficio_fiscal     |  cBenef         |  Não          |     Texto               |  10 dígitos                       |  Código de Benefício Fiscal utilizado pela UF, aplicado ao item.
 
 ## tributação (XML: imposto)  
 
@@ -117,7 +119,7 @@ Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e 
 
 ### icms (XML: ICMS)
 
-Informações relacionadas ao ICMS. O atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias
+Informações relacionadas ao ICMS. Os atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
@@ -148,7 +150,9 @@ Tributada integralmente.
   modalidade_base_calculo     | modBC         |  Sim          |  Numérico  |  1 dígito                          | 0=Margem Valor Agregado (%);  <br>1=Pauta (Valor);  <br>2=Preço Tabelado Máx. (valor);  <br>3=Valor da operação.
   valor_base_calculo          | vBC           |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
   aliquota_icms               | pICMS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
-  valor_icms                  | vICMS         |  SIm          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
+  valor_icms                  | vICMS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
+  aliquota_fcp                | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais   |
+  valor_fcp                   | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  |
 
 ### situacao_tributaria = 10
 
@@ -166,6 +170,12 @@ Tributada com cobrança de ICMS por ST.
   perc_mva_icms_st              |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    | 
   aliquota_icms_st              |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |  
   valor_icms_st                 |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |   
+  valor_base_calculo_fcp        | vBCFCP        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+  aliquota_fcp                  | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+  valor_fcp                     | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+  valor_base_calculo_fcp_st     | vBCFCPST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+  aliquota_fcp_st               | pFCPST        |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+  valor_fcp_st                  | vFCPST        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 #### com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação  
 
@@ -187,6 +197,9 @@ aliquota_icms                   |  pICMS        |  Sim          |  Decimal   |  
 valor_icms                      |  vICMS        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 valor_icms_desonerado           |  vICMSDeson   |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 motivo_desoneracao              |  motDesICMS   |  Não          |  Numérico  |  2 dígitos                          |  Informar o motivo da desoneração: <br>1 = Táxi<br> 3 = Produto Agropecuário <br>4 = Frotista/Locadora <br>5 = Diplomático/Consular <br>6 = Utilitários e Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio <br>7 = SUFRAMA <br>8 = Venda a Órgão Público <br>9 = Outros <br>10 = Deficiente Condutor <br>11 = Deficiente Não Condutor <br>12 = Órgão de fomento e desenvolvimento agropecuário
+valor_base_calculo_fcp          | vBCFCP        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp                    | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp                       | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 30
 
@@ -202,6 +215,9 @@ perc_reducao_base_calculo_st    |  pRedBCST   |  Não          |  Decimal   | At
 perc_mva_icms_st                |  pMVAST     |  Não          |  Decimal   | Até 3 dígitos, 4 casas decimais     |  
 aliquota_icms_st                |  pICMSST    |  Sim          |  Decimal   | Até 3 dígitos, 4 casas decimais     |
 valor_icms_st                   |  vICMSST    |  Sim          |  Decimal   | Até 13 dígitos, 2 casas decimais    |
+valor_base_calculo_fcp_st       | vBCFCPST    |  Sim          |  Decimal   | Até 13 dígitos, 2 casas decimais    |
+aliquota_fcp_st                 | pFCPST      |  Sim          |  Decimal   | Até 3 dígitos, 4 casas decimais     |
+valor_fcp_st                    | vFCPST      |  Sim          |  Decimal   | Até 13 dígitos, 2 casas decimais    |
 
 ### situacao_tributaria = 40, 41 e 50
 
@@ -238,6 +254,9 @@ valor_icms                      |  vICMS        |  Sim          |  Decimal   |  
 valor_icms_operacao             |  vICMSOp      |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor como se não tivesse o diferimento.
 perc_diferimento                |  pDif         |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |  No caso de diferimento total, informar o percentual de diferimento "100".
 valor_icms_diferido             |  vICMSDif     |  Não          |            |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp          | vBCFCP        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp                    | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp                       | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 60  
 
@@ -247,6 +266,10 @@ Cobrado anteriormente por ST.
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
 base_icmsst_retido              |  vBCSTRet     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor da Base de Cálculo do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
 valor_icmsst_retido             |  vICMSSTRet   |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
+aliquota_consumidor_final        | pST         | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_base_calculo_fcp_st_retido | vBCFCPSTRet | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st_retido           | pFCPSTRet   | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st_retido              | vFCPSTRet   | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 70 e 90  
 
@@ -268,6 +291,12 @@ perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   | 
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp          |  vBCFCP       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp                    |  pFCP         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp                       |  vFCP         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 #### com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação
 
@@ -317,6 +346,11 @@ perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   | 
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_icms_simples_nacional  |  pCredSN      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+credito_icms_simples_nacional   |  vCredICMSSN  |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 202  
 
@@ -331,6 +365,9 @@ perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   | 
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 203  
 
@@ -345,6 +382,9 @@ perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   | 
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 300  
 
@@ -371,6 +411,10 @@ ICMS cobrado anteriormente por ST ou antecipação.
 situacao_simples_nacional       |  CSOSN        |  Sim          |  Numérico  |  3 dígitos
 base_icmsst_retido              |  vBCSTRet     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor da Base de Cálculo do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
 valor_icmsst_retido             |  vICMSSTRet   |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
+aliquota_consumidor_final       |  pST          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_base_calculo_fcp_st_retido | vBCFCPSTRet | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st_retido           | pFCPSTRet   | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st_retido              | vFCPSTRet   | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### situacao_tributaria = 900  
 
@@ -393,6 +437,9 @@ perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   | 
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
 valor_icms_st                   |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 valor_icms_operacao             |  vICMSOp      |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor como se não tivesse o diferimento.
+valor_base_calculo_fcp_st       |  vBCFCPST     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st                 |  pFCPST       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### ipi (XML: IPI)
 
@@ -401,11 +448,10 @@ Atributos comuns a todas as situações tributárias
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
     situacao_tributaria         |  CST            |  Sim          |     Numérico            |  2 dígitos                         |
-    classe_enquadramento        |  clEnq          |  Não          |     Texto               |  Até 5 caracteres                  |                    
     cnpj_produtor               |  CNPJProd       |  Não          |     Numérico            |  14 dígitos                        |
     codigo_selo_controle        |  cSelo          |  Não          |     Texto               |  Até 60 caracteres                 |  Código do selo de controle IPI
     quantidade_selo_controle    |  qSelo          |  Não          |     Numérico            |  Até 12 dígitos                    |  Quantidade de selo de controle
-    cod_enquadramento           |  cEnq           |  Sim          |     Numérico            |  Até 3 dígitos                     |  Geralmente o valor informado é 999
+    codigo_enquadramento        |  cEnq           |  Sim          |     Numérico            |  Até 3 dígitos                     |  Geralmente o valor informado é 999
 
 ### situacao_tributaria = 00, 49, 50 e 99
 
@@ -861,6 +907,26 @@ Informações de comércio exterior.
     uf_embarque                 |  UFSaidaPais    |  Sim                |  Texto                  |  2 caracteres                      |  Sigla da UF de Embarque ou de transposição de fronteira. 
     local_embarque              |  xLocExporta    |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do Local de Embarque ou de transposição de fronteira.
     local_despacho              |  xLocDespacho   |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do local de despacho. 
+
+## forma_de_pagamento (XML: detPag)
+
+Grupo de Detalhamento da Forma de Pagamento. No XML, o nó detPag é subitem do nó pag e pode conter uma ou mais ocorrência. Seus atributos são:
+
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    tipo_de_pagamento           |  tPag           |  Sim                |  Texto                  |  2 caracteres                      |  01=Dinheiro;<br>02=Cheque;<br>03=Cartão de Crédito;<br>04=Cartão de Débito;<br>05=Crédito Loja;<br>10=Vale Alimentação;<br>11=Vale Refeição;<br>12=Vale Presente;<br>13=Vale Combustível;<br>14=Duplicata Mercantil;<br>15=Boleto Bancário;<br>90= Sem pagamento;<br>99=Outros.
+    valor_do_pagamento          |  vPag           |  Sim                |  Decimal                | 13 dígitos, 2 casas decimais       |
+
+## cartao (XML: card)
+
+Grupo de Cartões. No XML, o nó card é subitem do nó detPag e pode conter apenas uma ocorrência. Seus atributos são:
+
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+    tipo_de_integracao          |  tpIntegra      |  Sim                |  Numérico               | 1 dígito                           | 1=Pagamento integrado com o sistema de automação da empresa (Ex.: equipamento TEF, Comércio Eletrônico);<br>2= Pagamento não integrado com o sistema de automação da empresa (Ex.: equipamento POS); 
+    cnpj_credenciadora          |  CNPJ           |  Não                |  Numérico               | 14 dígitos                         |
+    bandeira_operadora          |  tBand          |  Não                |  Numérico               | 2 caracteres                       | 01=Visa;<br>02=Mastercard;<br>03=American Express;<br>04=Sorocred;<br>05=Diners Club;<br>06=Elo;<br>07=Hipercard;<br>08=Aura;<br>09=Cabal;<br>99=Outros.
+    numero_autorizacao_operacao |  cAut           |  Não                |  Numérico               | Até 20 caracteres                  |
 
 ## informacoes_adicionais (XML: infAdic)  
 
