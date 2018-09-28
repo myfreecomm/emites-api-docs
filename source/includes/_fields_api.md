@@ -9,6 +9,7 @@ Todas as notas fiscais são emitidas em lote, mesmo em caso de emissão de uma �
     lote                        | idLote          |   Sim         |     Numérico            |    De 1 a 15 dígitos         |    Identificador de controle do envio do lote. Deve ser um número sequencial e autoincremental, sendo um identificador único do lote.
     sincronicidade              | indSinc         |   Sim         |     Numérico            |    1 dígitos                 |    0 = Não<br>1 = Empresa solicita processamento síncrono do Lote de NF-e (sem a geração de Recibo para consulta futura)<br>O processamento síncrono do Lote corresponde a entrega da resposta do processamento das NF-e do Lote, sem a geração de um Recibo de Lote para consulta futura. A resposta de forma síncrona pela SEFAZ Autorizadora só ocorrerá se:<br>- a empresa solicitar e constar unicamente uma NFe
     uf                          | -               |   Sim         |     Numérico            |    2 dígitos                 |    Campo interno do Emites para indicar o estado de emissão da NF-e/NFC-e e direcionar ao servidor da SEFAZ correspondente
+    serie                       | serie           |   Sim         |     Numérico            |    Até 3 dígitos             |    Série do Lote de Documentos Fiscais
     nfes                        | NF-e            |   Sim         |     Array               |    Até 50 itens              |    Conjunto de NF-e transmitidas, máximo de 50 NF-e
 
 
@@ -19,9 +20,7 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     uf                          |   cUF           |  Sim          |     Numérico            |    2 dígitos                 |   Código da UF do emitente do Documento Fiscal.
-    serie                       |   serie         |  Sim          |     Numérico            |    Até 3 dígitos             |   Série do Documento Fiscal. Informar 0 (zero) para série única.
     codigo_mun_ocorrencia       |   cMunFG        |  Sim          |     Numérico            |    7 dígitos                 |   Código do Município de Ocorrência do Fato Gerador.
-    nfe_numero                  |   nNF           |  Sim          |     Numérico            |                              |   Número do Documento Fiscal.
     data_saida_entrada          |   dhSaiEnt      |  Não          |     Data                |    aaaa-mm-ddThh:mm:ss-03:00 |   Data e hora de Saída ou da Entrada da Mercadoria/Produto.  
     tipo_operacao               |   tpNF          |  Sim          |     Numérico            |    1 dígito                  |   Tipo de Operação, sendo 0 = Entrada e 1 = Saída.  
     tipo_emissão                |   tpEmiss       |  Sim          |     Numérico            |    1 dígito                  |   1 = Emissão normal (não em contingência); <br> 2 = Contingência FS-IA, com impressão do DANFE em formulário de segurança; <br> 3 = Contingência SCAN (Sistema de Contingência do Ambiente Nacional); <br> 4 = Contingência DPEC (Declaração Prévia da Emissão em Contingência); <br> 5 = Contingência FS-DA, com impressão do DANFE em formulário de segurança; <br> 6 = Contingência SVC-AN (SEFAZ Virtual de Contingência do AN); <br> 7 = Contingência SVC-RS (SEFAZ Virtual de Contingência do RS); <br> 9 = Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e).
@@ -30,7 +29,6 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     indicador_consumidor_final  |   indFinal      |  Sim          |     Numérico            |    1 dígito                  |   Indica se a NF-e foi emitida para consumidor final, sendo 0 = Não e 1 = Sim.  
     indicador_presenca          |   indPres       |  Sim          |     Numérico            |    1 dígito                  |   Indicador de presença do comprador no estabelecimento comercial no momento da operação. Seleção entre:<br>0 = Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);<br>1 = Operação presencial;<br>2 = Operação não presencial, pela Internet;<br>3   = Operação não presencial, Teleatendimento;<br>4 = NFC-e em operação com entrega a domicílio;<br>9 = Operação não presencial, outros.<br>
     finalidade_nfe              |   finNFe        |  Sim          |     Numérico            |    1 dígito                  |   Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste  
-    indicador_incentivo_fiscal  |   indIncentivo  |  Sim          |     Numérico            |    1 dígito                  |   Indicador de incentivo fiscal, sendo 1 = Sim, 2 = Não.  
 
 ## cliente (XML: dest)  
 
@@ -462,28 +460,17 @@ Atributos comuns a todas as situações tributárias
 
 ### Cálculo por alíquota  
 
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-valor_base_calculo              |  vBC          |  Sim       |  Decimal                            |  Até 13 dígitos, 2 casas decimais
-
-### aliquota_ipi
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-pIPI                            |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
-
-### valor_ipi
-
- Campo                          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
---------------------------------|---------------|------------|-------------------------------------|------------
-vIPI                            |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   
+ Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
+--------------------------------|---------------|---------------|------------|-------------------------------------|--------------
+valor_base_calculo              |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_ipi                    |  pIPI         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_ipi                       |  vIPI         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 ### Cálculo por valor
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
-quantidade_unidade_tributavel   |  qUnid        |  Sim          |  Decimal   |  Até 12 dígitos, de 0 a 4 casas decimais | Quantidade total na unidade padrão para tributação (somente para os produtos tributados por unidade)
-valor_unidade_tributavel        |  vUnid        |  Sim          |  Decimal   |  Até 11 dígitos, de 0 a 4 casas decimais |
+valor_unidade                   |  vUnid        |  Sim          |  Decimal   |  Até 11 dígitos, de 0 a 4 casas decimais |
 valor_ipi                       |  vIPI         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
 ### situacao_tributaria = 01
@@ -731,14 +718,57 @@ aliquota_cofins_reais           |  vAliqProd    |  Sim          |  Decimal   |  
 quantidade_vendida              |  qBCProd      |  Sim          |  Decimal   |  Até 12 dígitos, de 0 a 4 casas decimais
 valor_cofins                    |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
+
+### importacao (XML: II)
+
+Contém informações sobre imposto de importação. Informar apenas quando o item for sujeito ao II.
+
+ Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
+--------------------------------|---------------|---------------|------------|------------------------------------------|------------
+base_calculo_importacao         |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_despesas_aduaneiras       |  vDespAdu     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_imposto_importacao        |  vII          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_iof                       |  vIOF         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+
+## declaracao_importacao (XML: DI)
+
+Contém informações sobre as declarações de importação contidos na NF-e. No XML, o nó DI é subitem do nó prod e pode conter uma ou mais ocorrência. Seus atributos são:
+
+ Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
+--------------------------------|---------------|---------------|------------|------------------------------------------|------------
+documento_importacao            |  nDI          |  Sim          |  Numérico  |  De 1 a 12 dígitos
+data_importacao                 |  dDI          |  Sim          |  Data      |  “AAAA-MM-DD”
+local_desembaraco               |  xLocDesemb   |  Sim          |  Texto     |  1 a 60 caracteres
+uf_desembaraco                  |  UFDesemb     |  Sim          |  Numérico  |  2 dígitos
+data_desembaraco                |  dDesemb      |  Sim          |  Data      |  “AAAA-MM-DD”
+via_transporte                  |  tpViaTransp  |  Sim          |  Numérico  |  2 dígitos | 1=Marítima;<br>2=Fluvial;<br>3=Lacustre;<br>4=Aérea;<br>5=Postal<br>6=Ferroviária;<br>7=Rodoviária;<br>8=Conduto / Rede Transmissão;<br>9=Meios Próprios;<br>10=Entrada / Saída ficta.<br>11=Courier;<br>12=Handcarry
+valor_afrmm                     |  vAFRMM       |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+forma_importacao                |  tpIntermedio |  Sim          |  Numérico  |  1 dígito
+cnpj                            |  CNPJ         |  Não          |  Numérico  |  14 dígitos
+uf_adquirente                   |  UFTerceiro   |  Não          |  Decimal   |  2 dígitos
+codigo_exportador               |  cExportador  |  Sim          |  Texto     |  1 a 60 caracteres
+
+### adicoes (XML: adi)
+
+Contém informações sobre adições de uma declaração de importacao. No XML, o nó adi é subitem do nó DI e pode conter uma ou mais ocorrência. Seus atributos são:
+
+ Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
+--------------------------------|---------------|---------------|------------|------------------------------------------|------------
+numero_adicao                   |  nAdicao      |  Sim          |  Decimal   |  1 a 3 dígitos
+numero_sequencial               |  nSeqAdic     |  Sim          |  Decimal   |  1 a 3 dígitos
+codigo_fabricante               |  cFabricante  |  Sim          |  Decimal   |  1 a 60 caracteres
+valor_desconto                  |  vDescDI      |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+numero_drawback                 |  nDraw        |  Não          |  Numérico  |  9 (AANNNNNND) ou 11 dígitos (AAAANNNNNND)
+
+
 ## transporte (XML: transp)
 
 Contém informações sobre o frete e o transporte dos produtos ou serviços.  
 
-    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
+Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
-    codigo_modalidade           |  modFrete       |  Sim          |  Numérico               |  1 dígito                          |  Seleção entre:<br>0 = Por conta do emitente;<br>1 = Por conta do destinatário/remetente;<br>2 = Por conta de terceiros;<br>9 = Sem frete.<br>
-    valor_total_frete           |  vServ          |  Sim          |  Decimal                |  Até 13 dígitos, 2 casas decimais
+codigo_modalidade           |  modFrete       |  Sim          |  Numérico               |  1 dígito                          |  Seleção entre:<br>0 = Por conta do emitente;<br>1 = Por conta do destinatário/remetente;<br>2 = Por conta de terceiros;<br>9 = Sem frete.<br>
+valor_total_frete           |  vServ          |  Sim          |  Decimal                |  Até 13 dígitos, 2 casas decimais
 
 ### transportadora (XML: transporta)
 
@@ -765,23 +795,6 @@ Informações de retenção de ICMS de transporte.
     valor_retido                |  vICMSRet       |  Sim          |  Decimal                |  Até 13 dígitos, 2 casas decimais  |
     uf                          |  -              |  Não          |  Texto                  |  2 caracteres                      |  Sigla da UF
     codigo_municipio            |  cMunFG         |  Sim          |  Numérico               |  7 dígitos                         |  Código do município de acordo com tabela do IBGE
-
-### endereco_entrega (XML: entrega)
-
-Identificação do local de entrega. Informar somente se diferente do endereço destinatário. Seus atributos são:
-
-    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                    |    Formato e tamanho         |   Observações
---------------------------------|-----------------|---------------|-----------------------------|------------------------------|----------------------------------------------------------- 
-    cpf_cnpj                    |  CPF/CNPJ       |  Sim          |     Numérico                |    0, 11 ou 14 caracteres    |    Informar CNPJ ou CPF. Preencher os zeros não significativos.     
-    cep                         |  CEP            |  Sim          |     Numérico                |    8 dígitos                     |  
-    logradouro                  |  xLgr           |  Sim          |     Texto                   |    Até 60 caracteres         |  
-    numero                      |  nro            |  Sim          |     Texto                   |    Até 60 caracteres         |  
-    complemento                 |  xCpl           |  Não          |     Texto                   |    Até 60 caracteres         |  
-    bairro                      |  xBairro        |  Sim          |     Texto                   |    Até 60 caracteres         |  
-    codigo_municipio            |  cMun           |  Sim          |     Numérico                |    7 dígitos                 |    Informar ‘9999999 ‘para operações com o exterior.
-    nome_municipio              |  xMun           |  Sim          |     Texto                   |    Até 60 caracteres         |    Informar ‘EXTERIOR ‘para operações com o exterior.  
-    uf                          |  UF             |  Sim          |     Texto                   |    2 caracteres              |    Informar ‘EX’ para operações com o exterior.
-
 
 ### veiculo (XML: veicTransp)  
 
