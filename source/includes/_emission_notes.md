@@ -23,6 +23,7 @@ curl -X POST \
   -d '{
         "nfe_batch": {
           "lote": 1,
+          "serie": 1,
           "sincronicidade": 0,
           "uf": 35,
           "nfes": [
@@ -30,6 +31,12 @@ curl -X POST \
               "cliente": {
                 "cpf_cnpj": "46728754000163",
                 "email": "teste@nexaas.com.br",
+                "indicador_inscricao_estadual": 1,
+                "inscricao_estadual": "407056228113",
+                "inscricao_municipal": "",
+                "inscricao_suframa": "",
+                "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                "pessoa_fisica_juridica": "company",
                 "endereco": {
                   "bairro": "MEDEIROS",
                   "cep": "13212255",
@@ -40,15 +47,9 @@ curl -X POST \
                   "nome_municipio": "JUNDIAI",
                   "nome_pais": "BRASIL",
                   "numero": "S N",
+                  "telefone": "99999999",
                   "uf": "SP"
-                },
-                "indicador_inscricao_estadual": 1,
-                "inscricao_estadual": "407056228113",
-                "inscricao_municipal": "",
-                "inscricao_suframa": "",
-                "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
-                "pessoa_fisica_juridica": "company",
-                "telefone": "99999999"
+                }
               },
               "cobranca": {
                 "duplicatas": [
@@ -67,15 +68,12 @@ curl -X POST \
               },
               "dados_gerais": {
                 "codigo_mun_ocorrencia": "3525904",
-                "data_saida_entrada": "2017-09-24T17:07:35-03:00",
+                "data_saida_entrada": "2018-09-28T17:07:35-03:00",
                 "destino_operacao": "1",
                 "finalidade_nfe": "1",
                 "indicador_consumidor_final": "0",
-                "indicador_incentivo_fiscal": "FALSE",
                 "indicador_presenca": "9",
                 "natureza_operacao": "Venda merc. adq. rec. terc. efet. fora estab.",
-                "nfe_numero": "123",
-                "serie": "1",
                 "tipo_operacao": "1",
                 "uf": 35
               },
@@ -121,7 +119,16 @@ curl -X POST \
                   "producao_escala": "S",
                   "quantidade_comercial": 6,
                   "quantidade_tributaria": 6,
+                  "unidade_comercial": "M3",
+                  "unidade_tributaria": "M3",
+                  "valor_desconto": 0.0,
+                  "valor_frete": 0.0,
+                  "valor_seguro": 0.0,
+                  "valor_total_produto": "98.97",
+                  "valor_unitario_comercial": 16.49485,
+                  "valor_unitario_tributario": 16.49485,
                   "tributacao": {
+                    "valor_aproximado_total": 269.64,
                     "cofins": {
                       "aliquota_cofins": "7.60",
                       "aliquota_cofins_reais": 0,
@@ -178,6 +185,12 @@ curl -X POST \
                       "valor_uf_rementente": 0.0,
                       "valor_uf_remetente_interestadual": 0.0
                     },
+                    "importacao": {
+                      "base_calculo_importacao": "",
+                      "valor_despesas_aduaneiras": "",
+                      "valor_imposto_importacao": "",
+                      "valor_iof": ""
+                    },
                     "ipi": {
                       "aliquota_ipi": "0.00",
                       "cnpj_produtor": "",
@@ -186,7 +199,8 @@ curl -X POST \
                       "quantidade_selo_controle": 0,
                       "situacao_tributaria": "01",
                       "valor_base_calculo": "989.69",
-                      "valor_ipi": "0.00"
+                      "valor_ipi": "0.00",
+                      "valor_unidade": ""
                     },
                     "pis": {
                       "aliquota_pis": 1.65,
@@ -198,17 +212,32 @@ curl -X POST \
                       "valor_base_calculo_st": 0.0,
                       "valor_pis": 16.3,
                       "valor_pis_st": 0.0
-                    },
-                    "valor_aproximado_total": 269.64
+                    }
                   },
-                  "unidade_comercial": "M3",
-                  "unidade_tributaria": "M3",
-                  "valor_desconto": 0.0,
-                  "valor_frete": 0.0,
-                  "valor_seguro": 0.0,
-                  "valor_total_produto": "98.97",
-                  "valor_unitario_comercial": 16.49485,
-                  "valor_unitario_tributario": 16.49485
+                  "declaracao_importacao": [
+                    {
+                      "cnpj": "",
+                      "codigo_exportador": "",
+                      "data_desembaraco": "",
+                      "data_importacao": "",
+                      "documento_importacao": "",
+                      "forma_importacao": "",
+                      "local_desembaraco": "",
+                      "uf_adquirente": "",
+                      "uf_desembaraco": "",
+                      "valor_afrmm": "",
+                      "via_transporte": "",
+                      "adicoes": [
+                        {
+                          "codigo_fabricante": "",
+                          "numero_adicao": "",
+                          "numero_drawback": "",
+                          "numero_sequencial": "",
+                          "valor_desconto": ""
+                        }
+                      ]
+                    }
+                  ]
                 }
               ],
               "retencao_tributos": {
@@ -222,18 +251,6 @@ curl -X POST \
               },
               "transporte": {
                 "codigo_modalidade": 9,
-                "endereco_entrega": {
-                  "bairro": "",
-                  "cep": "",
-                  "codigo_municipio": "",
-                  "complemento": "",
-                  "cpf_cnpj": "",
-                  "logradouro": "",
-                  "nome_municipio": "",
-                  "numero": "",
-                  "pessoa_fisica_juridica": "",
-                  "uf": ""
-                },
                 "retencao_icms": {
                   "aliquota_retencao": 0.0,
                   "cfop": "",
@@ -251,7 +268,6 @@ curl -X POST \
                   "razao_social": "",
                   "uf": ""
                 },
-                "valor_total_frete": 0.0,
                 "veiculo": {
                   "placa": "",
                   "rntc": "",
