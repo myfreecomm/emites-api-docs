@@ -364,261 +364,291 @@
     </div>
 </div>
 
-<p>Veja a seguir um exemplo do corpo da requisição:  </p>
+<p>Veja a seguir um exemplo do corpo da requisição: </p>
 
+<blockquote>
+<p><i><b>Importante</b>: Use as chaves correspondentes para cada tipo de emissão. <br>
+Ex: NFe -&gt; nfe/nfes/nfe_batch e NFCe -&gt; nfce/nfces/nfce_batch.
+<br>
+<b>Essa convenção também deve ser usada nos endpoints descritos nessa documentação.</i></b></p>
+</blockquote>
+
+<p>&nbsp;
 <aside class="warning">
-Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo &ldquo;á&rdquo;, &ldquo;é&rdquo;, &ldquo;â&rdquo;, &ldquo;ã&rdquo; etc. Também não aceitam &ldquo;ç&rdquo;.
-</aside>
+  Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo &ldquo;á&rdquo;, &ldquo;é&rdquo;, &ldquo;â&rdquo;, &ldquo;ã&rdquo; etc. Também não aceitam &ldquo;ç&rdquo;.
+</aside></p>
 <pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
   https://app.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
-        "nfe_batch":  {
-            "lote": 1,
-            "sincronicidade": 0,
-            "uf": 35,
-            "nfes": [{
-                "dados_gerais": {
-                    "uf": 35,
-                    "serie": "1",
-                    "codigo_mun_ocorrencia": "3525904",
-                    "nfe_numero": "123",
-                    "natureza_operacao": "Venda merc. adq. rec. terc. efet. fora estab.",
-                    "data_saida_entrada": "2017-09-24T17:07:35-03:00",
-                    "tipo_operacao": "1",
-                    "indicador_consumidor_final": "0",
-                    "indicador_presenca": "9",
-                    "finalidade_nfe": "1",
-                    "destino_operacao": "1",
-                    "indicador_incentivo_fiscal": "FALSE"
-                },
-                "cliente": {
-                    "cpf_cnpj": "46728754000163",
-                    "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
-                    "pessoa_fisica_juridica": "company",
-                    "telefone": "99999999",
-                    "inscricao_estadual": "407056228113",
-                    "inscricao_municipal": "",
-                    "inscricao_suframa": "",
-                    "indicador_inscricao_estadual": 1,
-                    "email": "teste@nexaas.com.br",
-                    "endereco": {
-                        "logradouro": "AV GUILHERME PORCARI",
-                        "complemento": "",
-                        "numero": "S N",
-                        "bairro": "MEDEIROS",
-                        "codigo_municipio": "3525904",
-                        "nome_municipio": "JUNDIAI",
-                        "codigo_pais": "1058",
-                        "nome_pais": "BRASIL",
-                        "uf": "SP",
-                        "cep": "13212255"
-                    }
-                },
-                "lista_autorizacao": [],
-                "produtos": [
+        "nfe_batch": {
+          "lote": 1,
+          "serie": 1,
+          "sincronicidade": 0,
+          "uf": 35,
+          "nfes": [
+            {
+              "cliente": {
+                "cpf_cnpj": "46728754000163",
+                "email": "teste@nexaas.com.br",
+                "indicador_inscricao_estadual": 1,
+                "inscricao_estadual": "407056228113",
+                "inscricao_municipal": "",
+                "inscricao_suframa": "",
+                "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                "pessoa_fisica_juridica": "company",
+                "endereco": {
+                  "bairro": "MEDEIROS",
+                  "cep": "13212255",
+                  "codigo_municipio": "3525904",
+                  "codigo_pais": "1058",
+                  "complemento": "",
+                  "logradouro": "AV GUILHERME PORCARI",
+                  "nome_municipio": "JUNDIAI",
+                  "nome_pais": "BRASIL",
+                  "numero": "S N",
+                  "telefone": "99999999",
+                  "uf": "SP"
+                }
+              },
+              "cobranca": {
+                "duplicatas": [
+                  {
+                    "data_vencimento": "",
+                    "numero": "",
+                    "valor": ""
+                  }
+                ],
+                "fatura": {
+                  "numero_fatura": "",
+                  "valor_desconto": 0,
+                  "valor_liquido": 0,
+                  "valor_original": 0
+                }
+              },
+              "dados_gerais": {
+                "codigo_mun_ocorrencia": "3525904",
+                "data_saida_entrada": "2018-09-28T17:07:35-03:00",
+                "destino_operacao": "1",
+                "finalidade_nfe": "1",
+                "indicador_consumidor_final": "0",
+                "indicador_presenca": "9",
+                "natureza_operacao": "Venda merc. adq. rec. terc. efet. fora estab.",
+                "tipo_operacao": "1",
+                "uf": 35
+              },
+              "forma_de_pagamento": [
                 {
-                    "codigo_ean": "",
-                    "codigo_produto": "123456",
-                    "descricao": "NITROGENIO CIL 50L 10M3",
-                    "cfop": 5104,
-                    "valor_unitario_comercial": 16.49485,
-                    "valor_unitario_tributario": 16.49485,
-                    "valor_desconto": 0.0,
-                    "valor_total_produto": "98.97",
-                    "quantidade_tributaria": 6,
-                    "quantidade_comercial": 6,
-                    "unidade_tributaria": "M3",
-                    "unidade_comercial": "M3",
-                    "num_pedido": "S0100249134",
-                    "num_item_pedido": 1,
-                    "ean_unidade_trib": "",
-                    "ncm": 28043000,
-                    "cest": "",
-                    "valor_frete": 0.0,
-                    "valor_seguro": 0.0,
-                    "producao_escala": "S",
-                    "cnpj_fabricante_mercadoria": "99999999999999999",
-                    "codigo_beneficio_fiscal": "foo",
-                    "outras_despesas": 0.0,
-                    "informacoes_adicionais": "",
-                    "tributacao": {
-                        "valor_aproximado_total": 269.64,
-                        "icms": {
-                            "situacao_tributaria": "00",
-                            "modalidade_base_calculo": 3,
-                            "codigo_origem_produto": 3,
-                            "valor_base_calculo": 989.69,
-                            "perc_reducao_base_calculo": 0.0,
-                            "aliquota_icms": "18.00",
-                            "valor_icms": 178.14,
-                            "valor_icms_desonerado": 0.0,
-                            "motivo_desoneracao": "",
-                            "modalidade_base_calculo_st": "3",
-                            "valor_base_calculo_st": 0.0,
-                            "perc_reducao_base_calculo_st": 0.0,
-                            "perc_mva_icms_st": 0.0,
-                            "aliquota_icms_st": 0.0,
-                            "valor_icms_st": 0.0,
-                            "aliquota_interestadual": 0.0,
-                            "aliquota_interna_interestadual": 0.0,
-                            "valor_uf_remetente_interestadual": 0.0,
-                            "valor_uf_destinatario_interestadual": 0.0,
-                            "perc_provisorio_interestadual": 0.0,
-                            "valor_base_calculo_uf_dest": 0.0,
-                            "valor_uf_rementente": 0.0,
-                            "perc_fcp_interestadual": 0.0,
-                            "valor_fcp_interestadual": 0.0,
-                            "valor_icms_operacao": 0.0,
-                            "perc_diferimento": 0.0,
-                            "valor_icms_diferido": 0.0,
-                            "situacao_simples_nacional": 0,
-                            "aliquota_icms_simples_nacional": 0,
-                            "credito_icms_simples_nacional": 0,
-                            "motivo_desoneracao_icms": 0,
-                            "valor_icmsst_retido": 0,
-                            "base_icmsst_retido": 0,
-                            "valor_base_calculo_fcp": 0,
-                            "aliquota_fcp": 0,
-                            "valor_fcp": 0.0,
-                            "valor_base_calculo_fcp_st": 0.0,
-                            "aliquota_fcp_st": 0,
-                            "valor_fcp_st": 0.0,
-                            "aliquota_consumidor_final": 0,
-                            "valor_base_calculo_fcp_st_retido": 0.0,
-                            "aliquota_fcp_st_retido": 0,
-                            "valor_fcp_st_retido": 0.0
-                        },
-                        "ipi": {
-                            "situacao_tributaria": "01",
-                            "codigo_enquadramento": 999,
-                            "cnpj_produtor": "",
-                            "codigo_selo_controle": 0,
-                            "quantidade_selo_controle": 0,
-                            "valor_ipi": "0.00",
-                            "aliquota_ipi": "0.00",
-                            "valor_base_calculo": "989.69"
-                        },
-                        "pis": {
-                            "situacao_tributaria": "01",
-                            "valor_base_calculo": 989.69,
-                            "aliquota_pis": 1.65,
-                            "aliquota_pis_reais": 0,
-                            "valor_pis": 16.3,
-                            "valor_base_calculo_st": 0.0,
-                            "aliquota_st": 0.0,
-                            "valor_pis_st": 0.0,
-                            "aliquota_pis_reais_st": 0
-                        },
-                        "cofins": {
-                            "situacao_tributaria": "01",
-                            "valor_base_calculo": 989.69,
-                            "aliquota_cofins": "7.60",
-                            "aliquota_cofins_reais": 0,
-                            "valor_cofins": 75.2,
-                            "valor_base_calculo_st": 0.0,
-                            "aliquota_st": 0.0,
-                            "valor_cofins_st": 0.0,
-                            "aliquota_cofins_st_reais": 0
-                        }
+                  "tipo_de_pagamento": "01",
+                  "valor_do_pagamento": 50.0
+                },
+                {
+                  "tipo_de_integracao": "2",
+                  "tipo_de_pagamento": "03",
+                  "valor_do_pagamento": 8.97
+                },
+                {
+                  "bandeira_operadora": "02",
+                  "cnpj_credenciadora": "99999999999999",
+                  "numero_autorizacao_operacao": "99999999999999999999",
+                  "tipo_de_integracao": "1",
+                  "tipo_de_pagamento": "03",
+                  "valor_do_pagamento": 40.0
+                }
+              ],
+              "informacoes_adicionais": {
+                "informacoes_contribuinte": "",
+                "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123"
+              },
+              "lista_autorizacao": [],
+              "produtos": [
+                {
+                  "cest": "",
+                  "cfop": 5104,
+                  "cnpj_fabricante_mercadoria": "99999999999999999",
+                  "codigo_beneficio_fiscal": "foo",
+                  "codigo_ean": "",
+                  "codigo_produto": "123456",
+                  "descricao": "NITROGENIO CIL 50L 10M3",
+                  "ean_unidade_trib": "",
+                  "informacoes_adicionais": "",
+                  "ncm": 28043000,
+                  "num_item_pedido": 1,
+                  "num_pedido": "S0100249134",
+                  "outras_despesas": 0.0,
+                  "producao_escala": "S",
+                  "quantidade_comercial": 6,
+                  "quantidade_tributaria": 6,
+                  "unidade_comercial": "M3",
+                  "unidade_tributaria": "M3",
+                  "valor_desconto": 0.0,
+                  "valor_frete": 0.0,
+                  "valor_seguro": 0.0,
+                  "valor_total_produto": "98.97",
+                  "valor_unitario_comercial": 16.49485,
+                  "valor_unitario_tributario": 16.49485,
+                  "tributacao": {
+                    "valor_aproximado_total": 269.64,
+                    "cofins": {
+                      "aliquota_cofins": "7.60",
+                      "aliquota_cofins_reais": 0,
+                      "aliquota_cofins_st_reais": 0,
+                      "aliquota_st": 0.0,
+                      "situacao_tributaria": "01",
+                      "valor_base_calculo": 989.69,
+                      "valor_base_calculo_st": 0.0,
+                      "valor_cofins": 75.2,
+                      "valor_cofins_st": 0.0
+                    },
+                    "icms": {
+                      "aliquota_consumidor_final": 0,
+                      "aliquota_fcp": 0,
+                      "aliquota_fcp_st": 0,
+                      "aliquota_fcp_st_retido": 0,
+                      "aliquota_icms": "18.00",
+                      "aliquota_icms_simples_nacional": 0,
+                      "aliquota_icms_st": 0.0,
+                      "aliquota_interestadual": 0.0,
+                      "aliquota_interna_interestadual": 0.0,
+                      "base_icmsst_retido": 0,
+                      "codigo_origem_produto": 3,
+                      "credito_icms_simples_nacional": 0,
+                      "modalidade_base_calculo": 3,
+                      "modalidade_base_calculo_st": "3",
+                      "motivo_desoneracao": "",
+                      "motivo_desoneracao_icms": 0,
+                      "perc_diferimento": 0.0,
+                      "perc_fcp_interestadual": 0.0,
+                      "perc_mva_icms_st": 0.0,
+                      "perc_provisorio_interestadual": 0.0,
+                      "perc_reducao_base_calculo": 0.0,
+                      "perc_reducao_base_calculo_st": 0.0,
+                      "situacao_simples_nacional": 0,
+                      "situacao_tributaria": "00",
+                      "valor_base_calculo": 989.69,
+                      "valor_base_calculo_fcp": 0,
+                      "valor_base_calculo_fcp_st": 0.0,
+                      "valor_base_calculo_fcp_st_retido": 0.0,
+                      "valor_base_calculo_st": 0.0,
+                      "valor_base_calculo_uf_dest": 0.0,
+                      "valor_fcp": 0.0,
+                      "valor_fcp_interestadual": 0.0,
+                      "valor_fcp_st": 0.0,
+                      "valor_fcp_st_retido": 0.0,
+                      "valor_icms": 178.14,
+                      "valor_icms_desonerado": 0.0,
+                      "valor_icms_diferido": 0.0,
+                      "valor_icms_operacao": 0.0,
+                      "valor_icms_st": 0.0,
+                      "valor_icmsst_retido": 0,
+                      "valor_uf_destinatario_interestadual": 0.0,
+                      "valor_uf_rementente": 0.0,
+                      "valor_uf_remetente_interestadual": 0.0
+                    },
+                    "importacao": {
+                      "base_calculo_importacao": "",
+                      "valor_despesas_aduaneiras": "",
+                      "valor_imposto_importacao": "",
+                      "valor_iof": ""
+                    },
+                    "ipi": {
+                      "aliquota_ipi": "0.00",
+                      "cnpj_produtor": "",
+                      "codigo_enquadramento": 999,
+                      "codigo_selo_controle": 0,
+                      "quantidade_selo_controle": 0,
+                      "situacao_tributaria": "01",
+                      "valor_base_calculo": "989.69",
+                      "valor_ipi": "0.00",
+                      "valor_unidade": ""
+                    },
+                    "pis": {
+                      "aliquota_pis": 1.65,
+                      "aliquota_pis_reais": 0,
+                      "aliquota_pis_reais_st": 0,
+                      "aliquota_st": 0.0,
+                      "situacao_tributaria": "01",
+                      "valor_base_calculo": 989.69,
+                      "valor_base_calculo_st": 0.0,
+                      "valor_pis": 16.3,
+                      "valor_pis_st": 0.0
                     }
-                }
-                ],
-                "cobranca": {
-                    "fatura": {
-                        "numero_fatura": "",
-                        "valor_original": 0,
-                        "valor_desconto": 0,
-                        "valor_liquido": 0
-                    },
-                    "duplicatas": [{
-                        "numero": "",
-                        "data_vencimento": "",
-                        "valor": ""
-                    }]
-                },
-                "transporte": {
-                    "valor_total_frete": 0.0,
-                    "codigo_modalidade": 9,
-                    "transportadora": {
-                        "cnpj_cpf": "",
-                        "razao_social": "",
-                        "inscricao_estadual": "",
-                        "endereco_completo": "",
-                        "municipio": "",
-                        "uf": ""
-                    },
-                    "veiculo": {
-                        "placa": "",
-                        "uf": "",
-                        "rntc": ""
-                    },
-                    "retencao_icms": {
-                        "valor_servico": 0.0,
-                        "valor_base_calculo": 0.0,
-                        "aliquota_retencao": 0.0,
-                        "valor_retido": 0.0,
-                        "uf": "",
-                        "codigo_municipio": "",
-                        "cfop": ""
-                    },
-                    "endereco_entrega": {
-                        "cpf_cnpj": "",
-                        "pessoa_fisica_juridica": "",
-                        "logradouro": "",
-                        "cep": "",
-                        "numero": "",
-                        "complemento": "",
-                        "bairro": "",
-                        "uf": "",
-                        "nome_municipio": "",
-                        "codigo_municipio": ""
-                    },
-                    "volume_transportado": [{
-                        "quantidade_volumes": 1,
-                        "numeracao_volumes": 0,
-                        "marca": 0,
-                        "especie": "Cilindro",
-                        "peso_liquido": "66.780",
-                        "peso_bruto": "450.780"
-                    }]
-                },
-                "retencao_tributos": {
-                    "valor_retido_pis": 0.00,
-                    "valor_retido_cofins": 0.00,
-                    "valor_retido_csll": 0.00,
-                    "valor_base_calculo_irrf": 0.00,
-                    "valor_irrf": 0.00,
-                    "base_calculo_retencao_previdencia": 0.00,
-                    "valor_retencao_previdencia": 0.00
-                },
-                "forma_de_pagamento": [
-                  {
-                    "tipo_de_pagamento": '</span>01<span class="s1">',
-                    "valor_do_pagamento": 50.00
                   },
-                  {
-                    "tipo_de_pagamento": '</span>03<span class="s1">',
-                    "valor_do_pagamento": 8.97,
-                    "tipo_de_integracao": '</span>2<span class="s1">'
-                  }
-                  {
-                    "tipo_de_pagamento": '</span>03<span class="s1">',
-                    "valor_do_pagamento": 40.00,
-                    "tipo_de_integracao": '</span>1<span class="s1">',
-                    "bandeira_operadora": '</span>02<span class="s1">',
-                    "cnpj_credenciadora": '</span>99999999999999<span class="s1">',
-                    "numero_autorizacao_operacao": '</span>99999999999999999999<span class="s1">'
-                  }
-                ],
-                "informacoes_adicionais": {
-                    "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123",
-                    "informacoes_contribuinte": ""
+                  "declaracao_importacao": [
+                    {
+                      "cnpj": "",
+                      "codigo_exportador": "",
+                      "data_desembaraco": "",
+                      "data_importacao": "",
+                      "documento_importacao": "",
+                      "forma_importacao": "",
+                      "local_desembaraco": "",
+                      "uf_adquirente": "",
+                      "uf_desembaraco": "",
+                      "valor_afrmm": "",
+                      "via_transporte": "",
+                      "adicoes": [
+                        {
+                          "codigo_fabricante": "",
+                          "numero_adicao": "",
+                          "numero_drawback": "",
+                          "numero_sequencial": "",
+                          "valor_desconto": ""
+                        }
+                      ]
+                    }
+                  ]
                 }
-            }]
+              ],
+              "retencao_tributos": {
+                "base_calculo_retencao_previdencia": 0.0,
+                "valor_base_calculo_irrf": 0.0,
+                "valor_irrf": 0.0,
+                "valor_retencao_previdencia": 0.0,
+                "valor_retido_cofins": 0.0,
+                "valor_retido_csll": 0.0,
+                "valor_retido_pis": 0.0
+              },
+              "transporte": {
+                "codigo_modalidade": 9,
+                "retencao_icms": {
+                  "aliquota_retencao": 0.0,
+                  "cfop": "",
+                  "codigo_municipio": "",
+                  "uf": "",
+                  "valor_base_calculo": 0.0,
+                  "valor_retido": 0.0,
+                  "valor_servico": 0.0
+                },
+                "transportadora": {
+                  "cnpj_cpf": "",
+                  "endereco_completo": "",
+                  "inscricao_estadual": "",
+                  "municipio": "",
+                  "razao_social": "",
+                  "uf": ""
+                },
+                "veiculo": {
+                  "placa": "",
+                  "rntc": "",
+                  "uf": ""
+                },
+                "volume_transportado": [
+                  {
+                    "especie": "Cilindro",
+                    "marca": 0,
+                    "numeracao_volumes": 0,
+                    "peso_bruto": "450.780",
+                    "peso_liquido": "66.780",
+                    "quantidade_volumes": 1
+                  }
+                ]
+              }
+            }
+          ]
         }
-    }'</span>
+      }'</span>
 
 </code></pre>
 
@@ -663,6 +693,14 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Campo interno do Emites para indicar o estado de emissão da NF-e/NFC-e e direcionar ao servidor da SEFAZ correspondente</td>
 </tr>
 <tr>
+<td>serie</td>
+<td>serie</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>Até 3 dígitos</td>
+<td>Série do Lote de Documentos Fiscais</td>
+</tr>
+<tr>
 <td>nfes</td>
 <td>NF-e</td>
 <td>Sim</td>
@@ -687,6 +725,14 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
+<td>nfe_numero</td>
+<td>nNF</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>1 a 9 dígitos</td>
+<td>Número do Documento Fiscal<br> Se não informado, a numeração será gerada a partir da sequência da série cadastrada.</td>
+</tr>
+<tr>
 <td>uf</td>
 <td>cUF</td>
 <td>Sim</td>
@@ -695,28 +741,12 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Código da UF do emitente do Documento Fiscal.</td>
 </tr>
 <tr>
-<td>serie</td>
-<td>serie</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>Até 3 dígitos</td>
-<td>Série do Documento Fiscal. Informar 0 (zero) para série única.</td>
-</tr>
-<tr>
 <td>codigo_mun_ocorrencia</td>
 <td>cMunFG</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>7 dígitos</td>
 <td>Código do Município de Ocorrência do Fato Gerador.</td>
-</tr>
-<tr>
-<td>nfe_numero</td>
-<td>nNF</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td></td>
-<td>Número do Documento Fiscal.</td>
 </tr>
 <tr>
 <td>data_saida_entrada</td>
@@ -781,14 +811,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Numérico</td>
 <td>1 dígito</td>
 <td>Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste</td>
-</tr>
-<tr>
-<td>indicador_incentivo_fiscal</td>
-<td>indIncentivo</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>1 dígito</td>
-<td>Indicador de incentivo fiscal, sendo 1 = Sim, 2 = Não.</td>
 </tr>
 </tbody></table>
 
@@ -3017,6 +3039,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <table><thead>
 <tr>
 <th>Campo</th>
+<th>XML</th>
 <th>Obrigatório</th>
 <th>Tipo</th>
 <th>Formato e tamanho</th>
@@ -3029,41 +3052,18 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
 </tr>
-</tbody></table>
-
-<h3 id="aliquota_ipi">aliquota_ipi</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>aliquota_ipi</td>
 <td>pIPI</td>
 <td>Sim</td>
 <td>Decimal</td>
 <td>Até 3 dígitos, 4 casas decimais</td>
 <td></td>
 </tr>
-</tbody></table>
-
-<h3 id="valor_ipi">valor_ipi</h3>
-
-<table><thead>
 <tr>
-<th>Campo</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
+<td>valor_ipi</td>
 <td>vIPI</td>
 <td>Sim</td>
 <td>Decimal</td>
@@ -3085,15 +3085,7 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </thead><tbody>
 <tr>
-<td>quantidade_unidade_tributavel</td>
-<td>qUnid</td>
-<td>Sim</td>
-<td>Decimal</td>
-<td>Até 12 dígitos, de 0 a 4 casas decimais</td>
-<td>Quantidade total na unidade padrão para tributação (somente para os produtos tributados por unidade)</td>
-</tr>
-<tr>
-<td>valor_unidade_tributavel</td>
+<td>valor_unidade</td>
 <td>vUnid</td>
 <td>Sim</td>
 <td>Decimal</td>
@@ -3776,6 +3768,214 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 </tr>
 </tbody></table>
 
+<h3 id="importacao-xml-ii">importacao (XML: II)</h3>
+
+<p>Contém informações sobre imposto de importação. Informar apenas quando o item for sujeito ao II.</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>base_calculo_importacao</td>
+<td>vBC</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_despesas_aduaneiras</td>
+<td>vDespAdu</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_imposto_importacao</td>
+<td>vII</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_iof</td>
+<td>vIOF</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="declaracao_importacao-xml-di">declaracao_importacao (XML: DI)</h2>
+
+<p>Contém informações sobre as declarações de importação contidos na NF-e. No XML, o nó DI é subitem do nó prod e pode conter uma ou mais ocorrência. Seus atributos são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>documento_importacao</td>
+<td>nDI</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>De 1 a 12 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>data_importacao</td>
+<td>dDI</td>
+<td>Sim</td>
+<td>Data</td>
+<td>“AAAA-MM-DD”</td>
+<td></td>
+</tr>
+<tr>
+<td>local_desembaraco</td>
+<td>xLocDesemb</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>1 a 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>uf_desembaraco</td>
+<td>UFDesemb</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>data_desembaraco</td>
+<td>dDesemb</td>
+<td>Sim</td>
+<td>Data</td>
+<td>“AAAA-MM-DD”</td>
+<td></td>
+</tr>
+<tr>
+<td>via_transporte</td>
+<td>tpViaTransp</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>1=Marítima;<br>2=Fluvial;<br>3=Lacustre;<br>4=Aérea;<br>5=Postal<br>6=Ferroviária;<br>7=Rodoviária;<br>8=Conduto / Rede Transmissão;<br>9=Meios Próprios;<br>10=Entrada / Saída ficta.<br>11=Courier;<br>12=Handcarry</td>
+</tr>
+<tr>
+<td>valor_afrmm</td>
+<td>vAFRMM</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>forma_importacao</td>
+<td>tpIntermedio</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td></td>
+</tr>
+<tr>
+<td>cnpj</td>
+<td>CNPJ</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>14 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>uf_adquirente</td>
+<td>UFTerceiro</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>2 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>codigo_exportador</td>
+<td>cExportador</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>1 a 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="adicoes-xml-adi">adicoes (XML: adi)</h3>
+
+<p>Contém informações sobre adições de uma declaração de importacao. No XML, o nó adi é subitem do nó DI e pode conter uma ou mais ocorrência. Seus atributos são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>numero_adicao</td>
+<td>nAdicao</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>1 a 3 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>numero_sequencial</td>
+<td>nSeqAdic</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>1 a 3 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>codigo_fabricante</td>
+<td>cFabricante</td>
+<td>Sim</td>
+<td>Decimal</td>
+<td>1 a 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>valor_desconto</td>
+<td>vDescDI</td>
+<td>Não</td>
+<td>Decimal</td>
+<td>Até 13 dígitos, 2 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>numero_drawback</td>
+<td>nDraw</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>9 (AANNNNNND) ou 11 dígitos (AAAANNNNNND)</td>
+<td></td>
+</tr>
+</tbody></table>
+
 <h2 id="transporte-xml-transp">transporte (XML: transp)</h2>
 
 <p>Contém informações sobre o frete e o transporte dos produtos ou serviços.  </p>
@@ -3933,94 +4133,6 @@ Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por ex
 <td>Numérico</td>
 <td>7 dígitos</td>
 <td>Código do município de acordo com tabela do IBGE</td>
-</tr>
-</tbody></table>
-
-<h3 id="endereco_entrega-xml-entrega">endereco_entrega (XML: entrega)</h3>
-
-<p>Identificação do local de entrega. Informar somente se diferente do endereço destinatário. Seus atributos são:</p>
-
-<table><thead>
-<tr>
-<th>Campo</th>
-<th>Campo no XML</th>
-<th>Obrigatório</th>
-<th>Tipo</th>
-<th>Formato e tamanho</th>
-<th>Observações</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>cpf_cnpj</td>
-<td>CPF/CNPJ</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>0, 11 ou 14 caracteres</td>
-<td>Informar CNPJ ou CPF. Preencher os zeros não significativos.</td>
-</tr>
-<tr>
-<td>cep</td>
-<td>CEP</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>8 dígitos</td>
-<td></td>
-</tr>
-<tr>
-<td>logradouro</td>
-<td>xLgr</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>numero</td>
-<td>nro</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>complemento</td>
-<td>xCpl</td>
-<td>Não</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>bairro</td>
-<td>xBairro</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td></td>
-</tr>
-<tr>
-<td>codigo_municipio</td>
-<td>cMun</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>7 dígitos</td>
-<td>Informar ‘9999999 ‘para operações com o exterior.</td>
-</tr>
-<tr>
-<td>nome_municipio</td>
-<td>xMun</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>Até 60 caracteres</td>
-<td>Informar ‘EXTERIOR ‘para operações com o exterior.</td>
-</tr>
-<tr>
-<td>uf</td>
-<td>UF</td>
-<td>Sim</td>
-<td>Texto</td>
-<td>2 caracteres</td>
-<td>Informar ‘EX’ para operações com o exterior.</td>
 </tr>
 </tbody></table>
 
@@ -4633,6 +4745,27 @@ placa  </p>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
 </code></pre>
 
+<p>Após o processamento da solicitação de cancelamento da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;cancel_xml_url&rdquo;. Exemplo:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
+    </div>
+</div>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"nfe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
+      </span><span class="nt">"danfe_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"taxrules_calculation_log"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cancel_xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/cancel_xml_files/000/010/598/original/cancel_nfe.xml?15781"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
           <h1 id="inutiliza-o-de-n-mero-de-nota">Inutilização de número de nota</h1>
 
 <p>Para inutilizar um número, envie a seguinte requisição:  </p>
@@ -4650,12 +4783,87 @@ placa  </p>
     -d <span class="s1">'{
             "nfe": {
                 "uf": "35",
-                "cnpj_emitente": "12345678912345",
                 "serie": "1",
                 "numero": "9999999999"
             }
         }'</span>
 </code></pre>
+
+          <h1 id="carta-de-corre-o-de-nota">Carta de Correção de Nota</h1>
+
+<p>A carta de correção de nota fiscal eletrônica (CC-e) é um documento fiscal com o objetivo de corrigir informações da nota fiscal eletrônica (NF-e).
+Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem todos os erros são passíveis de correção, é preciso seguir algumas regras.</p>
+
+<p>Ela é utilizada para a regularização de algum erro ocorrido na emissão, desde que não seja: </p>
+
+<ul>
+<li>o valor do imposto (base de cálculo, alíquota, diferença de preço, quantidade, valor de operação ou prestação), </li>
+<li>os dados cadastrais (mudanças do remetente ou destinatário)</li>
+<li>data de emissão ou de saída da mercadoria.</li>
+</ul>
+
+<p>Regras:</p>
+
+<ul>
+<li>Permitido em até 30 dias, após a emissão da nojta.</li>
+</ul>
+
+<p>O que pode ser corrigido?</p>
+
+<ul>
+<li>A natureza de operação (CFOP): sob a condição de não mudar a natureza dos impostos;</li>
+<li>Os códigos ficais: desde que não altere os valores fiscais;</li>
+<li>Data de emissão ou de saída: contanto que não altere o período de apuração do ICMS;</li>
+<li>Peso, volume etc.;</li>
+<li>Endereço do destinatário;</li>
+<li>Razão social do destinatário: se não alterar por completo;</li>
+<li>Dados adicionais.</li>
+</ul>
+
+<p>Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada. </p>
+
+<p><strong>Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;correction_xml_url&rdquo;.</strong></p>
+
+<p>Para requisitar uma correção, envie a seguinte requisição:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/correction </h6>
+    </div>
+</div> 
+<pre class="highlight shell"><code>curl -X PATCH <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/10990/correction <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+            "nfe": {
+              "numero_evento": "2",
+              "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3"
+            }
+        }'</span>
+</code></pre>
+
+<p>Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;correction_xml_url&rdquo;.</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
+    </div>
+</div>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"nfe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"corrected"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
+      </span><span class="nt">"danfe_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"taxrules_calculation_log"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"correction_xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/correction_xml_files/000/010/598/original/correction_nfe.xml?15781"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
           <h1 id="webhooks">Webhooks</h1>
 
@@ -4713,6 +4921,28 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<h2 id="lote-rejeitado">Lote rejeitado</h2>
+
+<p>Quando o lote é rejeitado pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="lote-com-erro">Lote com erro</h2>
+
+<p>Quando ocorre um erro interno durante o processo de emissão de um lote. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"error"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <h2 id="nota-emitida">Nota emitida</h2>
 
 <p>Quando a NF é aceita pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
@@ -4728,16 +4958,40 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando a NF é rejeitada pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
     </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="nota-n-o-enviada">Nota não enviada</h2>
+
+<p>Quando a NF não é enviada para SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"not_sent"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="nota-com-erro">Nota com erro</h2>
+
+<p>Quando ocorre um erro interno durante o processo de emissão de uma nota. Nesta etapa será enviado o seguinte webhook:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"error"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <h2 id="nota-cancelada">Nota cancelada</h2>
 
 <p>Quando o cancelamento da NF é aceito pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
+
+<p><strong>Obs.: Após o processamento da solicitação de cancelamento da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;cancel_xml_url&rdquo;.</strong></p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
@@ -4769,6 +5023,19 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
     </span><span class="nt">"serie"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"numero"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"errors"</span><span class="p">:[</span><span class="s2">"215 - Rejeição: Falha no schema XML"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="carta-de-corre-o-rejeitada">Carta de Correção rejeitada</h2>
+
+<p>Quando uma solicitação de carta de correção de uma NF é rejeitada pela SEFAZ</p>
+
+<p><strong>Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;correction_xml_url&rdquo;.</strong></p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"correction_rejected"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
