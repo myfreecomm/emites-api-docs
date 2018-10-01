@@ -9,10 +9,16 @@ Para emitir notas, é necessário realizar uma requisição POST para o seguinte
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição: 
 
+><i><b>Importante</b>: Use as chaves correspondentes para cada tipo de emissão. <br>
+Ex: NFe -> nfe/nfes/nfe_batch e NFCe -> nfce/nfces/nfce_batch.
+<br>
+<b>Essa convenção também deve ser usada nos endpoints descritos nessa documentação.</i></b>
+
+&nbsp;
 <aside class="warning">
-Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo "á", "é", "â", "ã" etc. Também não aceitam "ç".
+  Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo "á", "é", "â", "ã" etc. Também não aceitam "ç".
 </aside>
 
 ```shell
