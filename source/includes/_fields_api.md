@@ -19,6 +19,7 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    nfe_numero                  |   nNF           |  Não          |     Numérico            |    1 a 9 dígitos                     |   Número do Documento Fiscal<br> Se não informado, a numeração será gerada a partir da sequência da série cadastrada.
     uf                          |   cUF           |  Sim          |     Numérico            |    2 dígitos                 |   Código da UF do emitente do Documento Fiscal.
     codigo_mun_ocorrencia       |   cMunFG        |  Sim          |     Numérico            |    7 dígitos                 |   Código do Município de Ocorrência do Fato Gerador.
     data_saida_entrada          |   dhSaiEnt      |  Não          |     Data                |    aaaa-mm-ddThh:mm:ss-03:00 |   Data e hora de Saída ou da Entrada da Mercadoria/Produto.  
