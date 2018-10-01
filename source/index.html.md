@@ -16,6 +16,7 @@ includes:
   - consult_note
   - cancel_note
   - disabled_note
+  - correction_note
   - webhooks
 
 search: true
