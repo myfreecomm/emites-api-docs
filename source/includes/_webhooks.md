@@ -14,7 +14,6 @@ Veja abaixo a descrição de cada campo:
 
 `object_type: tipo do objeto solicitado (NFe/NFeBatch e NFCe/NFCeBatch)`  
 
-
 `object_id: id interno objeto solicitado`
 
 `organization_id: id da organização`
@@ -59,6 +58,32 @@ Quando a SEFAZ do estado recebe o lote e inicia o processo de autenticação do 
 }
 ```
 
+## Lote rejeitado
+
+Quando o lote é rejeitado pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"NFeBatch",
+    "object_id":5,
+    "organization_id":1,
+    "event":"rejected"
+}
+```
+
+## Lote com erro
+
+Quando ocorre um erro interno durante o processo de emissão de um lote. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"NFeBatch",
+    "object_id":5,
+    "organization_id":1,
+    "event":"error"
+}
+```
+
 ## Nota emitida
 
 Quando a NF é aceita pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
@@ -78,16 +103,44 @@ Quando a NF é rejeitada pela SEFAZ. Nesta etapa será enviado o seguinte webhoo
 
 ```
 {
-    "object_type":"NFeBatch",
-    "object_id":4,
+    "object_type":"NFe",
+    "object_id":5,
     "organization_id":1,
     "event":"rejected"
+}
+```
+
+## Nota não enviada
+
+Quando a NF não é enviada para SEFAZ. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"NFe",
+    "object_id":5,
+    "organization_id":1,
+    "event":"not_sent"
+}
+```
+
+## Nota com erro
+
+Quando ocorre um erro interno durante o processo de emissão de uma nota. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+    "object_type":"NFe",
+    "object_id":5,
+    "organization_id":1,
+    "event":"error"
 }
 ```
 
 ## Nota cancelada  
 
 Quando o cancelamento da NF é aceito pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
+
+**Obs.: Após o processamento da solicitação de cancelamento da NF, o XML do evento estará disponível via consulta da NF no campo "cancel_xml_url".**
 
 ```
 {
@@ -125,5 +178,20 @@ Quando uma solicitação de inutilização de um número de NF é rejeitada pela
     "serie":"0",
     "numero":"98080986123",
     "errors":["215 - Rejeição: Falha no schema XML"]
+}
+```
+
+## Carta de Correção rejeitada
+
+Quando uma solicitação de carta de correção de uma NF é rejeitada pela SEFAZ
+
+**Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo "correction_xml_url".**
+
+```
+{
+    "object_type":"NFe",
+    "object_id":5,
+    "organization_id":1,
+    "event":"correction_rejected"
 }
 ```

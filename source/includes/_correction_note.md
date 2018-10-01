@@ -25,6 +25,8 @@ O que pode ser corrigido?
 
 Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada. 
 
+**Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo "correction_xml_url".**
+
 Para requisitar uma correção, envie a seguinte requisição:
 
  
@@ -46,4 +48,27 @@ curl -X PATCH \
               "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3"
             }
         }'
+```
+
+Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo "correction_xml_url".
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
+    </div>
+</div>
+
+```
+{
+  "nfe": {
+    "id": 5,
+      "status": "corrected",
+      "data": {...},
+      "danfe_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719",
+      "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379",
+      "taxrules_calculation_log": null,
+      "correction_xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/correction_xml_files/000/010/598/original/correction_nfe.xml?15781"
+  }
+}
 ```
