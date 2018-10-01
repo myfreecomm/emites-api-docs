@@ -18,7 +18,6 @@ curl -X POST \
     -d '{
             "nfe": {
                 "uf": "35",
-                "cnpj_emitente": "12345678912345",
                 "serie": "1",
                 "numero": "9999999999"
             }
