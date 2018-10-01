@@ -25,6 +25,8 @@ O que pode ser corrigido?
 
 Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada. 
 
+**Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo "correction_xml_url".**
+
 Para requisitar uma correção, envie a seguinte requisição:
 
  
@@ -47,3 +49,5 @@ curl -X PATCH \
             }
         }'
 ```
+
+Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo "correction_xml_url".

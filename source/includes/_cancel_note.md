@@ -2,6 +2,8 @@
 
 Para cancelar uma nota, envie a seguinte requisição:  
 
+**Obs.: Após o processamento da solicitação de cancelamento da NF, o XML do evento estará disponível via consulta da NF no campo "cancel_xml_url".**
+
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-get">PATCH </i>
