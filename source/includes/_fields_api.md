@@ -900,7 +900,7 @@ Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguint
     numero_ecf                  |  nECF           |  Sim                |  Numérico               |  3 dígitos                         |  Número de ordem sequencial de ECF.
     numero_coo                  |  nCOO           |  Sim                |  Numérico               |  6 dígitos                         |  Número do Contador de Ordem de Operação (COO).
 
-## retencoes (XML: retTrib)
+## retencao_tributos (XML: retTrib)
 
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
