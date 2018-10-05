@@ -831,7 +831,7 @@ Cada volume transportador pode conter lacres, sendo até 5.000 por volume.
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
     Número do lacre             |  nLacre         |  Sim                |  Texto                  |  Até 60 caracteres                 |
 
-## cobranca (XML: infNFe)
+## cobranca (XML: cobr)
 
 Informações opcionais de cobrança. Seus atributos são:  
 
@@ -856,7 +856,7 @@ Subgrupo de informações relacionadas às duplicatas (parcelas da compra). Pode
     data_vencimento             |  dVenc          |  Não                |  Data                   |  AAAA-MM-DD                        |  Data de vencimento da duplicata  
     valor                       |  vDup           |  Sim                |  Decimal                |  13 dígitos, 2 casas decimais      |  Valor da duplicata.  
 
-## documentos_referenciados (XML: infNFe)
+## documentos_referenciados (XML: NFref)
 
 Este campo é utilizado para referenciar uma Nota Fiscal, modelo 1 ou 1-A, ou NF-e emitida anteriormente e vinculada à NF-e que está sendo emitida. Cabe observar que esta informação será utilizada quando o regulamento do ICMS determinar indicação dos dados de outra nota fiscal referente àquela operação, como, por exemplo, nos casos de devolução de mercadoria, complementação de imposto etc.   
 
@@ -922,7 +922,7 @@ Informações de comércio exterior.
     local_embarque              |  xLocExporta    |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do Local de Embarque ou de transposição de fronteira.
     local_despacho              |  xLocDespacho   |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do local de despacho. 
 
-## forma_de_pagamento (XML: detPag)
+## forma_de_pagamento (XML: pag)
 
 Grupo de Detalhamento da Forma de Pagamento. No XML, o nó detPag é subitem do nó pag e pode conter uma ou mais ocorrência. Seus atributos são:
 
