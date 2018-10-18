@@ -1,6 +1,8 @@
-#Cancelamento de nota
+# Cancelamento
 
-Para cancelar uma nota, envie a seguinte requisição:  
+## Cancelamento de NFe
+
+Para cancelar uma NFe, envie a seguinte requisição:  
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -16,7 +18,7 @@ curl -X PATCH \
     -H 'content-type: application/json' \
 ```
 
-Após o processamento da solicitação de cancelamento da NF, o XML do evento estará disponível via consulta da NF no campo "cancel_xml_url". Exemplo:
+Após o processamento da solicitação de cancelamento da NFe, o XML do evento estará disponível via consulta da NFe no campo "cancel_xml_url". Exemplo:
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -35,6 +37,47 @@ Após o processamento da solicitação de cancelamento da NF, o XML do evento es
       "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379",
       "taxrules_calculation_log": null,
       "cancel_xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/cancel_xml_files/000/010/598/original/cancel_nfe.xml?15781"
+  }
+}
+```
+
+## Cancelamento de NFCe
+
+Para cancelar uma NFCe, envie a seguinte requisição:  
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH </i>
+        <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}/cancel </h6>
+    </div>
+</div>  
+
+```shell
+curl -X PATCH \
+    https://app.emites.com.br/api/v1/organizations/11/nfce/10990/cancel \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+```
+
+Após o processamento da solicitação de cancelamento da NFCe, o XML do evento estará disponível via consulta da NFCe no campo "cancel_xml_url". Exemplo:
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}  </h6>
+    </div>
+</div>
+
+```
+{
+  "nfce": {
+    "id": 5,
+      "status": "cancelled",
+      "data": {...},
+      "danfe_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/761/original/danfe.pdf?153719",
+      "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/761/original/nfce.xml?15379",
+      "taxrules_calculation_log": null,
+      "cancel_xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfce/cancel_xml_files/000/010/598/original/cancel_nfce.xml?15781"
   }
 }
 ```
