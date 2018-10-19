@@ -330,7 +330,184 @@ curl -X POST \
   https://app.emites.com.br/api/v1/organizations/11/nfce_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
-  -d '<WIP>'
+  -d '{
+        "dados_gerais": {
+          "csc": "000001",
+          "id_token": "A16A5A2DI8FA443FB8710D9AB8EB5432",
+          "codigo_mun_ocorrencia": "5300108",
+          "data_saida_entrada": null,
+          "destino_operacao": null,
+          "finalidade_nfe": "1",
+          "indicador_presenca": "1",
+          "natureza_operacao": "saida",
+          "tipo_operacao": "1",
+          "uf": "53"
+        },
+        "cliente": {
+          "pessoa_fisica_juridica": "person",
+          "cpf_cnpj": "86152288843",
+          "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+          "email": "teste@teste.com",
+          "endereco": {
+            "bairro": "Bairro teste",
+            "cep": "05685040",
+            "codigo_municipio": "5300108",
+            "codigo_pais": "1058",
+            "complemento": "",
+            "logradouro": "Rua do Consultor",
+            "nome_municipio": "Brasilia",
+            "nome_pais": "Brasil",
+            "numero": "14",
+            "telefone": "",
+            "uf": "DF"
+          }
+        },
+        "forma_de_pagamento": [
+          {
+            "tipo_de_pagamento": "03",
+            "valor_do_pagamento": 15.00,
+            "cnpj_credenciadora": "27.197.888/0186-02",
+            "bandeira_operadora": "01",
+            "numero_autorizacao_operacao": "1",
+            "tipo_de_integracao": "1"
+          },
+          {
+            "tipo_de_pagamento": null,
+            "cnpj_credenciadora": null,
+            "bandeira_operadora": null,
+            "tipo_de_integracao": null,
+            "numero_autorizacao_operacao": null,
+            "tipo_de_pagamento": "01",
+            "valor_do_pagamento": 85.0
+          }
+        ],
+        "produtos": [
+          {
+            "cest": "1300402",
+            "cfop": "5103",
+            "cnpj_fabricante_mercadoria": null,
+            "codigo_beneficio_fiscal": null,
+            "codigo_ean": "7891000315507",
+            "codigo_produto": "14600",
+            "declaracao_importacao": [],
+            "descricao": "NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+            "ean_unidade_trib": "7891000315507",
+            "extipi": "22",
+            "imposto_devolvido": null,
+            "ind_valor_total": null,
+            "informacoes_adicionais": "teste",
+            "ncm": "22086000",
+            "num_controle_fci": null,
+            "num_item_pedido": "1",
+            "num_pedido": "5100003910",
+            "outras_despesas": 0.0,
+            "producao_escala": null,
+            "quantidade_comercial": 10.0,
+            "quantidade_tributaria": 10.0,
+            "tributacao": {
+              "cofins": {
+                "aliquota_cofins": 7.6,
+                "aliquota_cofins_reais": null,
+                "aliquota_cofins_reais_st": null,
+                "aliquota_st": null,
+                "quantidade_vendida": null,
+                "quantidade_vendida_st": null,
+                "situacao_tributaria": "01",
+                "valor_base_calculo": 10.0,
+                "valor_base_calculo_st": null,
+                "valor_cofins": 7.6,
+                "valor_cofins_st": null
+              },
+              "icms": {
+                "aliquota_consumidor_final": null,
+                "aliquota_fcp": null,
+                "aliquota_fcp_st": null,
+                "aliquota_fcp_st_retido": null,
+                "aliquota_icms": 18.0,
+                "aliquota_icms_simples_nacional": null,
+                "aliquota_icms_st": 31.0,
+                "aliquota_interestadual": 0.0,
+                "aliquota_interna_interestadual": 0.0,
+                "base_calculo_icmsst_destino": null,
+                "base_calculo_icmsst_remetente": null,
+                "base_calculo_operacao_propria": null,
+                "base_icmsst_retido": null,
+                "codigo_origem_produto": 0,
+                "credito_icms_simples_nacional": null,
+                "modalidade_base_calculo": "1",
+                "modalidade_base_calculo_st": 4,
+                "motivo_desoneracao": "teste",
+                "perc_diferimento": 0.0,
+                "perc_fcp_interestadual": 0.0,
+                "perc_mva_icms_st": 29.04,
+                "perc_provisorio_interestadual": 0.0,
+                "perc_reducao_base_calculo": 0.0,
+                "perc_reducao_base_calculo_st": 0.0,
+                "situacao_simples_nacional": null,
+                "situacao_tributaria": "00",
+                "uf_icmsst_devido": null,
+                "valor_base_calculo": 100.0,
+                "valor_base_calculo_fcp": null,
+                "valor_base_calculo_fcp_dest": null,
+                "valor_base_calculo_fcp_st": null,
+                "valor_base_calculo_fcp_st_retido": null,
+                "valor_base_calculo_st": 0.0,
+                "valor_base_calculo_uf_dest": 0.0,
+                "valor_fcp": null,
+                "valor_fcp_interestadual": 0.0,
+                "valor_fcp_st": null,
+                "valor_fcp_st_retido": null,
+                "valor_icms": 18.0,
+                "valor_icms_desonerado": 0.0,
+                "valor_icms_diferido": 0.0,
+                "valor_icms_operacao": 0.0,
+                "valor_icms_st": 0.0,
+                "valor_icmsst_retido": null,
+                "valor_icmsst_retido_destino": null,
+                "valor_icmsst_retido_remetente": null,
+                "valor_uf_destinatario_interestadual": 0.0,
+                "valor_uf_remetente_interestadual": 0.0
+              },
+              "pis": {
+                "aliquota_pis": 1.65,
+                "aliquota_pis_reais": null,
+                "aliquota_pis_reais_st": null,
+                "aliquota_st": null,
+                "quantidade_vendida": null,
+                "quantidade_vendida_st": null,
+                "situacao_tributaria": "01",
+                "valor_base_calculo": 100.0,
+                "valor_base_calculo_st": null,
+                "valor_pis": 1.65,
+                "valor_pis_st": null
+              },
+              "valor_aproximado_total": null
+            },
+            "unidade_comercial": "UN",
+            "unidade_tributaria": "UN",
+            "valor_desconto": 0.0,
+            "valor_frete": 0.0,
+            "valor_seguro": 0.0,
+            "valor_total_produto": 100.0,
+            "valor_unitario_comercial": 10.0,
+            "valor_unitario_tributario": 10.0
+          }
+        ],
+        "transporte": {
+          "volume_transportado": [
+            {
+              "especie": "A Granel",
+              "lacres": [],
+              "marca": "0",
+              "numeracao_volumes": "333",
+              "peso_bruto": 0.0,
+              "peso_liquido": 0.0,
+              "quantidade_volumes": 1
+            }
+          ]
+        }
+      }'
+
 
 EXEMPLO DE RESPOSTA
 
