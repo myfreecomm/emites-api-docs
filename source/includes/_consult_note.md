@@ -14,16 +14,16 @@ Para consultar uma NF-e é necessário realizar a seguinte requisição:
 
 
 ```shell
-  curl -X GET \
-    https://app.emites.com.br/api/v1/organizations/11/nfe/10990 \
-    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
-    -H 'content-type: application/json' \
-```
+EXEMPLO DE REQUISIÇÃO
+ 
+curl -X GET \
+  https://app.emites.com.br/api/v1/organizations/11/nfe/10990 \
+  -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+  -H 'content-type: application/json'
 
 
-Exemplo de resposta:
+EXEMPLO DE RESPOSTA:
 
-```
 {
   "nfe": {
     "id": 10990,
@@ -50,16 +50,16 @@ Para consultar uma NFC-e é necessário realizar a seguinte requisição:
 
 
 ```shell
-  curl -X GET \
-    https://app.emites.com.br/api/v1/organizations/11/nfce/555 \
-    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
-    -H 'content-type: application/json' \
-```
+EXEMPLO DE REQUISIÇÃO
 
+curl -X GET \
+  https://app.emites.com.br/api/v1/organizations/11/nfce/555 \
+  -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+  -H 'content-type: application/json'
+  
 
-Exemplo de resposta:
+EXEMPLO DE RESPOSTA:
 
-```
 {
   "nfce": {
     "id": 555,
@@ -70,4 +70,4 @@ Exemplo de resposta:
       "taxrules_calculation_log": null
   }
 }
-``` 
+```
