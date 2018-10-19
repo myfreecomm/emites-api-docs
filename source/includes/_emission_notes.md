@@ -1,6 +1,8 @@
-# Emissão de notas
+# Emissão
 
-Para emitir notas, é necessário realizar uma requisição POST para o seguinte endereço:  
+## Emissão de NF-e
+
+Para emitir uma NF-e, é necessário realizar uma requisição POST para o seguinte endereço:
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -9,19 +11,13 @@ Para emitir notas, é necessário realizar uma requisição POST para o seguinte
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição: 
-
-><i><b>Importante</b>: Use as chaves correspondentes para cada tipo de emissão. <br>
-Ex: NFe -> nfe/nfes/nfe_batch e NFCe -> nfce/nfces/nfce_batch.
-<br>
-<b>Essa convenção também deve ser usada nos endpoints descritos nessa documentação.</i></b>
-
-&nbsp;
 <aside class="warning">
   Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo "á", "é", "â", "ã" etc. Também não aceitam "ç".
 </aside>
 
 ```shell
+EXEMPLO DE REQUISIÇÃO
+
 curl -X POST \
   https://app.emites.com.br/api/v1/organizations/11/nfe_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
@@ -295,4 +291,59 @@ curl -X POST \
         }
       }'
 
+
+EXEMPLO DE RESPOSTA
+
+{
+  "nfe_batch": {
+    "id": 1099,
+    "key": null,
+    "nfes": [
+      {
+        "id": 10990,
+        "status": "processing"
+      }
+    ]
+  }
+}
+```
+
+## Emissão de NFC-e
+
+Para emitir uma NFC-e, é necessário realizar uma requisição POST para o seguinte endereço:
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce_batch</h6>
+    </div>
+</div>
+
+<aside class="warning">
+  Todos os campos de texto da NFC-e não aceitam caracteres acentuados como, por exemplo "á", "é", "â", "ã" etc. Também não aceitam "ç".
+</aside>
+
+```shell
+EXEMPLO DE REQUISIÇÃO
+
+curl -X POST \
+  https://app.emites.com.br/api/v1/organizations/11/nfce_batch \
+  -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+  -H 'content-type: application/json' \
+  -d '<WIP>'
+
+EXEMPLO DE RESPOSTA
+
+{
+  "nfce_batch": {
+    "id": 1099,
+    "key": null,
+    "nfces": [
+      {
+        "id": 10990,
+        "status": "processing"
+      }
+    ]
+  }
+}
 ```
