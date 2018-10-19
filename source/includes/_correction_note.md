@@ -1,6 +1,6 @@
 # Carta de Correção
 
-## Carta de Correção de NFe
+## Carta de Correção de NF-e
 
 A carta de correção de nota fiscal eletrônica (CC-e) é um documento fiscal com o objetivo de corrigir informações da nota fiscal eletrônica (NF-e).
 Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem todos os erros são passíveis de correção, é preciso seguir algumas regras.
@@ -90,6 +90,6 @@ Após o processamento da solicitação da carta de correção da NF, o XML do ev
 }
 ```
 
-## Carta de Correção de NFCe
+## Carta de Correção de NFC-e
 
 A carta de correção eletrônica é utilizada, exclusivamente, para correções de NF-e, modelo 55.

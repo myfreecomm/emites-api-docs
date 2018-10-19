@@ -1,8 +1,8 @@
 # Cancelamento
 
-## Cancelamento de NFe
+## Cancelamento de NF-e
 
-Para cancelar uma NFe, envie a seguinte requisição:  
+Para cancelar uma NF-e, envie a seguinte requisição:  
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -34,7 +34,7 @@ EXEMPLO DE RESPOSTA
 }
 ```
 
-Após o processamento da solicitação de cancelamento da NFe, o XML do evento estará disponível via consulta da NFe no campo "cancel_xml_url". Exemplo:
+Após o processamento da solicitação de cancelamento da NF-e, o XML do evento estará disponível via consulta da NF-e no campo "cancel_xml_url". Exemplo:
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -57,9 +57,9 @@ Após o processamento da solicitação de cancelamento da NFe, o XML do evento e
 }
 ```
 
-## Cancelamento de NFCe
+## Cancelamento de NFC-e
 
-Para cancelar uma NFCe, envie a seguinte requisição:  
+Para cancelar uma NFC-e, envie a seguinte requisição:  
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -91,7 +91,7 @@ EXEMPLO DE RESPOSTA
 }
 ```
 
-Após o processamento da solicitação de cancelamento da NFCe, o XML do evento estará disponível via consulta da NFCe no campo "cancel_xml_url". Exemplo:
+Após o processamento da solicitação de cancelamento da NFC-e, o XML do evento estará disponível via consulta da NFC-e no campo "cancel_xml_url". Exemplo:
 
 <div class="api-endpoint">
     <div class="endpoint-data">

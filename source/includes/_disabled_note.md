@@ -1,8 +1,8 @@
 # Inutilização
 
-## Inutilização de NFe
+## Inutilização de NF-e
 
-Para inutilizar um número de NFe, envie a seguinte requisição:  
+Para inutilizar um número de NF-e, envie a seguinte requisição:  
 
  
 <div class="api-endpoint">
@@ -36,9 +36,9 @@ EXEMPLO DE RESPOSTA
 
 ```
 
-## Inutilização de NFCe
+## Inutilização de NFC-e
 
-Para inutilizar um número de NFCe, envie a seguinte requisição:  
+Para inutilizar um número de NFC-e, envie a seguinte requisição:  
 
 
 <div class="api-endpoint">
