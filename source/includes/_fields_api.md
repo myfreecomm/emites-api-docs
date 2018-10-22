@@ -7,10 +7,10 @@ Todas as notas fiscais são emitidas em lote, mesmo em caso de emissão de uma �
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     lote                        | idLote          |   Sim         |     Numérico            |    De 1 a 15 dígitos         |    Identificador de controle do envio do lote. Deve ser um número sequencial e autoincremental, sendo um identificador único do lote.
-    sincronicidade              | indSinc         |   Sim         |     Numérico            |    1 dígitos                 |    0 = Não<br>1 = Empresa solicita processamento síncrono do Lote de NF-e (sem a geração de Recibo para consulta futura)<br>O processamento síncrono do Lote corresponde a entrega da resposta do processamento das NF-e do Lote, sem a geração de um Recibo de Lote para consulta futura. A resposta de forma síncrona pela SEFAZ Autorizadora só ocorrerá se:<br>- a empresa solicitar e constar unicamente uma NFe
+    sincronicidade              | indSinc         |   Sim         |     Numérico            |    1 dígitos                 |    0 = Não<br>1 = Empresa solicita processamento síncrono do Lote de NF-e (sem a geração de Recibo para consulta futura)<br>O processamento síncrono do Lote corresponde a entrega da resposta do processamento das NF-e do Lote, sem a geração de um Recibo de Lote para consulta futura. A resposta de forma síncrona pela SEFAZ Autorizadora só ocorrerá se:<br>- a empresa solicitar e constar unicamente uma NF-e
     uf                          | -               |   Sim         |     Numérico            |    2 dígitos                 |    Campo interno do Emites para indicar o estado de emissão da NF-e/NFC-e e direcionar ao servidor da SEFAZ correspondente
     serie                       | serie           |   Sim         |     Numérico            |    Até 3 dígitos             |    Série do Lote de Documentos Fiscais
-    nfes                        | NF-e            |   Sim         |     Array               |    Até 50 itens              |    Conjunto de NF-e transmitidas, máximo de 50 NF-e
+    <strong>nfes</strong> ou <strong>nfces</strong>               | NF-e            |   Sim         |     Array               |    Até 50 itens              |    Conjunto de documentos fiscais transmitidos, máximo de 50 documentos.
 
 
 ## dados_gerais (XML: ide)  
@@ -24,12 +24,13 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     codigo_mun_ocorrencia       |   cMunFG        |  Sim          |     Numérico            |    7 dígitos                 |   Código do Município de Ocorrência do Fato Gerador.
     data_saida_entrada          |   dhSaiEnt      |  Não          |     Data                |    aaaa-mm-ddThh:mm:ss-03:00 |   Data e hora de Saída ou da Entrada da Mercadoria/Produto.  
     tipo_operacao               |   tpNF          |  Sim          |     Numérico            |    1 dígito                  |   Tipo de Operação, sendo 0 = Entrada e 1 = Saída.  
-    tipo_emissão                |   tpEmiss       |  Sim          |     Numérico            |    1 dígito                  |   1 = Emissão normal (não em contingência); <br> 2 = Contingência FS-IA, com impressão do DANFE em formulário de segurança; <br> 3 = Contingência SCAN (Sistema de Contingência do Ambiente Nacional); <br> 4 = Contingência DPEC (Declaração Prévia da Emissão em Contingência); <br> 5 = Contingência FS-DA, com impressão do DANFE em formulário de segurança; <br> 6 = Contingência SVC-AN (SEFAZ Virtual de Contingência do AN); <br> 7 = Contingência SVC-RS (SEFAZ Virtual de Contingência do RS); <br> 9 = Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e).
     destino_operacao            |   idDest        |  Sim          |     Numérico            |    1 dígito                  |   Identificador de Local de destino da operação (1 - Interna; 2 - Interestadual; 3 - Exterior).
     natureza_operacao           |   natOp         |  Sim          |     Texto  e/ou número  |    1 a 60 caracteres         |   Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea 'i', inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970. 
     indicador_consumidor_final  |   indFinal      |  Sim          |     Numérico            |    1 dígito                  |   Indica se a NF-e foi emitida para consumidor final, sendo 0 = Não e 1 = Sim.  
     indicador_presenca          |   indPres       |  Sim          |     Numérico            |    1 dígito                  |   Indicador de presença do comprador no estabelecimento comercial no momento da operação. Seleção entre:<br>0 = Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);<br>1 = Operação presencial;<br>2 = Operação não presencial, pela Internet;<br>3   = Operação não presencial, Teleatendimento;<br>4 = NFC-e em operação com entrega a domicílio;<br>9 = Operação não presencial, outros.<br>
-    finalidade_nfe              |   finNFe        |  Sim          |     Numérico            |    1 dígito                  |   Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste  
+    finalidade_nfe              |   finNFe        |  Sim          |     Numérico            |    1 dígito                  |   Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste
+    csc              |   -        |  Sim          |     Texto e/ou número            |    36 caracteres                  |   Código de Segurança do Contribuinte (antigo Token)<br><strong>* Somente para NFC-e</strong>
+    id_token              |   -        |  Sim          |     Numérico            |    6 dígitos                  |   Identificador do CSC <br><strong>* Somente para NFC-e</strong>
 
 ## cliente (XML: dest)  
 
@@ -43,7 +44,7 @@ Contém informações sobre o destinatário da aquisição dos produtos do emite
     inscricao_estadual          |   IE            |  Não          |  Numérico               |  Até 14 dígitos              |  Informar somente os algarismos, sem ponto, hífen, barra, etc.  
     inscricao_suframa           |   ISUF          |  Não          |  Numérico               |  De 8 a 9 dígitos            |  Obrigatório nas operações que se beneficiam de incentivos fiscais existentes nas áreas sob controle da SUFRAMA. A omissão desta informação impede o processamento da operação pelo Sistema de Mercadoria Nacional da SUFRAMA e a liberação da Declaração de Ingresso, prejudicando a comprovação do ingresso / internamento da mercadoria nestas áreas.
     inscricao_municipal         |   IM            |  Não          |  Texto                  |  Até 15 caracteres           |  
-    indicador_inscricao_estadual|   indIEDest     |  Sim          |  Numérico               |  1 dígito                    |  Indica se o destinatário é contribuinte do ICMS. Seleção entre:<br>1 = Contribuinte ICMS (informar a IE do destinatário);<br> 2  = Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS;<br>9 = Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS.
+    indicador_inscricao_estadual|   indIEDest     |  Sim          |  Numérico               |  1 dígito                    |  Indica se o destinatário é contribuinte do ICMS. Seleção entre:<br>1 = Contribuinte ICMS (informar a IE do destinatário);<br> 2  = Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS;<br>9 = Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS.<br><strong>Para NFC-e esse campo sempre terá o valor 9, por isso pode ser ignorado.<strong>
     email                       |   email         |  Não          |  Texto                  |  Até 60 caracteres           |  
 
 ### endereco (XML: enderDest)  
@@ -864,7 +865,7 @@ Seus atributos são:
 
 ### tipo_documento  
 
-Campo interno do Emites para indicar o tipo do documento. Os valores podem ser: NFe, NF ou Cupom.
+Campo interno do Emites para indicar o tipo do documento. Os valores podem ser: NF-e, NF ou Cupom.
 
 ### tipo_documento = “NFe”  
 

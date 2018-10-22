@@ -1,4 +1,6 @@
-# Carta de Correção de Nota
+# Carta de Correção
+
+## Carta de Correção de NF-e
 
 A carta de correção de nota fiscal eletrônica (CC-e) é um documento fiscal com o objetivo de corrigir informações da nota fiscal eletrônica (NF-e).
 Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem todos os erros são passíveis de correção, é preciso seguir algumas regras.
@@ -38,16 +40,31 @@ Para requisitar uma correção, envie a seguinte requisição:
 </div> 
 
 ```shell
+EXEMPLO DE REQUISIÇÃO
+
 curl -X PATCH \
   https://app.emites.com.br/api/v1/organizations/11/nfe/10990/correction \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-            "nfe": {
-              "numero_evento": "2",
-              "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3"
-            }
+          "nfe": {
+            "numero_evento": "2",
+            "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3"
+          }
         }'
+
+EXEMPLO DE RESPOSTA
+
+{
+  "nfe": {
+    "id": 10990,
+    "status": "processing",
+    "data": {...},
+    "danfe_url": "/system/nfe/pdf_files/000/010/953/original/danfe.pdf?1539874106",
+    "xml_url": "/system/nfe/xml_files/000/010/953/original/nfe.xml?1539874106",
+    "taxrules_calculation_log": null
+  }
+}
 ```
 
 Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo "correction_xml_url".
@@ -72,3 +89,7 @@ Após o processamento da solicitação da carta de correção da NF, o XML do ev
   }
 }
 ```
+
+## Carta de Correção de NFC-e
+
+A carta de correção eletrônica é utilizada, exclusivamente, para correções de NF-e, modelo 55.
