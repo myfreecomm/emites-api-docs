@@ -353,9 +353,11 @@
     }'</span>
 </code></pre>
 
-          <h1 id="emiss-o-de-notas">Emissão de notas</h1>
+          <h1 id="emiss-o">Emissão</h1>
 
-<p>Para emitir notas, é necessário realizar uma requisição POST para o seguinte endereço:  </p>
+<h2 id="emiss-o-de-nf-e">Emissão de NF-e</h2>
+
+<p>Para emitir uma NF-e, é necessário realizar uma requisição POST para o seguinte endereço:</p>
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -364,20 +366,12 @@
     </div>
 </div>
 
-<p>Veja a seguir um exemplo do corpo da requisição: </p>
-
-<blockquote>
-<p><i><b>Importante</b>: Use as chaves correspondentes para cada tipo de emissão. <br>
-Ex: NFe -&gt; nfe/nfes/nfe_batch e NFCe -&gt; nfce/nfces/nfce_batch.
-<br>
-<b>Essa convenção também deve ser usada nos endpoints descritos nessa documentação.</i></b></p>
-</blockquote>
-
-<p>&nbsp;
 <aside class="warning">
   Todos os campos de texto da NF-e não aceitam caracteres acentuados como, por exemplo &ldquo;á&rdquo;, &ldquo;é&rdquo;, &ldquo;â&rdquo;, &ldquo;ã&rdquo; etc. Também não aceitam &ldquo;ç&rdquo;.
-</aside></p>
-<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+</aside>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
   https://app.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
@@ -650,6 +644,252 @@ Ex: NFe -&gt; nfe/nfes/nfe_batch e NFCe -&gt; nfce/nfces/nfce_batch.
         }
       }'</span>
 
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfe_batch"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 1099,
+    <span class="s2">"key"</span>: null,
+    <span class="s2">"nfes"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"id"</span>: 10990,
+        <span class="s2">"status"</span>: <span class="s2">"processing"</span>
+      <span class="o">}</span>
+    <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="emiss-o-de-nfc-e">Emissão de NFC-e</h2>
+
+<p>Antes de emitir uma NFC-e, é necessário ter um Código de Segurança do Contribuite, também conhecido como CSC e seu respectivo token identificador. Ambos valores são utilizados na geração do QR Code da NFC-e a ser emitida.</p>
+
+<p>Acesse <strong><a href="http://www4.fazenda.rj.gov.br/sefaz-dfe-csc">http://www4.fazenda.rj.gov.br/sefaz-dfe-csc</a></strong> para gerar ou gerenciar seu CSC.</p>
+
+<p>Com o CSC e seu respectivo token identificador em mãos, preencha os campos &ldquo;csc&quot;e &quot;id_token&rdquo; do node &ldquo;dados_gerais&rdquo; com seus respectivos valores.</p>
+
+<p>Para emitir uma NFC-e, é necessário realizar uma requisição POST para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce_batch</h6>
+    </div>
+</div>
+
+<aside class="warning">
+  Todos os campos de texto da NFC-e não aceitam caracteres acentuados como, por exemplo &ldquo;á&rdquo;, &ldquo;é&rdquo;, &ldquo;â&rdquo;, &ldquo;ã&rdquo; etc. Também não aceitam &ldquo;ç&rdquo;.
+</aside>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+        "nfce_batch": {
+          "lote": "1",
+          "serie": "1",
+          "sincronicidade": "0",
+          "uf": "53",
+          "nfces": [
+            {
+              "dados_gerais": {
+                "csc": "000001",
+                "id_token": "A16A5A2DI8FA443FB8710D9AB8EB5432",
+                "codigo_mun_ocorrencia": "5300108",
+                "data_saida_entrada": null,
+                "destino_operacao": null,
+                "finalidade_nfe": "1",
+                "indicador_presenca": "1",
+                "natureza_operacao": "saida",
+                "tipo_operacao": "1",
+                "uf": "53"
+              },
+              "cliente": {
+                "pessoa_fisica_juridica": "person",
+                "cpf_cnpj": "86152288843",
+                "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                "email": "teste@teste.com",
+                "endereco": {
+                  "bairro": "Bairro teste",
+                  "cep": "05685040",
+                  "codigo_municipio": "5300108",
+                  "codigo_pais": "1058",
+                  "complemento": "",
+                  "logradouro": "Rua do Consultor",
+                  "nome_municipio": "Brasilia",
+                  "nome_pais": "Brasil",
+                  "numero": "14",
+                  "telefone": "",
+                  "uf": "DF"
+                }
+              },
+              "forma_de_pagamento": [
+                {
+                  "tipo_de_pagamento": "03",
+                  "valor_do_pagamento": 15.00,
+                  "cnpj_credenciadora": "27.197.888/0186-02",
+                  "bandeira_operadora": "01",
+                  "numero_autorizacao_operacao": "1",
+                  "tipo_de_integracao": "1"
+                },
+                {
+                  "tipo_de_pagamento": null,
+                  "cnpj_credenciadora": null,
+                  "bandeira_operadora": null,
+                  "tipo_de_integracao": null,
+                  "numero_autorizacao_operacao": null,
+                  "tipo_de_pagamento": "01",
+                  "valor_do_pagamento": 85.0
+                }
+              ],
+              "produtos": [
+                {
+                  "cest": "1300402",
+                  "cfop": "5103",
+                  "cnpj_fabricante_mercadoria": null,
+                  "codigo_beneficio_fiscal": null,
+                  "codigo_ean": "7891000315507",
+                  "codigo_produto": "14600",
+                  "declaracao_importacao": [],
+                  "descricao": "NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                  "ean_unidade_trib": "7891000315507",
+                  "extipi": "22",
+                  "imposto_devolvido": null,
+                  "ind_valor_total": null,
+                  "informacoes_adicionais": "teste",
+                  "ncm": "22086000",
+                  "num_controle_fci": null,
+                  "num_item_pedido": "1",
+                  "num_pedido": "5100003910",
+                  "outras_despesas": 0.0,
+                  "producao_escala": null,
+                  "quantidade_comercial": 10.0,
+                  "quantidade_tributaria": 10.0,
+                  "tributacao": {
+                    "cofins": {
+                      "aliquota_cofins": 7.6,
+                      "aliquota_cofins_reais": null,
+                      "aliquota_cofins_reais_st": null,
+                      "aliquota_st": null,
+                      "quantidade_vendida": null,
+                      "quantidade_vendida_st": null,
+                      "situacao_tributaria": "01",
+                      "valor_base_calculo": 10.0,
+                      "valor_base_calculo_st": null,
+                      "valor_cofins": 7.6,
+                      "valor_cofins_st": null
+                    },
+                    "icms": {
+                      "aliquota_consumidor_final": null,
+                      "aliquota_fcp": null,
+                      "aliquota_fcp_st": null,
+                      "aliquota_fcp_st_retido": null,
+                      "aliquota_icms": 18.0,
+                      "aliquota_icms_simples_nacional": null,
+                      "aliquota_icms_st": 31.0,
+                      "aliquota_interestadual": 0.0,
+                      "aliquota_interna_interestadual": 0.0,
+                      "base_calculo_icmsst_destino": null,
+                      "base_calculo_icmsst_remetente": null,
+                      "base_calculo_operacao_propria": null,
+                      "base_icmsst_retido": null,
+                      "codigo_origem_produto": 0,
+                      "credito_icms_simples_nacional": null,
+                      "modalidade_base_calculo": "1",
+                      "modalidade_base_calculo_st": 4,
+                      "motivo_desoneracao": "teste",
+                      "perc_diferimento": 0.0,
+                      "perc_fcp_interestadual": 0.0,
+                      "perc_mva_icms_st": 29.04,
+                      "perc_provisorio_interestadual": 0.0,
+                      "perc_reducao_base_calculo": 0.0,
+                      "perc_reducao_base_calculo_st": 0.0,
+                      "situacao_simples_nacional": null,
+                      "situacao_tributaria": "00",
+                      "uf_icmsst_devido": null,
+                      "valor_base_calculo": 100.0,
+                      "valor_base_calculo_fcp": null,
+                      "valor_base_calculo_fcp_dest": null,
+                      "valor_base_calculo_fcp_st": null,
+                      "valor_base_calculo_fcp_st_retido": null,
+                      "valor_base_calculo_st": 0.0,
+                      "valor_base_calculo_uf_dest": 0.0,
+                      "valor_fcp": null,
+                      "valor_fcp_interestadual": 0.0,
+                      "valor_fcp_st": null,
+                      "valor_fcp_st_retido": null,
+                      "valor_icms": 18.0,
+                      "valor_icms_desonerado": 0.0,
+                      "valor_icms_diferido": 0.0,
+                      "valor_icms_operacao": 0.0,
+                      "valor_icms_st": 0.0,
+                      "valor_icmsst_retido": null,
+                      "valor_icmsst_retido_destino": null,
+                      "valor_icmsst_retido_remetente": null,
+                      "valor_uf_destinatario_interestadual": 0.0,
+                      "valor_uf_remetente_interestadual": 0.0
+                    },
+                    "pis": {
+                      "aliquota_pis": 1.65,
+                      "aliquota_pis_reais": null,
+                      "aliquota_pis_reais_st": null,
+                      "aliquota_st": null,
+                      "quantidade_vendida": null,
+                      "quantidade_vendida_st": null,
+                      "situacao_tributaria": "01",
+                      "valor_base_calculo": 100.0,
+                      "valor_base_calculo_st": null,
+                      "valor_pis": 1.65,
+                      "valor_pis_st": null
+                    },
+                    "valor_aproximado_total": null
+                  },
+                  "unidade_comercial": "UN",
+                  "unidade_tributaria": "UN",
+                  "valor_desconto": 0.0,
+                  "valor_frete": 0.0,
+                  "valor_seguro": 0.0,
+                  "valor_total_produto": 100.0,
+                  "valor_unitario_comercial": 10.0,
+                  "valor_unitario_tributario": 10.0
+                }
+              ],
+              "transporte": {
+                "volume_transportado": [
+                  {
+                    "especie": "A Granel",
+                    "lacres": [],
+                    "marca": "0",
+                    "numeracao_volumes": "333",
+                    "peso_bruto": 0.0,
+                    "peso_liquido": 0.0,
+                    "quantidade_volumes": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }'</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfce_batch"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 1099,
+    <span class="s2">"key"</span>: null,
+    <span class="s2">"nfces"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"id"</span>: 10990,
+        <span class="s2">"status"</span>: <span class="s2">"processing"</span>
+      <span class="o">}</span>
+    <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 
           <h1 id="campos-da-emiss-o-de-nota">Campos da emissão de nota</h1>
@@ -682,7 +922,7 @@ Ex: NFe -&gt; nfe/nfes/nfe_batch e NFCe -&gt; nfce/nfces/nfce_batch.
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígitos</td>
-<td>0 = Não<br>1 = Empresa solicita processamento síncrono do Lote de NF-e (sem a geração de Recibo para consulta futura)<br>O processamento síncrono do Lote corresponde a entrega da resposta do processamento das NF-e do Lote, sem a geração de um Recibo de Lote para consulta futura. A resposta de forma síncrona pela SEFAZ Autorizadora só ocorrerá se:<br>- a empresa solicitar e constar unicamente uma NFe</td>
+<td>0 = Não<br>1 = Empresa solicita processamento síncrono do Lote de NF-e (sem a geração de Recibo para consulta futura)<br>O processamento síncrono do Lote corresponde a entrega da resposta do processamento das NF-e do Lote, sem a geração de um Recibo de Lote para consulta futura. A resposta de forma síncrona pela SEFAZ Autorizadora só ocorrerá se:<br>- a empresa solicitar e constar unicamente uma NF-e</td>
 </tr>
 <tr>
 <td>uf</td>
@@ -701,12 +941,12 @@ Ex: NFe -&gt; nfe/nfes/nfe_batch e NFCe -&gt; nfce/nfces/nfce_batch.
 <td>Série do Lote de Documentos Fiscais</td>
 </tr>
 <tr>
-<td>nfes</td>
+<td><strong>nfes</strong> ou <strong>nfces</strong></td>
 <td>NF-e</td>
 <td>Sim</td>
 <td>Array</td>
 <td>Até 50 itens</td>
-<td>Conjunto de NF-e transmitidas, máximo de 50 NF-e</td>
+<td>Conjunto de documentos fiscais transmitidos, máximo de 50 documentos.</td>
 </tr>
 </tbody></table>
 
@@ -765,14 +1005,6 @@ Ex: NFe -&gt; nfe/nfes/nfe_batch e NFCe -&gt; nfce/nfces/nfce_batch.
 <td>Tipo de Operação, sendo 0 = Entrada e 1 = Saída.</td>
 </tr>
 <tr>
-<td>tipo_emissão</td>
-<td>tpEmiss</td>
-<td>Sim</td>
-<td>Numérico</td>
-<td>1 dígito</td>
-<td>1 = Emissão normal (não em contingência); <br> 2 = Contingência FS-IA, com impressão do DANFE em formulário de segurança; <br> 3 = Contingência SCAN (Sistema de Contingência do Ambiente Nacional); <br> 4 = Contingência DPEC (Declaração Prévia da Emissão em Contingência); <br> 5 = Contingência FS-DA, com impressão do DANFE em formulário de segurança; <br> 6 = Contingência SVC-AN (SEFAZ Virtual de Contingência do AN); <br> 7 = Contingência SVC-RS (SEFAZ Virtual de Contingência do RS); <br> 9 = Contingência off-line da NFC-e (as demais opções de contingência são válidas também para a NFC-e).</td>
-</tr>
-<tr>
 <td>destino_operacao</td>
 <td>idDest</td>
 <td>Sim</td>
@@ -811,6 +1043,22 @@ Ex: NFe -&gt; nfe/nfes/nfe_batch e NFCe -&gt; nfce/nfces/nfce_batch.
 <td>Numérico</td>
 <td>1 dígito</td>
 <td>Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste</td>
+</tr>
+<tr>
+<td>csc</td>
+<td>-</td>
+<td>Sim</td>
+<td>Texto e/ou número</td>
+<td>36 caracteres</td>
+<td>Código de Segurança do Contribuinte (antigo Token)<br><strong>* Somente para NFC-e</strong></td>
+</tr>
+<tr>
+<td>id_token</td>
+<td>-</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>6 dígitos</td>
+<td>Identificador do CSC <br><strong>* Somente para NFC-e</strong></td>
 </tr>
 </tbody></table>
 
@@ -882,7 +1130,7 @@ Ex: NFe -&gt; nfe/nfes/nfe_batch e NFCe -&gt; nfce/nfces/nfce_batch.
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td>Indica se o destinatário é contribuinte do ICMS. Seleção entre:<br>1 = Contribuinte ICMS (informar a IE do destinatário);<br> 2  = Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS;<br>9 = Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS.</td>
+<td>Indica se o destinatário é contribuinte do ICMS. Seleção entre:<br>1 = Contribuinte ICMS (informar a IE do destinatário);<br> 2  = Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS;<br>9 = Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS.<br><strong>Para NFC-e esse campo sempre terá o valor 9, por isso pode ser ignorado.<strong></td>
 </tr>
 <tr>
 <td>email</td>
@@ -4367,7 +4615,7 @@ placa  </p>
 
 <h3 id="tipo_documento">tipo_documento</h3>
 
-<p>Campo interno do Emites para indicar o tipo do documento. Os valores podem ser: NFe, NF ou Cupom.</p>
+<p>Campo interno do Emites para indicar o tipo do documento. Os valores podem ser: NF-e, NF ou Cupom.</p>
 
 <h3 id="tipo_documento-nfe">tipo_documento = “NFe”</h3>
 
@@ -4713,25 +4961,77 @@ placa  </p>
 </tr>
 </tbody></table>
 
-          <h1 id="consulta-de-nota">Consulta de nota</h1>
+          <h1 id="consulta">Consulta</h1>
 
-<p>Para consultar uma nota é necessário realizar a seguinte requisição:  </p>
+<h2 id="consulta-de-nf-e">Consulta de NF-e</h2>
+
+<p>Para consultar uma NF-e é necessário realizar a seguinte requisição:  </p>
 
 <div class="api-endpoint">
-    <div class="endpoint-data">
-        <i class="label label-get">GET</i>
-        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
-    </div>
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
+  </div>
 </div>
-<pre class="highlight shell"><code>curl -X GET <span class="se">\</span>
-    https://app.emites.com.br/api/v1/organizations/11/nfe/10990 <span class="se">\</span>
-    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
-    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/10990 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA:
+
+<span class="o">{</span>
+  <span class="s2">"nfe"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 10990,
+      <span class="s2">"status"</span>: <span class="s2">"succeeded"</span>,
+      <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
+      <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/761/original/danfe.pdf?153719"</span>,
+      <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/761/original/nfce.xml?15379"</span>,
+      <span class="s2">"taxrules_calculation_log"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 
-          <h1 id="cancelamento-de-nota">Cancelamento de nota</h1>
+<h2 id="consulta-de-nfc-e">Consulta de NFC-e</h2>
 
-<p>Para cancelar uma nota, envie a seguinte requisição:  </p>
+<p>Para consultar uma NFC-e é necessário realizar a seguinte requisição:  </p>
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}  </h6>
+  </div>
+</div>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce/555 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA:
+
+<span class="o">{</span>
+  <span class="s2">"nfce"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 555,
+      <span class="s2">"status"</span>: <span class="s2">"succeeded"</span>,
+      <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
+      <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/761/original/danfe.pdf?153719"</span>,
+      <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/761/original/nfce.xml?15379"</span>,
+      <span class="s2">"taxrules_calculation_log"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+          <h1 id="cancelamento">Cancelamento</h1>
+
+<h2 id="cancelamento-de-nf-e">Cancelamento de NF-e</h2>
+
+<p>Para cancelar uma NF-e, envie a seguinte requisição:  </p>
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -4739,13 +5039,29 @@ placa  </p>
         <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel </h6>
     </div>
 </div>  
-<pre class="highlight shell"><code>curl -X PATCH <span class="se">\</span>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X PATCH <span class="se">\</span>
     https://app.emites.com.br/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfe"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 10990,
+    <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
+    <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
+    <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span>,
+    <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379"</span>,
+    <span class="s2">"taxrules_calculation_log"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 
-<p>Após o processamento da solicitação de cancelamento da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;cancel_xml_url&rdquo;. Exemplo:</p>
+<p>Após o processamento da solicitação de cancelamento da NF-e, o XML do evento estará disponível via consulta da NF-e no campo &ldquo;cancel_xml_url&rdquo;. Exemplo:</p>
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -4755,20 +5071,75 @@ placa  </p>
 </div>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"nfe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
-      </span><span class="nt">"danfe_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"taxrules_calculation_log"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"cancel_xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/cancel_xml_files/000/010/598/original/cancel_nfe.xml?15781"</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10990</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"danfe_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cancel_xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/cancel_xml_files/000/010/598/original/cancel_nfe.xml?15781"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"taxrules_calculation_log"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-          <h1 id="inutiliza-o-de-n-mero-de-nota">Inutilização de número de nota</h1>
+<h2 id="cancelamento-de-nfc-e">Cancelamento de NFC-e</h2>
 
-<p>Para inutilizar um número, envie a seguinte requisição:  </p>
+<p>Para cancelar uma NFC-e, envie a seguinte requisição:  </p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH </i>
+        <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}/cancel </h6>
+    </div>
+</div>  
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X PATCH <span class="se">\</span>
+    https://app.emites.com.br/api/v1/organizations/11/nfce/10990/cancel <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfce"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 10990,
+    <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
+    <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
+    <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/761/original/danfe.pdf?153719"</span>,
+    <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/761/original/nfe.xml?15379"</span>,
+    <span class="s2">"taxrules_calculation_log"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>Após o processamento da solicitação de cancelamento da NFC-e, o XML do evento estará disponível via consulta da NFC-e no campo &ldquo;cancel_xml_url&rdquo;. Exemplo:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}  </h6>
+    </div>
+</div>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"nfce"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
+      </span><span class="nt">"danfe_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/761/original/danfe.pdf?153719"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/761/original/nfce.xml?15379"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cancel_xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/cancel_xml_files/000/010/598/original/cancel_nfce.xml?15781"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"taxrules_calculation_log"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+          <h1 id="inutiliza-o">Inutilização</h1>
+
+<h2 id="inutiliza-o-de-nf-e">Inutilização de NF-e</h2>
+
+<p>Para inutilizar um número de NF-e, envie a seguinte requisição:  </p>
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -4776,20 +5147,64 @@ placa  </p>
         <h6>/api/v1/organizations/{organization_id}/nfe/disable</h6>
     </div>
 </div> 
-<pre class="highlight shell"><code>curl -X POST <span class="se">\</span>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
   https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
-            "nfe": {
-                "uf": "35",
-                "serie": "1",
-                "numero": "9999999999"
-            }
+          "nfe": {
+            "uf": "35",
+            "serie": "1",
+            "numero": "9999999999"
+          }
         }'</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"status"</span>: <span class="s2">"Inutilização de número solicitada à SEFAZ"</span>
+<span class="o">}</span>
+
 </code></pre>
 
-          <h1 id="carta-de-corre-o-de-nota">Carta de Correção de Nota</h1>
+<h2 id="inutiliza-o-de-nfc-e">Inutilização de NFC-e</h2>
+
+<p>Para inutilizar um número de NFC-e, envie a seguinte requisição:  </p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce/disable</h6>
+    </div>
+</div> 
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "nfce": {
+            "uf": "35",
+            "serie": "1",
+            "numero": "9999999999"
+          }
+        }'</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"status"</span>: <span class="s2">"Inutilização de número solicitada à SEFAZ"</span>
+<span class="o">}</span>
+</code></pre>
+
+          <h1 id="carta-de-corre-o">Carta de Correção</h1>
+
+<h2 id="carta-de-corre-o-de-nf-e">Carta de Correção de NF-e</h2>
 
 <p>A carta de correção de nota fiscal eletrônica (CC-e) é um documento fiscal com o objetivo de corrigir informações da nota fiscal eletrônica (NF-e).
 Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem todos os erros são passíveis de correção, é preciso seguir algumas regras.</p>
@@ -4832,16 +5247,31 @@ Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem tod
         <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/correction </h6>
     </div>
 </div> 
-<pre class="highlight shell"><code>curl -X PATCH <span class="se">\</span>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X PATCH <span class="se">\</span>
   https://app.emites.com.br/api/v1/organizations/11/nfe/10990/correction <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
-            "nfe": {
-              "numero_evento": "2",
-              "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3"
-            }
+          "nfe": {
+            "numero_evento": "2",
+            "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3"
+          }
         }'</span>
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfe"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 10990,
+    <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
+    <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
+    <span class="s2">"danfe_url"</span>: <span class="s2">"/system/nfe/pdf_files/000/010/953/original/danfe.pdf?1539874106"</span>,
+    <span class="s2">"xml_url"</span>: <span class="s2">"/system/nfe/xml_files/000/010/953/original/nfe.xml?1539874106"</span>,
+    <span class="s2">"taxrules_calculation_log"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre>
 
 <p>Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;correction_xml_url&rdquo;.</p>
@@ -4864,6 +5294,10 @@ Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem tod
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<h2 id="carta-de-corre-o-de-nfc-e">Carta de Correção de NFC-e</h2>
+
+<p>A carta de correção eletrônica é utilizada, exclusivamente, para correções de NF-e, modelo 55.</p>
 
           <h1 id="webhooks">Webhooks</h1>
 
