@@ -530,7 +530,7 @@ O motivo da devolução deverá ser informado pela empresa no campo de Informaç
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 valor_base_calculo              |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais    
 aliquota_pis                    |  pPIS         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais 
-valor_pis                       |  vIPI         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_pis                       |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
 ### situacao_tributaria = 03  
 
@@ -562,7 +562,7 @@ Operação Tributável por Substituição Tributária.
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 valor_base_calculo_st           |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 aliquota_st                     |  pPIS         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
-valor_pis_st                    |  vIPI         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_pis_st                    |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
 ### Cálculo por valor
 
@@ -605,7 +605,7 @@ valor_pis_st                    |  vPIS         |  Sim          |  Decimal   |  
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 valor_base_calculo              |  vBC          |  Sim          |  Decimal   |   Até 13 dígitos, 2 casas decimais       
 aliquota_pis                    |  pPIS         |  Sim          |  Decimal   |   Até 3 dígitos, 4 casas decimais
-valor_pis                       |  vIPI         |  Sim          |  Decimal   |   Até 13 dígitos, 2 casas decimais  
+valor_pis                       |  vPIS         |  Sim          |  Decimal   |   Até 13 dígitos, 2 casas decimais  
 
 ### Cálculo por valor
 
@@ -633,8 +633,8 @@ CST         |  Sim          |  Numérico  |  2 dígitos         |
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 valor_base_calculo              |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
-aliquota_cofins                 |  pPIS         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
-valor_cofins                    |  vIPI         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+aliquota_cofins                 |  pCOFINS      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
+valor_cofins                    |  vCOFINS      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
 ### situacao_tributaria = 03  
 
@@ -644,7 +644,7 @@ Operação Tributável com Alíquota por Unidade de Medida de Produto.
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 aliquota_cofins_reais           |  vAliqProd    |  Sim          |  Decimal   |  Até 11 dígitos, de 0 a 4 casas decimais |
 quantidade_vendida              |  qBCProd      |  Sim          |  Decimal   |  Até 12 dígitos, de 0 a 4 casas decimais |
-valor_cofins                    |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais        |
+valor_cofins                    |  vCOFINS      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais        |
 
 ### situacao_tributaria = 04, 06, 07, 08, 09   
 
@@ -665,8 +665,8 @@ Operação Tributável por Substituição Tributária.
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 valor_base_calculo_st           |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais        |
-aliquota_st                     |  pPIS         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais         |
-valor_cofins_st                 |  vIPI         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais        |
+aliquota_st                     |  pCOFINS      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais         |
+valor_cofins_st                 |  vCOFINS      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais        |
 
 
 ### Cálculo por valor
@@ -675,7 +675,7 @@ valor_cofins_st                 |  vIPI         |  Sim          |  Decimal   |  
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 aliquota_cofins_reais_st        |  vAliqProd    |  Sim          |  Decimal   |  Até 11 dígitos, de 0 a 4 casas decimais
 quantidade_vendida_st           |  qBCProd      |  Sim          |  Decimal   |  Até 12 dígitos, de 0 a 4 casas decimais
-valor_cofins_st                 |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_cofins_st                 |  vCOFINS      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
 ### situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99
 
@@ -709,8 +709,8 @@ valor_cofins_st                 |  vPIS         |  Sim          |  Decimal   |  
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 valor_base_calculo              |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
-aliquota_cofins                 |  pPIS         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
-valor_cofins                    |  vIPI         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+aliquota_cofins                 |  pCOFINS      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
+valor_cofins                    |  vCOFINS      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
 ### Cálculo por valor
 
@@ -718,7 +718,7 @@ valor_cofins                    |  vIPI         |  Sim          |  Decimal   |  
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 aliquota_cofins_reais           |  vAliqProd    |  Sim          |  Decimal   |  Até 11 dígitos, de 0 a 4 casas decimais
 quantidade_vendida              |  qBCProd      |  Sim          |  Decimal   |  Até 12 dígitos, de 0 a 4 casas decimais
-valor_cofins                    |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_cofins                    |  vCOFINS      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
 
 ### importacao (XML: II)
