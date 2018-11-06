@@ -13,6 +13,7 @@ includes:
   - create_organizations
   - emission_notes
   - fields_api
+  - list_notes
   - consult_note
   - cancel_note
   - disabled_note
