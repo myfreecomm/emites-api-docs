@@ -4961,6 +4961,86 @@ placa  </p>
 </tr>
 </tbody></table>
 
+          <h1 id="lista">Lista</h1>
+
+<h2 id="lista-de-nf-e">Lista de NF-e</h2>
+
+<p>Para obter uma lista de NF-e é necessário realizar a seguinte requisição:  </p>
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfe</h6>
+  </div>
+</div>
+
+<aside class="notice">
+    Os resultados estão limitados a 10 registros por página.<br>
+    Você pode usar o parâmetro &ldquo;page&rdquo; para indicar página desejada.
+</aside>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe?page<span class="o">=</span>1 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA:
+
+<span class="o">{</span>
+  <span class="s2">"nfe"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: 10990,
+        <span class="s2">"status"</span>: <span class="s2">"succeeded"</span>,
+        <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
+        <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span>,
+        <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfce.xml?15379"</span>,
+        <span class="s2">"taxrules_calculation_log"</span>: null
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="lista-de-nfc-e">Lista de NFC-e</h2>
+
+<p>Para obter uma lista de NFC-e é necessário realizar a seguinte requisição:  </p>
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce</h6>
+  </div>
+</div>
+
+<aside class="notice">
+    Os resultados estão limitados a 10 registros por página.<br>
+    Você pode usar o parâmetro &ldquo;page&rdquo; para indicar página desejada.
+</aside>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce?page<span class="o">=</span>1 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA:
+
+<span class="o">{</span>
+  <span class="s2">"nfce"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: 10990,
+        <span class="s2">"status"</span>: <span class="s2">"succeeded"</span>,
+        <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
+        <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/761/original/danfe.pdf?153719"</span>,
+        <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/761/original/nfce.xml?15379"</span>,
+        <span class="s2">"taxrules_calculation_log"</span>: null
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+
           <h1 id="consulta">Consulta</h1>
 
 <h2 id="consulta-de-nf-e">Consulta de NF-e</h2>
