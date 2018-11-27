@@ -11,13 +11,27 @@ Para cancelar uma NF-e, envie a seguinte requisição:
     </div>
 </div>  
 
+<aside class="notice">
+    Atenção: somente poderá ser cancelada uma NF-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo "Autorização de Uso") e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NF-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
+    <b>O motivo(opcional) deve possuir entre 15 e 255 caracteres.</b>
+</aside>
+
 ```shell
 EXEMPLO DE REQUISIÇÃO
 
+# Motivo padrão: "Cancelamento NF-e"
 curl -X PATCH \
     https://app.emites.com.br/api/v1/organizations/11/nfe/10990/cancel \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
+        
+# Motivo personalizado
+curl -X PATCH \
+    https://app.emites.com.br/api/v1/organizations/11/nfe/10990/cancel \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -d '{
+          "motivo": "Desistência do cliente"
+        }'
 
 
 EXEMPLO DE RESPOSTA
@@ -68,13 +82,27 @@ Para cancelar uma NFC-e, envie a seguinte requisição:
     </div>
 </div>  
 
+<aside class="notice">
+    Atenção: somente poderá ser cancelada uma NFC-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo "Autorização de Uso") e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NFC-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
+    <b>O motivo(opcional) deve possuir entre 15 e 255 caracteres.</b>
+</aside>
+
 ```shell
 EXEMPLO DE REQUISIÇÃO
 
+# Motivo padrão: "Cancelamento NFC-e"
 curl -X PATCH \
     https://app.emites.com.br/api/v1/organizations/11/nfce/10990/cancel \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
+
+# Motivo personalizado
+curl -X PATCH \
+    https://app.emites.com.br/api/v1/organizations/11/nfce/10990/cancel \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -d '{
+          "motivo": "Desistência do cliente"
+        }'
 
 
 EXEMPLO DE RESPOSTA
