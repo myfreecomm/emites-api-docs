@@ -56,7 +56,7 @@ EXEMPLO DE RESPOSTA
 {
   "nfe": {
     "id": 10990,
-    "status": "processing",
+    "status": "corrected",
     "data": {...},
     "danfe_url": "/system/nfe/pdf_files/000/010/953/original/danfe.pdf?1539874106",
     "xml_url": "/system/nfe/xml_files/000/010/953/original/nfe.xml?1539874106",
