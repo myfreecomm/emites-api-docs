@@ -14,6 +14,7 @@ Ela é utilizada para a regularização de algum erro ocorrido na emissão, desd
 Regras:
 
 * Permitido em até 30 dias, após a emissão da nojta.
+* Pode ter até 20 cartas em uma nota
 
 O que pode ser corrigido?
 
@@ -27,7 +28,7 @@ O que pode ser corrigido?
 
 Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada. 
 
-**Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo "correction_xml_url".**
+**Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF, no último item do node "corrections".**
 
 Para requisitar uma correção, envie a seguinte requisição:
 
@@ -47,10 +48,7 @@ curl -X PATCH \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfe": {
-            "numero_evento": "2",
-            "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3"
-          }
+          "correcao": "Carta correcao teste"
         }'
 
 EXEMPLO DE RESPOSTA
@@ -62,30 +60,47 @@ EXEMPLO DE RESPOSTA
     "data": {...},
     "danfe_url": "/system/nfe/pdf_files/000/010/953/original/danfe.pdf?1539874106",
     "xml_url": "/system/nfe/xml_files/000/010/953/original/nfe.xml?1539874106",
-    "taxrules_calculation_log": null
-  }
-}
-```
-
-Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo "correction_xml_url".
-
-<div class="api-endpoint">
-    <div class="endpoint-data">
-        <i class="label label-get">GET</i>
-        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
-    </div>
-</div>
-
-```
-{
-  "nfe": {
-    "id": 5,
-      "status": "corrected",
-      "data": {...},
-      "danfe_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719",
-      "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379",
-      "taxrules_calculation_log": null,
-      "correction_xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/correction_xml_files/000/010/598/original/correction_nfe.xml?15781"
+    "corrections": [
+      {
+        "id": 34,
+        "data": {
+          "numero_evento": 3,
+          "correcao": "Carta correcao teste",
+          "resposta_correcao": {
+            "numero_protocolo": "135180016104757",
+            "chave_acesso": "35181160619202003910551010000000321613631381"
+          }
+        },
+        "status": "authorized",
+        "xml_url": "/system/corrections/files/000/000/024/original/correction_nfe.xml?1543402657"
+      },
+      {
+        "id": 33,
+        "data": {
+          "numero_evento": 2,
+          "correcao": "Corrige o nome o nome do fornecedor",
+          "resposta_correcao": {
+            "numero_protocolo": "135180016098939",
+            "chave_acesso": "35181160619202003910551010000000321613631381"
+          }
+        },
+        "status": "authorized",
+        "xml_url": "/system/corrections/files/000/000/003/original/correction_nfe.xml?1543345161"
+      },
+      {
+        "id": 32,
+        "data": {
+          "numero_evento": 1,
+          "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3",
+          "resposta_correcao": {
+            "numero_protocolo": "135180016098422",
+            "chave_acesso": "35181160619202003910551010000000321613631381"
+          }
+        },
+        "status": "authorized",
+        "xml_url": "/system/corrections/files/000/000/001/original/correction_nfe.xml?1543343189"
+      }
+    ]
   }
 }
 ```
