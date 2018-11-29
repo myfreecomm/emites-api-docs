@@ -5329,6 +5329,7 @@ Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem tod
 
 <ul>
 <li>Permitido em até 30 dias, após a emissão da nojta.</li>
+<li>Pode ter até 20 cartas em uma nota</li>
 </ul>
 
 <p>O que pode ser corrigido?</p>
@@ -5345,7 +5346,7 @@ Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem tod
 
 <p>Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada. </p>
 
-<p><strong>Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;correction_xml_url&rdquo;.</strong></p>
+<p><strong>Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF, no último item do node &ldquo;corrections&rdquo;.</strong></p>
 
 <p>Para requisitar uma correção, envie a seguinte requisição:</p>
 
@@ -5362,10 +5363,7 @@ curl -X PATCH <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
-          "nfe": {
-            "numero_evento": "2",
-            "correcao": "Altera-se a descrição do produto para NITROGENIO 50L 10M3"
-          }
+          "correcao": "Carta correcao teste"
         }'</span>
 
 EXEMPLO DE RESPOSTA
@@ -5373,35 +5371,54 @@ EXEMPLO DE RESPOSTA
 <span class="o">{</span>
   <span class="s2">"nfe"</span>: <span class="o">{</span>
     <span class="s2">"id"</span>: 10990,
-    <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
+    <span class="s2">"status"</span>: <span class="s2">"corrected"</span>,
     <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
     <span class="s2">"danfe_url"</span>: <span class="s2">"/system/nfe/pdf_files/000/010/953/original/danfe.pdf?1539874106"</span>,
     <span class="s2">"xml_url"</span>: <span class="s2">"/system/nfe/xml_files/000/010/953/original/nfe.xml?1539874106"</span>,
-    <span class="s2">"taxrules_calculation_log"</span>: null
+    <span class="s2">"corrections"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"id"</span>: 34,
+        <span class="s2">"data"</span>: <span class="o">{</span>
+          <span class="s2">"numero_evento"</span>: 3,
+          <span class="s2">"correcao"</span>: <span class="s2">"Carta correcao teste"</span>,
+          <span class="s2">"resposta_correcao"</span>: <span class="o">{</span>
+            <span class="s2">"numero_protocolo"</span>: <span class="s2">"135180016104757"</span>,
+            <span class="s2">"chave_acesso"</span>: <span class="s2">"35181160619202003910551010000000321613631381"</span>
+          <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="s2">"status"</span>: <span class="s2">"authorized"</span>,
+        <span class="s2">"xml_url"</span>: <span class="s2">"/system/corrections/files/000/000/024/original/correction_nfe.xml?1543402657"</span>
+      <span class="o">}</span>,
+      <span class="o">{</span>
+        <span class="s2">"id"</span>: 33,
+        <span class="s2">"data"</span>: <span class="o">{</span>
+          <span class="s2">"numero_evento"</span>: 2,
+          <span class="s2">"correcao"</span>: <span class="s2">"Corrige o nome o nome do fornecedor"</span>,
+          <span class="s2">"resposta_correcao"</span>: <span class="o">{</span>
+            <span class="s2">"numero_protocolo"</span>: <span class="s2">"135180016098939"</span>,
+            <span class="s2">"chave_acesso"</span>: <span class="s2">"35181160619202003910551010000000321613631381"</span>
+          <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="s2">"status"</span>: <span class="s2">"authorized"</span>,
+        <span class="s2">"xml_url"</span>: <span class="s2">"/system/corrections/files/000/000/003/original/correction_nfe.xml?1543345161"</span>
+      <span class="o">}</span>,
+      <span class="o">{</span>
+        <span class="s2">"id"</span>: 32,
+        <span class="s2">"data"</span>: <span class="o">{</span>
+          <span class="s2">"numero_evento"</span>: 1,
+          <span class="s2">"correcao"</span>: <span class="s2">"Altera-se a descrição do produto para NITROGENIO 50L 10M3"</span>,
+          <span class="s2">"resposta_correcao"</span>: <span class="o">{</span>
+            <span class="s2">"numero_protocolo"</span>: <span class="s2">"135180016098422"</span>,
+            <span class="s2">"chave_acesso"</span>: <span class="s2">"35181160619202003910551010000000321613631381"</span>
+          <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="s2">"status"</span>: <span class="s2">"authorized"</span>,
+        <span class="s2">"xml_url"</span>: <span class="s2">"/system/corrections/files/000/000/001/original/correction_nfe.xml?1543343189"</span>
+      <span class="o">}</span>
+    <span class="o">]</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
-
-<p>Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;correction_xml_url&rdquo;.</p>
-
-<div class="api-endpoint">
-    <div class="endpoint-data">
-        <i class="label label-get">GET</i>
-        <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}  </h6>
-    </div>
-</div>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"nfe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"corrected"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
-      </span><span class="nt">"danfe_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"taxrules_calculation_log"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"correction_xml_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/correction_xml_files/000/010/598/original/correction_nfe.xml?15781"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <h2 id="carta-de-corre-o-de-nfc-e">Carta de Correção de NFC-e</h2>
 
