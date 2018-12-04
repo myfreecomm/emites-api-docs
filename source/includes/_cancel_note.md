@@ -13,7 +13,7 @@ Para cancelar uma NF-e, envie a seguinte requisição:
 
 <aside class="notice">
     Atenção: somente poderá ser cancelada uma NF-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo "Autorização de Uso") e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NF-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
-    <b>O motivo(opcional) deve possuir entre 15 e 255 caracteres.</b>
+    <b>O motivo (opcional) deve possuir entre 15 e 255 caracteres.</b>
 </aside>
 
 ```shell
@@ -84,7 +84,7 @@ Para cancelar uma NFC-e, envie a seguinte requisição:
 
 <aside class="notice">
     Atenção: somente poderá ser cancelada uma NFC-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo "Autorização de Uso") e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NFC-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
-    <b>O motivo(opcional) deve possuir entre 15 e 255 caracteres.</b>
+    <b>O motivo (opcional) deve possuir entre 15 e 255 caracteres.</b>
 </aside>
 
 ```shell

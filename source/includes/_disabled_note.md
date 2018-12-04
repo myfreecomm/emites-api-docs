@@ -3,7 +3,6 @@
 ## Inutilização de NF-e
 
 Para inutilizar um número de NF-e, envie a seguinte requisição:  
-
  
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -12,9 +11,23 @@ Para inutilizar um número de NF-e, envie a seguinte requisição:
     </div>
 </div> 
 
+Regras de Validação:
+
+* Os campos "serie" e "uf" são obrigatórios;
+* O motivo é opcional e deve possuir entre 15 e 255 caracteres;
+* Não é permitido inutilizar numeros de notas emitidas, canceladas, corrigidas ou denegadas;
+* Em caso de inutilização de apenas um número, os campos "numero_inicial" e "numero_final" devem ser ignorados;
+* Em caso de inutilização de um intervalo, o campo "numero" deve ser ignorado;
+* Em caso de inutilização de um intervalo, o "numero_final" deve ser maior que o "numero_inicial";
+
+<aside class="notice">
+    Atenção: somente podem ser inutilizados números de notas fiscais que não tenham sido utilizadas em NF-e emitidas, canceladas ou denegadas. A inutilização tem o objetivo de comunicar a quebra na sequência numérica de NF-e e esta quebra não deve ser fruto de fraude ou dolo intencional.
+</aside>
+
 ```shell
 EXEMPLO DE REQUISIÇÃO
 
+# Inutilização de apenas um número com motivo padrão: "Erro na emissão da nota fiscal"
 curl -X POST \
   https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
@@ -27,6 +40,48 @@ curl -X POST \
           }
         }'
 
+# Inutilização de apenas um número com motivo personalizado
+curl -X POST \
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+    -d '{
+          "nfe": {
+            "uf": "35",
+            "serie": "1",
+            "numero": "9999999999",
+            "motivo": "Quebra na sequencia de numeracao"
+          }
+        }'
+
+# Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"
+curl -X POST \
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+    -d '{
+          "nfe": {
+            "uf": "35",
+            "serie": "1",
+            "numero_inicial": "1500",
+            "numero_final": "1550"
+          }
+        }'
+
+# Inutilização de um intervalo de numeros com motivo personalizado
+curl -X POST \
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+    -d '{
+          "nfe": {
+            "uf": "35",
+            "serie": "1",
+            "numero_inicial": "1500",
+            "numero_final": "1550",
+            "motivo": "Quebra na sequencia de numeracao"
+          }
+        }'
 
 EXEMPLO DE RESPOSTA
 
@@ -40,7 +95,6 @@ EXEMPLO DE RESPOSTA
 
 Para inutilizar um número de NFC-e, envie a seguinte requisição:  
 
-
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-get">POST</i>
@@ -48,9 +102,23 @@ Para inutilizar um número de NFC-e, envie a seguinte requisição:
     </div>
 </div> 
 
+Regras de Validação:
+
+* Os campos "serie" e "uf" são obrigatórios;
+* O motivo é opcional e deve possuir entre 15 e 255 caracteres;
+* Não é permitido inutilizar numeros de notas emitidas, canceladas, corrigidas ou denegadas;
+* Em caso de inutilização de apenas um número, os campos "numero_inicial" e "numero_final" devem ser ignorados;
+* Em caso de inutilização de um intervalo, o campo "numero" deve ser ignorado;
+* Em caso de inutilização de um intervalo, o "numero_final" deve ser maior que o "numero_inicial";
+
+<aside class="notice">
+    Atenção: somente podem ser inutilizados números de notas fiscais que não tenham sido utilizadas em NF-e emitidas, canceladas ou denegadas. A inutilização tem o objetivo de comunicar a quebra na sequência numérica de NF-e e esta quebra não deve ser fruto de fraude ou dolo intencional.
+</aside>
+
 ```shell
 EXEMPLO DE REQUISIÇÃO
 
+# Inutilização de apenas um número com motivo padrão: "Erro na emissão da nota fiscal"
 curl -X POST \
   https://app.emites.com.br/api/v1/organizations/11/nfce/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
@@ -63,6 +131,48 @@ curl -X POST \
           }
         }'
 
+# Inutilização de apenas um número com motivo personalizado
+curl -X POST \
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+    -d '{
+          "nfce": {
+            "uf": "35",
+            "serie": "1",
+            "numero": "9999999999",
+            "motivo": "Quebra na sequencia de numeracao"
+          }
+        }'
+
+# Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"
+curl -X POST \
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+    -d '{
+          "nfce": {
+            "uf": "35",
+            "serie": "1",
+            "numero_inicial": "1500",
+            "numero_final": "1550"
+          }
+        }'
+
+# Inutilização de um intervalo de numeros com motivo personalizado
+curl -X POST \
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+    -d '{
+          "nfce": {
+            "uf": "35",
+            "serie": "1",
+            "numero_inicial": "1500",
+            "numero_final": "1550",
+            "motivo": "Quebra na sequencia de numeracao"
+          }
+        }'
 
 EXEMPLO DE RESPOSTA
 

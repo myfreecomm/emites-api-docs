@@ -8,7 +8,7 @@ Para adicionar uma nova url, acesse a interface do Emites, clique no ícone do m
 
 Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  
 
-Os webhooks seguem a mesma estrutura com exceção da inutilização rejeitada que possui os campos `uf`, `serie`, `numero`, `errors`.  
+Os webhooks seguem a mesma estrutura com exceção da inutilização solicitada, rejeitada e com erro que possuem o campo "additional_info" com informações adicionais;
 
 Veja abaixo a descrição de cada campo:
 
@@ -20,13 +20,7 @@ Veja abaixo a descrição de cada campo:
 
 `event: status da nota`
 
-`uf: código do estado de acordo com o IBGE `
-
-`serie: série do lote`
-
-`numero: número da nfe/nfc`
-
-`errors: código de erro seguido de uma breve descrição`
+`additional_info: informações adicionais`
 
 <aside class="notice">
     OBS.: O tipo de objeto NFeBatch e NFCeBatch é referente a lotes compostos de várias notas e o tipo de objeto NFe ou NFCe é referente à nota avulsa.
@@ -38,10 +32,10 @@ Veja abaixo a descrição de cada campo:
 
 ```
 {
-    "object_type":"NFeBatch",
-    "object_id":5,
-    "organization_id":1,
-    "event":"sent"
+  "object_type":"NFeBatch",
+  "object_id":5,
+  "organization_id":1,
+  "event":"sent"
 }
 ```
 
@@ -51,10 +45,10 @@ Quando a SEFAZ do estado recebe o lote e inicia o processo de autenticação do 
 
 ```
 {
-    "object_type":"NFeBatch",
-    "object_id":5,
-    "organization_id":1,
-    "event":"processed"
+  "object_type":"NFeBatch",
+  "object_id":5,
+  "organization_id":1,
+  "event":"processed"
 }
 ```
 
@@ -64,10 +58,10 @@ Quando o lote é rejeitado pela SEFAZ. Nesta etapa será enviado o seguinte webh
 
 ```
 {
-    "object_type":"NFeBatch",
-    "object_id":5,
-    "organization_id":1,
-    "event":"rejected"
+  "object_type":"NFeBatch",
+  "object_id":5,
+  "organization_id":1,
+  "event":"rejected"
 }
 ```
 
@@ -77,10 +71,10 @@ Quando ocorre um erro interno durante o processo de emissão de um lote. Nesta e
 
 ```
 {
-    "object_type":"NFeBatch",
-    "object_id":5,
-    "organization_id":1,
-    "event":"error"
+  "object_type":"NFeBatch",
+  "object_id":5,
+  "organization_id":1,
+  "event":"error"
 }
 ```
 
@@ -90,10 +84,10 @@ Quando a NF é aceita pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
 
 ```
 {
-    "object_type":"NFe",
-    "object_id":5,
-    "organization_id":1,
-    "event":"succeeded"
+  "object_type":"NFe",
+  "object_id":5,
+  "organization_id":1,
+  "event":"succeeded"
 }
 ```
 
@@ -103,10 +97,10 @@ Quando a NF é rejeitada pela SEFAZ. Nesta etapa será enviado o seguinte webhoo
 
 ```
 {
-    "object_type":"NFe",
-    "object_id":5,
-    "organization_id":1,
-    "event":"rejected"
+  "object_type":"NFe",
+  "object_id":5,
+  "organization_id":1,
+  "event":"rejected"
 }
 ```
 
@@ -116,10 +110,10 @@ Quando a NF não é enviada para SEFAZ. Nesta etapa será enviado o seguinte web
 
 ```
 {
-    "object_type":"NFe",
-    "object_id":5,
-    "organization_id":1,
-    "event":"not_sent"
+  "object_type":"NFe",
+  "object_id":5,
+  "organization_id":1,
+  "event":"not_sent"
 }
 ```
 
@@ -129,10 +123,10 @@ Quando ocorre um erro interno durante o processo de emissão de uma nota. Nesta 
 
 ```
 {
-    "object_type":"NFe",
-    "object_id":5,
-    "organization_id":1,
-    "event":"error"
+  "object_type":"NFe",
+  "object_id":5,
+  "organization_id":1,
+  "event":"error"
 }
 ```
 
@@ -144,10 +138,10 @@ Quando o cancelamento da NF é aceito pela SEFAZ. Nesta etapa será enviado o se
 
 ```
 {
-    "object_type":"NFe",
-    "object_id":5,
-    "organization_id":1,
-    "event":"cancelled"
+  "object_type":"NFe",
+  "object_id":5,
+  "organization_id":1,
+  "event":"cancelled"
 }
 ```
 
@@ -157,10 +151,31 @@ Quando o cancelamento da NF é rejeitado pela SEFAZ. Nesta etapa será enviado o
 
 ```
 {
-    "object_type":"NFe",
-    "object_id":5,
-    "organization_id":1,
-    "event":"cancel_rejected"
+  "object_type":"NFe",
+  "object_id":5,
+  "organization_id":1,
+  "event":"cancel_rejected"
+}
+```
+
+## Inutilização solicitada
+
+Quando uma solicitação de inutilização de um número de NF é enviada para SEFAZ
+
+```
+{
+  "object_type":"NFeDisablement",
+  "object_id":5,
+  "organization_id":1,
+  "event":"disabled",
+  "additional_info": {
+    "uf":"35",
+    "serie":"0",
+    "motivo": "Erro na emissão da nota fiscal",
+    "numero_inicial":"98080986123",
+    "numero_final":"98080986123",
+    "protocolo": "135180216568911"
+  }
 }
 ```
 
@@ -170,14 +185,39 @@ Quando uma solicitação de inutilização de um número de NF é rejeitada pela
 
 ```
 {
-    "object_type":"None",
-    "object_id":"",
-    "organization_id":1,
-    "event":"disablement_rejected",
+  "object_type":"NFeDisablement",
+  "object_id":5,
+  "organization_id":1,
+  "event":"disablement_rejected",
+  "additional_info": {
     "uf":"35",
     "serie":"0",
-    "numero":"98080986123",
+    "motivo": "Erro na emissão da nota fiscal",
+    "numero_inicial":"98080986123",
+    "numero_final":"98080986123",
     "errors":["215 - Rejeição: Falha no schema XML"]
+  }
+}
+```
+
+## Inutilização com erro
+
+Quando ocorre um erro interno durante o processo de solicitação de inutilização de um número ou intervalo
+
+```
+{
+  "object_type":"NFeDisablement",
+  "object_id":5,
+  "organization_id":1,
+  "event": "disablement_error",
+  "additional_info": {
+    "uf":"35",
+    "serie":"0",
+    "motivo": "Erro na emissão da nota fiscal",
+    "numero_inicial":"98080986123",
+    "numero_final":"98080986123",
+    "errors":["Ocorreu um erro interno ao acessar o Webservice da SEFAZ. Por favor, entre em contato com o nosso suporte"]
+  }
 }
 ```
 
@@ -189,9 +229,9 @@ Quando uma solicitação de carta de correção de uma NF é rejeitada pela SEFA
 
 ```
 {
-    "object_type":"NFe",
-    "object_id":5,
-    "organization_id":1,
-    "event":"correction_rejected"
+  "object_type":"NFe",
+  "object_id":5,
+  "organization_id":1,
+  "event":"correction_rejected"
 }
 ```
