@@ -5122,7 +5122,7 @@ EXEMPLO DE RESPOSTA:
 
 <aside class="notice">
     Atenção: somente poderá ser cancelada uma NF-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo &ldquo;Autorização de Uso&rdquo;) e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NF-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
-    <b>O motivo(opcional) deve possuir entre 15 e 255 caracteres.</b>
+    <b>O motivo (opcional) deve possuir entre 15 e 255 caracteres.</b>
 </aside>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
@@ -5189,7 +5189,7 @@ EXEMPLO DE RESPOSTA
 
 <aside class="notice">
     Atenção: somente poderá ser cancelada uma NFC-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo &ldquo;Autorização de Uso&rdquo;) e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NFC-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
-    <b>O motivo(opcional) deve possuir entre 15 e 255 caracteres.</b>
+    <b>O motivo (opcional) deve possuir entre 15 e 255 caracteres.</b>
 </aside>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
@@ -5255,8 +5255,24 @@ EXEMPLO DE RESPOSTA
         <h6>/api/v1/organizations/{organization_id}/nfe/disable</h6>
     </div>
 </div> 
+
+<p>Regras de Validação:</p>
+
+<ul>
+<li>Os campos &ldquo;serie&rdquo; e &ldquo;uf&rdquo; são obrigatórios;</li>
+<li>O motivo é opcional e deve possuir entre 15 e 255 caracteres;</li>
+<li>Não é permitido inutilizar numeros de notas emitidas, canceladas, corrigidas ou denegadas;</li>
+<li>Em caso de inutilização de apenas um número, os campos &ldquo;numero_inicial&rdquo; e &ldquo;numero_final&rdquo; devem ser ignorados;</li>
+<li>Em caso de inutilização de um intervalo, o campo &ldquo;numero&rdquo; deve ser ignorado;</li>
+<li>Em caso de inutilização de um intervalo, o &ldquo;numero_final&rdquo; deve ser maior que o &ldquo;numero_inicial&rdquo;;</li>
+</ul>
+
+<aside class="notice">
+    Atenção: somente podem ser inutilizados números de notas fiscais que não tenham sido utilizadas em NF-e emitidas, canceladas ou denegadas. A inutilização tem o objetivo de comunicar a quebra na sequência numérica de NF-e e esta quebra não deve ser fruto de fraude ou dolo intencional.
+</aside>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
+<span class="c"># Inutilização de apenas um número com motivo padrão: "Erro na emissão da nota fiscal"</span>
 curl -X POST <span class="se">\</span>
   https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
@@ -5269,6 +5285,48 @@ curl -X POST <span class="se">\</span>
           }
         }'</span>
 
+<span class="c"># Inutilização de apenas um número com motivo personalizado</span>
+curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "nfe": {
+            "uf": "35",
+            "serie": "1",
+            "numero": "9999999999",
+            "motivo": "Quebra na sequencia de numeracao"
+          }
+        }'</span>
+
+<span class="c"># Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"</span>
+curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "nfe": {
+            "uf": "35",
+            "serie": "1",
+            "numero_inicial": "1500",
+            "numero_final": "1550"
+          }
+        }'</span>
+
+<span class="c"># Inutilização de um intervalo de numeros com motivo personalizado</span>
+curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "nfe": {
+            "uf": "35",
+            "serie": "1",
+            "numero_inicial": "1500",
+            "numero_final": "1550",
+            "motivo": "Quebra na sequencia de numeracao"
+          }
+        }'</span>
 
 EXEMPLO DE RESPOSTA
 
@@ -5288,8 +5346,24 @@ EXEMPLO DE RESPOSTA
         <h6>/api/v1/organizations/{organization_id}/nfce/disable</h6>
     </div>
 </div> 
+
+<p>Regras de Validação:</p>
+
+<ul>
+<li>Os campos &ldquo;serie&rdquo; e &ldquo;uf&rdquo; são obrigatórios;</li>
+<li>O motivo é opcional e deve possuir entre 15 e 255 caracteres;</li>
+<li>Não é permitido inutilizar numeros de notas emitidas, canceladas, corrigidas ou denegadas;</li>
+<li>Em caso de inutilização de apenas um número, os campos &ldquo;numero_inicial&rdquo; e &ldquo;numero_final&rdquo; devem ser ignorados;</li>
+<li>Em caso de inutilização de um intervalo, o campo &ldquo;numero&rdquo; deve ser ignorado;</li>
+<li>Em caso de inutilização de um intervalo, o &ldquo;numero_final&rdquo; deve ser maior que o &ldquo;numero_inicial&rdquo;;</li>
+</ul>
+
+<aside class="notice">
+    Atenção: somente podem ser inutilizados números de notas fiscais que não tenham sido utilizadas em NF-e emitidas, canceladas ou denegadas. A inutilização tem o objetivo de comunicar a quebra na sequência numérica de NF-e e esta quebra não deve ser fruto de fraude ou dolo intencional.
+</aside>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
+<span class="c"># Inutilização de apenas um número com motivo padrão: "Erro na emissão da nota fiscal"</span>
 curl -X POST <span class="se">\</span>
   https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
@@ -5302,6 +5376,48 @@ curl -X POST <span class="se">\</span>
           }
         }'</span>
 
+<span class="c"># Inutilização de apenas um número com motivo personalizado</span>
+curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "nfce": {
+            "uf": "35",
+            "serie": "1",
+            "numero": "9999999999",
+            "motivo": "Quebra na sequencia de numeracao"
+          }
+        }'</span>
+
+<span class="c"># Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"</span>
+curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "nfce": {
+            "uf": "35",
+            "serie": "1",
+            "numero_inicial": "1500",
+            "numero_final": "1550"
+          }
+        }'</span>
+
+<span class="c"># Inutilização de um intervalo de numeros com motivo personalizado</span>
+curl -X POST <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "nfce": {
+            "uf": "35",
+            "serie": "1",
+            "numero_inicial": "1500",
+            "numero_final": "1550",
+            "motivo": "Quebra na sequencia de numeracao"
+          }
+        }'</span>
 
 EXEMPLO DE RESPOSTA
 
@@ -5434,7 +5550,7 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Após adicionado, a cada requisição efetuada ao Emites, será retornada uma notificação sobre o estado do evento.  </p>
 
-<p>Os webhooks seguem a mesma estrutura com exceção da inutilização rejeitada que possui os campos <code class="prettyprint">uf</code>, <code class="prettyprint">serie</code>, <code class="prettyprint">numero</code>, <code class="prettyprint">errors</code>.  </p>
+<p>Os webhooks seguem a mesma estrutura com exceção da inutilização solicitada, rejeitada e com erro que possuem o campo &ldquo;additional_info&rdquo; com informações adicionais;</p>
 
 <p>Veja abaixo a descrição de cada campo:</p>
 
@@ -5446,13 +5562,7 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p><code class="prettyprint">event: status da nota</code></p>
 
-<p><code class="prettyprint">uf: código do estado de acordo com o IBGE</code></p>
-
-<p><code class="prettyprint">serie: série do lote</code></p>
-
-<p><code class="prettyprint">numero: número da nfe/nfc</code></p>
-
-<p><code class="prettyprint">errors: código de erro seguido de uma breve descrição</code></p>
+<p><code class="prettyprint">additional_info: informações adicionais</code></p>
 
 <aside class="notice">
     OBS.: O tipo de objeto NFeBatch e NFCeBatch é referente a lotes compostos de várias notas e o tipo de objeto NFe ou NFCe é referente à nota avulsa.
@@ -5462,10 +5572,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>É Quando é realizado o envio de um lote de NF para a SEFAZ e o mesmo é recebido. Nesta etapa será enviado o seguinte webhook:  </p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"sent"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"sent"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5473,10 +5583,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando a SEFAZ do estado recebe o lote e inicia o processo de autenticação do mesmo. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"processed"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"processed"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5484,10 +5594,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando o lote é rejeitado pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5495,10 +5605,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando ocorre um erro interno durante o processo de emissão de um lote. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"error"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeBatch"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"error"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5506,10 +5616,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando a NF é aceita pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"succeeded"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"succeeded"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5517,10 +5627,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando a NF é rejeitada pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5528,10 +5638,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando a NF não é enviada para SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"not_sent"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"not_sent"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5539,10 +5649,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando ocorre um erro interno durante o processo de emissão de uma nota. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"error"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"error"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5552,10 +5662,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p><strong>Obs.: Após o processamento da solicitação de cancelamento da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;cancel_xml_url&rdquo;.</strong></p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"cancelled"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"cancelled"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5563,10 +5673,29 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando o cancelamento da NF é rejeitado pela SEFAZ. Nesta etapa será enviado o seguinte webhook:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"cancel_rejected"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"cancel_rejected"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="inutiliza-o-solicitada">Inutilização solicitada</h2>
+
+<p>Quando uma solicitação de inutilização de um número de NF é enviada para SEFAZ</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeDisablement"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"disabled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"additional_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"uf"</span><span class="p">:</span><span class="s2">"35"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"serie"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"motivo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Erro na emissão da nota fiscal"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numero_inicial"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numero_final"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"protocolo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"135180216568911"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5574,14 +5703,37 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p>Quando uma solicitação de inutilização de um número de NF é rejeitada pela SEFAZ</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"disablement_rejected"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeDisablement"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"disablement_rejected"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"additional_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"uf"</span><span class="p">:</span><span class="s2">"35"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"serie"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"numero"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"motivo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Erro na emissão da nota fiscal"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numero_inicial"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numero_final"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"errors"</span><span class="p">:[</span><span class="s2">"215 - Rejeição: Falha no schema XML"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="inutiliza-o-com-erro">Inutilização com erro</h2>
+
+<p>Quando ocorre um erro interno durante o processo de solicitação de inutilização de um número ou intervalo</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFeDisablement"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disablement_error"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"additional_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"uf"</span><span class="p">:</span><span class="s2">"35"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"serie"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"motivo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Erro na emissão da nota fiscal"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numero_inicial"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"numero_final"</span><span class="p">:</span><span class="s2">"98080986123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errors"</span><span class="p">:[</span><span class="s2">"Ocorreu um erro interno ao acessar o Webservice da SEFAZ. Por favor, entre em contato com o nosso suporte"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -5591,10 +5743,10 @@ Os webhooks também são conhecidos como Callbacks ou Reverse API .  </p>
 
 <p><strong>Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF no campo &ldquo;correction_xml_url&rdquo;.</strong></p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"correction_rejected"</span><span class="w">
+  </span><span class="nt">"object_type"</span><span class="p">:</span><span class="s2">"NFe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object_id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"event"</span><span class="p">:</span><span class="s2">"correction_rejected"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
