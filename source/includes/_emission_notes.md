@@ -310,11 +310,11 @@ EXEMPLO DE RESPOSTA
 
 ## Emissão de NFC-e
 
-Antes de emitir uma NFC-e, é necessário ter um Código de Segurança do Contribuite, também conhecido como CSC e seu respectivo token identificador. Ambos valores são utilizados na geração do QR Code da NFC-e a ser emitida.
+Antes de emitir uma NFC-e, é necessário ter um Código de Segurança do Contribuite, também conhecido como CSC e seu respectivo token identificador. Ambos valores são utilizados na geração do QR Code e na garantia da autoria e da autenticidade do DANFE NFC-e.
 
-Acesse <strong>[http://www4.fazenda.rj.gov.br/sefaz-dfe-csc](http://www4.fazenda.rj.gov.br/sefaz-dfe-csc)</strong> para gerar ou gerenciar seu CSC.
+É possível ter até dois CSC ativos por ambiente, que podem ser gerados e gerenciados na SEFAZ do Estado do contribuinte. 
 
-Com o CSC e seu respectivo token identificador em mãos, preencha os campos "csc"e "id_token" do node "dados_gerais" com seus respectivos valores.
+O CSC e o IdToken são obrigatórios, no entanto, é possível armazená-los no cadastro da organização. Dessa forma, não há necessidade de enviá-los nos dados_gerais. Contudo, se enviados serão utilizados na emissão. 
 
 Para emitir uma NFC-e, é necessário realizar uma requisição POST para o seguinte endereço:
 

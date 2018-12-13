@@ -1,6 +1,6 @@
 # Campos da emissão de nota
 
-## Emissão em lote 
+## Emissão em lote
 
 Todas as notas fiscais são emitidas em lote, mesmo em caso de emissão de uma única nota. A emissão em lote gera um pacote de transmissão de diversas notas fiscais eletrônicas, que são processadas em conjunto. Isto permite maior agilidade para emissão de um grande volume de notas. Cada lote pode conter até 50 NF-e ou NFC-e. Os atributos do lote da nota são:
 
@@ -26,19 +26,19 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     data_saida_entrada          |   dhSaiEnt      |  Não          |     Data                |    aaaa-mm-ddThh:mm:ss-03:00 |   Data e hora de Saída ou da Entrada da Mercadoria/Produto.  
     tipo_operacao               |   tpNF          |  Sim          |     Numérico            |    1 dígito                  |   Tipo de Operação, sendo 0 = Entrada e 1 = Saída.  
     destino_operacao            |   idDest        |  Sim          |     Numérico            |    1 dígito                  |   Identificador de Local de destino da operação (1 - Interna; 2 - Interestadual; 3 - Exterior).
-    natureza_operacao           |   natOp         |  Sim          |     Texto  e/ou número  |    1 a 60 caracteres         |   Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea 'i', inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970. 
+    natureza_operacao           |   natOp         |  Sim          |     Texto  e/ou número  |    1 a 60 caracteres         |   Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea 'i', inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970.
     indicador_consumidor_final  |   indFinal      |  Sim          |     Numérico            |    1 dígito                  |   Indica se a NF-e foi emitida para consumidor final, sendo 0 = Não e 1 = Sim.  
     indicador_presenca          |   indPres       |  Sim          |     Numérico            |    1 dígito                  |   Indicador de presença do comprador no estabelecimento comercial no momento da operação. Seleção entre:<br>0 = Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);<br>1 = Operação presencial;<br>2 = Operação não presencial, pela Internet;<br>3   = Operação não presencial, Teleatendimento;<br>4 = NFC-e em operação com entrega a domicílio;<br>9 = Operação não presencial, outros.<br>
     finalidade_nfe              |   finNFe        |  Sim          |     Numérico            |    1 dígito                  |   Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste
-    csc              |   -        |  Sim          |     Texto e/ou número            |    36 caracteres                  |   Código de Segurança do Contribuinte (antigo Token)<br><strong>* Somente para NFC-e</strong>
-    id_token              |   -        |  Sim          |     Numérico            |    6 dígitos                  |   Identificador do CSC <br><strong>* Somente para NFC-e</strong>
+    csc             |   -        |  Não          |     Numérico            |    6 dígitos                  |   Identificador do CSC <br><strong>* Somente para NFC-e. Não obrigatório caso seja informado no cadastro da organização.</strong>
+    id_token               |   -        |  Não          |     Texto e/ou número            |    36 caracteres                  |   Código de Segurança do Contribuinte (antigo Token)<br><strong>* Somente para NFC-e. Não obrigatório caso seja informado no cadastro da organização.</strong>
 
 ## cliente (XML: dest)  
 
 Contém informações sobre o destinatário da aquisição dos produtos do emitente (nota de saída) ou venda dos produtos para o emitente (nota de entrada). Seus atributos são:  
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     cpf_cnpj                    |   CPF ou CNPJ   |  Sim          |  Numérico               |  11 ou 14 dígitos            |  CPF ou CNPJ do destinatário, somente números.
     nome                        |   xNome         |  Sim          |  Texto                  |  Até 60 caracteres           |  Razão social ou nome do destinatário  
     pessoa_fisica_juridica      |   -             |  Sim          |  Texto                  |  -                           |  Campo de controle do Emites para indicar se o destinatário é pessoa física (“person”) ou jurídica (“company”).
@@ -53,7 +53,7 @@ Contém informações sobre o destinatário da aquisição dos produtos do emite
 Grupo de informações relacionadas ao endereço do destinatário. Seus atributos são:  
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     logradouro                  |  xLgr           |  Sim          |  Texto                  |  Até 60 caracteres           |  
     numero                      |  nro            |  Sim          |  Texto                  |  Até 60 caracteres           |  
     complemento                 |  xCpl           |  Não          |  Texto                  |  Até 60 caracteres           |  
@@ -81,7 +81,7 @@ Conjunto de pessoas ou empresas autorizadas a obter o XML. Seus atributos são:
 Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:  
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho              |   Observações
---------------------------------|-----------------|---------------|-------------------------|-----------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|-----------------------------------|-----------------------------------------------------------
     codigo_produto              |    cProd        |  Sim          |     Texto e/ou número   |  Até 60 caracteres                |  Codificação própria da empresa. Preencher com CFOP, caso se trate de itens não relacionados com mercadorias/produtos e se o contribuinte não possuir codificação própria. Caso preenchido com CFOP, utilizar o formato "CFOP9999".  
     codigo_ean                  |    cEAN         |  Não          |     Numérico            |  8, 12, 13 ou 14 dígitos          |  Código de barras. Preencher com o código de barra GTIN-8, GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN- 14). Não informar este campo se o produto não possuir este código.
     descricao                   |    xProd        |  Sim          |     Texto               |  Até 120 caracteres               |  Descrição do produto.
@@ -115,7 +115,7 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
 Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.  
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
     valor_aproximado_total      |  vTotalTrib     |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais  |  Valor aproximado total de tributos federais, estaduais e municipais.
 
 ### icms (XML: ICMS)
@@ -123,7 +123,7 @@ Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e 
 Informações relacionadas ao ICMS. Os atributos são variáveis de acordo com a situação tributária. Atributos comuns a todas as situações tributárias
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
 situacao_tributaria             |  CST            |  Sim          |     Numérico            |    2 dígitos                       |  
 codigo_origem_produto           |  orig           |  Sim          |     Numérico            |    1 dígito                        |  Origem da mercadoria. Seleção entre:<br>  0 = Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8;  <br>1 = Estrangeira - Importação direta, exceto a indicada no código 6;  <br>2 = Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7;  <br>3 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%;  <br>4 = Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes;  <br>5 = Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%;  <br>6 = Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e gás natural;  <br>7 = Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CAMEX e gás natural.  <br>8 = Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%.  
 
@@ -149,9 +149,9 @@ Tributada integralmente.
   Campo no XML                | XML           |  Obrigatório  |  Tipo      |  Formato e tamanho                 | Observações
 ------------------------------|---------------|---------------|------------|------------------------------------|------------
   modalidade_base_calculo     | modBC         |  Sim          |  Numérico  |  1 dígito                          | 0=Margem Valor Agregado (%);  <br>1=Pauta (Valor);  <br>2=Preço Tabelado Máx. (valor);  <br>3=Valor da operação.
-  valor_base_calculo          | vBC           |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
-  aliquota_icms               | pICMS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
-  valor_icms                  | vICMS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  | 
+  valor_base_calculo          | vBC           |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  |
+  aliquota_icms               | pICMS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  |
+  valor_icms                  | vICMS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  |
   aliquota_fcp                | pFCP          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais   |
   valor_fcp                   | vFCP          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais  |
 
@@ -168,7 +168,7 @@ Tributada com cobrança de ICMS por ST.
   modalidade_base_calculo_st    |  modBCST      |  Sim          |  Numérico  |  1 dígito                           | 0=Preço tabelado ou máximo sugerido; <br>1=Lista Negativa (valor); <br>2=Lista Positiva (valor); <br>3=Lista Neutra (valor);  4=Margem Valor Agregado (%); 5=Pauta (valor).
   valor_base_calculo_st         |  vBCST        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  
   perc_reducao_base_calculo_st  |  pRedBCST     |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |   
-  perc_mva_icms_st              |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    | 
+  perc_mva_icms_st              |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
   aliquota_icms_st              |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |  
   valor_icms_st                 |  vICMSST      |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |   
   valor_base_calculo_fcp        | vBCFCP        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
@@ -193,7 +193,7 @@ Com redução de base de cálculo.
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
 modalidade_base_calculo         |  modBC        |  Sim          |  Numérico  |  1 dígito                           |  0=Margem Valor Agregado (%);<br>1=Pauta (Valor);<br>2=Preço Tabelado Máx. (valor);<br>3=Valor da operação.
 valor_base_calculo              |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  
-perc_reducao_base_calculo       |  pRedBC       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    | 
+perc_reducao_base_calculo       |  pRedBC       |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 aliquota_icms                   |  pICMS        |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_icms                      |  vICMS        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 valor_icms_desonerado           |  vICMSDeson   |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
@@ -209,7 +209,7 @@ Isenta e não tributada e com cobrança de ICMS por ST.
   Campo                         |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
 valor_icms_desonerado           |  vICMSDeson   |  Não          |  Decimal   | Até 13 dígitos, 2 casas decimais    |  
-motivo_desoneracao              |  motDesICMS   |  Não          |  Numérico  | 2 dígitos                           |  Informar o motivo da desoneração: <br>1 = Táxi <br>3 = Produto Agropecuário <br>4 = Frotista/Locadora <br>5 = Diplomático/Consular <br>6 = Utilitários e  Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio <br>7 = SUFRAMA <br>8 = Venda a Órgão Público <br>9 = Outros <br>10 = Deficiente Condutor <br>11 = Deficiente Não Condutor <br>12 = Órgão de fomento e desenvolvimento agropecuário 
+motivo_desoneracao              |  motDesICMS   |  Não          |  Numérico  | 2 dígitos                           |  Informar o motivo da desoneração: <br>1 = Táxi <br>3 = Produto Agropecuário <br>4 = Frotista/Locadora <br>5 = Diplomático/Consular <br>6 = Utilitários e  Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio <br>7 = SUFRAMA <br>8 = Venda a Órgão Público <br>9 = Outros <br>10 = Deficiente Condutor <br>11 = Deficiente Não Condutor <br>12 = Órgão de fomento e desenvolvimento agropecuário
 modalidade_base_calculo_st      |  modBCST      |  Sim          |  Numérico   | 1 dígito                           |  0=Preço tabelado ou máximo sugerido;<br>1=Lista Negativa (valor);<br>2=Lista Positiva (valor);<br>3=Lista Neutra (valor);<br>4=Margem Valor Agregado (%);<br>5=Pauta (valor).
 valor_base_calculo_st           |  vBCST      |  Sim          |  Decimal   | Até 13 dígitos, 2 casas decimais    |  
 perc_reducao_base_calculo_st    |  pRedBCST   |  Não          |  Decimal   | Até 3 dígitos, 4 casas decimais     |  
@@ -237,7 +237,7 @@ motivo_desoneracao              |  motDesICMS   |  Não          |  Numérico  |
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
 base_calculo_icmsst_remetente   |  vBCSTRet     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 valor_icmsst_retido_remetente   |  vICMSSTRet   |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
-base_calculo_icmsst_destino     |  vBCSTDest    |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   | 
+base_calculo_icmsst_destino     |  vBCSTDest    |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 valor_icmsst_retido_destino     |  vICMSSTDest  |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 
 
@@ -287,7 +287,7 @@ valor_icms                      |  vICMS        |  Sim          |  Decimal   |  
 valor_icms_desonerado           |  vICMSDeson   |  Não          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 motivo_desoneracao              |  motDesICMS   |  Não          |  Numérico  |  2 dígitos                          |  Informar o motivo da desoneração: <br>1 = Táxi<br>3 = Produto Agropecuário<br>4 = Frotista/Locadora<br>5 = Diplomático/Consular<br>6 = Utilitários e Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio<br>7 = SUFRAMA<br>8 = Venda a Órgão Público<br>9 = Outros<br>10 = Deficiente Condutor<br>11 = Deficiente Não Condutor<br>12 = Órgão de fomento e desenvolvimento agropecuário<br>
 modalidade_base_calculo_st      |  modBCST      |  Sim          |  Numérico  |  1 dígito                           |  0=Preço tabelado ou máximo sugerido;<br>1=Lista Negativa (valor);<br>2=Lista Positiva (valor);<br>3=Lista Neutra (valor);<br>4=Margem Valor Agregado (%);<br>5=Pauta (valor).<br>
-valor_base_calculo_st           |  vBCST        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   | 
+valor_base_calculo_st           |  vBCST        |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 perc_reducao_base_calculo_st    |  pRedBCST     |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 perc_mva_icms_st                |  pMVAST       |  Não          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 aliquota_icms_st                |  pICMSST      |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
@@ -393,7 +393,7 @@ Imune.
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
-situacao_simples_nacional       |  CSOSN        |  Sim          |  Numérico  |  3 dígitos 
+situacao_simples_nacional       |  CSOSN        |  Sim          |  Numérico  |  3 dígitos
 
 ### situacao_tributaria = 400
 
@@ -447,7 +447,7 @@ valor_fcp_st                    |  vFCPST       |  Sim          |  Decimal   |  
 Atributos comuns a todas as situações tributárias  
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
     situacao_tributaria         |  CST            |  Sim          |     Numérico            |  2 dígitos                         |
     cnpj_produtor               |  CNPJProd       |  Não          |     Numérico            |  14 dígitos                        |
     codigo_selo_controle        |  cSelo          |  Não          |     Texto               |  Até 60 caracteres                 |  Código do selo de controle IPI
@@ -512,14 +512,14 @@ Saída com suspensão. Não possui campos para informar alíquota.
 O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto.  
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
     perc_mercadoria_devolvida   |  pDevol         |  Sim          |     Decimal             |  Até 3 dígitos, 2 casas decimais   |
     valor_ipi_devolvido         |  vIPIDevol      |  Sim          |     Decimal             |  Até 13 dígitos, 2 casas decimais  |
 
 ### pis (XML: PIS)
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
     situacao_tributaria         |  CST            |  Sim          |  Numérico               |  2 dígitos                         |   Atributos comuns a todas as situações tributárias
 
 ### situacao_tributaria = 01 e 02  
@@ -530,7 +530,7 @@ O motivo da devolução deverá ser informado pela empresa no campo de Informaç
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 valor_base_calculo              |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais    
-aliquota_pis                    |  pPIS         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais 
+aliquota_pis                    |  pPIS         |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais
 valor_pis                       |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
 ### situacao_tributaria = 03  
@@ -612,7 +612,7 @@ valor_pis                       |  vPIS         |  Sim          |  Decimal   |  
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
-aliquota_pis_reais              |  vAliqProd    |  Sim          |  Decimal   |  Até 11 dígitos, de 0 a 4 casas decimais 
+aliquota_pis_reais              |  vAliqProd    |  Sim          |  Decimal   |  Até 11 dígitos, de 0 a 4 casas decimais
 quantidade_vendida              |  qBCProd      |  Sim          |  Decimal   |  Até 12 dígitos, de 0 a 4 casas decimais
 valor_pis                       |  vPIS         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
 
@@ -769,7 +769,7 @@ numero_drawback                 |  nDraw        |  Não          |  Numérico  |
 Contém informações sobre o frete e o transporte dos produtos ou serviços.  
 
 Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
 codigo_modalidade           |  modFrete       |  Sim          |  Numérico               |  1 dígito                          |  Seleção entre:<br>0 = Por conta do emitente;<br>1 = Por conta do destinatário/remetente;<br>2 = Por conta de terceiros;<br>9 = Sem frete.<br>
 valor_total_frete           |  vServ          |  Sim          |  Decimal                |  Até 13 dígitos, 2 casas decimais
 
@@ -778,7 +778,7 @@ valor_total_frete           |  vServ          |  Sim          |  Decimal        
 Grupo de informações relacionadas à transportadora, caso haja frete.
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
---------------------------------|-----------------|---------------|-------------------------|------------------------------------|----------------------------------------------------------- 
+--------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
     razao_social                |  xNome          |  Não          |  Texto                  |  Até 60 caracteres                 |  Nome (pessoa física) ou Razão Social (Pessoa Jurídica).
     cnpj_cpf                    |  CNPJ ou CPF    |  Não          |  Numérico               |  14 ou 11 dígitos                  |
     inscricao_estadual          |  IE             |  Não          |  Texto e/ou número      |  De 2 a 14 caracteres              |  Inscrição Estadual do transportador contribuinte do ICMS, sem caracteres de formatação (ponto, barra, hífen, etc.). Pode ser informado o texto “ISENTO” para transportador isento de inscrição no cadastro de contribuintes ICMS. Não informar a tag para não contribuinte do ICMS. A UF deve ser informada se informado uma IE.  
@@ -910,7 +910,7 @@ Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguint
     valor_retido_cofins         |  vRetCOFINS     |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
     valor_retido_csll           |  vRetCSLL       |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
     valor_base_calculo_irrf     |  vBCIRRF        |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
-    valor_irrf                  |  vIRRF          |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      | 
+    valor_irrf                  |  vIRRF          |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
     base_calculo_retencao_previdencia|vBCRetPrev  |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
     valor_retencao_previdencia  |  vRetPrev       |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
 
@@ -920,9 +920,9 @@ Informações de comércio exterior.
 
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
-    uf_embarque                 |  UFSaidaPais    |  Sim                |  Texto                  |  2 caracteres                      |  Sigla da UF de Embarque ou de transposição de fronteira. 
+    uf_embarque                 |  UFSaidaPais    |  Sim                |  Texto                  |  2 caracteres                      |  Sigla da UF de Embarque ou de transposição de fronteira.
     local_embarque              |  xLocExporta    |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do Local de Embarque ou de transposição de fronteira.
-    local_despacho              |  xLocDespacho   |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do local de despacho. 
+    local_despacho              |  xLocDespacho   |  Sim                |  Texto                  |  Até 60 caracteres                 |  Descrição do local de despacho.
 
 ## forma_de_pagamento (XML: pag)
 
@@ -939,7 +939,7 @@ Grupo de Cartões. No XML, o nó card é subitem do nó detPag e pode conter ape
 
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
-    tipo_de_integracao          |  tpIntegra      |  Sim                |  Numérico               | 1 dígito                           | 1=Pagamento integrado com o sistema de automação da empresa (Ex.: equipamento TEF, Comércio Eletrônico);<br>2= Pagamento não integrado com o sistema de automação da empresa (Ex.: equipamento POS); 
+    tipo_de_integracao          |  tpIntegra      |  Sim                |  Numérico               | 1 dígito                           | 1=Pagamento integrado com o sistema de automação da empresa (Ex.: equipamento TEF, Comércio Eletrônico);<br>2= Pagamento não integrado com o sistema de automação da empresa (Ex.: equipamento POS);
     cnpj_credenciadora          |  CNPJ           |  Não                |  Numérico               | 14 dígitos                         |
     bandeira_operadora          |  tBand          |  Não                |  Numérico               | 2 caracteres                       | 01=Visa;<br>02=Mastercard;<br>03=American Express;<br>04=Sorocred;<br>05=Diners Club;<br>06=Elo;<br>07=Hipercard;<br>08=Aura;<br>09=Cabal;<br>99=Outros.
     numero_autorizacao_operacao |  cAut           |  Não                |  Numérico               | Até 20 caracteres                  |
@@ -952,5 +952,3 @@ Grupo de informações adicionais da NF-e. Seus atributos são:
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
     informacoes_contribuinte    |  infCpl         |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações complementares de interesse do Contribuinte.
     informacoes_fisco           |    infAdFisco   |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações adicionais de interesse do Fisco.  
-
-
