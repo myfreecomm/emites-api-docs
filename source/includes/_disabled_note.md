@@ -139,10 +139,8 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfce": {
-            "serie": "1",
-            "numero": "9999999999"
-          }
+          "serie": "1",
+          "numero": "9999999999"
         }'
 
 # Inutilização de apenas um número com motivo personalizado
