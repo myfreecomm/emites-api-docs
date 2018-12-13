@@ -13,7 +13,7 @@ Para inutilizar um número de NF-e, envie a seguinte requisição:
 
 Regras de Validação:
 
-* Os campos "serie" e "uf" são obrigatórios;
+* O campo "serie" é obrigatório;
 * O motivo é opcional e deve possuir entre 15 e 255 caracteres;
 * Não é permitido inutilizar numeros de notas emitidas, canceladas, corrigidas ou denegadas;
 * Em caso de inutilização de apenas um número, os campos "numero_inicial" e "numero_final" devem ser ignorados;
@@ -33,11 +33,8 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfe": {
-            "uf": "35",
-            "serie": "1",
-            "numero": "9999999999"
-          }
+          "serie": "1",
+          "numero": "9999999999"
         }'
 
 # Inutilização de apenas um número com motivo personalizado
@@ -46,12 +43,9 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfe": {
-            "uf": "35",
-            "serie": "1",
-            "numero": "9999999999",
-            "motivo": "Quebra na sequencia de numeracao"
-          }
+          "serie": "1",
+          "numero": "9999999999",
+          "motivo": "Quebra na sequencia de numeracao"
         }'
 
 # Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"
@@ -60,12 +54,9 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfe": {
-            "uf": "35",
-            "serie": "1",
-            "numero_inicial": "1500",
-            "numero_final": "1550"
-          }
+          "serie": "1",
+          "numero_inicial": "1500",
+          "numero_final": "1550"
         }'
 
 # Inutilização de um intervalo de numeros com motivo personalizado
@@ -74,21 +65,45 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfe": {
-            "uf": "35",
-            "serie": "1",
-            "numero_inicial": "1500",
-            "numero_final": "1550",
-            "motivo": "Quebra na sequencia de numeracao"
-          }
+          "serie": "1",
+          "numero_inicial": "1500",
+          "numero_final": "1550",
+          "motivo": "Quebra na sequencia de numeracao"
         }'
 
 EXEMPLO DE RESPOSTA
 
+# Inutilização de apenas um número
 {
-  "status": "Inutilização de número solicitada à SEFAZ"
+  "nfe_disablement": {
+    "id": 16,
+    "status": "processing",
+    "data": {
+      "uf": "35",
+      "cnpj_emitente": "58521175000124",
+      "serie": "1",
+      "motivo": "Erro na emissão da nota fiscal",
+      "numero_inicial": 9999999999,
+      "numero_final": 9999999999
+    }
+  }
 }
 
+# Inutilização de um intervalo de numeros
+{
+  "nfe_disablement": {
+    "id": 16,
+    "status": "processing",
+    "data": {
+      "uf": "35",
+      "cnpj_emitente": "58521175000124",
+      "serie": "1",
+      "motivo": "Erro na emissão da nota fiscal",
+      "numero_inicial": 1500,
+      "numero_final": 1550
+    }
+  }
+}
 ```
 
 ## Inutilização de NFC-e
@@ -104,7 +119,7 @@ Para inutilizar um número de NFC-e, envie a seguinte requisição:
 
 Regras de Validação:
 
-* Os campos "serie" e "uf" são obrigatórios;
+* O campo "serie" é obrigatório;
 * O motivo é opcional e deve possuir entre 15 e 255 caracteres;
 * Não é permitido inutilizar numeros de notas emitidas, canceladas, corrigidas ou denegadas;
 * Em caso de inutilização de apenas um número, os campos "numero_inicial" e "numero_final" devem ser ignorados;
@@ -124,11 +139,8 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfce": {
-            "uf": "35",
-            "serie": "1",
-            "numero": "9999999999"
-          }
+          "serie": "1",
+          "numero": "9999999999"
         }'
 
 # Inutilização de apenas um número com motivo personalizado
@@ -137,12 +149,9 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfce": {
-            "uf": "35",
-            "serie": "1",
-            "numero": "9999999999",
-            "motivo": "Quebra na sequencia de numeracao"
-          }
+          "serie": "1",
+          "numero": "9999999999",
+          "motivo": "Quebra na sequencia de numeracao"
         }'
 
 # Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"
@@ -151,12 +160,9 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfce": {
-            "uf": "35",
-            "serie": "1",
-            "numero_inicial": "1500",
-            "numero_final": "1550"
-          }
+          "serie": "1",
+          "numero_inicial": "1500",
+          "numero_final": "1550"
         }'
 
 # Inutilização de um intervalo de numeros com motivo personalizado
@@ -165,18 +171,43 @@ curl -X POST \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
-          "nfce": {
-            "uf": "35",
-            "serie": "1",
-            "numero_inicial": "1500",
-            "numero_final": "1550",
-            "motivo": "Quebra na sequencia de numeracao"
-          }
+          "serie": "1",
+          "numero_inicial": "1500",
+          "numero_final": "1550",
+          "motivo": "Quebra na sequencia de numeracao"
         }'
 
 EXEMPLO DE RESPOSTA
 
+# Inutilização de apenas um número
 {
-  "status": "Inutilização de número solicitada à SEFAZ"
+  "nfce_disablement": {
+    "id": 16,
+    "status": "processing",
+    "data": {
+      "uf": "35",
+      "cnpj_emitente": "58521175000124",
+      "serie": "1",
+      "motivo": "Erro na emissão da nota fiscal",
+      "numero_inicial": 9999999999,
+      "numero_final": 9999999999
+    }
+  }
+}
+
+# Inutilização de um intervalo de numeros
+{
+  "nfce_disablement": {
+    "id": 16,
+    "status": "processing",
+    "data": {
+      "uf": "35",
+      "cnpj_emitente": "58521175000124",
+      "serie": "1",
+      "motivo": "Erro na emissão da nota fiscal",
+      "numero_inicial": 1500,
+      "numero_final": 1550
+    }
+  }
 }
 ```
