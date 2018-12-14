@@ -941,6 +941,14 @@ EXEMPLO DE RESPOSTA
 <td>Série do Lote de Documentos Fiscais</td>
 </tr>
 <tr>
+<td>engine_de_calculo</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>-</td>
+<td>Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada</td>
+</tr>
+<tr>
 <td><strong>nfes</strong> ou <strong>nfces</strong></td>
 <td>NF-e</td>
 <td>Sim</td>
@@ -1027,6 +1035,14 @@ EXEMPLO DE RESPOSTA
 <td>Texto  e/ou número</td>
 <td>1 a 60 caracteres</td>
 <td>Informar a natureza da operação de que decorrer a saída ou a entrada, tais como venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea &lsquo;i&rsquo;, inciso I, do art. 19 do Convênio s/nº de 15 de dezembro de 1970.</td>
+</tr>
+<tr>
+<td>codigo_natureza_operacao</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>3 caracteres</td>
+<td>Código da natureza da operação utilizado das Regras de Tributação<br>001 = Compra para Comercialização;<br>002 = Venda de Mercadoria;<br>005 = Devolução de Compra de Mercadoria;<br>006 = Remessa para Conserto;<br>012 = Devolução de Venda de Mercadoria;</td>
 </tr>
 <tr>
 <td>indicador_consumidor_final</td>
@@ -5483,7 +5499,7 @@ Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem tod
 <p>Regras:</p>
 
 <ul>
-<li>Permitido em até 30 dias, após a emissão da nojta.</li>
+<li>Permitido em até 30 dias, após a emissão da nota.</li>
 <li>Pode ter até 20 cartas em uma nota</li>
 </ul>
 
