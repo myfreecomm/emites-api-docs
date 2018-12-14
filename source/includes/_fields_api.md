@@ -10,6 +10,7 @@ Todas as notas fiscais são emitidas em lote, mesmo em caso de emissão de uma �
     sincronicidade              | indSinc         |   Sim         |     Numérico            |    1 dígitos                 |    0 = Não<br>1 = Empresa solicita processamento síncrono do Lote de NF-e (sem a geração de Recibo para consulta futura)<br>O processamento síncrono do Lote corresponde a entrega da resposta do processamento das NF-e do Lote, sem a geração de um Recibo de Lote para consulta futura. A resposta de forma síncrona pela SEFAZ Autorizadora só ocorrerá se:<br>- a empresa solicitar e constar unicamente uma NF-e
     uf                          | -               |   Sim         |     Numérico            |    2 dígitos                 |    Campo interno do Emites para indicar o estado de emissão da NF-e/NFC-e e direcionar ao servidor da SEFAZ correspondente
     serie                       | serie           |   Sim         |     Numérico            |    Até 3 dígitos             |    Série do Lote de Documentos Fiscais
+    engine_de_calculo           | -               |   Não         |     Texto               |              -               |    Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada
     <strong>nfes</strong> ou <strong>nfces</strong>               | NF-e            |   Sim         |     Array               |    Até 50 itens              |    Conjunto de documentos fiscais transmitidos, máximo de 50 documentos.
 
 
