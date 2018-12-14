@@ -13,7 +13,7 @@ Ela é utilizada para a regularização de algum erro ocorrido na emissão, desd
 
 Regras:
 
-* Permitido em até 30 dias, após a emissão da nojta.
+* Permitido em até 30 dias, após a emissão da nota.
 * Pode ter até 20 cartas em uma nota
 
 O que pode ser corrigido?
