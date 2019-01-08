@@ -4998,14 +4998,78 @@ placa  </p>
   </div>
 </div>
 
-<aside class="notice">
-    Os resultados estão limitados a 10 registros por página.<br>
-    Você pode usar o parâmetro &ldquo;page&rdquo; para indicar página desejada.
-</aside>
+<h3 id="filtro-de-nf-e">Filtro de NF-e</h3>
+
+<p>É possível obter registros específicos usando alguns filtros.</p>
+
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Obrigatório</th>
+<th>Localização</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>identifier</td>
+<td>não</td>
+<td>query</td>
+<td>Número ou Chave de Acesso da NF-e. <br>Se o valor enviado possuir 44 dígitos será utilizado o atributo <strong>chave de acesso</strong> para a busca, caso contrário será utilizado o atributo <strong>número</strong></td>
+</tr>
+<tr>
+<td>status</td>
+<td>não</td>
+<td>query</td>
+<td>Situação da NF-e na API.<br>Valores válidos: <strong>proccessing, succeeded, rejected, cancelled, error, cancel_rejected, corrected, correction_rejected, not_sent</strong>.<br> <strong>Deixe em branco ou não envie o parâmetro para listar todas as situações</strong></td>
+</tr>
+<tr>
+<td>sort_type</td>
+<td>não</td>
+<td>query</td>
+<td>Atributo utilizado para ordenar os resultados. <br> Valores válidos: <strong>created_at</strong> e <strong>updated_at</strong><br>Valor padrão: <strong>created_at</strong></td>
+</tr>
+<tr>
+<td>sort_direction</td>
+<td>não</td>
+<td>query</td>
+<td>Sentido que os resultados serão listados.<br> Valores válidos: <strong>desc</strong> e <strong>asc</strong><br>Valor padrão: <strong>desc</strong></td>
+</tr>
+<tr>
+<td>starting_at</td>
+<td>não</td>
+<td>query</td>
+<td>Data inicial (utiliza data de emissão da NF-e).<br>Formato: <strong>DD/MM/AAAA</strong></td>
+</tr>
+<tr>
+<td>ending_at</td>
+<td>não</td>
+<td>query</td>
+<td>Data final (utiliza data de emissão da NF-e).<br>Formato: <strong>DD/MM/AAAA</strong></td>
+</tr>
+<tr>
+<td>page</td>
+<td>não</td>
+<td>query</td>
+<td>Indica o número da página de registros que será retornada.<br>Valor padrão: <strong>1</strong></td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>não</td>
+<td>query</td>
+<td>Indica a quantidade de registros a serem retornados.<br>Valor padrão: <strong>10</strong></td>
+</tr>
+</tbody></table>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
+<span class="c"># Sem o uso dos filtros</span>
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe?page<span class="o">=</span>1 <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+<span class="c"># Utilizando os parâmetros para filtrar resultados</span>
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe?identifier<span class="o">=</span>123&amp;starting_at<span class="o">=</span>01/01/2019&amp;status<span class="o">=</span>succeeded <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -5037,17 +5101,80 @@ EXEMPLO DE RESPOSTA:
   </div>
 </div>
 
-<aside class="notice">
-    Os resultados estão limitados a 10 registros por página.<br>
-    Você pode usar o parâmetro &ldquo;page&rdquo; para indicar página desejada.
-</aside>
+<h3 id="filtro-de-nfc-e">Filtro de NFC-e</h3>
+
+<p>É possível obter registros específicos usando alguns filtros.</p>
+
+<table><thead>
+<tr>
+<th>Nome</th>
+<th>Obrigatório</th>
+<th>Localização</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>identifier</td>
+<td>não</td>
+<td>query</td>
+<td>Número ou Chave de Acesso da NFC-e. <br>Se o valor enviado possuir 44 dígitos será utilizado o atributo <strong>chave de acesso</strong> para a busca, caso contrário será utilizado o atributo <strong>número</strong></td>
+</tr>
+<tr>
+<td>status</td>
+<td>não</td>
+<td>query</td>
+<td>Situação da NFC-e na API.<br>Valores válidos: <strong>proccessing, succeeded, rejected, cancelled, error, cancel_rejected, corrected, correction_rejected, not_sent</strong>.<br> <strong>Deixe em branco ou não envie o parâmetro para listar todas as situações</strong></td>
+</tr>
+<tr>
+<td>sort_type</td>
+<td>não</td>
+<td>query</td>
+<td>Atributo utilizado para ordenar os resultados. <br> Valores válidos: <strong>created_at</strong> e <strong>updated_at</strong><br>Valor padrão: <strong>created_at</strong></td>
+</tr>
+<tr>
+<td>sort_direction</td>
+<td>não</td>
+<td>query</td>
+<td>Sentido que os resultados serão listados.<br> Valores válidos: <strong>desc</strong> e <strong>asc</strong><br>Valor padrão: <strong>desc</strong></td>
+</tr>
+<tr>
+<td>starting_at</td>
+<td>não</td>
+<td>query</td>
+<td>Data inicial (utiliza data de emissão da NFC-e).<br>Formato: <strong>DD/MM/AAAA</strong></td>
+</tr>
+<tr>
+<td>ending_at</td>
+<td>não</td>
+<td>query</td>
+<td>Data final (utiliza data de emissão da NFC-e).<br>Formato: <strong>DD/MM/AAAA</strong></td>
+</tr>
+<tr>
+<td>page</td>
+<td>não</td>
+<td>query</td>
+<td>Indica o número da página de registros que será retornada.<br>Valor padrão: <strong>1</strong></td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>não</td>
+<td>query</td>
+<td>Indica a quantidade de registros a serem retornados.<br>Valor padrão: <strong>10</strong></td>
+</tr>
+</tbody></table>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
+<span class="c"># Sem o uso dos filtros</span>
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce?page<span class="o">=</span>1 <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
+<span class="c"># Utilizando os parâmetros para filtrar resultados</span>
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce?identifier<span class="o">=</span>123&amp;starting_at<span class="o">=</span>01/01/2019&amp;status<span class="o">=</span>succeeded <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
 
 EXEMPLO DE RESPOSTA:
 
