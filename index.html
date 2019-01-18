@@ -5405,7 +5405,7 @@ EXEMPLO DE RESPOSTA
         <i class="label label-get">POST</i>
         <h6>/api/v1/organizations/{organization_id}/nfe/disable</h6>
     </div>
-</div> 
+</div>
 
 <p>Regras de Validação:</p>
 
@@ -5502,6 +5502,69 @@ EXEMPLO DE RESPOSTA
 <span class="o">}</span>
 </code></pre>
 
+<h2 id="consulta-de-inutiliza-o-de-nf-e">Consulta de inutilização de NF-e</h2>
+
+<p>Para consultar uma inutilização de  NF-e é necessário realizar a seguinte requisição:  </p>
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfe/disable/{nfe_disablement_id}</h6>
+  </div>
+</div>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable/16 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA:
+
+<span class="c"># Solicitação rejeitada pela SEFAZ</span>
+
+<span class="o">{</span>
+  <span class="s2">"nfe_disablement"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 16,
+      <span class="s2">"status"</span>: <span class="s2">"rejected"</span>,
+      <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"uf"</span>: <span class="s2">"35"</span>,
+        <span class="s2">"cnpj_emitente"</span>: <span class="s2">"58521175000124"</span>,
+        <span class="s2">"serie"</span>: 1,
+        <span class="s2">"motivo"</span>: <span class="s2">"Erro na emissão da nota fiscal"</span>,
+        <span class="s2">"numero_inicial"</span>: 1500,
+        <span class="s2">"numero_final"</span>: 1550,
+        <span class="s2">"resposta_inutilizacao"</span>: <span class="o">{</span>
+          <span class="s2">"erros"</span>: <span class="o">[</span>
+            <span class="s2">"241 - Rejeicao: Um numero da faixa ja foi utilizado"</span>
+          <span class="o">]</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c"># Solicitação autorizada pela SEFAZ</span>
+
+<span class="o">{</span>
+  <span class="s2">"nfe_disablement"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 17,
+      <span class="s2">"status"</span>: <span class="s2">"authorized"</span>,
+      <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"uf"</span>: <span class="s2">"35"</span>,
+        <span class="s2">"cnpj_emitente"</span>: <span class="s2">"58521175000124"</span>,
+        <span class="s2">"serie"</span>: 1,
+        <span class="s2">"motivo"</span>: <span class="s2">"Erro na emissão da nota fiscal"</span>,
+        <span class="s2">"numero_inicial"</span>: 1500,
+        <span class="s2">"numero_final"</span>: 1550,
+        <span class="s2">"resposta_inutilizacao"</span>: <span class="o">{</span>
+          <span class="s2">"numero_protocolo"</span>: <span class="s2">"135190000301748"</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
 <h2 id="inutiliza-o-de-nfc-e">Inutilização de NFC-e</h2>
 
 <p>Para inutilizar um número de NFC-e, envie a seguinte requisição:  </p>
@@ -5511,7 +5574,7 @@ EXEMPLO DE RESPOSTA
         <i class="label label-get">POST</i>
         <h6>/api/v1/organizations/{organization_id}/nfce/disable</h6>
     </div>
-</div> 
+</div>
 
 <p>Regras de Validação:</p>
 
@@ -5604,6 +5667,69 @@ EXEMPLO DE RESPOSTA
       <span class="s2">"numero_inicial"</span>: 1500,
       <span class="s2">"numero_final"</span>: 1550
     <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="consulta-de-inutiliza-o-de-nfc-e">Consulta de inutilização de NFC-e</h2>
+
+<p>Para consultar uma inutilização de  NFC-e é necessário realizar a seguinte requisição:  </p>
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/disable/{nfce_disablement_id}</h6>
+  </div>
+</div>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable/16 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA:
+
+<span class="c"># Solicitação rejeitada pela SEFAZ</span>
+
+<span class="o">{</span>
+  <span class="s2">"nfce_disablement"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 16,
+      <span class="s2">"status"</span>: <span class="s2">"rejected"</span>,
+      <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"uf"</span>: <span class="s2">"35"</span>,
+        <span class="s2">"cnpj_emitente"</span>: <span class="s2">"58521175000124"</span>,
+        <span class="s2">"serie"</span>: 1,
+        <span class="s2">"motivo"</span>: <span class="s2">"Erro na emissão da nota fiscal"</span>,
+        <span class="s2">"numero_inicial"</span>: 1500,
+        <span class="s2">"numero_final"</span>: 1550,
+        <span class="s2">"resposta_inutilizacao"</span>: <span class="o">{</span>
+          <span class="s2">"erros"</span>: <span class="o">[</span>
+            <span class="s2">"241 - Rejeicao: Um numero da faixa ja foi utilizado"</span>
+          <span class="o">]</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c"># Solicitação autorizada pela SEFAZ</span>
+
+<span class="o">{</span>
+  <span class="s2">"nfce_disablement"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 17,
+      <span class="s2">"status"</span>: <span class="s2">"authorized"</span>,
+      <span class="s2">"data"</span>: <span class="o">{</span>
+        <span class="s2">"uf"</span>: <span class="s2">"35"</span>,
+        <span class="s2">"cnpj_emitente"</span>: <span class="s2">"58521175000124"</span>,
+        <span class="s2">"serie"</span>: 1,
+        <span class="s2">"motivo"</span>: <span class="s2">"Erro na emissão da nota fiscal"</span>,
+        <span class="s2">"numero_inicial"</span>: 1500,
+        <span class="s2">"numero_final"</span>: 1550,
+        <span class="s2">"resposta_inutilizacao"</span>: <span class="o">{</span>
+          <span class="s2">"numero_protocolo"</span>: <span class="s2">"135190000301748"</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
