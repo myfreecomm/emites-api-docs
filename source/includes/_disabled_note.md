@@ -3,13 +3,13 @@
 ## Inutilização de NF-e
 
 Para inutilizar um número de NF-e, envie a seguinte requisição:  
- 
+
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-get">POST</i>
         <h6>/api/v1/organizations/{organization_id}/nfe/disable</h6>
     </div>
-</div> 
+</div>
 
 Regras de Validação:
 
@@ -106,6 +106,73 @@ EXEMPLO DE RESPOSTA
 }
 ```
 
+## Consulta de inutilização de NF-e  
+
+Para consultar uma inutilização de  NF-e é necessário realizar a seguinte requisição:  
+
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfe/disable/{nfe_disablement_id}</h6>
+  </div>
+</div>
+
+
+```shell
+EXEMPLO DE REQUISIÇÃO
+
+curl -X GET \
+  https://app.emites.com.br/api/v1/organizations/11/nfe/disable/16 \
+  -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+  -H 'content-type: application/json'
+
+
+EXEMPLO DE RESPOSTA:
+
+# Solicitação rejeitada pela SEFAZ
+
+{
+  "nfe_disablement": {
+    "id": 16,
+      "status": "rejected",
+      "data": {
+        "uf": "35",
+        "cnpj_emitente": "58521175000124",
+        "serie": 1,
+        "motivo": "Erro na emissão da nota fiscal",
+        "numero_inicial": 1500,
+        "numero_final": 1550,
+        "resposta_inutilizacao": {
+          "erros": [
+            "241 - Rejeicao: Um numero da faixa ja foi utilizado"
+          ]
+        }
+      }
+  }
+}
+
+# Solicitação autorizada pela SEFAZ
+
+{
+  "nfe_disablement": {
+    "id": 17,
+      "status": "authorized",
+      "data": {
+        "uf": "35",
+        "cnpj_emitente": "58521175000124",
+        "serie": 1,
+        "motivo": "Erro na emissão da nota fiscal",
+        "numero_inicial": 1500,
+        "numero_final": 1550,
+        "resposta_inutilizacao": {
+          "numero_protocolo": "135190000301748"
+        }
+      }
+  }
+}
+```
+
 ## Inutilização de NFC-e
 
 Para inutilizar um número de NFC-e, envie a seguinte requisição:  
@@ -115,7 +182,7 @@ Para inutilizar um número de NFC-e, envie a seguinte requisição:
         <i class="label label-get">POST</i>
         <h6>/api/v1/organizations/{organization_id}/nfce/disable</h6>
     </div>
-</div> 
+</div>
 
 Regras de Validação:
 
@@ -208,6 +275,73 @@ EXEMPLO DE RESPOSTA
       "numero_inicial": 1500,
       "numero_final": 1550
     }
+  }
+}
+```
+
+## Consulta de inutilização de NFC-e  
+
+Para consultar uma inutilização de  NFC-e é necessário realizar a seguinte requisição:  
+
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/disable/{nfce_disablement_id}</h6>
+  </div>
+</div>
+
+
+```shell
+EXEMPLO DE REQUISIÇÃO
+
+curl -X GET \
+  https://app.emites.com.br/api/v1/organizations/11/nfce/disable/16 \
+  -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+  -H 'content-type: application/json'
+
+
+EXEMPLO DE RESPOSTA:
+
+# Solicitação rejeitada pela SEFAZ
+
+{
+  "nfce_disablement": {
+    "id": 16,
+      "status": "rejected",
+      "data": {
+        "uf": "35",
+        "cnpj_emitente": "58521175000124",
+        "serie": 1,
+        "motivo": "Erro na emissão da nota fiscal",
+        "numero_inicial": 1500,
+        "numero_final": 1550,
+        "resposta_inutilizacao": {
+          "erros": [
+            "241 - Rejeicao: Um numero da faixa ja foi utilizado"
+          ]
+        }
+      }
+  }
+}
+
+# Solicitação autorizada pela SEFAZ
+
+{
+  "nfce_disablement": {
+    "id": 17,
+      "status": "authorized",
+      "data": {
+        "uf": "35",
+        "cnpj_emitente": "58521175000124",
+        "serie": 1,
+        "motivo": "Erro na emissão da nota fiscal",
+        "numero_inicial": 1500,
+        "numero_final": 1550,
+        "resposta_inutilizacao": {
+          "numero_protocolo": "135190000301748"
+        }
+      }
   }
 }
 ```
