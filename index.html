@@ -1088,7 +1088,7 @@ EXEMPLO DE RESPOSTA
 
 <h2 id="cliente-xml-dest">cliente (XML: dest)</h2>
 
-<p>Contém informações sobre o destinatário da aquisição dos produtos do emitente (nota de saída) ou venda dos produtos para o emitente (nota de entrada). Seus atributos são:  </p>
+<p>Contém informações sobre o destinatário da aquisição dos produtos do emitente (nota de saída) ou venda dos produtos para o emitente (nota de entrada). Seus atributos são:</p>
 
 <table><thead>
 <tr>
@@ -1102,11 +1102,11 @@ EXEMPLO DE RESPOSTA
 </thead><tbody>
 <tr>
 <td>cpf_cnpj</td>
-<td>CPF ou CNPJ</td>
+<td>CPF<br/><br/>CNPJ<br/><br/>idEstrangeiro</td>
 <td>Sim</td>
 <td>Numérico</td>
-<td>11 ou 14 dígitos</td>
-<td>CPF ou CNPJ do destinatário, somente números.</td>
+<td>11 dígitos<br/><br/>14 dígitos<br/><br/>5 a 20 dígitos</td>
+<td>CPF ou CNPJ do destinatário, somente números. </br></br></br></br><strong>OBS:</strong> No caso de operação com o exterior, ou para comprador estrangeiro informar o número do passaporte ou outro documento legal para identificar pessoa estrangeira.</td>
 </tr>
 <tr>
 <td>nome</td>
@@ -1122,7 +1122,7 @@ EXEMPLO DE RESPOSTA
 <td>Sim</td>
 <td>Texto</td>
 <td>-</td>
-<td>Campo de controle do Emites para indicar se o destinatário é pessoa física (“person”) ou jurídica (“company”).</td>
+<td>Campo de controle do Emites para indicar se o destinatário é pessoa física (“person”) / jurídica (“company”) / estrangeiro (&ldquo;foreign&rdquo;).</td>
 </tr>
 <tr>
 <td>inscricao_estadual</td>
@@ -1168,7 +1168,7 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="endereco-xml-enderdest">endereco (XML: enderDest)</h3>
 
-<p>Grupo de informações relacionadas ao endereço do destinatário. Seus atributos são:  </p>
+<p>Grupo de informações relacionadas ao endereço do destinatário. Seus atributos são:</p>
 
 <table><thead>
 <tr>
@@ -1304,7 +1304,7 @@ EXEMPLO DE RESPOSTA
 
 <h2 id="produto-xml-prod">produto (XML: prod)</h2>
 
-<p>Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:  </p>
+<p>Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:</p>
 
 <table><thead>
 <tr>
@@ -1536,7 +1536,7 @@ EXEMPLO DE RESPOSTA
 
 <h2 id="tributa-o-xml-imposto">tributação (XML: imposto)</h2>
 
-<p>Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.  </p>
+<p>Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.</p>
 
 <table><thead>
 <tr>
@@ -1592,7 +1592,7 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="icms-interestadual-xml-icmsufdest">ICMS interestadual (XML: ICMSUFDest)</h3>
 
-<p>Grupo a ser informado nas vendas interestaduais para consumidor final, não contribuinte de ICMS.  </p>
+<p>Grupo a ser informado nas vendas interestaduais para consumidor final, não contribuinte de ICMS.</p>
 
 <table><thead>
 <tr>
@@ -2110,9 +2110,9 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-40-41-e-50">situacao_tributaria = 40, 41 e 50</h3>
 
-<p>40 =  Isenta<br>
-41 =  Não tributada<br>
-50 =  Suspensão  </p>
+<p>40 =  Isenta
+41 =  Não tributada
+50 =  Suspensão</p>
 
 <table><thead>
 <tr>
@@ -2358,8 +2358,8 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-70-e-90">situacao_tributaria = 70 e 90</h3>
 
-<p>70 = Com redução da base de cálculo e cobrança por ST<br>
-90 = Outras  </p>
+<p>70 = Com redução da base de cálculo e cobrança por ST
+90 = Outras</p>
 
 <table><thead>
 <tr>
@@ -2869,7 +2869,7 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-203">situacao_tributaria = 203</h3>
 
-<p>Isenção de ICMS pela faixa de receita bruta e com cobrança de ICMS por ST.  </p>
+<p>Isenção de ICMS pela faixa de receita bruta e com cobrança de ICMS por ST.</p>
 
 <table><thead>
 <tr>
@@ -3085,7 +3085,7 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-900">situacao_tributaria = 900</h3>
 
-<p>Outros.  </p>
+<p>Outros.</p>
 
 <table><thead>
 <tr>
@@ -3245,7 +3245,7 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="ipi-xml-ipi">ipi (XML: IPI)</h3>
 
-<p>Atributos comuns a todas as situações tributárias  </p>
+<p>Atributos comuns a todas as situações tributárias</p>
 
 <table><thead>
 <tr>
@@ -3301,10 +3301,10 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-00-49-50-e-99">situacao_tributaria = 00, 49, 50 e 99</h3>
 
-<p>00 = Entrada com recuperação de crédito.<br>
-49 = Outras entradas<br>
-50 = Saída tributada<br>
-99 = Outra saídas  </p>
+<p>00 = Entrada com recuperação de crédito.
+49 = Outras entradas
+50 = Saída tributada
+99 = Outra saídas</p>
 
 <h3 id="c-lculo-por-al-quota">Cálculo por alíquota</h3>
 
@@ -3416,7 +3416,7 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="imposto_devolvido-xml-impostodevol">imposto_devolvido (XML: impostoDevol)</h3>
 
-<p>O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto.  </p>
+<p>O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto.</p>
 
 <table><thead>
 <tr>
@@ -3470,8 +3470,8 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-01-e-02">situacao_tributaria = 01 e 02</h3>
 
-<p>01 = Operação Tributável com Alíquota Básica<br>
-02 = Operação Tributável com Alíquota Diferenciada  </p>
+<p>01 = Operação Tributável com Alíquota Básica
+02 = Operação Tributável com Alíquota Diferenciada</p>
 
 <table><thead>
 <tr>
@@ -3511,7 +3511,7 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-03">situacao_tributaria = 03</h3>
 
-<p>Operação Tributável com Alíquota por Unidade de Medida de Produto.  </p>
+<p>Operação Tributável com Alíquota por Unidade de Medida de Produto.</p>
 
 <table><thead>
 <tr>
@@ -3551,13 +3551,13 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-04-06-07-08-09">situacao_tributaria = 04, 06, 07, 08, 09</h3>
 
-<p>04 = Operação Tributável Monofásica - Revenda a Alíquota Zero<br>
-06 = Operação Tributável a Alíquota Zero<br>
-07 = Operação Isenta da Contribuição<br>
-08 = Operação sem Incidência da Contribuição<br>
-09 = Operação com Suspensão da Contribuição  </p>
+<p>04 = Operação Tributável Monofásica - Revenda a Alíquota Zero
+06 = Operação Tributável a Alíquota Zero
+07 = Operação Isenta da Contribuição
+08 = Operação sem Incidência da Contribuição
+09 = Operação com Suspensão da Contribuição</p>
 
-<p>Não há campos para informar alíquota.  </p>
+<p>Não há campos para informar alíquota.</p>
 
 <h3 id="situacao_tributaria-05">situacao_tributaria = 05</h3>
 
@@ -3641,30 +3641,30 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-49-50-51-52-53-54-55-56-60-61-62-63-64-65-66-67-70-71-72-73-74-75-98-99">situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99</h3>
 
-<p>49 = Outras Operações de Saída<br>
-50 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
-51 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno<br>
-52 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação<br>
-53 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno<br>
-54 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação<br>
-55 = Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação<br>
-56 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação<br>
-60 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
-61 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno<br>
-62 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação<br>
-63 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno<br>
-64 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação<br>
-65 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação<br>
-66 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação<br>
-67 = Crédito Presumido - Outras Operações<br>
-70 = Operação de Aquisição sem Direito a Crédito<br>
-71 = Operação de Aquisição com Isenção<br>
-72 = Operação de Aquisição com Suspensão<br>
-73 = Operação de Aquisição a Alíquota Zero<br>
-74 = Operação de Aquisição sem Incidência da Contribuição<br>
-75 = Operação de Aquisição por Substituição Tributária<br>
-98 = Outras Operações de Entrada<br>
-99 = Outras Operações  </p>
+<p>49 = Outras Operações de Saída
+50 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno
+51 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno
+52 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação
+53 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno
+54 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação
+55 = Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação
+56 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação
+60 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno
+61 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno
+62 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação
+63 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno
+64 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação
+65 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação
+66 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação
+67 = Crédito Presumido - Outras Operações
+70 = Operação de Aquisição sem Direito a Crédito
+71 = Operação de Aquisição com Isenção
+72 = Operação de Aquisição com Suspensão
+73 = Operação de Aquisição a Alíquota Zero
+74 = Operação de Aquisição sem Incidência da Contribuição
+75 = Operação de Aquisição por Substituição Tributária
+98 = Outras Operações de Entrada
+99 = Outras Operações</p>
 
 <h3 id="c-lculo-por-percentual">Cálculo por percentual</h3>
 
@@ -3768,8 +3768,8 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-01-e-02">situacao_tributaria = 01 e 02</h3>
 
-<p>01 = Operação Tributável com Alíquota Básica<br>
-02 = Operação Tributável com Alíquota Diferenciada  </p>
+<p>01 = Operação Tributável com Alíquota Básica
+02 = Operação Tributável com Alíquota Diferenciada</p>
 
 <table><thead>
 <tr>
@@ -3849,13 +3849,13 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-04-06-07-08-09">situacao_tributaria = 04, 06, 07, 08, 09</h3>
 
-<p>04 = Operação Tributável Monofásica - Revenda a Alíquota Zero<br>
-06 = Operação Tributável a Alíquota Zero<br>
-07 = Operação Isenta da Contribuição<br>
-08 = Operação sem Incidência da Contribuição<br>
-09 = Operação com Suspensão da Contribuição  </p>
+<p>04 = Operação Tributável Monofásica - Revenda a Alíquota Zero
+06 = Operação Tributável a Alíquota Zero
+07 = Operação Isenta da Contribuição
+08 = Operação sem Incidência da Contribuição
+09 = Operação com Suspensão da Contribuição</p>
 
-<p>Não há campos para informar alíquota.  </p>
+<p>Não há campos para informar alíquota.</p>
 
 <h3 id="situacao_tributaria-05">situacao_tributaria = 05</h3>
 
@@ -3939,30 +3939,30 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="situacao_tributaria-49-50-51-52-53-54-55-56-60-61-62-63-64-65-66-67-70-71-72-73-74-75-98-99">situacao_tributaria = 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98, 99</h3>
 
-<p>49 = Outras Operações de Saída<br>
-50 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
-51 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno<br>
-52 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação<br>
-53 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno<br>
-54 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação<br>
-55 = Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação<br>
-56 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação<br>
-60 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno<br>
-61 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno<br>
-62 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação<br>
-63 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno<br>
-64 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação<br>
-65 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação<br>
-66 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação<br>
-67 = Crédito Presumido - Outras Operações<br>
-70 = Operação de Aquisição sem Direito a Crédito<br>
-71 = Operação de Aquisição com Isenção<br>
-72 = Operação de Aquisição com Suspensão<br>
-73 = Operação de Aquisição a Alíquota Zero<br>
-74 = Operação de Aquisição sem Incidência da Contribuição<br>
-75 = Operação de Aquisição por Substituição Tributária<br>
-98 = Outras Operações de Entrada<br>
-99 = Outras Operações  </p>
+<p>49 = Outras Operações de Saída
+50 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno
+51 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno
+52 = Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação
+53 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno
+54 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação
+55 = Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação
+56 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação
+60 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno
+61 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno
+62 = Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação
+63 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno
+64 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação
+65 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação
+66 = Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação
+67 = Crédito Presumido - Outras Operações
+70 = Operação de Aquisição sem Direito a Crédito
+71 = Operação de Aquisição com Isenção
+72 = Operação de Aquisição com Suspensão
+73 = Operação de Aquisição a Alíquota Zero
+74 = Operação de Aquisição sem Incidência da Contribuição
+75 = Operação de Aquisição por Substituição Tributária
+98 = Outras Operações de Entrada
+99 = Outras Operações</p>
 
 <h3 id="c-lculo-por-percentual">Cálculo por percentual</h3>
 
@@ -4250,7 +4250,7 @@ EXEMPLO DE RESPOSTA
 
 <h2 id="transporte-xml-transp">transporte (XML: transp)</h2>
 
-<p>Contém informações sobre o frete e o transporte dos produtos ou serviços.  </p>
+<p>Contém informações sobre o frete e o transporte dos produtos ou serviços.</p>
 
 <table><thead>
 <tr>
@@ -4346,7 +4346,7 @@ EXEMPLO DE RESPOSTA
 
 <h3 id="retencao_icms-xml-rettransp">retencao_icms (XML: retTransp)</h3>
 
-<p>Informações de retenção de ICMS de transporte.  </p>
+<p>Informações de retenção de ICMS de transporte.</p>
 
 <table><thead>
 <tr>
@@ -4411,7 +4411,7 @@ EXEMPLO DE RESPOSTA
 <h3 id="veiculo-xml-veictransp">veiculo (XML: veicTransp)</h3>
 
 <p>Dados do veículo utilizado para transporte, caso haja frete. O campo pode ser omitido caso não haja frete.
-placa  </p>
+placa</p>
 
 <table><thead>
 <tr>
@@ -4515,7 +4515,7 @@ placa  </p>
 
 <h3 id="lacres-xml-lacres">lacres (XML: lacres)</h3>
 
-<p>Cada volume transportador pode conter lacres, sendo até 5.000 por volume.  </p>
+<p>Cada volume transportador pode conter lacres, sendo até 5.000 por volume.</p>
 
 <h3 id="item-da-cole-o-array-de-lacres">Item da coleção (array) de lacres</h3>
 
@@ -4541,7 +4541,7 @@ placa  </p>
 
 <h2 id="cobranca-xml-cobr">cobranca (XML: cobr)</h2>
 
-<p>Informações opcionais de cobrança. Seus atributos são:  </p>
+<p>Informações opcionais de cobrança. Seus atributos são:</p>
 
 <h3 id="fatura-xml-fat">fatura (XML: fat)</h3>
 
@@ -4593,7 +4593,7 @@ placa  </p>
 
 <h3 id="duplicata-xml-dup">duplicata (XML: dup)</h3>
 
-<p>Subgrupo de informações relacionadas às duplicatas (parcelas da compra). Pode conter até 200 ocorrências e possui os seguintes atributos:  </p>
+<p>Subgrupo de informações relacionadas às duplicatas (parcelas da compra). Pode conter até 200 ocorrências e possui os seguintes atributos:</p>
 
 <table><thead>
 <tr>
@@ -4633,9 +4633,9 @@ placa  </p>
 
 <h2 id="documentos_referenciados-xml-nfref">documentos_referenciados (XML: NFref)</h2>
 
-<p>Este campo é utilizado para referenciar uma Nota Fiscal, modelo 1 ou 1-A, ou NF-e emitida anteriormente e vinculada à NF-e que está sendo emitida. Cabe observar que esta informação será utilizada quando o regulamento do ICMS determinar indicação dos dados de outra nota fiscal referente àquela operação, como, por exemplo, nos casos de devolução de mercadoria, complementação de imposto etc.   </p>
+<p>Este campo é utilizado para referenciar uma Nota Fiscal, modelo 1 ou 1-A, ou NF-e emitida anteriormente e vinculada à NF-e que está sendo emitida. Cabe observar que esta informação será utilizada quando o regulamento do ICMS determinar indicação dos dados de outra nota fiscal referente àquela operação, como, por exemplo, nos casos de devolução de mercadoria, complementação de imposto etc.</p>
 
-<p>Seus atributos são:  </p>
+<p>Seus atributos são:</p>
 
 <h3 id="tipo_documento">tipo_documento</h3>
 
@@ -4669,7 +4669,7 @@ placa  </p>
 
 <h3 id="tipo_documento-nf">tipo_documento = “NF”</h3>
 
-<p>Para notas fiscais físicas, os atributos são:  </p>
+<p>Para notas fiscais físicas, os atributos são:</p>
 
 <table><thead>
 <tr>
@@ -4733,7 +4733,7 @@ placa  </p>
 
 <h3 id="tipo_documento-cupom">tipo_documento = “Cupom”</h3>
 
-<p>Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguintes atributos:  </p>
+<p>Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguintes atributos:</p>
 
 <table><thead>
 <tr>
@@ -4955,7 +4955,7 @@ placa  </p>
 
 <h2 id="informacoes_adicionais-xml-infadic">informacoes_adicionais (XML: infAdic)</h2>
 
-<p>Grupo de informações adicionais da NF-e. Seus atributos são:  </p>
+<p>Grupo de informações adicionais da NF-e. Seus atributos são:</p>
 
 <table><thead>
 <tr>
