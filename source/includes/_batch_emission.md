@@ -310,7 +310,7 @@ EXEMPLO DE RESPOSTA
 
 ## Emissão em lote de NFC-e
 
-Antes de emitir um lote de NFC-e, é necessário ter um Código de Segurança do Contribuite, também conhecido como CSC e seu respectivo token identificador. Ambos valores são utilizados na geração do QR Code e na garantia da autoria e da autenticidade do DANFE NFC-e.
+Antes de emitir um lote de NFC-e, é necessário ter um Código de Segurança do Contribuinte, também conhecido como CSC e seu respectivo token identificador. Ambos valores são utilizados na geração do QR Code e na garantia da autoria e da autenticidade do DANFE NFC-e.
 
 É possível ter até dois CSC ativos por ambiente, que podem ser gerados e gerenciados na SEFAZ do Estado do contribuinte.
 
