@@ -1,8 +1,15 @@
 # Campos da emissão de nota
 
+## Emissão síncrona
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    engine_de_calculo           | -               |   Não         |     Texto               |              -               |    Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada
+    <strong>nfe</strong> ou <strong>nfce</strong>               | NF-e            |   Sim         |     Objeto               |                  |    Conjunto de informações de apenas um documento.
+
 ## Emissão em lote
 
-Todas as notas fiscais são emitidas em lote, mesmo em caso de emissão de uma única nota. A emissão em lote gera um pacote de transmissão de diversas notas fiscais eletrônicas, que são processadas em conjunto. Isto permite maior agilidade para emissão de um grande volume de notas. Cada lote pode conter até 50 NF-e ou NFC-e. Os atributos do lote da nota são:
+A emissão em lote gera um pacote de transmissão de diversas notas fiscais eletrônicas, que são processadas em conjunto. Isto permite maior agilidade para emissão de um grande volume de notas. Cada lote pode conter até 50 NF-e ou NFC-e. Os atributos do lote da nota são:
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
@@ -13,6 +20,10 @@ Todas as notas fiscais são emitidas em lote, mesmo em caso de emissão de uma �
     engine_de_calculo           | -               |   Não         |     Texto               |              -               |    Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada
     <strong>nfes</strong> ou <strong>nfces</strong>               | NF-e            |   Sim         |     Array               |    Até 50 itens              |    Conjunto de documentos fiscais transmitidos, máximo de 50 documentos.
 
+
+<aside class="notice">
+  Os requisítos descritos abaixo são para o envio de documentos individuais e lotes.
+</aside>
 
 ## dados_gerais (XML: ide)
 
@@ -35,7 +46,7 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     csc             |   -        |  Não          |     Numérico            |    6 dígitos                  |   Identificador do CSC <br><strong>* Somente para NFC-e. Não obrigatório caso seja informado no cadastro da organização.</strong>
     id_token               |   -        |  Não          |     Texto e/ou número            |    36 caracteres                  |   Código de Segurança do Contribuinte (antigo Token)<br><strong>* Somente para NFC-e. Não obrigatório caso seja informado no cadastro da organização.</strong>
     just_contingencia           |   xJust      |  Sim quando Contingência     |     Texto e/ou número        |    15 a 256 caracteres   | Justificativa da entrada em contingência
-    data_hora_contingencia      |   dhCont     |  Sim quando Contingência     |     Data    |  aaaa-mm-ddThh:mm:ss-03:00 | Data e Hora da entrada em contingência 
+    data_hora_contingencia      |   dhCont     |  Sim quando Contingência     |     Data    |  aaaa-mm-ddThh:mm:ss-03:00 | Data e Hora da entrada em contingência
 
 ## cliente (XML: dest)
 
