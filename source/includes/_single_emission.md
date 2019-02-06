@@ -154,7 +154,6 @@ curl -X POST \
               "modalidade_base_calculo": 3,
               "modalidade_base_calculo_st": "3",
               "motivo_desoneracao": "",
-              "motivo_desoneracao_icms": 0,
               "perc_diferimento": 0,
               "perc_fcp_interestadual": 0,
               "perc_mva_icms_st": 0,
