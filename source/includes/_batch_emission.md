@@ -1,8 +1,8 @@
-# Emissão
+# Emissão em Lote
 
-## Emissão de NF-e
+## Emissão em lote de NF-e
 
-Para emitir uma NF-e, é necessário realizar uma requisição POST para o seguinte endereço:
+Para emitir um lote NF-e, é necessário realizar uma requisição POST para o seguinte endereço:
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -158,7 +158,6 @@ curl -X POST \
                       "modalidade_base_calculo": 3,
                       "modalidade_base_calculo_st": "3",
                       "motivo_desoneracao": "",
-                      "motivo_desoneracao_icms": 0,
                       "perc_diferimento": 0.0,
                       "perc_fcp_interestadual": 0.0,
                       "perc_mva_icms_st": 0.0,
@@ -308,15 +307,15 @@ EXEMPLO DE RESPOSTA
 }
 ```
 
-## Emissão de NFC-e
+## Emissão em lote de NFC-e
 
-Antes de emitir uma NFC-e, é necessário ter um Código de Segurança do Contribuite, também conhecido como CSC e seu respectivo token identificador. Ambos valores são utilizados na geração do QR Code e na garantia da autoria e da autenticidade do DANFE NFC-e.
+Antes de emitir um lote de NFC-e, é necessário ter um Código de Segurança do Contribuinte, também conhecido como CSC e seu respectivo token identificador. Ambos valores são utilizados na geração do QR Code e na garantia da autoria e da autenticidade do DANFE NFC-e.
 
-É possível ter até dois CSC ativos por ambiente, que podem ser gerados e gerenciados na SEFAZ do Estado do contribuinte. 
+É possível ter até dois CSC ativos por ambiente, que podem ser gerados e gerenciados na SEFAZ do Estado do contribuinte.
 
-O CSC e o IdToken são obrigatórios, no entanto, é possível armazená-los no cadastro da organização. Dessa forma, não há necessidade de enviá-los nos dados_gerais. Contudo, se enviados serão utilizados na emissão. 
+O CSC e o IdToken são obrigatórios, no entanto, é possível armazená-los no cadastro da organização. Dessa forma, não há necessidade de enviá-los nos dados_gerais. Contudo, se enviados serão utilizados na emissão.
 
-Para emitir uma NFC-e, é necessário realizar uma requisição POST para o seguinte endereço:
+Para emitir um lote de NFC-e, é necessário realizar uma requisição POST para o seguinte endereço:
 
 <div class="api-endpoint">
     <div class="endpoint-data">
