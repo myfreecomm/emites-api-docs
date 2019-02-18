@@ -13,6 +13,7 @@ includes:
   - create_organizations
   - single_emission
   - batch_emission
+  - authorize_single
   - fields_api
   - list_notes
   - consult_note
