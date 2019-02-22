@@ -16,6 +16,8 @@ Para criar uma organização, é necessário realizar uma requisição POST para
 Veja a seguir um exemplo do corpo da requisição:  
 
 ```shell
+EXEMPLO DE REQUISIÇÃO
+
 curl -X POST \
   http://localhost:3000/api/v1/organizations/ \
   -H 'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da' \
@@ -43,6 +45,37 @@ curl -X POST \
         "name": "MyString"
       }
     }'
+
+
+EXEMPLO DE RESPOSTA
+
+{
+  "organization": {
+    "id": 5,
+      "document": "58521175000124",
+      "name": "Foo",
+      "inscricao_municipal": "13213213",
+      "company_name": "The String",
+      "email": "foo@bar.com",
+      "logo_file_name": null,
+      "logo_url": "",
+      "address": {
+        "zipcode": "04552000",
+        "address": "Rua do Rocio",
+        "number": "199",
+        "complement": "Conj. 91",
+        "district": "Vila Olimpia",
+        "city": "Sao Paulo",
+        "state": "SP",
+        "phone": "1133333333",
+        "city_code": "812938"
+      },
+      "inscricao_estadual": "787811920",
+      "codigo_regime_tributario": "simples_nacional",
+      "cnae": null,
+      "certificate": null
+  }
+}
 ```
 
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
@@ -85,6 +118,8 @@ A inclusão de certificado digital vigente da organização é obrigatório para
 Veja a seguir um exemplo do corpo da requisição:  
 
 ```shell
+EXEMPLO DE REQUISIÇÃO
+
 curl -X POST \
   http://localhost:3000/api/v1/organizations/8/certificate \
   -H 'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da' \
@@ -93,6 +128,18 @@ curl -X POST \
         "password": "senhadocertificado",
         "file": "código em Base64 do arquivo PFX"
     }'
+
+
+EXEMPLO DE RESPOSTA
+
+{
+  "certificate": {
+    "pfx_certificate_file_name": "certificate.pfx",
+      "password": "JKeDKzdvZWtLS2lxcmNBRTVQK2foob9mdFF6SW5uVllzVkNTTTB0Mjhmdz0tLWx6UXJFNUp4NWp2cG5mSWh4NmRDb3c9PQ-eao925ca6870661ed52c5b6577e6a56feb9f09d744",
+      "expires_at": "2019-07-04",
+      "pfx_certificate_url": "/system/certificates/pfx_certificates/000/000/019/original/certificate.pfx?1550754636"
+  }
+}
 ```
 
 

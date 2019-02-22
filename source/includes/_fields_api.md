@@ -967,3 +967,19 @@ Grupo de informações adicionais da NF-e. Seus atributos são:
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
     informacoes_contribuinte    |  infCpl         |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações complementares de interesse do Contribuinte.
     informacoes_fisco           |    infAdFisco   |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações adicionais de interesse do Fisco.
+
+## resposta_emissao (XML: N/A)
+
+Grupo informativo de resposta da emissao da NF-e.
+
+<aside class="warning">
+  Esses campos não devem ser enviados na requisição.
+</aside>
+
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+ data_emissao | dhRecbto | - | - | - | Preenchido com a data e hora do processamento 
+ codigo_verificacao | digVal | - | - | - | Digest Value da NF-e processada
+ numero_protocolo | nProt | - | - | - | Número do Protocolo da NF-e
+ chave_acesso | chNFe | - | - | - | Chave de Acesso da NF-e
+ erros | - | - | - | - | Lista erros da emissão, podendo ser uma mensagem de rejeição da SEFAZ ou uma lista de erros de validação de Schema

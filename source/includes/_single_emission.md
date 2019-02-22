@@ -69,6 +69,7 @@ curl -X POST \
         "data_saida_entrada": "2018-09-28T17:07:35-03:00",
         "destino_operacao": "1",
         "finalidade_nfe": "1",
+        "serie": 1"
         "indicador_consumidor_final": "0",
         "indicador_presenca": "9",
         "natureza_operacao": "Venda merc. adq. rec. terc. efet. fora estab.",
@@ -329,6 +330,7 @@ curl -X POST \
       "dados_gerais": {
         "csc": "000001",
         "id_token": "A16A5A2DI8FA443FB8710D9AB8EB5432",
+        "serie": 1,
         "codigo_mun_ocorrencia": "5300108",
         "data_saida_entrada": null,
         "destino_operacao": null,
