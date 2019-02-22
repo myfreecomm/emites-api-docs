@@ -970,7 +970,11 @@ Grupo de informações adicionais da NF-e. Seus atributos são:
 
 ## resposta_emissao (XML: N/A)
 
-Grupo informativo de resposta da emissao da NF-e
+Grupo informativo de resposta da emissao da NF-e.
+
+<aside class="warning">
+  Esses campos não devem ser enviados na requisição.
+</aside>
 
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
