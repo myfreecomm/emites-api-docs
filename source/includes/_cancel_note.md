@@ -62,7 +62,15 @@ Após o processamento da solicitação de cancelamento da NF-e, o XML do evento 
   "nfe": {
     "id": 10990,
     "status": "cancelled",
-    "data": {...},
+    "data": {
+      ...
+      "resposta_cancelamento": {
+        "numero_protocolo": "353190000049440",
+        "chave_acesso": "53190222769530000131556110000002041100341123"
+      },
+      "data_cancelamento": "2019-02-22T14:53:25.521-03:00",
+      "motivo": "Desistência do cliente"
+    },
     "danfe_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719",
     "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379",
     "cancel_xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/cancel_xml_files/000/010/598/original/cancel_nfe.xml?15781",
@@ -133,7 +141,15 @@ Após o processamento da solicitação de cancelamento da NFC-e, o XML do evento
   "nfce": {
     "id": 5,
       "status": "cancelled",
-      "data": {...},
+      "data": {
+        ...
+        "resposta_cancelamento": {
+          "numero_protocolo": "353190000027203",
+          "chave_acesso": "53190222769530000131657170000000551642238289"
+        },
+        "data_cancelamento": "2019-02-22T15:04:19.311-03:00",
+        "motivo": "Desistência do cliente"
+      },
       "danfe_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/761/original/danfe.pdf?153719",
       "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/761/original/nfce.xml?15379",
       "cancel_xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfce/cancel_xml_files/000/010/598/original/cancel_nfce.xml?15781",
