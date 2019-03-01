@@ -83,12 +83,22 @@ Grupo de informações relacionadas ao endereço do destinatário. Seus atributo
 
 ## retirada (XML: retirada)
 
-Grupo de informações relacionadas aos campos para complementação das informações de identificação do estabelecimento e do endereço do local de retirada:
+Grupo de informações relacionadas aos campos para complementação das informações de identificação do estabelecimento:
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     cpf_cnpj                    | CPF<br/><br/>CNPJ<br/> | Sim    |  Numérico               |  11 dígitos<br/><br/>14 dígitos<br/>             |  CPF ou CNPJ do destinatário, somente números.
     razao_social                |  xNome          |  Não          |  Texto                  |  Até 60 caracteres           | Nome (pessoa física) ou Razão Social (Pessoa Jurídica).
+    email                       |  email          |  Não          |  Texto                  |  Até 60 caracteres           |
+    inscricao_estadual          |  IE             |  Não          |  Texto e/ou número      |  De 2 a 14 caracteres        |
+
+
+### endereco (XML: N/A)
+
+Grupo de informações relacionadas ao endereço do local de retirada:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     logradouro                  |  xLgr           |  Sim          |  Texto                  |  Até 60 caracteres           |
     numero                      |  nro            |  Sim          |  Texto                  |  Até 60 caracteres           |
     complemento                 |  xCpl           |  Não          |  Texto                  |  Até 60 caracteres           |
@@ -100,17 +110,24 @@ Grupo de informações relacionadas aos campos para complementação das infor
     codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |
     nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |
     telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |
-    email                       |  email          |  Não          |  Texto                  |  Até 60 caracteres           |
-    inscricao_estadual          |  IE             |  Não          |  Texto e/ou número      |  De 2 a 14 caracteres        |
 
 ## entrega (XML: entrega)
 
-Grupo de informações relacionadas aos campos para complementação das informações de identificação do estabelecimento e do endereço do local de entrega:
+Grupo de informações relacionadas aos campos para complementação das informações de identificação do estabelecimento:
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     cpf_cnpj                    | CPF<br/><br/>CNPJ<br/> | Sim    |  Numérico               |  11 dígitos<br/><br/>14 dígitos<br/>             |  CPF ou CNPJ do destinatário, somente números.
     razao_social                |  xNome          |  Não          |  Texto                  |  Até 60 caracteres           | Nome (pessoa física) ou Razão Social (Pessoa Jurídica).
+    email                       |  email          |  Não          |  Texto                  |  Até 60 caracteres           |
+    inscricao_estadual          |  IE             |  Não          |  Texto e/ou número      |  De 2 a 14 caracteres        |
+
+### endereco (XML: N/A)
+
+Grupo de informações relacionadas ao endereço do local da entrega:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     logradouro                  |  xLgr           |  Sim          |  Texto                  |  Até 60 caracteres           |
     numero                      |  nro            |  Sim          |  Texto                  |  Até 60 caracteres           |
     complemento                 |  xCpl           |  Não          |  Texto                  |  Até 60 caracteres           |
@@ -122,8 +139,6 @@ Grupo de informações relacionadas aos campos para complementação das infor
     codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |
     nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |
     telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |
-    email                       |  email          |  Não          |  Texto                  |  Até 60 caracteres           |
-    inscricao_estadual          |  IE             |  Não          |  Texto e/ou número      |  De 2 a 14 caracteres        |
 
 ## lista_autorizacao (XML: autXML)
 
