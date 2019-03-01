@@ -1046,6 +1046,21 @@ Grupo de informações adicionais da NF-e. Seus atributos são:
     informacoes_contribuinte    |  infCpl         |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações complementares de interesse do Contribuinte.
     informacoes_fisco           |    infAdFisco   |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações adicionais de interesse do Fisco.
 
+## responsavel_tecnico (XML: infRespTec)
+
+<aside class="warning">
+  Esses campos não devem ser enviados na requisição.
+</aside>
+
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+ cnpj | CNPJ | - | - | - | CNPJ da pessoa jurídica responsável pelo sistema utilizado na emissão do documento fiscal eletrônico
+ contato | xContato | - | - | - | Nome da pessoa a ser contatada na empresa desenvolvedora do sistema utilizado na emissão do documento fiscal eletrônico
+ email | email | - | - | - | E-mail da pessoa a ser contatada na empresa desenvolvedora do sistema.
+ fone | fone | - | - | - | O telefone da pessoa a ser contatada na empresa desenvolvedora do sistema.
+ id_csrt | idCSRT | - | - | - | Identificador do CSRT utilizado para montar o hash do CSRT
+ hash_csrt | hashCSRT | - | - | - | -
+
 ## resposta_emissao (XML: N/A)
 
 Grupo informativo de resposta da emissao da NF-e.
