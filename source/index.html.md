@@ -20,6 +20,7 @@ includes:
   - cancel_note
   - disabled_note
   - correction_note
+  - cfe_storage
   - webhooks
 
 search: true
