@@ -81,6 +81,65 @@ Grupo de informações relacionadas ao endereço do destinatário. Seus atributo
     nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |
     telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |
 
+## retirada (XML: retirada)
+
+Grupo de informações relacionadas aos campos para complementação das informações de identificação do estabelecimento:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    cpf_cnpj                    | CPF<br/><br/>CNPJ<br/> | Sim    |  Numérico               |  11 dígitos<br/><br/>14 dígitos<br/>             |  CPF ou CNPJ do destinatário, somente números.
+    razao_social                |  xNome          |  Não          |  Texto                  |  Até 60 caracteres           | Nome (pessoa física) ou Razão Social (Pessoa Jurídica).
+    email                       |  email          |  Não          |  Texto                  |  Até 60 caracteres           |
+    inscricao_estadual          |  IE             |  Não          |  Texto e/ou número      |  De 2 a 14 caracteres        |
+
+
+### endereco (XML: N/A)
+
+Grupo de informações relacionadas ao endereço do local de retirada:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    logradouro                  |  xLgr           |  Sim          |  Texto                  |  Até 60 caracteres           |
+    numero                      |  nro            |  Sim          |  Texto                  |  Até 60 caracteres           |
+    complemento                 |  xCpl           |  Não          |  Texto                  |  Até 60 caracteres           |
+    bairro                      |  xBairro        |  Sim          |  Texto                  |  Até 60 caracteres           |
+    codigo_municipio            |  cMun           |  Sim          |  Numérico               |  7 dígitos                   |
+    nome_municipio              |  xMun           |  Sim          |  Texto                  |  Até 60 caracteres           |
+    uf                          |  UF             |  Sim          |  Texto                  |  2 caracteres                |
+    cep                         |  CEP            |  Sim          |  Numérico               |  8 dígitos                   |
+    codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |
+    nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |
+    telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |
+
+## entrega (XML: entrega)
+
+Grupo de informações relacionadas aos campos para complementação das informações de identificação do estabelecimento:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    cpf_cnpj                    | CPF<br/><br/>CNPJ<br/> | Sim    |  Numérico               |  11 dígitos<br/><br/>14 dígitos<br/>             |  CPF ou CNPJ do destinatário, somente números.
+    razao_social                |  xNome          |  Não          |  Texto                  |  Até 60 caracteres           | Nome (pessoa física) ou Razão Social (Pessoa Jurídica).
+    email                       |  email          |  Não          |  Texto                  |  Até 60 caracteres           |
+    inscricao_estadual          |  IE             |  Não          |  Texto e/ou número      |  De 2 a 14 caracteres        |
+
+### endereco (XML: N/A)
+
+Grupo de informações relacionadas ao endereço do local da entrega:
+
+    Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|-----------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    logradouro                  |  xLgr           |  Sim          |  Texto                  |  Até 60 caracteres           |
+    numero                      |  nro            |  Sim          |  Texto                  |  Até 60 caracteres           |
+    complemento                 |  xCpl           |  Não          |  Texto                  |  Até 60 caracteres           |
+    bairro                      |  xBairro        |  Sim          |  Texto                  |  Até 60 caracteres           |
+    codigo_municipio            |  cMun           |  Sim          |  Numérico               |  7 dígitos                   |
+    nome_municipio              |  xMun           |  Sim          |  Texto                  |  Até 60 caracteres           |
+    uf                          |  UF             |  Sim          |  Texto                  |  2 caracteres                |
+    cep                         |  CEP            |  Sim          |  Numérico               |  8 dígitos                   |
+    codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |
+    nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |
+    telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |
+
 ## lista_autorizacao (XML: autXML)
 
 Conjunto de pessoas ou empresas autorizadas a obter o XML. Seus atributos são:
@@ -156,6 +215,27 @@ Grupo a ser informado nas vendas interestaduais para consumidor final, não cont
   valor_uf_destinatario_interestadual   |  vICMSUFDest    |  Não          |  Decimal  | Até 13 dígitos, 2 casas decimais   |
   perc_fcp_interestadual                |  pFCPUFDest     |  Não          |  Decimal  | Até 3 dígitos, 4 casas decimais    |
   valor_fcp_interestadual               |  vFCPUFDest     |  Não          |  Decimal  | Até 13 dígitos, 2 casas decimais   |
+
+### ICMSST (XML: ICMSST) | situacao_tributaria = 41 e 60
+
+41 = Não Tributado (v2.0);<br>
+60 = cobrado anteriormente por substituição tributária (Incluído NT 2016/002);
+
+ Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
+--------------------------------|---------------|---------------|------------|-------------------------------------|------------
+base_calculo_icmsst_remetente     | vBCSTRet     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_consumidor_final         | pST            | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_icms_substituto             | vICMSSubstituto | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais    | Valor do ICMS Próprio do Substituto cobrado em operação anterior
+valor_icmsst_retido_remetente     | vICMSSTRet   |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_base_calculo_fcp_st_retido  | vBCFCPSTRet | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+aliquota_fcp_st_retido            | pFCPSTRet   | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_fcp_st_retido               | vFCPSTRet   | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+base_calculo_icmsst_destino       | vBCSTDest    |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+valor_icmsst_retido_destino       | vICMSSTDest  |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
+perc_reducao_base_calculo_efetivo | pRedBCEfet | Sim | Decimal | Até 3 dígitos, 4 casas decimais | Opcional a critério da UF.
+valor_base_calculo_efetivo        | vBCEfet | Sim | Decimal | Até 13 dígitos, 2 casas decimais | Opcional a critério da UF.
+aliquota_efetiva                  | pICMSEfet | Sim | Decimal | Até 3 dígitos, 4 casas decimais | Opcional a critério da UF.
+valor_efetivo                     | vICMSEfet | Sim | Decimal | Até 13 dígitos, 2 casas decimais | Opcional a critério da UF.
 
 ### situacao_tributaria = 00
 
@@ -281,8 +361,9 @@ Cobrado anteriormente por ST.
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                  |  Observações
 --------------------------------|---------------|---------------|------------|-------------------------------------|------------
 base_icmsst_retido              |  vBCSTRet     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor da Base de Cálculo do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
+aliquota_consumidor_final       | pST            | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_icms_substituto           | vICMSSubstituto | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais    | Valor do ICMS Próprio do Substituto cobrado em operação anterior
 valor_icmsst_retido             |  vICMSSTRet   |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
-aliquota_consumidor_final        | pST         | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_base_calculo_fcp_st_retido | vBCFCPSTRet | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 aliquota_fcp_st_retido           | pFCPSTRet   | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_fcp_st_retido              | vFCPSTRet   | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
@@ -427,7 +508,8 @@ ICMS cobrado anteriormente por ST ou antecipação.
 situacao_simples_nacional       |  CSOSN        |  Sim          |  Numérico  |  3 dígitos
 base_icmsst_retido              |  vBCSTRet     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor da Base de Cálculo do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
 valor_icmsst_retido             |  vICMSSTRet   |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |  Valor do ICMS ST cobrado anteriormente por ST. O valor pode ser omitido quando a legislação não exigir a sua informação.
-aliquota_consumidor_final       |  pST          |  Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+aliquota_consumidor_final       | pST            | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
+valor_icms_substituto           | vICMSSubstituto | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais    | Valor do ICMS Próprio do Substituto cobrado em operação anterior
 valor_base_calculo_fcp_st_retido | vBCFCPSTRet | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
 aliquota_fcp_st_retido           | pFCPSTRet   | Sim          |  Decimal   |  Até 3 dígitos, 4 casas decimais    |
 valor_fcp_st_retido              | vFCPSTRet   | Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais   |
@@ -766,6 +848,17 @@ cnpj                            |  CNPJ         |  Não          |  Numérico  |
 uf_adquirente                   |  UFTerceiro   |  Não          |  Decimal   |  2 dígitos
 codigo_exportador               |  cExportador  |  Sim          |  Texto     |  1 a 60 caracteres
 
+## medicamento (XML: med)
+
+Contém informações sobre detalhamento de medicamentos e de matérias-primas farmacêuticas
+
+ Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
+--------------------------------|---------------|---------------|------------|------------------------------------------|------------
+codigo_anvisa | cProdANVISA | Sim | Texto | 6 a 13 caracteres
+motivo_isencao | xMotivoIsencao | Não | Texto | 1 a 255 caracteres
+preco_maximo | vPMC | Sim | Decimal | Até 13 dígitos, 2 casas decimais
+
+
 ### adicoes (XML: adi)
 
 Contém informações sobre adições de uma declaração de importacao. No XML, o nó adi é subitem do nó DI e pode conter uma ou mais ocorrência. Seus atributos são:
@@ -967,6 +1060,21 @@ Grupo de informações adicionais da NF-e. Seus atributos são:
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
     informacoes_contribuinte    |  infCpl         |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações complementares de interesse do Contribuinte.
     informacoes_fisco           |    infAdFisco   |  Não                |  Texto                  |  Até 2.000 caracteres              |  Informações adicionais de interesse do Fisco.
+
+## responsavel_tecnico (XML: infRespTec)
+
+<aside class="warning">
+  Esses campos não devem ser enviados na requisição.
+</aside>
+
+    Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
+--------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
+ cnpj | CNPJ | - | - | - | CNPJ da pessoa jurídica responsável pelo sistema utilizado na emissão do documento fiscal eletrônico
+ contato | xContato | - | - | - | Nome da pessoa a ser contatada na empresa desenvolvedora do sistema utilizado na emissão do documento fiscal eletrônico
+ email | email | - | - | - | E-mail da pessoa a ser contatada na empresa desenvolvedora do sistema.
+ fone | fone | - | - | - | O telefone da pessoa a ser contatada na empresa desenvolvedora do sistema.
+ id_csrt | idCSRT | - | - | - | Identificador do CSRT utilizado para montar o hash do CSRT
+ hash_csrt | hashCSRT | - | - | - | -
 
 ## resposta_emissao (XML: N/A)
 
