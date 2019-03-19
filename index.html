@@ -2381,6 +2381,14 @@ EXEMPLO DE RESPOSTA
 <td>Até 60 caracteres</td>
 <td></td>
 </tr>
+<tr>
+<td>regime_tributario_diferenciado</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>De 3 a 4 caracteres</td>
+<td>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb. <br>Preencher se a organização não tiver nenhum regime tributário diferenciado. <br><strong>Valores válidos: LFEM, LFDES e ISENLF.</strong><br><br><i>É importante que o regime tributário diferenciado (emitente) também esteja configurado na organização.</i></td>
+</tr>
 </tbody></table>
 
 <h3 id="endereco-xml-enderdest">endereco (XML: enderDest)</h3>
@@ -2868,6 +2876,14 @@ EXEMPLO DE RESPOSTA
 <td>Numérico</td>
 <td>8 dígitos</td>
 <td>Nomenclatura comum do Mercosul. Itens específicos que não possuem NCM podem informar somente o código “00”.</td>
+</tr>
+<tr>
+<td>exncm</td>
+<td>-</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>2 dígitos</td>
+<td>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb destinado à detalhar a característica do produto. (Ex. pauta fiscal etc).</td>
 </tr>
 <tr>
 <td>cest</td>
