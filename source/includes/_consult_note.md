@@ -1,6 +1,6 @@
 # Consulta
 
-Para consultar uma NF-e é necessário realizar a seguinte requisição:
+### Para consultar uma NF-e é necessário realizar a seguinte requisição:
 
 <div class="api-endpoint">
   <div class="endpoint-data">
@@ -9,12 +9,30 @@ Para consultar uma NF-e é necessário realizar a seguinte requisição:
   </div>
 </div>
 
-E para consultar uma NFC-e, a seguinte:
+ou pela chave de acesso:
 
 <div class="api-endpoint">
   <div class="endpoint-data">
     <i class="label label-get">GET</i>
-    <h6>/api/v1/organizations/{organization_id}/nfce/{nfe_id}  </h6>
+    <h6>/api/v1/organizations/{organization_id}/nfe/{chave_acesso}  </h6>
+  </div>
+</div>
+
+### E para consultar uma NFC-e, a seguinte:
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}  </h6>
+  </div>
+</div>
+
+ou pela chave de acesso:
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/{chave_acesso}  </h6>
   </div>
 </div>
 
