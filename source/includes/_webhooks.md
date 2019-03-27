@@ -104,6 +104,19 @@ Quando a NF é rejeitada pela SEFAZ. Nesta etapa será enviado o seguinte webhoo
 }
 ```
 
+## Nota denegada
+
+Quando a NF é denegada pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
+
+```
+{
+  "object_type":"NFe",
+  "object_id":5,
+  "organization_id":1,
+  "event":"denegated"
+}
+```
+
 ## Nota não enviada
 
 Quando a NF não é enviada para SEFAZ. Nesta etapa será enviado o seguinte webhook:
@@ -145,7 +158,7 @@ Quando o cancelamento da NF é aceito pela SEFAZ. Nesta etapa será enviado o se
 }
 ```
 
-## Cancelamento rejeitado 
+## Cancelamento rejeitado
 
 Quando o cancelamento da NF é rejeitado pela SEFAZ. Nesta etapa será enviado o seguinte webhook:
 
