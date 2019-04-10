@@ -185,6 +185,8 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     producao_escala             |  indEscala      |  Não          |     Texto               |  1 dígito                         |  S - Produzido em Escala Relevante;<br>N – Produzido em Escala NÃO Relevante.
     cnpj_fabricante_mercadoria  |  CNPJFab        |  Não          |     Numérico            |  14 dígitos                       |  S - Produzido em Escala Relevante;<br>N – Produzido em Escala NÃO Relevante.
     codigo_beneficio_fiscal     |  cBenef         |  Não          |     Texto               |  10 dígitos                       |  Código de Benefício Fiscal utilizado pela UF, aplicado ao item.
+    aplicacao     |     -     |  Não          |     Texto               |  1 dígito                       |  Aplicação do Produto (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>I - Industrialização<br>C - Comercialização<br>U - Uso e Consumo<br>A - Ativo Imobilizado
+    fabricacao     |     -     |  Não          |     Numérico               |  1 dígito                       |  Indica onde ocorreu a fabricação do produto (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>0 - Própria<br>1 - Terceiros
 
 ## tributação (XML: imposto)
 
