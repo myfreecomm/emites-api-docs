@@ -14,6 +14,7 @@ includes:
   - single_emission
   - batch_emission
   - authorize_single
+  - authorize_batch
   - fields_api
   - list_notes
   - consult_note
