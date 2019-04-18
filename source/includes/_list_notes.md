@@ -26,6 +26,7 @@ Para obter uma lista de NF-e é necessário realizar a seguinte requisição:
     ending_at                  |  não          |  query                  |   Data final (utiliza data de emissão da NF-e).<br>Formato: **DD/MM/AAAA**          |
     page                       |  não          |  query                  |   Indica o número da página de registros que será retornada.<br>Valor padrão: **1**          |  
     per_page                   |  não          |  query                  |   Indica a quantidade de registros a serem retornados.<br>Valor padrão: **10**       |
+    remote_id                  |  não          |  query                  |   Identificador de requisição. A responsabilidade de gerar e controlar esse identificador é exclusiva do cliente.  |
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -85,6 +86,7 @@ Para obter uma lista de NFC-e é necessário realizar a seguinte requisição:
     ending_at                  |  não          |  query                  |   Data final (utiliza data de emissão da NFC-e).<br>Formato: **DD/MM/AAAA**          |
     page                       |  não          |  query                  |   Indica o número da página de registros que será retornada.<br>Valor padrão: **1**          |  
     per_page                   |  não          |  query                  |   Indica a quantidade de registros a serem retornados.<br>Valor padrão: **10**       |
+    remote_id                  |  não          |  query                  |   Identificador de requisição. A responsabilidade de gerar e controlar esse identificador é exclusiva do cliente.  |
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
