@@ -26,7 +26,7 @@ Segue abaixo um exemplo de requisição de emissão em lote com sucesso que ser�
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -191,7 +191,7 @@ Para consultar a NF-e criada, é necessário realizar a seguinte requisição ut
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/350 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/350 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -226,7 +226,7 @@ Segue abaixo um exemplo de requisição de emissão em lote com rejeição da SE
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -390,7 +390,7 @@ Para consultar a NF-e criada, é necessário realizar a seguinte requisição ut
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/351 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/351 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -424,7 +424,7 @@ Segue abaixo um exemplo de requisição de emissão em lote com uma NF-e denegad
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -588,7 +588,7 @@ Para consultar a NF-e criada, é necessário realizar a seguinte requisição ut
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/351 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/351 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -622,7 +622,7 @@ Segue abaixo um exemplo de requisição de emissão em lote com rejeição por e
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -786,7 +786,7 @@ Para consultar a NF-e criada, é necessário realizar a seguinte requisição ut
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/352 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/352 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -821,7 +821,7 @@ Segue abaixo um exemplo de requisição de emissão em lote com sucesso que ser�
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -933,7 +933,7 @@ Para consultar a NFC-e criada, é necessário realizar a seguinte requisição u
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/109 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/109 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -967,7 +967,7 @@ Segue abaixo um exemplo de requisição de emissão em lote com rejeição da SE
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -1079,7 +1079,7 @@ Para consultar a NFC-e criada, é necessário realizar a seguinte requisição u
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/110 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/110 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -1113,7 +1113,7 @@ Segue abaixo um exemplo de requisição de emissão em lote com uma NFC-e denega
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -1225,7 +1225,7 @@ Para consultar a NFC-e criada, é necessário realizar a seguinte requisição u
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/110 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/110 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -1259,7 +1259,7 @@ Segue abaixo um exemplo de requisição de emissão em lote com rejeição por e
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -1369,7 +1369,7 @@ Para consultar a NFC-e criada, é necessário realizar a seguinte requisição u
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/111 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/111 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 

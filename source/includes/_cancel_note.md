@@ -21,13 +21,13 @@ EXEMPLO DE REQUISIÇÃO
 
 # Motivo padrão: "Cancelamento NF-e"
 curl -X PATCH \
-    https://app.emites.com.br/api/v1/organizations/11/nfe/10990/cancel \
+    https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/cancel \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
         
 # Motivo personalizado
 curl -X PATCH \
-    https://app.emites.com.br/api/v1/organizations/11/nfe/10990/cancel \
+    https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/cancel \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -d '{
           "motivo": "Desistência do cliente"
@@ -100,13 +100,13 @@ EXEMPLO DE REQUISIÇÃO
 
 # Motivo padrão: "Cancelamento NFC-e"
 curl -X PATCH \
-    https://app.emites.com.br/api/v1/organizations/11/nfce/10990/cancel \
+    https://app.production.emites.com.br/api/v1/organizations/11/nfce/10990/cancel \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
 
 # Motivo personalizado
 curl -X PATCH \
-    https://app.emites.com.br/api/v1/organizations/11/nfce/10990/cancel \
+    https://app.production.emites.com.br/api/v1/organizations/11/nfce/10990/cancel \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -d '{
           "motivo": "Desistência do cliente"

@@ -19,7 +19,7 @@ Para todas as requisições são necessários os seguintes Headers:
   EXEMPLO DE REQUISIÇÃO
 
     curl -X GET \
-      https://app.emites.com.br/api/v1/organizations \
+      https://app.production.emites.com.br/api/v1/organizations \
       -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
       -H 'content-type: application/json' 
 

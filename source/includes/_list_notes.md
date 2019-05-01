@@ -33,13 +33,13 @@ EXEMPLO DE REQUISIÇÃO
 
 # Sem o uso dos filtros
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfe \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
 # Utilizando os parâmetros para filtrar resultados
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfe?identifier=123&starting_at=01/01/2019&status=succeeded \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe?identifier=123&starting_at=01/01/2019&status=succeeded \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -93,13 +93,13 @@ EXEMPLO DE REQUISIÇÃO
 
 # Sem o uso dos filtros
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfce \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
 # Utilizando os parâmetros para filtrar resultados
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfce?identifier=123&starting_at=01/01/2019&status=succeeded \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce?identifier=123&starting_at=01/01/2019&status=succeeded \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
