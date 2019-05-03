@@ -17,7 +17,7 @@ Para armazenar uma CF-e, é necessário realizar uma requisição POST para o se
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/cfe \
+  https://app.production.emites.com.br/api/v1/organizations/11/cfe \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{

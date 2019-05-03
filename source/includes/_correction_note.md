@@ -44,7 +44,7 @@ Para requisitar uma correção, envie a seguinte requisição:
 EXEMPLO DE REQUISIÇÃO
 
 curl -X PATCH \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/10990/correction \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/correction \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{

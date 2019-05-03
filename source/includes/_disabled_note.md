@@ -29,7 +29,7 @@ EXEMPLO DE REQUISIÇÃO
 
 # Inutilização de apenas um número com motivo padrão: "Erro na emissão da nota fiscal"
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
@@ -39,7 +39,7 @@ curl -X POST \
 
 # Inutilização de apenas um número com motivo personalizado
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
@@ -50,7 +50,7 @@ curl -X POST \
 
 # Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
@@ -61,7 +61,7 @@ curl -X POST \
 
 # Inutilização de um intervalo de numeros com motivo personalizado
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
@@ -123,7 +123,7 @@ Para consultar uma inutilização de  NF-e é necessário realizar a seguinte re
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable/16 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable/16 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -202,7 +202,7 @@ EXEMPLO DE REQUISIÇÃO
 
 # Inutilização de apenas um número com motivo padrão: "Erro na emissão da nota fiscal"
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
@@ -212,7 +212,7 @@ curl -X POST \
 
 # Inutilização de apenas um número com motivo personalizado
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
@@ -223,7 +223,7 @@ curl -X POST \
 
 # Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
@@ -234,7 +234,7 @@ curl -X POST \
 
 # Inutilização de um intervalo de numeros com motivo personalizado
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{
@@ -296,7 +296,7 @@ Para consultar uma inutilização de  NFC-e é necessário realizar a seguinte r
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable/16 \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable/16 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 

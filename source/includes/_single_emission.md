@@ -19,7 +19,7 @@ Para emitir uma NF-e, é necessário realizar uma requisição POST para o segui
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -321,7 +321,7 @@ Para emitir uma NFC-e, é necessário realizar uma requisição POST para o segu
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{

@@ -25,7 +25,7 @@ Os campos utilizados para esse tipo de emissão são os mesmos praticados na Emi
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe/authorize \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/authorize \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -328,7 +328,7 @@ Os campos utilizados para esse tipo de emissão são os mesmos praticados na Emi
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce/authorize \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/authorize \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{

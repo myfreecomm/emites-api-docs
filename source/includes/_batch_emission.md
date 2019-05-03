@@ -19,7 +19,7 @@ Para emitir um lote NF-e, é necessário realizar uma requisição POST para o s
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
@@ -332,7 +332,7 @@ Para emitir um lote de NFC-e, é necessário realizar uma requisição POST para
 EXEMPLO DE REQUISIÇÃO
 
 curl -X POST \
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch \
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json' \
   -d '{
