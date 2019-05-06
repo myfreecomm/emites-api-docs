@@ -136,7 +136,7 @@
   EXEMPLO DE REQUISIÇÃO
 
     curl -X GET <span class="se">\</span>
-      https://app.emites.com.br/api/v1/organizations <span class="se">\</span>
+      https://app.production.emites.com.br/api/v1/organizations <span class="se">\</span>
       -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
       -H <span class="s1">'content-type: application/json'</span> 
 
@@ -419,7 +419,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -719,7 +719,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -933,7 +933,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -1244,7 +1244,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -1477,7 +1477,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/authorize <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/authorize <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -1778,7 +1778,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/authorize <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/authorize <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -2080,7 +2080,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch/authorize <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch/authorize <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -2392,7 +2392,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch/authorize <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch/authorize <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -7547,13 +7547,13 @@ placa</p>
 
 <span class="c"># Sem o uso dos filtros</span>
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
 <span class="c"># Utilizando os parâmetros para filtrar resultados</span>
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe?identifier<span class="o">=</span>123&amp;starting_at<span class="o">=</span>01/01/2019&amp;status<span class="o">=</span>succeeded <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe?identifier<span class="o">=</span>123&amp;starting_at<span class="o">=</span>01/01/2019&amp;status<span class="o">=</span>succeeded <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -7656,13 +7656,13 @@ EXEMPLO DE RESPOSTA:
 
 <span class="c"># Sem o uso dos filtros</span>
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
 <span class="c"># Utilizando os parâmetros para filtrar resultados</span>
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce?identifier<span class="o">=</span>123&amp;starting_at<span class="o">=</span>01/01/2019&amp;status<span class="o">=</span>succeeded <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce?identifier<span class="o">=</span>123&amp;starting_at<span class="o">=</span>01/01/2019&amp;status<span class="o">=</span>succeeded <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -7684,7 +7684,7 @@ EXEMPLO DE RESPOSTA:
 
           <h1 id="consulta">Consulta</h1>
 
-<p>Para consultar uma NF-e é necessário realizar a seguinte requisição:</p>
+<h3 id="para-consultar-uma-nf-e-necess-rio-realizar-a-seguinte-requisi-o">Para consultar uma NF-e é necessário realizar a seguinte requisição:</h3>
 
 <div class="api-endpoint">
   <div class="endpoint-data">
@@ -7693,12 +7693,30 @@ EXEMPLO DE RESPOSTA:
   </div>
 </div>
 
-<p>E para consultar uma NFC-e, a seguinte:</p>
+<p>ou pela chave de acesso:</p>
 
 <div class="api-endpoint">
   <div class="endpoint-data">
     <i class="label label-get">GET</i>
-    <h6>/api/v1/organizations/{organization_id}/nfce/{nfe_id}  </h6>
+    <h6>/api/v1/organizations/{organization_id}/nfe/{chave_acesso}  </h6>
+  </div>
+</div>
+
+<h3 id="e-para-consultar-uma-nfc-e-a-seguinte">E para consultar uma NFC-e, a seguinte:</h3>
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}  </h6>
+  </div>
+</div>
+
+<p>ou pela chave de acesso:</p>
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/{chave_acesso}  </h6>
   </div>
 </div>
 
@@ -7708,7 +7726,7 @@ EXEMPLO DE RESPOSTA:
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -7871,7 +7889,36 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/350 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/350 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA:
+
+<span class="o">{</span>
+  <span class="s2">"nfe"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 350,
+    <span class="s2">"status"</span>: <span class="s2">"succeeded"</span>,
+    <span class="s2">"data"</span>: <span class="o">{</span>
+      ...
+      <span class="s2">"resposta_emissao"</span>: <span class="o">{</span>
+        <span class="s2">"data_emissao"</span>: <span class="s2">"2019-02-21T16:30:12.000-03:00"</span>,
+        <span class="s2">"codigo_verificacao"</span>: <span class="s2">"d0X2SUrxM6IDrmJnIA36/D5LKrE="</span>,
+        <span class="s2">"numero_protocolo"</span>: <span class="s2">"3531900003011886"</span>,
+        <span class="s2">"chave_acesso"</span>: <span class="s2">"53190222769530000131556110000002001616311935"</span>
+      <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/350/original/danfe.pdf?153719"</span>,
+    <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/350/original/nfe.xml?15379"</span>,
+    <span class="s2">"taxrules_calculation_log"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
+
+EXEMPLO DE REQUISIÇÃO USANDO A CHAVE DE ACESSO
+
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/53190222769530000131556110000002001616311935 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -7904,7 +7951,7 @@ EXEMPLO DE RESPOSTA:
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -8066,7 +8113,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/351 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/351 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -8098,7 +8145,7 @@ EXEMPLO DE RESPOSTA:
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -8260,7 +8307,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/351 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/351 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -8292,7 +8339,7 @@ EXEMPLO DE RESPOSTA:
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -8454,7 +8501,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/352 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/352 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -8487,7 +8534,7 @@ EXEMPLO DE RESPOSTA:
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -8597,7 +8644,36 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/109 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/109 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA:
+
+<span class="o">{</span>
+  <span class="s2">"nfce"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 109,
+    <span class="s2">"status"</span>: <span class="s2">"succeeded"</span>,
+    <span class="s2">"data"</span>: <span class="o">{</span>
+      ...
+      <span class="s2">"resposta_emissao"</span>: <span class="o">{</span>
+        <span class="s2">"data_emissao"</span>: <span class="s2">"2019-02-21T12:04:39.000-03:00"</span>,
+        <span class="s2">"codigo_verificacao"</span>: <span class="s2">"blHtjEXhgCfW8LknVU9QKfbBM4o="</span>,
+        <span class="s2">"numero_protocolo"</span>: <span class="s2">"353190000052272"</span>,
+        <span class="s2">"chave_acesso"</span>: <span class="s2">"53190222769530000131657170000000501127125918"</span>
+      <span class="o">}</span>
+    <span class="o">}</span>,
+    <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/109/original/danfe.pdf?153719"</span>,
+    <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/109/original/nfce.xml?15379"</span>,
+    <span class="s2">"taxrules_calculation_log"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
+
+EXEMPLO DE REQUISIÇÃO USANDO CHAVE DE ACESSO
+
+curl -X GET <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfce/53190222769530000131657170000000501127125918 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -8630,7 +8706,7 @@ EXEMPLO DE RESPOSTA:
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -8740,7 +8816,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/110 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/110 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -8772,7 +8848,7 @@ EXEMPLO DE RESPOSTA:
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -8882,7 +8958,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/110 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/110 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -8914,7 +8990,7 @@ EXEMPLO DE RESPOSTA:
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce_batch <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -9022,7 +9098,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/111 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/111 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -9053,14 +9129,14 @@ EXEMPLO DE RESPOSTA:
 
 <h2 id="cancelamento-de-nf-e">Cancelamento de NF-e</h2>
 
-<p>Para cancelar uma NF-e, envie a seguinte requisição:  </p>
+<p>Para cancelar uma NF-e, envie a seguinte requisição:</p>
 
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-get">PATCH </i>
         <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel </h6>
     </div>
-</div>  
+</div>
 
 <aside class="notice">
     Atenção: somente poderá ser cancelada uma NF-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo &ldquo;Autorização de Uso&rdquo;) e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NF-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
@@ -9070,18 +9146,22 @@ EXEMPLO DE RESPOSTA:
 
 <span class="c"># Motivo padrão: "Cancelamento NF-e"</span>
 curl -X PATCH <span class="se">\</span>
-    https://app.emites.com.br/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
+    https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
 
 <span class="c"># Motivo personalizado</span>
 curl -X PATCH <span class="se">\</span>
-    https://app.emites.com.br/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
+    https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/cancel <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -d <span class="s1">'{
           "motivo": "Desistência do cliente"
         }'</span>
 
+<span class="c"># Usando a chave de acesso</span>
+curl -X PATCH <span class="se">\</span>
+    https://app.emites.com.br/api/v1/organizations/11/nfe/53190222769530000131556110000002041100341123/cancel <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
 
 EXEMPLO DE RESPOSTA
 
@@ -9128,14 +9208,14 @@ EXEMPLO DE RESPOSTA
 
 <h2 id="cancelamento-de-nfc-e">Cancelamento de NFC-e</h2>
 
-<p>Para cancelar uma NFC-e, envie a seguinte requisição:  </p>
+<p>Para cancelar uma NFC-e, envie a seguinte requisição:</p>
 
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-get">PATCH </i>
         <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}/cancel </h6>
     </div>
-</div>  
+</div>
 
 <aside class="notice">
     Atenção: somente poderá ser cancelada uma NFC-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo &ldquo;Autorização de Uso&rdquo;) e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NFC-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
@@ -9145,17 +9225,22 @@ EXEMPLO DE RESPOSTA
 
 <span class="c"># Motivo padrão: "Cancelamento NFC-e"</span>
 curl -X PATCH <span class="se">\</span>
-    https://app.emites.com.br/api/v1/organizations/11/nfce/10990/cancel <span class="se">\</span>
+    https://app.production.emites.com.br/api/v1/organizations/11/nfce/10990/cancel <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
 
 <span class="c"># Motivo personalizado</span>
 curl -X PATCH <span class="se">\</span>
-    https://app.emites.com.br/api/v1/organizations/11/nfce/10990/cancel <span class="se">\</span>
+    https://app.production.emites.com.br/api/v1/organizations/11/nfce/10990/cancel <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -d <span class="s1">'{
           "motivo": "Desistência do cliente"
         }'</span>
+
+<span class="c"># Usando a chave de acesso</span>
+curl -X PATCH <span class="se">\</span>
+    https://app.emites.com.br/api/v1/organizations/11/nfce/53190222769530000131657170000000551642238289/cancel <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
 
 
 EXEMPLO DE RESPOSTA
@@ -9232,7 +9317,7 @@ EXEMPLO DE RESPOSTA
 
 <span class="c"># Inutilização de apenas um número com motivo padrão: "Erro na emissão da nota fiscal"</span>
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9242,7 +9327,7 @@ curl -X POST <span class="se">\</span>
 
 <span class="c"># Inutilização de apenas um número com motivo personalizado</span>
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9253,7 +9338,7 @@ curl -X POST <span class="se">\</span>
 
 <span class="c"># Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"</span>
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9264,7 +9349,7 @@ curl -X POST <span class="se">\</span>
 
 <span class="c"># Inutilização de um intervalo de numeros com motivo personalizado</span>
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9322,7 +9407,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/disable/16 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/disable/16 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -9401,7 +9486,7 @@ EXEMPLO DE RESPOSTA:
 
 <span class="c"># Inutilização de apenas um número com motivo padrão: "Erro na emissão da nota fiscal"</span>
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9411,7 +9496,7 @@ curl -X POST <span class="se">\</span>
 
 <span class="c"># Inutilização de apenas um número com motivo personalizado</span>
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9422,7 +9507,7 @@ curl -X POST <span class="se">\</span>
 
 <span class="c"># Inutilização de um intervalo de numeros com motivo padrão: "Erro na emissão da nota fiscal"</span>
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9433,7 +9518,7 @@ curl -X POST <span class="se">\</span>
 
 <span class="c"># Inutilização de um intervalo de numeros com motivo personalizado</span>
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9491,7 +9576,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X GET <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfce/disable/16 <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfce/disable/16 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span>
 
@@ -9548,10 +9633,10 @@ EXEMPLO DE RESPOSTA:
 <p>A carta de correção de nota fiscal eletrônica (CC-e) é um documento fiscal com o objetivo de corrigir informações da nota fiscal eletrônica (NF-e).
 Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem todos os erros são passíveis de correção, é preciso seguir algumas regras.</p>
 
-<p>Ela é utilizada para a regularização de algum erro ocorrido na emissão, desde que não seja: </p>
+<p>Ela é utilizada para a regularização de algum erro ocorrido na emissão, desde que não seja:</p>
 
 <ul>
-<li>o valor do imposto (base de cálculo, alíquota, diferença de preço, quantidade, valor de operação ou prestação), </li>
+<li>o valor do imposto (base de cálculo, alíquota, diferença de preço, quantidade, valor de operação ou prestação),</li>
 <li>os dados cadastrais (mudanças do remetente ou destinatário)</li>
 <li>data de emissão ou de saída da mercadoria.</li>
 </ul>
@@ -9575,7 +9660,7 @@ Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem tod
 <li>Dados adicionais.</li>
 </ul>
 
-<p>Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada. </p>
+<p>Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada.</p>
 
 <p><strong>Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF, no último item do node &ldquo;corrections&rdquo;.</strong></p>
 
@@ -9586,11 +9671,20 @@ Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem tod
         <i class="label label-get">PATCH</i>
         <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/correction </h6>
     </div>
-</div> 
+</div>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X PATCH <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/nfe/10990/correction <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/correction <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "correcao": "Carta correcao teste"
+        }'</span>
+
+<span class="c"># Usando a chave de acesso</span>
+curl -X PATCH <span class="se">\</span>
+  https://app.emites.com.br/api/v1/organizations/11/nfe/35181160619202003910551010000000321613631381/correction <span class="se">\</span>
     -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
     -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
     -d <span class="s1">'{
@@ -9672,7 +9766,7 @@ EXEMPLO DE RESPOSTA
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
-  https://app.emites.com.br/api/v1/organizations/11/cfe <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/cfe <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
