@@ -1,6 +1,6 @@
 # Consulta
 
-Para consultar uma NF-e é necessário realizar a seguinte requisição:
+### Para consultar uma NF-e é necessário realizar a seguinte requisição:
 
 <div class="api-endpoint">
   <div class="endpoint-data">
@@ -9,12 +9,30 @@ Para consultar uma NF-e é necessário realizar a seguinte requisição:
   </div>
 </div>
 
-E para consultar uma NFC-e, a seguinte:
+ou pela chave de acesso:
 
 <div class="api-endpoint">
   <div class="endpoint-data">
     <i class="label label-get">GET</i>
-    <h6>/api/v1/organizations/{organization_id}/nfce/{nfe_id}  </h6>
+    <h6>/api/v1/organizations/{organization_id}/nfe/{chave_acesso}  </h6>
+  </div>
+</div>
+
+### E para consultar uma NFC-e, a seguinte:
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}  </h6>
+  </div>
+</div>
+
+ou pela chave de acesso:
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/nfce/{chave_acesso}  </h6>
   </div>
 </div>
 
@@ -192,6 +210,35 @@ EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
   https://app.production.emites.com.br/api/v1/organizations/11/nfe/350 \
+  -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+  -H 'content-type: application/json'
+
+
+EXEMPLO DE RESPOSTA:
+
+{
+  "nfe": {
+    "id": 350,
+    "status": "succeeded",
+    "data": {
+      ...
+      "resposta_emissao": {
+        "data_emissao": "2019-02-21T16:30:12.000-03:00",
+        "codigo_verificacao": "d0X2SUrxM6IDrmJnIA36/D5LKrE=",
+        "numero_protocolo": "3531900003011886",
+        "chave_acesso": "53190222769530000131556110000002001616311935"
+      }
+    },
+    "danfe_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/350/original/danfe.pdf?153719",
+    "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/350/original/nfe.xml?15379",
+    "taxrules_calculation_log": null
+  }
+}
+
+EXEMPLO DE REQUISIÇÃO USANDO A CHAVE DE ACESSO
+
+curl -X GET \
+  https://app.emites.com.br/api/v1/organizations/11/nfe/53190222769530000131556110000002001616311935 \
   -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -958,7 +1005,37 @@ EXEMPLO DE RESPOSTA:
     "taxrules_calculation_log": null
   }
 }
+
+EXEMPLO DE REQUISIÇÃO USANDO CHAVE DE ACESSO
+
+curl -X GET \
+  https://app.emites.com.br/api/v1/organizations/11/nfce/53190222769530000131657170000000501127125918 \
+  -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+  -H 'content-type: application/json'
+
+
+EXEMPLO DE RESPOSTA:
+
+{
+  "nfce": {
+    "id": 109,
+    "status": "succeeded",
+    "data": {
+      ...
+      "resposta_emissao": {
+        "data_emissao": "2019-02-21T12:04:39.000-03:00",
+        "codigo_verificacao": "blHtjEXhgCfW8LknVU9QKfbBM4o=",
+        "numero_protocolo": "353190000052272",
+        "chave_acesso": "53190222769530000131657170000000501127125918"
+      }
+    },
+    "danfe_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfce/pdf_files/000/015/109/original/danfe.pdf?153719",
+    "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfce/xml_files/000/015/109/original/nfce.xml?15379",
+    "taxrules_calculation_log": null
+  }
+}
 ```
+
 ## Consulta NFC-e Rejeitada (SEFAZ)
 
 Segue abaixo um exemplo de requisição de emissão em lote com rejeição da SEFAZ que será utilizado para posterior consulta:

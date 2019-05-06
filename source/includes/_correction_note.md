@@ -5,9 +5,9 @@
 A carta de correção de nota fiscal eletrônica (CC-e) é um documento fiscal com o objetivo de corrigir informações da nota fiscal eletrônica (NF-e).
 Se você emitir uma NF-e com um erro, pode corrigi-lá com uma CC-e, mas nem todos os erros são passíveis de correção, é preciso seguir algumas regras.
 
-Ela é utilizada para a regularização de algum erro ocorrido na emissão, desde que não seja: 
+Ela é utilizada para a regularização de algum erro ocorrido na emissão, desde que não seja:
 
-* o valor do imposto (base de cálculo, alíquota, diferença de preço, quantidade, valor de operação ou prestação), 
+* o valor do imposto (base de cálculo, alíquota, diferença de preço, quantidade, valor de operação ou prestação),
 * os dados cadastrais (mudanças do remetente ou destinatário)
 * data de emissão ou de saída da mercadoria.
 
@@ -26,25 +26,34 @@ O que pode ser corrigido?
 * Razão social do destinatário: se não alterar por completo;
 * Dados adicionais.
 
-Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada. 
+Não há um padrão de texto, mas o emissor tem a obrigação de descrever de forma clara e objetiva a correção que deve ser considerada.
 
 **Obs.: Após o processamento da solicitação da carta de correção da NF, o XML do evento estará disponível via consulta da NF, no último item do node "corrections".**
 
 Para requisitar uma correção, envie a seguinte requisição:
 
- 
+
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-get">PATCH</i>
         <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/correction </h6>
     </div>
-</div> 
+</div>
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
 
 curl -X PATCH \
   https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/correction \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+    -d '{
+          "correcao": "Carta correcao teste"
+        }'
+
+# Usando a chave de acesso
+curl -X PATCH \
+  https://app.emites.com.br/api/v1/organizations/11/nfe/35181160619202003910551010000000321613631381/correction \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
     -d '{

@@ -2,14 +2,14 @@
 
 ## Cancelamento de NF-e
 
-Para cancelar uma NF-e, envie a seguinte requisição:  
+Para cancelar uma NF-e, envie a seguinte requisição:
 
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-get">PATCH </i>
         <h6>/api/v1/organizations/{organization_id}/nfe/{nfe_id}/cancel </h6>
     </div>
-</div>  
+</div>
 
 <aside class="notice">
     Atenção: somente poderá ser cancelada uma NF-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo "Autorização de Uso") e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NF-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
@@ -24,7 +24,7 @@ curl -X PATCH \
     https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/cancel \
     -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
     -H 'content-type: application/json' \
-        
+
 # Motivo personalizado
 curl -X PATCH \
     https://app.production.emites.com.br/api/v1/organizations/11/nfe/10990/cancel \
@@ -33,6 +33,10 @@ curl -X PATCH \
           "motivo": "Desistência do cliente"
         }'
 
+# Usando a chave de acesso
+curl -X PATCH \
+    https://app.emites.com.br/api/v1/organizations/11/nfe/53190222769530000131556110000002041100341123/cancel \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
 
 EXEMPLO DE RESPOSTA
 
@@ -81,14 +85,14 @@ Após o processamento da solicitação de cancelamento da NF-e, o XML do evento 
 
 ## Cancelamento de NFC-e
 
-Para cancelar uma NFC-e, envie a seguinte requisição:  
+Para cancelar uma NFC-e, envie a seguinte requisição:
 
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-get">PATCH </i>
         <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}/cancel </h6>
     </div>
-</div>  
+</div>
 
 <aside class="notice">
     Atenção: somente poderá ser cancelada uma NFC-e cujo uso tenha sido previamente autorizado pelo Fisco (protocolo "Autorização de Uso") e desde que não tenha ainda ocorrido a saída da mercadoria do estabelecimento. Atualmente o prazo máximo para cancelamento de uma NFC-e é de 24 horas após a emissão. O cancelamento não pode ser desfeito.<br><br>
@@ -111,6 +115,11 @@ curl -X PATCH \
     -d '{
           "motivo": "Desistência do cliente"
         }'
+
+# Usando a chave de acesso
+curl -X PATCH \
+    https://app.emites.com.br/api/v1/organizations/11/nfce/53190222769530000131657170000000551642238289/cancel \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
 
 
 EXEMPLO DE RESPOSTA
