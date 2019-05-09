@@ -179,13 +179,13 @@ curl -X POST <span class="se">\</span>
             "complement": "Conj. 91",
             "district": "Vila Olimpia",
             "number": "199",
-            "phone": "1133333333", 
+            "phone": "1133333333",
             "state": "SP",
-            "zipcode": "04552000" 
+            "zipcode": "04552000"
         },
         "codigo_regime_tributario": 1,
         "company_name": "The String",
-        "document": "58521175000124", 
+        "document": "58521175000124",
         "email": "foo@bar.com",
 
         "inscricao_estadual": "787811920",
@@ -374,6 +374,11 @@ EXEMPLO DE RESPOSTA
         <h6>/api/v1/organizations/{:organization_id}/certificate</h6>
     </div>
 </div>
+
+<aside class="notice">
+    <b>Atenção</b>: O parâmetro <b>:organization_id</b> também pode ser substituído pela notação <b>CNPJ{CNPJ da organização (somente números)}IE{ Inscrição Estadual da Organização (Somente Números OU ISENTO) }</b> em qualquer requisição.<br><br>
+    Ex: <b>/api/v1/organizations/CNPJ58521175000124IE787811920</b>
+</aside>
 
 <p>Veja a seguir um exemplo do corpo da requisição:  </p>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
