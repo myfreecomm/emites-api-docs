@@ -31,13 +31,13 @@ curl -X POST \
             "complement": "Conj. 91",
             "district": "Vila Olimpia",
             "number": "199",
-            "phone": "1133333333", 
+            "phone": "1133333333",
             "state": "SP",
-            "zipcode": "04552000" 
+            "zipcode": "04552000"
         },
         "codigo_regime_tributario": 1,
         "company_name": "The String",
-        "document": "58521175000124", 
+        "document": "58521175000124",
         "email": "foo@bar.com",
 
         "inscricao_estadual": "787811920",
@@ -82,18 +82,18 @@ EXEMPLO DE RESPOSTA
 --------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     codigo_regime_tributario    |  Não          |     Numérico            |   1 dígito                   |  1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.  
     razao_social                |  Sim          |     Texto               |   Até 60 caracteres          |  
-    cnpj                        |  Sim          |     Numérico            |   14 dígitos                 |  CNPJ da empresa emitente, somente números. 
+    cnpj                        |  Sim          |     Numérico            |   14 dígitos                 |  CNPJ da empresa emitente, somente números.
     email                       |  Sim          |     Texto               |   Até 60 caracteres          |
     inscricao_estadual          |  sim          |     Texto               |   Até 14 caracteres          |  Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.  
     inscricao_municipal         |  Não          |     Texto               |   Até 15 caracteres          |  
     nome_fantasia               |  Não          |     Texto               |   Até 60 caracteres          |  
- 
+
 ### address  
 
 Grupo de informações relacionadas ao endereço da organização. Seus atributos são:  
 
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
---------------------------------|---------------|-------------------------|------------------------------|----------------------------------------------------------- 
+--------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     address                     |  Sim          |  Texto                  |   Até 60 caracteres          |
     city                        |  Sim          |  Texto                  |   Até 60 caracteres          |
     city_code                   |  Sim          |  Numérico               |   7 dígitos                  |  
@@ -114,6 +114,11 @@ A inclusão de certificado digital vigente da organização é obrigatório para
         <h6>/api/v1/organizations/{:organization_id}/certificate</h6>
     </div>
 </div>
+
+<aside class="notice">
+    <b>Atenção</b>: O parâmetro <b>:organization_id</b> também pode ser substituído pela notação <b>CNPJ{CNPJ da organização (somente números)}IE{ Inscrição Estadual da Organização (Somente Números OU ISENTO) }</b> em qualquer requisição.<br><br>
+    Ex: <b>/api/v1/organizations/CNPJ58521175000124IE787811920</b>
+</aside>
 
 Veja a seguir um exemplo do corpo da requisição:  
 
@@ -141,5 +146,3 @@ EXEMPLO DE RESPOSTA
   }
 }
 ```
-
-
