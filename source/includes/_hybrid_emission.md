@@ -1,6 +1,6 @@
-# Emissão Inteligente
+# Emissão Híbrida
 
-## Emissão Inteligente de NF-e
+## Emissão Híbrida de NF-e
 
 Para emitir um lote NF-e, é necessário realizar uma requisição POST para o seguinte endereço:
 
@@ -26,7 +26,6 @@ curl -X POST \
         "nfe_batch": {
           "lote": 1,
           "serie": 1,
-          "sincronicidade": 0,
           "uf": 35,
           "nfes": [
             {
@@ -307,7 +306,7 @@ EXEMPLO DE RESPOSTA
 }
 ```
 
-## Emissão Inteligente de NFC-e
+## Emissão Híbrida de NFC-e
 
 Antes de emitir um lote de NFC-e, é necessário ter um Código de Segurança do Contribuinte, também conhecido como CSC e seu respectivo token identificador. Ambos valores são utilizados na geração do QR Code e na garantia da autoria e da autenticidade do DANFE NFC-e.
 
@@ -339,7 +338,6 @@ curl -X POST \
         "nfce_batch": {
           "lote": "1",
           "serie": "1",
-          "sincronicidade": "0",
           "uf": "53",
           "nfces": [
             {

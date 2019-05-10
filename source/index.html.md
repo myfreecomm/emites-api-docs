@@ -14,7 +14,7 @@ includes:
   - emission_types
   - single_emission
   - batch_emission
-  - smart_emission
+  - hybrid_emission
   - authorize_single
   - authorize_batch
   - fields_api
