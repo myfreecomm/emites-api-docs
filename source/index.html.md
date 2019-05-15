@@ -11,8 +11,10 @@ toc_footers:
 includes:
   - basic_information
   - create_organizations
+  - emission_types
   - single_emission
   - batch_emission
+  - hybrid_emission
   - authorize_single
   - authorize_batch
   - fields_api
