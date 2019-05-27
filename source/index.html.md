@@ -24,6 +24,7 @@ includes:
   - disabled_note
   - correction_note
   - cfe_storage
+  - tax_calculator
   - webhooks
 
 search: true
