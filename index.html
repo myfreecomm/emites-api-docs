@@ -3457,10 +3457,10 @@ EXEMPLO DE RESPOSTA
 <tr>
 <td>codigo_natureza_operacao</td>
 <td>-</td>
-<td>Não</td>
+<td>Condicional</td>
 <td>Texto</td>
 <td>3 caracteres</td>
-<td>Código da natureza da operação utilizado das Regras de Tributação<br>001 = Compra para Comercialização;<br>002 = Venda de Mercadoria;<br>005 = Devolução de Compra de Mercadoria;<br>006 = Remessa para Conserto;<br>012 = Devolução de Venda de Mercadoria;</td>
+<td><strong>* Quando existir engine de cálculo o campo será obrigatório.</strong><br><br>Código da natureza da operação utilizado das Regras de Tributação<br>001 = Compra para Comercialização;<br>002 = Venda de Mercadoria;<br>005 = Devolução de Compra de Mercadoria;<br>006 = Remessa para Conserto;<br>012 = Devolução de Venda de Mercadoria;</td>
 </tr>
 <tr>
 <td>indicador_consumidor_final</td>
@@ -10636,6 +10636,1480 @@ EXEMPLO DE RESPOSTA
     <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
     <span class="s2">"data"</span>:  <span class="o">{</span>...<span class="o">}</span>
   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+          <h1 id="c-lculo-tribut-rio">Cálculo Tributário</h1>
+
+<p>Para calcular os tributos de um documento fiscal (NFe e NFCe), é necessário realizar uma requisição POST para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/tax_calculator</h6>
+    </div>
+</div>
+
+<aside class="notice">
+  A estrutura JSON será a mesma que a emissão em lote para NFe e NFCe
+</aside>
+
+<h2 id="exemplo-nfe">Exemplo NFe</h2>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/tax_calculator <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "nfe_batch": {
+        "lote": 1,
+        "serie": 22,
+        "engine_de_calculo": "nexaas",
+        "sincronicidade": 0,
+        "uf": 53,
+        "nfes": [
+            {
+                "cliente": {
+                    "cpf_cnpj": "01716006000122",
+                    "email": "teste@nexaas.com.br",
+                    "indicador_inscricao_estadual": 1,
+                    "inscricao_estadual": "0736913700156",
+                    "inscricao_municipal": "",
+                    "inscricao_suframa": "",
+                    "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                    "pessoa_fisica_juridica": "company",
+                    "endereco": {
+                        "bairro": "Bairro teste",
+                        "cep": "05685040",
+                        "codigo_municipio": "5300108",
+                        "codigo_pais": "1058",
+                        "complemento": "",
+                        "logradouro": "Rua do Consultor",
+                        "nome_municipio": "BRASILIA",
+                        "nome_pais": "BRASIL",
+                        "numero": "14",
+                        "telefone": "99999999",
+                        "uf": "DF"
+                    }
+                },
+                "cobranca": {
+                    "duplicatas": [
+                        {
+                            "data_vencimento": "",
+                            "numero": "",
+                            "valor": ""
+                        }
+                    ],
+                    "fatura": {
+                        "numero_fatura": "",
+                        "valor_desconto": 0,
+                        "valor_liquido": 0,
+                        "valor_original": 0
+                    }
+                },
+                "dados_gerais": {
+                    "codigo_mun_ocorrencia": "5300108",
+                    "destino_operacao": "1",
+                    "finalidade_nfe": "1",
+                    "indicador_consumidor_final": "0",
+                    "indicador_presenca": "9",
+                    "natureza_operacao": "Venda merc. adq. rec. terc. efet. fora estab.",
+                    "tipo_operacao": "1",
+                    "uf": 53,
+                    "codigo_natureza_operacao": "002"
+                },
+                "forma_de_pagamento": [
+                    {
+                        "tipo_de_pagamento": "01",
+                        "valor_do_pagamento": 50
+                    },
+                    {
+                        "tipo_de_integracao": "2",
+                        "tipo_de_pagamento": "03",
+                        "valor_do_pagamento": 8.97
+                    },
+                    {
+                        "bandeira_operadora": "02",
+                        "cnpj_credenciadora": "99999999999999",
+                        "numero_autorizacao_operacao": "99999999999999999999",
+                        "tipo_de_integracao": "1",
+                        "tipo_de_pagamento": "03",
+                        "valor_do_pagamento": 40
+                    }
+                ],
+                "informacoes_adicionais": {
+                    "informacoes_contribuinte": "",
+                    "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123"
+                },
+                "lista_autorizacao": [],
+                "produtos": [
+                    {
+                        "cest": "",
+                        "cfop": 5104,
+                        "cnpj_fabricante_mercadoria": "99999999999999999",
+                        "codigo_beneficio_fiscal": "foo",
+                        "codigo_ean": "",
+                        "codigo_produto": "123456",
+                        "descricao": "NITROGENIO CIL 50L 10M3",
+                        "ean_unidade_trib": "",
+                        "informacoes_adicionais": "",
+                        "ncm": 28043000,
+                        "num_item_pedido": 1,
+                        "num_pedido": "S0100249134",
+                        "outras_despesas": 0,
+                        "producao_escala": "S",
+                        "quantidade_comercial": 6,
+                        "quantidade_tributaria": 6,
+                        "unidade_comercial": "M3",
+                        "unidade_tributaria": "M3",
+                        "valor_desconto": 0,
+                        "valor_frete": 0,
+                        "valor_seguro": 0,
+                        "valor_total_produto": "98.97",
+                        "valor_unitario_comercial": 16.49485,
+                        "valor_unitario_tributario": 16.49485,
+                        "tributacao": {
+                            "icms": {
+                                "codigo_origem_produto": 2
+                            }
+                        },
+                        "declaracao_importacao": [
+                            {
+                                "cnpj": "",
+                                "codigo_exportador": "",
+                                "data_desembaraco": "",
+                                "data_importacao": "",
+                                "documento_importacao": "",
+                                "forma_importacao": "",
+                                "local_desembaraco": "",
+                                "uf_adquirente": "",
+                                "uf_desembaraco": "",
+                                "valor_afrmm": "",
+                                "via_transporte": "",
+                                "adicoes": [
+                                    {
+                                        "codigo_fabricante": "",
+                                        "numero_adicao": "",
+                                        "numero_drawback": "",
+                                        "numero_sequencial": "",
+                                        "valor_desconto": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "retencao_tributos": {
+                    "base_calculo_retencao_previdencia": 0,
+                    "valor_base_calculo_irrf": 0,
+                    "valor_irrf": 0,
+                    "valor_retencao_previdencia": 0,
+                    "valor_retido_cofins": 0,
+                    "valor_retido_csll": 0,
+                    "valor_retido_pis": 0
+                },
+                "transporte": {
+                    "codigo_modalidade": 9,
+                    "retencao_icms": {
+                        "aliquota_retencao": 0,
+                        "cfop": "",
+                        "codigo_municipio": "",
+                        "uf": "",
+                        "valor_base_calculo": 0,
+                        "valor_retido": 0,
+                        "valor_servico": 0
+                    },
+                    "transportadora": {
+                        "cnpj_cpf": "",
+                        "endereco_completo": "",
+                        "inscricao_estadual": "",
+                        "municipio": "",
+                        "razao_social": "",
+                        "uf": ""
+                    },
+                    "veiculo": {
+                        "placa": "",
+                        "rntc": "",
+                        "uf": ""
+                    },
+                    "volume_transportado": [
+                        {
+                            "especie": "Cilindro",
+                            "marca": 0,
+                            "numeracao_volumes": 0,
+                            "peso_bruto": "450.780",
+                            "peso_liquido": "66.780",
+                            "quantidade_volumes": 1
+                        }
+                    ]
+                }
+            },
+            {
+                "cliente": {
+                    "cpf_cnpj": "01716006000122",
+                    "email": "teste@nexaas.com.br",
+                    "indicador_inscricao_estadual": 1,
+                    "inscricao_estadual": "0736913700156",
+                    "inscricao_municipal": "",
+                    "inscricao_suframa": "",
+                    "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                    "pessoa_fisica_juridica": "company",
+                    "endereco": {
+                        "bairro": "Bairro teste",
+                        "cep": "05685040",
+                        "codigo_municipio": "5300108",
+                        "codigo_pais": "1058",
+                        "complemento": "",
+                        "logradouro": "Rua do Consultor",
+                        "nome_municipio": "BRASILIA",
+                        "nome_pais": "BRASIL",
+                        "numero": "14",
+                        "telefone": "99999999",
+                        "uf": "DF"
+                    }
+                },
+                "cobranca": {
+                    "duplicatas": [
+                        {
+                            "data_vencimento": "",
+                            "numero": "",
+                            "valor": ""
+                        }
+                    ],
+                    "fatura": {
+                        "numero_fatura": "",
+                        "valor_desconto": 0,
+                        "valor_liquido": 0,
+                        "valor_original": 0
+                    }
+                },
+                "dados_gerais": {
+                    "codigo_mun_ocorrencia": "5300108",
+                    "destino_operacao": "1",
+                    "finalidade_nfe": "1",
+                    "indicador_consumidor_final": "0",
+                    "indicador_presenca": "9",
+                    "natureza_operacao": "Venda merc. adq. rec. terc. efet. fora estab.",
+                    "tipo_operacao": "1",
+                    "uf": 53,
+                    "codigo_natureza_operacao": "002"
+                },
+                "forma_de_pagamento": [
+                    {
+                        "tipo_de_pagamento": "01",
+                        "valor_do_pagamento": 50
+                    },
+                    {
+                        "tipo_de_integracao": "2",
+                        "tipo_de_pagamento": "03",
+                        "valor_do_pagamento": 8.97
+                    },
+                    {
+                        "bandeira_operadora": "02",
+                        "cnpj_credenciadora": "99999999999999",
+                        "numero_autorizacao_operacao": "99999999999999999999",
+                        "tipo_de_integracao": "1",
+                        "tipo_de_pagamento": "03",
+                        "valor_do_pagamento": 40
+                    }
+                ],
+                "informacoes_adicionais": {
+                    "informacoes_contribuinte": "",
+                    "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123"
+                },
+                "lista_autorizacao": [],
+                "produtos": [
+                    {
+                        "cest": "",
+                        "cfop": 5104,
+                        "cnpj_fabricante_mercadoria": "99999999999999999",
+                        "codigo_beneficio_fiscal": "foo",
+                        "codigo_ean": "",
+                        "codigo_produto": "123456",
+                        "descricao": "NITROGENIO CIL 50L 10M3",
+                        "ean_unidade_trib": "",
+                        "informacoes_adicionais": "",
+                        "ncm": 28043000,
+                        "num_item_pedido": 1,
+                        "num_pedido": "S0100249134",
+                        "outras_despesas": 0,
+                        "producao_escala": "S",
+                        "quantidade_comercial": 6,
+                        "quantidade_tributaria": 6,
+                        "unidade_comercial": "M3",
+                        "unidade_tributaria": "M3",
+                        "valor_desconto": 0,
+                        "valor_frete": 0,
+                        "valor_seguro": 0,
+                        "valor_total_produto": "98.97",
+                        "valor_unitario_comercial": 16.49485,
+                        "valor_unitario_tributario": 16.49485,
+                        "tributacao": {
+                            "icms": {
+                                "codigo_origem_produto": 2
+                            }
+                        },
+                        "declaracao_importacao": [
+                            {
+                                "cnpj": "",
+                                "codigo_exportador": "",
+                                "data_desembaraco": "",
+                                "data_importacao": "",
+                                "documento_importacao": "",
+                                "forma_importacao": "",
+                                "local_desembaraco": "",
+                                "uf_adquirente": "",
+                                "uf_desembaraco": "",
+                                "valor_afrmm": "",
+                                "via_transporte": "",
+                                "adicoes": [
+                                    {
+                                        "codigo_fabricante": "",
+                                        "numero_adicao": "",
+                                        "numero_drawback": "",
+                                        "numero_sequencial": "",
+                                        "valor_desconto": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "retencao_tributos": {
+                    "base_calculo_retencao_previdencia": 0,
+                    "valor_base_calculo_irrf": 0,
+                    "valor_irrf": 0,
+                    "valor_retencao_previdencia": 0,
+                    "valor_retido_cofins": 0,
+                    "valor_retido_csll": 0,
+                    "valor_retido_pis": 0
+                },
+                "transporte": {
+                    "codigo_modalidade": 9,
+                    "retencao_icms": {
+                        "aliquota_retencao": 0,
+                        "cfop": "",
+                        "codigo_municipio": "",
+                        "uf": "",
+                        "valor_base_calculo": 0,
+                        "valor_retido": 0,
+                        "valor_servico": 0
+                    },
+                    "transportadora": {
+                        "cnpj_cpf": "",
+                        "endereco_completo": "",
+                        "inscricao_estadual": "",
+                        "municipio": "",
+                        "razao_social": "",
+                        "uf": ""
+                    },
+                    "veiculo": {
+                        "placa": "",
+                        "rntc": "",
+                        "uf": ""
+                    },
+                    "volume_transportado": [
+                        {
+                            "especie": "Cilindro",
+                            "marca": 0,
+                            "numeracao_volumes": 0,
+                            "peso_bruto": "450.780",
+                            "peso_liquido": "66.780",
+                            "quantidade_volumes": 1
+                        }
+                    ]
+                }
+            },
+            {
+                "cliente": {
+                    "cpf_cnpj": "01716006000122",
+                    "email": "teste@nexaas.com.br",
+                    "indicador_inscricao_estadual": 1,
+                    "inscricao_estadual": "0736913700156",
+                    "inscricao_municipal": "",
+                    "inscricao_suframa": "",
+                    "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                    "pessoa_fisica_juridica": "company",
+                    "endereco": {
+                        "bairro": "Bairro teste",
+                        "cep": "05685040",
+                        "codigo_municipio": "5300108",
+                        "codigo_pais": "1058",
+                        "complemento": "",
+                        "logradouro": "Rua do Consultor",
+                        "nome_municipio": "BRASILIA",
+                        "nome_pais": "BRASIL",
+                        "numero": "14",
+                        "telefone": "99999999",
+                        "uf": "DF"
+                    }
+                },
+                "cobranca": {
+                    "duplicatas": [
+                        {
+                            "data_vencimento": "",
+                            "numero": "",
+                            "valor": ""
+                        }
+                    ],
+                    "fatura": {
+                        "numero_fatura": "",
+                        "valor_desconto": 0,
+                        "valor_liquido": 0,
+                        "valor_original": 0
+                    }
+                },
+                "dados_gerais": {
+                    "codigo_mun_ocorrencia": "5300108",
+                    "destino_operacao": "1",
+                    "finalidade_nfe": "1",
+                    "indicador_consumidor_final": "0",
+                    "indicador_presenca": "9",
+                    "natureza_operacao": "Venda merc. adq. rec. terc. efet. fora estab.",
+                    "tipo_operacao": "1",
+                    "uf": 53,
+                    "codigo_natureza_operacao": "002"
+                },
+                "forma_de_pagamento": [
+                    {
+                        "tipo_de_pagamento": "01",
+                        "valor_do_pagamento": 50
+                    },
+                    {
+                        "tipo_de_integracao": "2",
+                        "tipo_de_pagamento": "03",
+                        "valor_do_pagamento": 8.97
+                    },
+                    {
+                        "bandeira_operadora": "02",
+                        "cnpj_credenciadora": "99999999999999",
+                        "numero_autorizacao_operacao": "99999999999999999999",
+                        "tipo_de_integracao": "1",
+                        "tipo_de_pagamento": "03",
+                        "valor_do_pagamento": 40
+                    }
+                ],
+                "informacoes_adicionais": {
+                    "informacoes_contribuinte": "",
+                    "informacoes_fisco": "Cliente: 112. Remessa: 000061074-0123"
+                },
+                "lista_autorizacao": [],
+                "produtos": [
+                    {
+                        "cest": "",
+                        "cfop": 5104,
+                        "cnpj_fabricante_mercadoria": "99999999999999999",
+                        "codigo_beneficio_fiscal": "foo",
+                        "codigo_ean": "",
+                        "codigo_produto": "123456",
+                        "descricao": "OXIGENIO CIL 50L 10M3",
+                        "ean_unidade_trib": "",
+                        "informacoes_adicionais": "",
+                        "ncm": 28043000,
+                        "num_item_pedido": 1,
+                        "num_pedido": "S0100249134",
+                        "outras_despesas": 0,
+                        "producao_escala": "S",
+                        "quantidade_comercial": 6,
+                        "quantidade_tributaria": 6,
+                        "unidade_comercial": "M3",
+                        "unidade_tributaria": "M3",
+                        "valor_desconto": 0,
+                        "valor_frete": 0,
+                        "valor_seguro": 0,
+                        "valor_total_produto": "98.97",
+                        "valor_unitario_comercial": 16.49485,
+                        "valor_unitario_tributario": 16.49485,
+                        "tributacao": {
+                            "icms": {
+                                "codigo_origem_produto": 2
+                            }
+                        },
+                        "declaracao_importacao": [
+                            {
+                                "cnpj": "",
+                                "codigo_exportador": "",
+                                "data_desembaraco": "",
+                                "data_importacao": "",
+                                "documento_importacao": "",
+                                "forma_importacao": "",
+                                "local_desembaraco": "",
+                                "uf_adquirente": "",
+                                "uf_desembaraco": "",
+                                "valor_afrmm": "",
+                                "via_transporte": "",
+                                "adicoes": [
+                                    {
+                                        "codigo_fabricante": "",
+                                        "numero_adicao": "",
+                                        "numero_drawback": "",
+                                        "numero_sequencial": "",
+                                        "valor_desconto": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "retencao_tributos": {
+                    "base_calculo_retencao_previdencia": 0,
+                    "valor_base_calculo_irrf": 0,
+                    "valor_irrf": 0,
+                    "valor_retencao_previdencia": 0,
+                    "valor_retido_cofins": 0,
+                    "valor_retido_csll": 0,
+                    "valor_retido_pis": 0
+                },
+                "transporte": {
+                    "codigo_modalidade": 9,
+                    "retencao_icms": {
+                        "aliquota_retencao": 0,
+                        "cfop": "",
+                        "codigo_municipio": "",
+                        "uf": "",
+                        "valor_base_calculo": 0,
+                        "valor_retido": 0,
+                        "valor_servico": 0
+                    },
+                    "transportadora": {
+                        "cnpj_cpf": "",
+                        "endereco_completo": "",
+                        "inscricao_estadual": "",
+                        "municipio": "",
+                        "razao_social": "",
+                        "uf": ""
+                    },
+                    "veiculo": {
+                        "placa": "",
+                        "rntc": "",
+                        "uf": ""
+                    },
+                    "volume_transportado": [
+                        {
+                            "especie": "Cilindro",
+                            "marca": 0,
+                            "numeracao_volumes": 0,
+                            "peso_bruto": "450.780",
+                            "peso_liquido": "66.780",
+                            "quantidade_volumes": 1
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
+}'</span>
+
+
+EXEMPLO DE RESPOSTA
+<span class="o">{</span>
+    <span class="s2">"nfe_batch"</span>: <span class="o">{</span>
+        <span class="s2">"lote"</span>: 1,
+        <span class="s2">"serie"</span>: 22,
+        <span class="s2">"engine_de_calculo"</span>: <span class="s2">"nexaas"</span>,
+        <span class="s2">"sincronicidade"</span>: 0,
+        <span class="s2">"uf"</span>: 53,
+        <span class="s2">"nfes"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+                <span class="s2">"dados_gerais"</span>: <span class="o">{</span>
+                    <span class="s2">"uf"</span>: <span class="s2">"53"</span>,
+                    <span class="s2">"serie"</span>: 22,
+                    <span class="s2">"codigo_mun_ocorrencia"</span>: <span class="s2">"5300108"</span>,
+                    <span class="s2">"natureza_operacao"</span>: <span class="s2">"Venda merc. adq. rec. terc. efet. fora estab."</span>,
+                    <span class="s2">"codigo_natureza_operacao"</span>: <span class="s2">"002"</span>,
+                    <span class="s2">"tipo_operacao"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"indicador_consumidor_final"</span>: <span class="s2">"0"</span>,
+                    <span class="s2">"destino_operacao"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"finalidade_nfe"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"indicador_presenca"</span>: <span class="s2">"9"</span>
+                <span class="o">}</span>,
+                <span class="s2">"emitente"</span>: <span class="o">{</span>
+                    <span class="s2">"cnpj"</span>: <span class="s2">"22769530000131"</span>,
+                    <span class="s2">"razao_social"</span>: <span class="s2">"Organizacao Teste NFCe / DF"</span>,
+                    <span class="s2">"nome_fantasia"</span>: <span class="s2">"Organizacao Teste NFCe / DF"</span>,
+                    <span class="s2">"inscricao_estadual"</span>: <span class="s2">"772733700120"</span>,
+                    <span class="s2">"codigo_regime_tributario"</span>: 3,
+                    <span class="s2">"regime_tributario_diferenciado"</span>: <span class="s2">"ISENLF"</span>,
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"bairro"</span>: <span class="s2">"Asa Sul"</span>,
+                        <span class="s2">"cep"</span>: <span class="s2">"70070938"</span>,
+                        <span class="s2">"logradouro"</span>: <span class="s2">"SAUS Quadra 4 Lote 9/10"</span>,
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"nome_municipio"</span>: <span class="s2">"Brasilia"</span>,
+                        <span class="s2">"numero"</span>: <span class="s2">"04"</span>,
+                        <span class="s2">"codigo_municipio"</span>: <span class="s2">"5300108"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>,
+                        <span class="s2">"uf"</span>: <span class="s2">"DF"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"cliente"</span>: <span class="o">{</span>
+                    <span class="s2">"cpf_cnpj"</span>: <span class="s2">"01716006000122"</span>,
+                    <span class="s2">"email"</span>: <span class="s2">"teste@nexaas.com.br"</span>,
+                    <span class="s2">"inscricao_estadual"</span>: <span class="s2">"0736913700156"</span>,
+                    <span class="s2">"nome"</span>: <span class="s2">"NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL"</span>,
+                    <span class="s2">"pessoa_fisica_juridica"</span>: <span class="s2">"company"</span>,
+                    <span class="s2">"indicador_inscricao_estadual"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"bairro"</span>: <span class="s2">"Bairro teste"</span>,
+                        <span class="s2">"cep"</span>: <span class="s2">"05685040"</span>,
+                        <span class="s2">"logradouro"</span>: <span class="s2">"Rua do Consultor"</span>,
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"BRASIL"</span>,
+                        <span class="s2">"nome_municipio"</span>: <span class="s2">"BRASILIA"</span>,
+                        <span class="s2">"numero"</span>: <span class="s2">"14"</span>,
+                        <span class="s2">"codigo_municipio"</span>: <span class="s2">"5300108"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>,
+                        <span class="s2">"telefone"</span>: <span class="s2">"99999999"</span>,
+                        <span class="s2">"uf"</span>: <span class="s2">"DF"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"retirada"</span>: <span class="o">{</span>
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"entrega"</span>: <span class="o">{</span>
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"produtos"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"codigo_produto"</span>: <span class="s2">"123456"</span>,
+                        <span class="s2">"codigo_ean"</span>: <span class="s2">"SEM GTIN"</span>,
+                        <span class="s2">"descricao"</span>: <span class="s2">"NITROGENIO CIL 50L 10M3"</span>,
+                        <span class="s2">"ncm"</span>: <span class="s2">"28043000"</span>,
+                        <span class="s2">"cfop"</span>: <span class="s2">"5102"</span>,
+                        <span class="s2">"unidade_comercial"</span>: <span class="s2">"M3"</span>,
+                        <span class="s2">"ean_unidade_trib"</span>: <span class="s2">"SEM GTIN"</span>,
+                        <span class="s2">"unidade_tributaria"</span>: <span class="s2">"M3"</span>,
+                        <span class="s2">"num_pedido"</span>: <span class="s2">"S0100249134"</span>,
+                        <span class="s2">"num_item_pedido"</span>: <span class="s2">"1"</span>,
+                        <span class="s2">"producao_escala"</span>: <span class="s2">"S"</span>,
+                        <span class="s2">"cnpj_fabricante_mercadoria"</span>: <span class="s2">"99999999999999999"</span>,
+                        <span class="s2">"codigo_beneficio_fiscal"</span>: <span class="s2">"foo"</span>,
+                        <span class="s2">"quantidade_comercial"</span>: 6,
+                        <span class="s2">"valor_unitario_comercial"</span>: 16.49485,
+                        <span class="s2">"quantidade_tributaria"</span>: 6,
+                        <span class="s2">"valor_unitario_tributario"</span>: 16.49485,
+                        <span class="s2">"valor_frete"</span>: 0,
+                        <span class="s2">"valor_seguro"</span>: 0,
+                        <span class="s2">"valor_desconto"</span>: 0,
+                        <span class="s2">"valor_total_produto"</span>: 98.97,
+                        <span class="s2">"outras_despesas"</span>: 0,
+                        <span class="s2">"tributacao"</span>: <span class="o">{</span>
+                            <span class="s2">"icms"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_consumidor_final"</span>: 0,
+                                <span class="s2">"aliquota_icms"</span>: 17,
+                                <span class="s2">"aliquota_icms_simples_nacional"</span>: 0,
+                                <span class="s2">"aliquota_icms_st"</span>: 0,
+                                <span class="s2">"aliquota_interestadual"</span>: <span class="s2">"12"</span>,
+                                <span class="s2">"aliquota_interna_interestadual"</span>: <span class="s2">"0.0000"</span>,
+                                <span class="s2">"base_icmsst_retido"</span>: 0,
+                                <span class="s2">"codigo_origem_produto"</span>: 2,
+                                <span class="s2">"credito_icms_simples_nacional"</span>: 0,
+                                <span class="s2">"modalidade_base_calculo"</span>: <span class="s2">"3"</span>,
+                                <span class="s2">"perc_diferimento"</span>: 0,
+                                <span class="s2">"perc_fcp_interestadual"</span>: <span class="s2">"0.0000"</span>,
+                                <span class="s2">"perc_mva_icms_st"</span>: 0,
+                                <span class="s2">"perc_provisorio_interestadual"</span>: <span class="s2">"100"</span>,
+                                <span class="s2">"perc_reducao_base_calculo"</span>: 0,
+                                <span class="s2">"perc_reducao_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"00"</span>,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"valor_icms"</span>: 16.82,
+                                <span class="s2">"valor_icms_desonerado"</span>: 0,
+                                <span class="s2">"valor_icms_diferido"</span>: 0,
+                                <span class="s2">"valor_icms_operacao"</span>: 0,
+                                <span class="s2">"valor_icms_st"</span>: 0,
+                                <span class="s2">"valor_icmsst_retido"</span>: 0
+                            <span class="o">}</span>,
+                            <span class="s2">"pis"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_st"</span>: 0,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"49"</span>,
+                                <span class="s2">"aliquota_pis"</span>: 3,
+                                <span class="s2">"aliquota_pis_reais"</span>: 0,
+                                <span class="s2">"aliquota_pis_reais_st"</span>: 0,
+                                <span class="s2">"valor_pis"</span>: 2.97,
+                                <span class="s2">"valor_pis_st"</span>: 0
+                            <span class="o">}</span>,
+                            <span class="s2">"cofins"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_st"</span>: 0,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"49"</span>,
+                                <span class="s2">"aliquota_cofins"</span>: 4,
+                                <span class="s2">"aliquota_cofins_reais"</span>: 0,
+                                <span class="s2">"aliquota_cofins_reais_st"</span>: 0,
+                                <span class="s2">"valor_cofins"</span>: 3.96,
+                                <span class="s2">"valor_cofins_st"</span>: 0
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">]</span>,
+                <span class="s2">"transporte"</span>: <span class="o">{</span>
+                    <span class="s2">"codigo_modalidade"</span>: 9,
+                    <span class="s2">"retencao_icms"</span>: <span class="o">{</span>
+                        <span class="s2">"valor_servico"</span>: 0,
+                        <span class="s2">"valor_base_calculo"</span>: 0,
+                        <span class="s2">"aliquota_retencao"</span>: 0,
+                        <span class="s2">"valor_retido"</span>: 0
+                    <span class="o">}</span>,
+                    <span class="s2">"volume_transportado"</span>: <span class="o">[</span>
+                        <span class="o">{</span>
+                            <span class="s2">"numeracao_volumes"</span>: <span class="s2">"0"</span>,
+                            <span class="s2">"marca"</span>: <span class="s2">"0"</span>,
+                            <span class="s2">"especie"</span>: <span class="s2">"Cilindro"</span>,
+                            <span class="s2">"quantidade_volumes"</span>: 1,
+                            <span class="s2">"peso_liquido"</span>: 66.78,
+                            <span class="s2">"peso_bruto"</span>: 450.78
+                        <span class="o">}</span>
+                    <span class="o">]</span>
+                <span class="o">}</span>,
+                <span class="s2">"cobranca"</span>: <span class="o">{</span>
+                    <span class="s2">"fatura"</span>: <span class="o">{</span>
+                        <span class="s2">"valor_original"</span>: 0,
+                        <span class="s2">"valor_desconto"</span>: 0,
+                        <span class="s2">"valor_liquido"</span>: 0
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"forma_de_pagamento"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"01"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 50
+                    <span class="o">}</span>,
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"03"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 8.97,
+                        <span class="s2">"tipo_de_integracao"</span>: 2
+                    <span class="o">}</span>,
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"03"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 40,
+                        <span class="s2">"tipo_de_integracao"</span>: 1,
+                        <span class="s2">"cnpj_credenciadora"</span>: <span class="s2">"99999999999999"</span>,
+                        <span class="s2">"bandeira_operadora"</span>: <span class="s2">"02"</span>,
+                        <span class="s2">"numero_autorizacao_operacao"</span>: <span class="s2">"99999999999999999999"</span>
+                    <span class="o">}</span>
+                <span class="o">]</span>,
+                <span class="s2">"informacoes_adicionais"</span>: <span class="o">{</span>
+                    <span class="s2">"informacoes_fisco"</span>: <span class="s2">"Cliente: 112. Remessa: 000061074-0123"</span>
+                <span class="o">}</span>,
+                <span class="s2">"retencao_tributos"</span>: <span class="o">{</span>
+                    <span class="s2">"valor_retido_pis"</span>: 0,
+                    <span class="s2">"valor_retido_cofins"</span>: 0,
+                    <span class="s2">"valor_retido_csll"</span>: 0,
+                    <span class="s2">"valor_base_calculo_irrf"</span>: 0,
+                    <span class="s2">"valor_irrf"</span>: 0,
+                    <span class="s2">"base_calculo_retencao_previdencia"</span>: 0,
+                    <span class="s2">"valor_retencao_previdencia"</span>: 0
+                <span class="o">}</span>
+            <span class="o">}</span>,
+            <span class="o">{</span>
+                <span class="s2">"dados_gerais"</span>: <span class="o">{</span>
+                    <span class="s2">"uf"</span>: <span class="s2">"53"</span>,
+                    <span class="s2">"serie"</span>: 22,
+                    <span class="s2">"codigo_mun_ocorrencia"</span>: <span class="s2">"5300108"</span>,
+                    <span class="s2">"natureza_operacao"</span>: <span class="s2">"Venda merc. adq. rec. terc. efet. fora estab."</span>,
+                    <span class="s2">"codigo_natureza_operacao"</span>: <span class="s2">"002"</span>,
+                    <span class="s2">"tipo_operacao"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"indicador_consumidor_final"</span>: <span class="s2">"0"</span>,
+                    <span class="s2">"destino_operacao"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"finalidade_nfe"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"indicador_presenca"</span>: <span class="s2">"9"</span>
+                <span class="o">}</span>,
+                <span class="s2">"emitente"</span>: <span class="o">{</span>
+                    <span class="s2">"cnpj"</span>: <span class="s2">"22769530000131"</span>,
+                    <span class="s2">"razao_social"</span>: <span class="s2">"Organizacao Teste NFCe / DF"</span>,
+                    <span class="s2">"nome_fantasia"</span>: <span class="s2">"Organizacao Teste NFCe / DF"</span>,
+                    <span class="s2">"inscricao_estadual"</span>: <span class="s2">"772733700120"</span>,
+                    <span class="s2">"codigo_regime_tributario"</span>: 3,
+                    <span class="s2">"regime_tributario_diferenciado"</span>: <span class="s2">"ISENLF"</span>,
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"bairro"</span>: <span class="s2">"Asa Sul"</span>,
+                        <span class="s2">"cep"</span>: <span class="s2">"70070938"</span>,
+                        <span class="s2">"logradouro"</span>: <span class="s2">"SAUS Quadra 4 Lote 9/10"</span>,
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"nome_municipio"</span>: <span class="s2">"Brasilia"</span>,
+                        <span class="s2">"numero"</span>: <span class="s2">"04"</span>,
+                        <span class="s2">"codigo_municipio"</span>: <span class="s2">"5300108"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>,
+                        <span class="s2">"uf"</span>: <span class="s2">"DF"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"cliente"</span>: <span class="o">{</span>
+                    <span class="s2">"cpf_cnpj"</span>: <span class="s2">"01716006000122"</span>,
+                    <span class="s2">"email"</span>: <span class="s2">"teste@nexaas.com.br"</span>,
+                    <span class="s2">"inscricao_estadual"</span>: <span class="s2">"0736913700156"</span>,
+                    <span class="s2">"nome"</span>: <span class="s2">"NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL"</span>,
+                    <span class="s2">"pessoa_fisica_juridica"</span>: <span class="s2">"company"</span>,
+                    <span class="s2">"indicador_inscricao_estadual"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"bairro"</span>: <span class="s2">"Bairro teste"</span>,
+                        <span class="s2">"cep"</span>: <span class="s2">"05685040"</span>,
+                        <span class="s2">"logradouro"</span>: <span class="s2">"Rua do Consultor"</span>,
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"BRASIL"</span>,
+                        <span class="s2">"nome_municipio"</span>: <span class="s2">"BRASILIA"</span>,
+                        <span class="s2">"numero"</span>: <span class="s2">"14"</span>,
+                        <span class="s2">"codigo_municipio"</span>: <span class="s2">"5300108"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>,
+                        <span class="s2">"telefone"</span>: <span class="s2">"99999999"</span>,
+                        <span class="s2">"uf"</span>: <span class="s2">"DF"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"retirada"</span>: <span class="o">{</span>
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"entrega"</span>: <span class="o">{</span>
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"produtos"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"codigo_produto"</span>: <span class="s2">"123456"</span>,
+                        <span class="s2">"codigo_ean"</span>: <span class="s2">"SEM GTIN"</span>,
+                        <span class="s2">"descricao"</span>: <span class="s2">"NITROGENIO CIL 50L 10M3"</span>,
+                        <span class="s2">"ncm"</span>: <span class="s2">"28043000"</span>,
+                        <span class="s2">"cfop"</span>: <span class="s2">"5102"</span>,
+                        <span class="s2">"unidade_comercial"</span>: <span class="s2">"M3"</span>,
+                        <span class="s2">"ean_unidade_trib"</span>: <span class="s2">"SEM GTIN"</span>,
+                        <span class="s2">"unidade_tributaria"</span>: <span class="s2">"M3"</span>,
+                        <span class="s2">"num_pedido"</span>: <span class="s2">"S0100249134"</span>,
+                        <span class="s2">"num_item_pedido"</span>: <span class="s2">"1"</span>,
+                        <span class="s2">"producao_escala"</span>: <span class="s2">"S"</span>,
+                        <span class="s2">"cnpj_fabricante_mercadoria"</span>: <span class="s2">"99999999999999999"</span>,
+                        <span class="s2">"codigo_beneficio_fiscal"</span>: <span class="s2">"foo"</span>,
+                        <span class="s2">"quantidade_comercial"</span>: 6,
+                        <span class="s2">"valor_unitario_comercial"</span>: 16.49485,
+                        <span class="s2">"quantidade_tributaria"</span>: 6,
+                        <span class="s2">"valor_unitario_tributario"</span>: 16.49485,
+                        <span class="s2">"valor_frete"</span>: 0,
+                        <span class="s2">"valor_seguro"</span>: 0,
+                        <span class="s2">"valor_desconto"</span>: 0,
+                        <span class="s2">"valor_total_produto"</span>: 98.97,
+                        <span class="s2">"outras_despesas"</span>: 0,
+                        <span class="s2">"tributacao"</span>: <span class="o">{</span>
+                            <span class="s2">"icms"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_consumidor_final"</span>: 0,
+                                <span class="s2">"aliquota_icms"</span>: 17,
+                                <span class="s2">"aliquota_icms_simples_nacional"</span>: 0,
+                                <span class="s2">"aliquota_icms_st"</span>: 0,
+                                <span class="s2">"aliquota_interestadual"</span>: <span class="s2">"12"</span>,
+                                <span class="s2">"aliquota_interna_interestadual"</span>: <span class="s2">"0.0000"</span>,
+                                <span class="s2">"base_icmsst_retido"</span>: 0,
+                                <span class="s2">"codigo_origem_produto"</span>: 2,
+                                <span class="s2">"credito_icms_simples_nacional"</span>: 0,
+                                <span class="s2">"modalidade_base_calculo"</span>: <span class="s2">"3"</span>,
+                                <span class="s2">"perc_diferimento"</span>: 0,
+                                <span class="s2">"perc_fcp_interestadual"</span>: <span class="s2">"0.0000"</span>,
+                                <span class="s2">"perc_mva_icms_st"</span>: 0,
+                                <span class="s2">"perc_provisorio_interestadual"</span>: <span class="s2">"100"</span>,
+                                <span class="s2">"perc_reducao_base_calculo"</span>: 0,
+                                <span class="s2">"perc_reducao_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"00"</span>,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"valor_icms"</span>: 16.82,
+                                <span class="s2">"valor_icms_desonerado"</span>: 0,
+                                <span class="s2">"valor_icms_diferido"</span>: 0,
+                                <span class="s2">"valor_icms_operacao"</span>: 0,
+                                <span class="s2">"valor_icms_st"</span>: 0,
+                                <span class="s2">"valor_icmsst_retido"</span>: 0
+                            <span class="o">}</span>,
+                            <span class="s2">"pis"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_st"</span>: 0,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"49"</span>,
+                                <span class="s2">"aliquota_pis"</span>: 3,
+                                <span class="s2">"aliquota_pis_reais"</span>: 0,
+                                <span class="s2">"aliquota_pis_reais_st"</span>: 0,
+                                <span class="s2">"valor_pis"</span>: 2.97,
+                                <span class="s2">"valor_pis_st"</span>: 0
+                            <span class="o">}</span>,
+                            <span class="s2">"cofins"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_st"</span>: 0,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"49"</span>,
+                                <span class="s2">"aliquota_cofins"</span>: 4,
+                                <span class="s2">"aliquota_cofins_reais"</span>: 0,
+                                <span class="s2">"aliquota_cofins_reais_st"</span>: 0,
+                                <span class="s2">"valor_cofins"</span>: 3.96,
+                                <span class="s2">"valor_cofins_st"</span>: 0
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">]</span>,
+                <span class="s2">"transporte"</span>: <span class="o">{</span>
+                    <span class="s2">"codigo_modalidade"</span>: 9,
+                    <span class="s2">"retencao_icms"</span>: <span class="o">{</span>
+                        <span class="s2">"valor_servico"</span>: 0,
+                        <span class="s2">"valor_base_calculo"</span>: 0,
+                        <span class="s2">"aliquota_retencao"</span>: 0,
+                        <span class="s2">"valor_retido"</span>: 0
+                    <span class="o">}</span>,
+                    <span class="s2">"volume_transportado"</span>: <span class="o">[</span>
+                        <span class="o">{</span>
+                            <span class="s2">"numeracao_volumes"</span>: <span class="s2">"0"</span>,
+                            <span class="s2">"marca"</span>: <span class="s2">"0"</span>,
+                            <span class="s2">"especie"</span>: <span class="s2">"Cilindro"</span>,
+                            <span class="s2">"quantidade_volumes"</span>: 1,
+                            <span class="s2">"peso_liquido"</span>: 66.78,
+                            <span class="s2">"peso_bruto"</span>: 450.78
+                        <span class="o">}</span>
+                    <span class="o">]</span>
+                <span class="o">}</span>,
+                <span class="s2">"cobranca"</span>: <span class="o">{</span>
+                    <span class="s2">"fatura"</span>: <span class="o">{</span>
+                        <span class="s2">"valor_original"</span>: 0,
+                        <span class="s2">"valor_desconto"</span>: 0,
+                        <span class="s2">"valor_liquido"</span>: 0
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"forma_de_pagamento"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"01"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 50
+                    <span class="o">}</span>,
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"03"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 8.97,
+                        <span class="s2">"tipo_de_integracao"</span>: 2
+                    <span class="o">}</span>,
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"03"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 40,
+                        <span class="s2">"tipo_de_integracao"</span>: 1,
+                        <span class="s2">"cnpj_credenciadora"</span>: <span class="s2">"99999999999999"</span>,
+                        <span class="s2">"bandeira_operadora"</span>: <span class="s2">"02"</span>,
+                        <span class="s2">"numero_autorizacao_operacao"</span>: <span class="s2">"99999999999999999999"</span>
+                    <span class="o">}</span>
+                <span class="o">]</span>,
+                <span class="s2">"informacoes_adicionais"</span>: <span class="o">{</span>
+                    <span class="s2">"informacoes_fisco"</span>: <span class="s2">"Cliente: 112. Remessa: 000061074-0123"</span>
+                <span class="o">}</span>,
+                <span class="s2">"retencao_tributos"</span>: <span class="o">{</span>
+                    <span class="s2">"valor_retido_pis"</span>: 0,
+                    <span class="s2">"valor_retido_cofins"</span>: 0,
+                    <span class="s2">"valor_retido_csll"</span>: 0,
+                    <span class="s2">"valor_base_calculo_irrf"</span>: 0,
+                    <span class="s2">"valor_irrf"</span>: 0,
+                    <span class="s2">"base_calculo_retencao_previdencia"</span>: 0,
+                    <span class="s2">"valor_retencao_previdencia"</span>: 0
+                <span class="o">}</span>
+            <span class="o">}</span>,
+            <span class="o">{</span>
+                <span class="s2">"dados_gerais"</span>: <span class="o">{</span>
+                    <span class="s2">"uf"</span>: <span class="s2">"53"</span>,
+                    <span class="s2">"serie"</span>: 22,
+                    <span class="s2">"codigo_mun_ocorrencia"</span>: <span class="s2">"5300108"</span>,
+                    <span class="s2">"natureza_operacao"</span>: <span class="s2">"Venda merc. adq. rec. terc. efet. fora estab."</span>,
+                    <span class="s2">"codigo_natureza_operacao"</span>: <span class="s2">"002"</span>,
+                    <span class="s2">"tipo_operacao"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"indicador_consumidor_final"</span>: <span class="s2">"0"</span>,
+                    <span class="s2">"destino_operacao"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"finalidade_nfe"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"indicador_presenca"</span>: <span class="s2">"9"</span>
+                <span class="o">}</span>,
+                <span class="s2">"emitente"</span>: <span class="o">{</span>
+                    <span class="s2">"cnpj"</span>: <span class="s2">"22769530000131"</span>,
+                    <span class="s2">"razao_social"</span>: <span class="s2">"Organizacao Teste NFCe / DF"</span>,
+                    <span class="s2">"nome_fantasia"</span>: <span class="s2">"Organizacao Teste NFCe / DF"</span>,
+                    <span class="s2">"inscricao_estadual"</span>: <span class="s2">"772733700120"</span>,
+                    <span class="s2">"codigo_regime_tributario"</span>: 3,
+                    <span class="s2">"regime_tributario_diferenciado"</span>: <span class="s2">"ISENLF"</span>,
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"bairro"</span>: <span class="s2">"Asa Sul"</span>,
+                        <span class="s2">"cep"</span>: <span class="s2">"70070938"</span>,
+                        <span class="s2">"logradouro"</span>: <span class="s2">"SAUS Quadra 4 Lote 9/10"</span>,
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"nome_municipio"</span>: <span class="s2">"Brasilia"</span>,
+                        <span class="s2">"numero"</span>: <span class="s2">"04"</span>,
+                        <span class="s2">"codigo_municipio"</span>: <span class="s2">"5300108"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>,
+                        <span class="s2">"uf"</span>: <span class="s2">"DF"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"cliente"</span>: <span class="o">{</span>
+                    <span class="s2">"cpf_cnpj"</span>: <span class="s2">"01716006000122"</span>,
+                    <span class="s2">"email"</span>: <span class="s2">"teste@nexaas.com.br"</span>,
+                    <span class="s2">"inscricao_estadual"</span>: <span class="s2">"0736913700156"</span>,
+                    <span class="s2">"nome"</span>: <span class="s2">"NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL"</span>,
+                    <span class="s2">"pessoa_fisica_juridica"</span>: <span class="s2">"company"</span>,
+                    <span class="s2">"indicador_inscricao_estadual"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"bairro"</span>: <span class="s2">"Bairro teste"</span>,
+                        <span class="s2">"cep"</span>: <span class="s2">"05685040"</span>,
+                        <span class="s2">"logradouro"</span>: <span class="s2">"Rua do Consultor"</span>,
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"BRASIL"</span>,
+                        <span class="s2">"nome_municipio"</span>: <span class="s2">"BRASILIA"</span>,
+                        <span class="s2">"numero"</span>: <span class="s2">"14"</span>,
+                        <span class="s2">"codigo_municipio"</span>: <span class="s2">"5300108"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>,
+                        <span class="s2">"telefone"</span>: <span class="s2">"99999999"</span>,
+                        <span class="s2">"uf"</span>: <span class="s2">"DF"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"retirada"</span>: <span class="o">{</span>
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"entrega"</span>: <span class="o">{</span>
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"produtos"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"codigo_produto"</span>: <span class="s2">"123456"</span>,
+                        <span class="s2">"codigo_ean"</span>: <span class="s2">"SEM GTIN"</span>,
+                        <span class="s2">"descricao"</span>: <span class="s2">"OXIGENIO CIL 50L 10M3"</span>,
+                        <span class="s2">"ncm"</span>: <span class="s2">"28043000"</span>,
+                        <span class="s2">"cfop"</span>: <span class="s2">"5102"</span>,
+                        <span class="s2">"unidade_comercial"</span>: <span class="s2">"M3"</span>,
+                        <span class="s2">"ean_unidade_trib"</span>: <span class="s2">"SEM GTIN"</span>,
+                        <span class="s2">"unidade_tributaria"</span>: <span class="s2">"M3"</span>,
+                        <span class="s2">"num_pedido"</span>: <span class="s2">"S0100249134"</span>,
+                        <span class="s2">"num_item_pedido"</span>: <span class="s2">"1"</span>,
+                        <span class="s2">"producao_escala"</span>: <span class="s2">"S"</span>,
+                        <span class="s2">"cnpj_fabricante_mercadoria"</span>: <span class="s2">"99999999999999999"</span>,
+                        <span class="s2">"codigo_beneficio_fiscal"</span>: <span class="s2">"foo"</span>,
+                        <span class="s2">"quantidade_comercial"</span>: 6,
+                        <span class="s2">"valor_unitario_comercial"</span>: 16.49485,
+                        <span class="s2">"quantidade_tributaria"</span>: 6,
+                        <span class="s2">"valor_unitario_tributario"</span>: 16.49485,
+                        <span class="s2">"valor_frete"</span>: 0,
+                        <span class="s2">"valor_seguro"</span>: 0,
+                        <span class="s2">"valor_desconto"</span>: 0,
+                        <span class="s2">"valor_total_produto"</span>: 98.97,
+                        <span class="s2">"outras_despesas"</span>: 0,
+                        <span class="s2">"tributacao"</span>: <span class="o">{</span>
+                            <span class="s2">"icms"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_consumidor_final"</span>: 0,
+                                <span class="s2">"aliquota_icms"</span>: 17,
+                                <span class="s2">"aliquota_icms_simples_nacional"</span>: 0,
+                                <span class="s2">"aliquota_icms_st"</span>: 0,
+                                <span class="s2">"aliquota_interestadual"</span>: <span class="s2">"12"</span>,
+                                <span class="s2">"aliquota_interna_interestadual"</span>: <span class="s2">"0.0000"</span>,
+                                <span class="s2">"base_icmsst_retido"</span>: 0,
+                                <span class="s2">"codigo_origem_produto"</span>: 2,
+                                <span class="s2">"credito_icms_simples_nacional"</span>: 0,
+                                <span class="s2">"modalidade_base_calculo"</span>: <span class="s2">"3"</span>,
+                                <span class="s2">"perc_diferimento"</span>: 0,
+                                <span class="s2">"perc_fcp_interestadual"</span>: <span class="s2">"0.0000"</span>,
+                                <span class="s2">"perc_mva_icms_st"</span>: 0,
+                                <span class="s2">"perc_provisorio_interestadual"</span>: <span class="s2">"100"</span>,
+                                <span class="s2">"perc_reducao_base_calculo"</span>: 0,
+                                <span class="s2">"perc_reducao_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"00"</span>,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"valor_icms"</span>: 16.82,
+                                <span class="s2">"valor_icms_desonerado"</span>: 0,
+                                <span class="s2">"valor_icms_diferido"</span>: 0,
+                                <span class="s2">"valor_icms_operacao"</span>: 0,
+                                <span class="s2">"valor_icms_st"</span>: 0,
+                                <span class="s2">"valor_icmsst_retido"</span>: 0
+                            <span class="o">}</span>,
+                            <span class="s2">"pis"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_st"</span>: 0,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"49"</span>,
+                                <span class="s2">"aliquota_pis"</span>: 3,
+                                <span class="s2">"aliquota_pis_reais"</span>: 0,
+                                <span class="s2">"aliquota_pis_reais_st"</span>: 0,
+                                <span class="s2">"valor_pis"</span>: 2.97,
+                                <span class="s2">"valor_pis_st"</span>: 0
+                            <span class="o">}</span>,
+                            <span class="s2">"cofins"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_st"</span>: 0,
+                                <span class="s2">"valor_base_calculo"</span>: 98.97,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"49"</span>,
+                                <span class="s2">"aliquota_cofins"</span>: 4,
+                                <span class="s2">"aliquota_cofins_reais"</span>: 0,
+                                <span class="s2">"aliquota_cofins_reais_st"</span>: 0,
+                                <span class="s2">"valor_cofins"</span>: 3.96,
+                                <span class="s2">"valor_cofins_st"</span>: 0
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">]</span>,
+                <span class="s2">"transporte"</span>: <span class="o">{</span>
+                    <span class="s2">"codigo_modalidade"</span>: 9,
+                    <span class="s2">"retencao_icms"</span>: <span class="o">{</span>
+                        <span class="s2">"valor_servico"</span>: 0,
+                        <span class="s2">"valor_base_calculo"</span>: 0,
+                        <span class="s2">"aliquota_retencao"</span>: 0,
+                        <span class="s2">"valor_retido"</span>: 0
+                    <span class="o">}</span>,
+                    <span class="s2">"volume_transportado"</span>: <span class="o">[</span>
+                        <span class="o">{</span>
+                            <span class="s2">"numeracao_volumes"</span>: <span class="s2">"0"</span>,
+                            <span class="s2">"marca"</span>: <span class="s2">"0"</span>,
+                            <span class="s2">"especie"</span>: <span class="s2">"Cilindro"</span>,
+                            <span class="s2">"quantidade_volumes"</span>: 1,
+                            <span class="s2">"peso_liquido"</span>: 66.78,
+                            <span class="s2">"peso_bruto"</span>: 450.78
+                        <span class="o">}</span>
+                    <span class="o">]</span>
+                <span class="o">}</span>,
+                <span class="s2">"cobranca"</span>: <span class="o">{</span>
+                    <span class="s2">"fatura"</span>: <span class="o">{</span>
+                        <span class="s2">"valor_original"</span>: 0,
+                        <span class="s2">"valor_desconto"</span>: 0,
+                        <span class="s2">"valor_liquido"</span>: 0
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"forma_de_pagamento"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"01"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 50
+                    <span class="o">}</span>,
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"03"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 8.97,
+                        <span class="s2">"tipo_de_integracao"</span>: 2
+                    <span class="o">}</span>,
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"03"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 40,
+                        <span class="s2">"tipo_de_integracao"</span>: 1,
+                        <span class="s2">"cnpj_credenciadora"</span>: <span class="s2">"99999999999999"</span>,
+                        <span class="s2">"bandeira_operadora"</span>: <span class="s2">"02"</span>,
+                        <span class="s2">"numero_autorizacao_operacao"</span>: <span class="s2">"99999999999999999999"</span>
+                    <span class="o">}</span>
+                <span class="o">]</span>,
+                <span class="s2">"informacoes_adicionais"</span>: <span class="o">{</span>
+                    <span class="s2">"informacoes_fisco"</span>: <span class="s2">"Cliente: 112. Remessa: 000061074-0123"</span>
+                <span class="o">}</span>,
+                <span class="s2">"retencao_tributos"</span>: <span class="o">{</span>
+                    <span class="s2">"valor_retido_pis"</span>: 0,
+                    <span class="s2">"valor_retido_cofins"</span>: 0,
+                    <span class="s2">"valor_retido_csll"</span>: 0,
+                    <span class="s2">"valor_base_calculo_irrf"</span>: 0,
+                    <span class="s2">"valor_irrf"</span>: 0,
+                    <span class="s2">"base_calculo_retencao_previdencia"</span>: 0,
+                    <span class="s2">"valor_retencao_previdencia"</span>: 0
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">]</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+
+<h2 id="exemplo-nfce">Exemplo NFCe</h2>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/tax_calculator <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "nfce_batch": {
+        "lote": "1",
+        "serie": "233",
+        "engine_de_calculo": "nexaas",
+        "sincronicidade": "0",
+        "uf": "53",
+        "nfces": [
+            {
+                "dados_gerais": {
+                    "csc": "000002",
+                    "id_token": "A16A5A2DD8FA443FB8710D9AB8EB5432",
+                    "codigo_mun_ocorrencia": "5300108",
+                    "destino_operacao": 1,
+                    "finalidade_nfe": "1",
+                    "indicador_presenca": "1",
+                    "natureza_operacao": "saida",
+                    "codigo_natureza_operacao": "002",
+                    "tipo_operacao": "1",
+                    "uf": "53"
+                },
+                "cliente": {
+                    "pessoa_fisica_juridica": "person",
+                    "cpf_cnpj": "86152288843",
+                    "nome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                    "email": "teste@teste.com",
+                    "endereco": {
+                        "bairro": "Bairro teste",
+                        "cep": "05685040",
+                        "codigo_municipio": "5300108",
+                        "codigo_pais": "1058",
+                        "complemento": "",
+                        "logradouro": "Rua do Consultor",
+                        "nome_municipio": "Brasilia",
+                        "nome_pais": "Brasil",
+                        "numero": "14",
+                        "telefone": "",
+                        "uf": "DF"
+                    }
+                },
+                "forma_de_pagamento": [
+                    {
+                        "tipo_de_pagamento": "03",
+                        "valor_do_pagamento": 15,
+                        "cnpj_credenciadora": "27.197.888/0186-02",
+                        "bandeira_operadora": "01",
+                        "numero_autorizacao_operacao": "1",
+                        "tipo_de_integracao": "1"
+                    },
+                    {
+                        "tipo_de_pagamento": "01",
+                        "cnpj_credenciadora": null,
+                        "bandeira_operadora": null,
+                        "tipo_de_integracao": null,
+                        "numero_autorizacao_operacao": null,
+                        "valor_do_pagamento": 85
+                    }
+                ],
+                "produtos": [
+                    {
+                        "cest": "1300402",
+                        "cfop": "5103",
+                        "cnpj_fabricante_mercadoria": null,
+                        "codigo_beneficio_fiscal": null,
+                        "codigo_ean": "7891000315507",
+                        "codigo_produto": "14600",
+                        "declaracao_importacao": [],
+                        "descricao": "NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                        "ean_unidade_trib": "7891000315507",
+                        "extipi": "22",
+                        "imposto_devolvido": null,
+                        "ind_valor_total": null,
+                        "informacoes_adicionais": "teste",
+                        "ncm": "22086000",
+                        "num_controle_fci": null,
+                        "num_item_pedido": "1",
+                        "num_pedido": "5100003910",
+                        "outras_despesas": 0,
+                        "producao_escala": null,
+                        "quantidade_comercial": 10,
+                        "quantidade_tributaria": 10,
+                        "tributacao": { "icms": { "codigo_origem_produto": 2 } },
+                        "unidade_comercial": "UN",
+                        "unidade_tributaria": "UN",
+                        "valor_desconto": 0,
+                        "valor_frete": 0,
+                        "valor_seguro": 0,
+                        "valor_total_produto": 100,
+                        "valor_unitario_comercial": 10,
+                        "valor_unitario_tributario": 10
+                    }
+                ],
+                "transporte": {
+                    "volume_transportado": [
+                        {
+                            "especie": "A Granel",
+                            "lacres": [],
+                            "marca": "0",
+                            "numeracao_volumes": "333",
+                            "peso_bruto": 0,
+                            "peso_liquido": 0,
+                            "quantidade_volumes": 1
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}'</span>
+
+
+EXEMPLO DE RESPOSTA
+<span class="o">{</span>
+    <span class="s2">"nfce_batch"</span>: <span class="o">{</span>
+        <span class="s2">"lote"</span>: <span class="s2">"1"</span>,
+        <span class="s2">"serie"</span>: <span class="s2">"233"</span>,
+        <span class="s2">"engine_de_calculo"</span>: <span class="s2">"nexaas"</span>,
+        <span class="s2">"sincronicidade"</span>: <span class="s2">"0"</span>,
+        <span class="s2">"uf"</span>: <span class="s2">"53"</span>,
+        <span class="s2">"nfces"</span>: <span class="o">[</span>
+            <span class="o">{</span>
+                <span class="s2">"dados_gerais"</span>: <span class="o">{</span>
+                    <span class="s2">"uf"</span>: <span class="s2">"53"</span>,
+                    <span class="s2">"serie"</span>: 233,
+                    <span class="s2">"codigo_mun_ocorrencia"</span>: <span class="s2">"5300108"</span>,
+                    <span class="s2">"natureza_operacao"</span>: <span class="s2">"saida"</span>,
+                    <span class="s2">"codigo_natureza_operacao"</span>: <span class="s2">"002"</span>,
+                    <span class="s2">"csc"</span>: <span class="s2">"000002"</span>,
+                    <span class="s2">"id_token"</span>: <span class="s2">"A16A5A2DD8FA443FB8710D9AB8EB5432"</span>,
+                    <span class="s2">"tipo_operacao"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"destino_operacao"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"finalidade_nfe"</span>: <span class="s2">"1"</span>,
+                    <span class="s2">"indicador_presenca"</span>: <span class="s2">"1"</span>
+                <span class="o">}</span>,
+                <span class="s2">"emitente"</span>: <span class="o">{</span>
+                    <span class="s2">"cnpj"</span>: <span class="s2">"22769530000131"</span>,
+                    <span class="s2">"razao_social"</span>: <span class="s2">"Organizacao Teste NFCe / DF"</span>,
+                    <span class="s2">"nome_fantasia"</span>: <span class="s2">"Organizacao Teste NFCe / DF"</span>,
+                    <span class="s2">"inscricao_estadual"</span>: <span class="s2">"772733700120"</span>,
+                    <span class="s2">"codigo_regime_tributario"</span>: 3,
+                    <span class="s2">"regime_tributario_diferenciado"</span>: <span class="s2">"ISENLF"</span>,
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"bairro"</span>: <span class="s2">"Asa Sul"</span>,
+                        <span class="s2">"cep"</span>: <span class="s2">"70070938"</span>,
+                        <span class="s2">"logradouro"</span>: <span class="s2">"SAUS Quadra 4 Lote 9/10"</span>,
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"nome_municipio"</span>: <span class="s2">"Brasilia"</span>,
+                        <span class="s2">"numero"</span>: <span class="s2">"04"</span>,
+                        <span class="s2">"codigo_municipio"</span>: <span class="s2">"5300108"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>,
+                        <span class="s2">"uf"</span>: <span class="s2">"DF"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"cliente"</span>: <span class="o">{</span>
+                    <span class="s2">"cpf_cnpj"</span>: <span class="s2">"86152288843"</span>,
+                    <span class="s2">"email"</span>: <span class="s2">"teste@teste.com"</span>,
+                    <span class="s2">"nome"</span>: <span class="s2">"NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL"</span>,
+                    <span class="s2">"pessoa_fisica_juridica"</span>: <span class="s2">"person"</span>,
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"bairro"</span>: <span class="s2">"Bairro teste"</span>,
+                        <span class="s2">"cep"</span>: <span class="s2">"05685040"</span>,
+                        <span class="s2">"logradouro"</span>: <span class="s2">"Rua do Consultor"</span>,
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"nome_municipio"</span>: <span class="s2">"Brasilia"</span>,
+                        <span class="s2">"numero"</span>: <span class="s2">"14"</span>,
+                        <span class="s2">"codigo_municipio"</span>: <span class="s2">"5300108"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>,
+                        <span class="s2">"uf"</span>: <span class="s2">"DF"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"retirada"</span>: <span class="o">{</span>
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"entrega"</span>: <span class="o">{</span>
+                    <span class="s2">"endereco"</span>: <span class="o">{</span>
+                        <span class="s2">"nome_pais"</span>: <span class="s2">"Brasil"</span>,
+                        <span class="s2">"codigo_pais"</span>: <span class="s2">"1058"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>,
+                <span class="s2">"produtos"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"informacoes_adicionais"</span>: <span class="s2">"teste"</span>,
+                        <span class="s2">"codigo_produto"</span>: <span class="s2">"14600"</span>,
+                        <span class="s2">"codigo_ean"</span>: <span class="s2">"7891000315507"</span>,
+                        <span class="s2">"descricao"</span>: <span class="s2">"NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL"</span>,
+                        <span class="s2">"ncm"</span>: <span class="s2">"22086000"</span>,
+                        <span class="s2">"cest"</span>: <span class="s2">"1300402"</span>,
+                        <span class="s2">"extipi"</span>: <span class="s2">"22"</span>,
+                        <span class="s2">"cfop"</span>: <span class="s2">"5102"</span>,
+                        <span class="s2">"unidade_comercial"</span>: <span class="s2">"UN"</span>,
+                        <span class="s2">"ean_unidade_trib"</span>: <span class="s2">"7891000315507"</span>,
+                        <span class="s2">"unidade_tributaria"</span>: <span class="s2">"UN"</span>,
+                        <span class="s2">"num_pedido"</span>: <span class="s2">"5100003910"</span>,
+                        <span class="s2">"num_item_pedido"</span>: <span class="s2">"1"</span>,
+                        <span class="s2">"quantidade_comercial"</span>: 10,
+                        <span class="s2">"valor_unitario_comercial"</span>: 10,
+                        <span class="s2">"quantidade_tributaria"</span>: 10,
+                        <span class="s2">"valor_unitario_tributario"</span>: 10,
+                        <span class="s2">"valor_frete"</span>: 0,
+                        <span class="s2">"valor_seguro"</span>: 0,
+                        <span class="s2">"valor_desconto"</span>: 0,
+                        <span class="s2">"valor_total_produto"</span>: 100,
+                        <span class="s2">"outras_despesas"</span>: 0,
+                        <span class="s2">"tributacao"</span>: <span class="o">{</span>
+                            <span class="s2">"icms"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_consumidor_final"</span>: 0,
+                                <span class="s2">"aliquota_icms"</span>: 17,
+                                <span class="s2">"aliquota_icms_simples_nacional"</span>: 0,
+                                <span class="s2">"aliquota_icms_st"</span>: 0,
+                                <span class="s2">"aliquota_interestadual"</span>: <span class="s2">"12"</span>,
+                                <span class="s2">"aliquota_interna_interestadual"</span>: <span class="s2">"0.0000"</span>,
+                                <span class="s2">"base_icmsst_retido"</span>: 0,
+                                <span class="s2">"codigo_origem_produto"</span>: 2,
+                                <span class="s2">"credito_icms_simples_nacional"</span>: 0,
+                                <span class="s2">"modalidade_base_calculo"</span>: <span class="s2">"3"</span>,
+                                <span class="s2">"perc_diferimento"</span>: 0,
+                                <span class="s2">"perc_fcp_interestadual"</span>: <span class="s2">"0.0000"</span>,
+                                <span class="s2">"perc_mva_icms_st"</span>: 0,
+                                <span class="s2">"perc_provisorio_interestadual"</span>: <span class="s2">"100"</span>,
+                                <span class="s2">"perc_reducao_base_calculo"</span>: 0,
+                                <span class="s2">"perc_reducao_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"00"</span>,
+                                <span class="s2">"valor_base_calculo"</span>: 100,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"valor_icms"</span>: 17,
+                                <span class="s2">"valor_icms_desonerado"</span>: 0,
+                                <span class="s2">"valor_icms_diferido"</span>: 0,
+                                <span class="s2">"valor_icms_operacao"</span>: 0,
+                                <span class="s2">"valor_icms_st"</span>: 0,
+                                <span class="s2">"valor_icmsst_retido"</span>: 0
+                            <span class="o">}</span>,
+                            <span class="s2">"pis"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_st"</span>: 0,
+                                <span class="s2">"valor_base_calculo"</span>: 100,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"49"</span>,
+                                <span class="s2">"aliquota_pis"</span>: 3,
+                                <span class="s2">"aliquota_pis_reais"</span>: 0,
+                                <span class="s2">"aliquota_pis_reais_st"</span>: 0,
+                                <span class="s2">"valor_pis"</span>: 3,
+                                <span class="s2">"valor_pis_st"</span>: 0
+                            <span class="o">}</span>,
+                            <span class="s2">"cofins"</span>: <span class="o">{</span>
+                                <span class="s2">"aliquota_st"</span>: 0,
+                                <span class="s2">"valor_base_calculo"</span>: 100,
+                                <span class="s2">"valor_base_calculo_st"</span>: 0,
+                                <span class="s2">"situacao_tributaria"</span>: <span class="s2">"49"</span>,
+                                <span class="s2">"aliquota_cofins"</span>: 4,
+                                <span class="s2">"aliquota_cofins_reais"</span>: 0,
+                                <span class="s2">"aliquota_cofins_reais_st"</span>: 0,
+                                <span class="s2">"valor_cofins"</span>: 4,
+                                <span class="s2">"valor_cofins_st"</span>: 0
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">]</span>,
+                <span class="s2">"transporte"</span>: <span class="o">{</span>
+                    <span class="s2">"volume_transportado"</span>: <span class="o">[</span>
+                        <span class="o">{</span>
+                            <span class="s2">"numeracao_volumes"</span>: <span class="s2">"333"</span>,
+                            <span class="s2">"marca"</span>: <span class="s2">"0"</span>,
+                            <span class="s2">"especie"</span>: <span class="s2">"A Granel"</span>,
+                            <span class="s2">"quantidade_volumes"</span>: 1,
+                            <span class="s2">"peso_liquido"</span>: 0,
+                            <span class="s2">"peso_bruto"</span>: 0
+                        <span class="o">}</span>
+                    <span class="o">]</span>
+                <span class="o">}</span>,
+                <span class="s2">"forma_de_pagamento"</span>: <span class="o">[</span>
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"03"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 15,
+                        <span class="s2">"tipo_de_integracao"</span>: 1,
+                        <span class="s2">"cnpj_credenciadora"</span>: <span class="s2">"27197888018602"</span>,
+                        <span class="s2">"bandeira_operadora"</span>: <span class="s2">"01"</span>,
+                        <span class="s2">"numero_autorizacao_operacao"</span>: <span class="s2">"1"</span>
+                    <span class="o">}</span>,
+                    <span class="o">{</span>
+                        <span class="s2">"tipo_de_pagamento"</span>: <span class="s2">"01"</span>,
+                        <span class="s2">"valor_do_pagamento"</span>: 85
+                    <span class="o">}</span>
+                <span class="o">]</span>
+            <span class="o">}</span>
+        <span class="o">]</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
 
