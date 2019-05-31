@@ -491,7 +491,7 @@ curl -X POST \
                       "valor_pis": 1.65,
                       "valor_pis_st": null
                     },
-                    "valor_aproximado_total": null
+                    "valor_aproximado_total": 27.25
                   },
                   "unidade_comercial": "UN",
                   "unidade_tributaria": "UN",
