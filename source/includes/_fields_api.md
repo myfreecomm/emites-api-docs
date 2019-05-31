@@ -194,7 +194,7 @@ Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e 
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
-    valor_aproximado_total      |  vTotTrib     |  Não          |     Decimal             |  Até 13 dígitos, 2 casas decimais  |  Valor aproximado total de tributos federais, estaduais e municipais.
+    valor_aproximado_total      |  vTotTrib     |  Sim          |     Decimal             |  Até 13 dígitos, 2 casas decimais  |  Valor aproximado total de tributos federais, estaduais e municipais para o produto.<br><i>Caso o valor esteja ausente, o Emites não enviará valor algum para a SEFAZ.</i>
 
 ### icms (XML: ICMS)
 
