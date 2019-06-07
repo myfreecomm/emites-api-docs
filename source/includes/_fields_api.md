@@ -162,7 +162,7 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     descricao                   |    xProd        |  Sim          |     Texto               |  Até 120 caracteres               |  Descrição do produto.
     ncm                         |    NCM          |  Sim          |     Numérico            |  8 dígitos                        |  Nomenclatura comum do Mercosul. Itens específicos que não possuem NCM podem informar somente o código “00”.
     exncm                       |    -            |  Não          |     Numérico            |  2 dígitos                        |  Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb destinado à detalhar a característica do produto. (Ex. pauta fiscal etc).
-    cest                        |    CEST         |  Não          |     Numérico            |  Até 7 dígitos                    |  Código Especificador de Substituição Tributária.
+    cest                        |    CEST         |  Não          |     Numérico            |  7 dígitos                        |  Código Especificador de Substituição Tributária.
     extipi                      |    EXTIPI       |  Não          |     Numérico            |  De 2 a 3 dígitos                 |
     cfop                        |    CFOP         |  Sim          |     Numérico            |  4 dígitos                        |  Código Fiscal de Operações e Prestações.
     produto_especifico          |         -       |       -       |            -            |          -                        |  -
