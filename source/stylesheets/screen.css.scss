@@ -678,6 +678,11 @@ html, body {
   white-space: nowrap;
   background: #00c952;
 }
+
+.label-warning {
+  background: $bg-label-warning;
+}
+
 .api-endpoint .endpoint-data h6 {
   margin: 0;
   text-transform: lowercase;

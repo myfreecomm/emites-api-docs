@@ -25,6 +25,7 @@ includes:
   - correction_note
   - cfe_storage
   - tax_calculator
+  - users
   - webhooks
 
 search: true
