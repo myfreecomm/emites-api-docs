@@ -21,7 +21,7 @@ curl -X POST \
   -H 'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da' \
   -H 'content-type: application/json' \
   -d '{
-      "users": {
+      "user": {
         "email": "foo@bar.com",
       }
     }'
@@ -35,7 +35,7 @@ EXEMPLO DE RESPOSTA
     "name": "foo@bar.com",
     "email": "foo@bar.com",
     "auth_provider": "nexaas_id",
-    "uuid": "1234",
+    "uuid": "4dc677bd-c23e-4618-911c-a6c80d5797b4",
     "created_at": "2019-06-17T09:51:51.558-03:00",
     "updated_at": "2019-06-17T09:51:51.558-03:00"
   }
