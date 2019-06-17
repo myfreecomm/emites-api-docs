@@ -676,8 +676,13 @@ html, body {
   text-transform: uppercase;
   font-style: normal;
   white-space: nowrap;
-  background: #00c952;
+  background: $bg-label;
 }
+
+.label-warning {
+  background: $bg-label-warning;
+}
+
 .api-endpoint .endpoint-data h6 {
   margin: 0;
   text-transform: lowercase;
