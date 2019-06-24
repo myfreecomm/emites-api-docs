@@ -2,11 +2,11 @@
 
 ## Criação de Organizações
 
-Para emissão de NF-e ou NFC-e, é necessário possuir ao menos uma organização criada no Emites. Para realizar a criação de uma organização via API, o processo consiste em dois passos:  
+Para emissão de NF-e ou NFC-e, é necessário possuir ao menos uma organização criada no Emites. Para realizar a criação de uma organização via API, o processo consiste em dois passos:
 
-### 1º Passo: Criação da Organização  
+### 1º Passo: Criação da Organização
 
-Para criar uma organização, é necessário realizar uma requisição POST para o seguinte endereço:  
+Para criar uma organização, é necessário realizar uma requisição POST para o seguinte endereço:
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -15,7 +15,7 @@ Para criar uma organização, é necessário realizar uma requisição POST para
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -82,27 +82,27 @@ EXEMPLO DE RESPOSTA
 
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
-    codigo_regime_tributario    |  Não          |     Numérico            |   1 dígito                   |  1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.  
-    razao_social                |  Sim          |     Texto               |   Até 60 caracteres          |  
-    cnpj                        |  Sim          |     Numérico            |   14 dígitos                 |  CNPJ da empresa emitente, somente números.
+    codigo_regime_tributario    |  Não          |     Numérico            |   1 dígito                   |  1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.
+    razao_social                |  Sim          |     Texto               |   Até 60 caracteres          |
+    document                    |  Sim          |     Numérico            |   14 dígitos                 |  CNPJ da empresa emitente, somente números.
     email                       |  Sim          |     Texto               |   Até 60 caracteres          |
-    inscricao_estadual          |  sim          |     Texto               |   Até 14 caracteres          |  Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.  
-    inscricao_municipal         |  Não          |     Texto               |   Até 15 caracteres          |  
-    nome_fantasia               |  Não          |     Texto               |   Até 60 caracteres          |  
+    inscricao_estadual          |  sim          |     Texto               |   Até 14 caracteres          |  Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.
+    inscricao_municipal         |  Não          |     Texto               |   Até 15 caracteres          |
+    nome_fantasia               |  Não          |     Texto               |   Até 60 caracteres          |
 
-#### address  
+#### address
 
-Grupo de informações relacionadas ao endereço da organização. Seus atributos são:  
+Grupo de informações relacionadas ao endereço da organização. Seus atributos são:
 
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     address                     |  Sim          |  Texto                  |   Até 60 caracteres          |
     city                        |  Sim          |  Texto                  |   Até 60 caracteres          |
-    city_code                   |  Sim          |  Numérico               |   7 dígitos                  |  
-    complement                  |  Não          |  Texto                  |   Até 60 caracteres          |  
+    city_code                   |  Sim          |  Numérico               |   7 dígitos                  |
+    complement                  |  Não          |  Texto                  |   Até 60 caracteres          |
     district                    |  Sim          |  Texto                  |   Até 60 caracteres          |
-    number                      |  Sim          |  Texto                  |   Até 60 caracteres          |  
-    phone                       |  Não          |  Numérico               |   De 6 a 14 carateres        |  
+    number                      |  Sim          |  Texto                  |   Até 60 caracteres          |
+    phone                       |  Não          |  Numérico               |   De 6 a 14 carateres        |
     state                       |  Sim          |  Texto                  |   2 caracteres               |
     zipcode                     |  Sim          |  Numérico               |   8 dígitos                  |
 
@@ -122,7 +122,7 @@ A inclusão de certificado digital vigente da organização é obrigatório para
     Ex: <b>/api/v1/organizations/CNPJ58521175000124IE787811920</b>
 </aside>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -150,6 +150,90 @@ EXEMPLO DE RESPOSTA
 ```
 
 ## Atualização de Organizações
+
+Para atualizar uma organização, é necessário realizar uma requisição PATCH para o seguinte endereço:
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH</i>
+        <h6>/api/v1/organizations/{:organization_id}</h6>
+    </div>
+</div>
+
+Veja a seguir um exemplo do corpo da requisição:
+
+```shell
+EXEMPLO DE REQUISIÇÃO
+
+curl -X PATCH \
+  http://localhost:3000/api/v1/organizations/ \
+  -H 'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da' \
+  -H 'content-type: application/json' \
+  -d '{
+      "organization": {
+        "company_name": "Update company_name",
+        "email": "foo2@bar.com"
+      }
+    }'
+
+
+EXEMPLO DE RESPOSTA
+
+{
+  "organization": {
+    "id": 5,
+      "document": "58521175000124",
+      "name": "Foo",
+      "inscricao_municipal": "13213213",
+      "company_name": "Update company_name",
+      "email": "foo2@bar.com",
+      "logo_file_name": null,
+      "logo_url": "",
+      "address": {
+        "zipcode": "04552000",
+        "address": "Rua do Rocio",
+        "number": "199",
+        "complement": "Conj. 91",
+        "district": "Vila Olimpia",
+        "city": "Sao Paulo",
+        "state": "SP",
+        "phone": "1133333333",
+        "city_code": "812938"
+      },
+      "inscricao_estadual": "787811920",
+      "codigo_regime_tributario": "simples_nacional",
+      "cnae": null,
+      "certificate": null
+  }
+}
+```
+
+    Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    codigo_regime_tributario    |  Não          |     Numérico            |   1 dígito                   |  1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.
+    razao_social                |  Sim          |     Texto               |   Até 60 caracteres          |
+    document                    |  Sim          |     Numérico            |   14 dígitos                 |  CNPJ da empresa emitente, somente números.
+    email                       |  Sim          |     Texto               |   Até 60 caracteres          |
+    inscricao_estadual          |  sim          |     Texto               |   Até 14 caracteres          |  Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.
+    inscricao_municipal         |  Não          |     Texto               |   Até 15 caracteres          |
+    nome_fantasia               |  Não          |     Texto               |   Até 60 caracteres          |
+
+#### address
+
+Grupo de informações relacionadas ao endereço da organização. Seus atributos são:
+
+    Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
+--------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
+    address                     |  Sim          |  Texto                  |   Até 60 caracteres          |
+    city                        |  Sim          |  Texto                  |   Até 60 caracteres          |
+    city_code                   |  Sim          |  Numérico               |   7 dígitos                  |
+    complement                  |  Não          |  Texto                  |   Até 60 caracteres          |
+    district                    |  Sim          |  Texto                  |   Até 60 caracteres          |
+    number                      |  Sim          |  Texto                  |   Até 60 caracteres          |
+    phone                       |  Não          |  Numérico               |   De 6 a 14 carateres        |
+    state                       |  Sim          |  Texto                  |   2 caracteres               |
+    zipcode                     |  Sim          |  Numérico               |   8 dígitos                  |
+
 
 ## Exclusão de Organizações
 
