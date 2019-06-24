@@ -830,9 +830,9 @@ Contém informações sobre imposto de importação. Informar apenas quando o it
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 base_calculo_importacao         |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
-valor_despesas_aduaneiras       |  vDespAdu     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_despesas_aduaneiras       |  vDespAdu     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais | **Obrigatório quando usar engine de cálculo taxweb** |
 valor_imposto_importacao        |  vII          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
-valor_iof                       |  vIOF         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_iof                       |  vIOF         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais | **Obrigatório quando usar engine de cálculo taxweb** |
 
 ## declaracao_importacao (XML: DI)
 
