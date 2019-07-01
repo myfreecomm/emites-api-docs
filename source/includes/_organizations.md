@@ -242,7 +242,7 @@ Para excluir uma organização da conta, é necessário realizar uma requisiçã
 <div class="api-endpoint">
     <div class="endpoint-data">
         <i class="label label-warning">DELETE</i>
-        <h6>/api/v1/organizations/{:user_id}</h6>
+        <h6>/api/v1/organizations/{:organization_id}</h6>
     </div>
 </div>
 
