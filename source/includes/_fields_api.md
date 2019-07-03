@@ -78,7 +78,7 @@ Grupo de informações relacionadas ao endereço do destinatário. Seus atributo
     nome_municipio              |  xMun           |  Sim          |  Texto                  |  Até 60 caracteres           |
     cep                         |  CEP            |  Sim          |  Numérico               |  8 dígitos                   |
     uf                          |  UF             |  Sim          |  Texto                  |  2 caracteres                |
-    codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |
+    codigo_pais                 |  cPais          |  Condicional          |  Numérico               |  4 dígitos                   | Condicional em razão do desejo do contribuinte ou do valor máximo do documento, conforme cada UF
     nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |
     telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |
 
