@@ -86,6 +86,7 @@ EXEMPLO DE RESPOSTA
   }
 }
 
+
 EXEMPLO DE RETORNO DE ERROS
 
 {
@@ -96,6 +97,16 @@ EXEMPLO DE RETORNO DE ERROS
             ],
             "last_number": [
                 "não pode ficar em branco"
+            ]
+        }
+    ],
+    "error_details": [
+        {
+            "serie": [
+                { "error": "blank" }
+            ],
+            "last_number": [
+                { "error": "blank" }
             ]
         }
     ]
@@ -169,11 +180,18 @@ curl -X DELETE \
 ```
 {
   "errors": [
-    {
-      "base": [
-          "Não foi possível excluir essa série de notas pois ela está vinculada a um documento"
-      ]
-    }
+      {
+          "base": [
+              "Não foi possível excluir essa série de notas pois ela está vinculada a um documento"
+          ]
+      }
+  ],
+  "error_details": [
+      {
+          "base": [
+              { "error": "default" }
+          ]
+      }
   ]
 }
 ```
@@ -272,6 +290,16 @@ EXEMPLO DE RETORNO DE ERROS
                 "não pode ficar em branco"
             ]
         }
+    ],
+    "error_details": [
+        {
+            "serie": [
+                { "error": "blank" }
+            ],
+            "last_number": [
+                { "error": "blank" }
+            ]
+        }
     ]
 }
 ```
@@ -344,10 +372,17 @@ curl -X DELETE \
 ```
 {
   "errors": [
-    {
-      "base": [
-          "Não foi possível excluir essa série de notas pois ela está vinculada a um documento"
-      ]
-    }
+      {
+          "base": [
+              "Não foi possível excluir essa série de notas pois ela está vinculada a um documento"
+          ]
+      }
+  ],
+  "error_details": [
+      {
+          "base": [
+              { "error": "default" }
+          ]
+      }
   ]
 }
