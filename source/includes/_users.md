@@ -41,6 +41,20 @@ EXEMPLO DE RESPOSTA
   }
 }
 
+EXEMPLO DE RETORNO DE ERROS
+
+{
+    "errors": "E-mail para convite não é válido",
+    "error_details": [
+        {
+            "email": [
+                { "error":  "invalid" }
+            ]
+        }
+    ]
+}
+
+
 ```
 
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
