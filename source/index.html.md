@@ -11,6 +11,7 @@ toc_footers:
 includes:
   - basic_information
   - organizations
+  - accounts
   - emission_types
   - single_emission
   - batch_emission
@@ -25,6 +26,7 @@ includes:
   - correction_note
   - cfe_storage
   - tax_calculator
+  - users
   - webhooks
 
 search: true
