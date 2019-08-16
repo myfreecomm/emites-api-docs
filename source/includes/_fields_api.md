@@ -78,7 +78,7 @@ Grupo de informações relacionadas ao endereço do destinatário. Seus atributo
     nome_municipio              |  xMun           |  Sim          |  Texto                  |  Até 60 caracteres           |
     cep                         |  CEP            |  Sim          |  Numérico               |  8 dígitos                   |
     uf                          |  UF             |  Sim          |  Texto                  |  2 caracteres                |
-    codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |
+    codigo_pais                 |  cPais          |  Condicional          |  Numérico               |  4 dígitos                   | Condicional em razão do desejo do contribuinte ou do valor máximo do documento, conforme cada UF
     nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |
     telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |
 
@@ -161,8 +161,8 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     codigo_ean                  |    cEAN         |  Não          |     Numérico            |  8, 12, 13 ou 14 dígitos          |  Código de barras. Preencher com o código de barra GTIN-8, GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN- 14). Não informar este campo se o produto não possuir este código.
     descricao                   |    xProd        |  Sim          |     Texto               |  Até 120 caracteres               |  Descrição do produto.
     ncm                         |    NCM          |  Sim          |     Numérico            |  8 dígitos                        |  Nomenclatura comum do Mercosul. Itens específicos que não possuem NCM podem informar somente o código “00”.
-    exncm                         |    -          |  Não          |     Numérico            |  2 dígitos                        |  Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb destinado à detalhar a característica do produto. (Ex. pauta fiscal etc).
-    cest                        |    CEST         |               |                         |                                   |  Código Especificador de Substituição Tributária.
+    exncm                       |    -            |  Não          |     Numérico            |  2 dígitos                        |  Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb destinado à detalhar a característica do produto. (Ex. pauta fiscal etc).
+    cest                        |    CEST         |  Não          |     Numérico            |  7 dígitos                        |  Código Especificador de Substituição Tributária.
     extipi                      |    EXTIPI       |  Não          |     Numérico            |  De 2 a 3 dígitos                 |
     cfop                        |    CFOP         |  Sim          |     Numérico            |  4 dígitos                        |  Código Fiscal de Operações e Prestações.
     produto_especifico          |         -       |       -       |            -            |          -                        |  -
@@ -830,9 +830,9 @@ Contém informações sobre imposto de importação. Informar apenas quando o it
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 base_calculo_importacao         |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
-valor_despesas_aduaneiras       |  vDespAdu     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_despesas_aduaneiras       |  vDespAdu     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais | **Obrigatório quando usar engine de cálculo taxweb** |
 valor_imposto_importacao        |  vII          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
-valor_iof                       |  vIOF         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_iof                       |  vIOF         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais | **Obrigatório quando usar engine de cálculo taxweb** |
 
 ## declaracao_importacao (XML: DI)
 
