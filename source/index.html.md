@@ -10,8 +10,8 @@ toc_footers:
 
 includes:
   - basic_information
+  - organizations
   - accounts
-  - create_organizations
   - emission_types
   - single_emission
   - batch_emission
