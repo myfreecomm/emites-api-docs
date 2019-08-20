@@ -858,6 +858,18 @@ cnpj                            |  CNPJ         |  Não          |  Numérico  |
 uf_adquirente                   |  UFTerceiro   |  Não          |  Decimal   |  2 dígitos
 codigo_exportador               |  cExportador  |  Sim          |  Texto     |  1 a 60 caracteres
 
+## rastreabilidade (XML: rastro)
+
+Grupo criado para permitir a rastreabilidade de qualquer produto sujeito a regulações sanitárias, casos de recolhimento/recall, além de defensivos agrícolas, produtos veterinários, odontológicos, medicamentos, bebidas, águas envasadas, embalagens, etc., a partir da indicação de informações de número de lote, data de fabricação/produção, data de validade, etc. <strong>Obrigatório o preenchimento deste grupo no caso de medicamentos e produtos farmacêuticos.</strong>
+
+ Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
+--------------------------------|---------------|---------------|------------|------------------------------------------|------------
+numero_lote                     | nLote         | Sim           | Texto      | 1 a 20 caracteres
+quantidade_lote                 | qLote         | Sim           | Numérico   | Até 8 digitos, 3 casas decimais
+data_fabricacao                 | dFab          | Sim           | Data       | "AAAA-MM-DD"
+data_validade                   | dVal          | Sim           | Data       | "AAAA-MM-DD"
+codigo_agregacao                | cAgreg        | Não           | Numérico   | 1 a 20 dígitos
+
 ## medicamento (XML: med)
 
 Contém informações sobre detalhamento de medicamentos e de matérias-primas farmacêuticas
