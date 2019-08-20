@@ -187,6 +187,12 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     codigo_beneficio_fiscal     |  cBenef         |  Não          |     Texto               |  10 dígitos                       |  Código de Benefício Fiscal utilizado pela UF, aplicado ao item.
     aplicacao     |     -     |  Não          |     Texto               |  1 dígito                       |  Aplicação do Produto (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>I - Industrialização<br>C - Comercialização<br>U - Uso e Consumo<br>A - Ativo Imobilizado
     fabricacao     |     -     |  Não          |     Numérico               |  1 dígito                       |  Indica onde ocorreu a fabricação do produto (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>0 - Própria<br>1 - Terceiros
+    indFarmaciaPopular     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não
+    praticaRepasse     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não
+    praticaPMC     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não
+    listaCMED     |     -     |  Não          |     Texto               |  -                       |  Valor do medicamento da lista, expresso em reais. (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>).
+    listaFarmaceutica     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>S - Sim<br>N - Não
+    tpProdMed     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>0 - Similar<br>1 - Genérico<br>2 - Referência<br>3 - Outros
 
 ## tributação (XML: imposto)
 
