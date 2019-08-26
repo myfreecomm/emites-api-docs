@@ -15,7 +15,7 @@ Para listar séries de NF-e, é necessário realizar uma requisição GET para o
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -58,7 +58,7 @@ Para criar uma série de NF-e, é necessário realizar uma requisição POST par
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -104,8 +104,8 @@ EXEMPLO DE RETORNO DE ERROS
 
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
-    serie                       |  Sim          |     Numérico            |                              |                                                
-    last_number                 |  Sim          |     Numérico            |                              |  
+    serie                       |  Sim          |     Numérico            |                              |
+    last_number                 |  Sim          |     Numérico            |                              |
 
 ## Exibir série NF-e
 
@@ -118,7 +118,7 @@ Para exibir uma série de NF-e, é necessário realizar uma requisição GET par
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -189,7 +189,7 @@ Para listar séries de NFC-e, é necessário realizar uma requisição GET para 
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -206,6 +206,7 @@ EXEMPLO DE RESPOSTA
     {
       "id": 1,
       "serie": 1,
+      "emission_type": "standard",
       "last_number": 10,
       "created_at": "2019-01-31T14:05:11.733-03:00",
       "updated_at": "2019-01-31T14:05:11.733-03:00"
@@ -213,6 +214,7 @@ EXEMPLO DE RESPOSTA
     {
       "id": 2,
       "serie": 2,
+      "emission_type": "offline_contingency",
       "last_number": 20,
       "created_at": "2019-01-31T14:05:11.733-03:00",
       "updated_at": "2019-01-31T14:05:11.733-03:00"
@@ -232,7 +234,7 @@ Para criar uma série de NFC-e, é necessário realizar uma requisição POST pa
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -244,7 +246,8 @@ curl -X POST \
   -d '{
       "nfce_numeration": {
         "serie": 1,
-        "last_number": "100",
+        "emission_type": "standard",
+        "last_number": "100"
       }
     }'
 
@@ -255,6 +258,7 @@ EXEMPLO DE RESPOSTA
     "id": 1,
     "serie": 1,
     "last_number": 100,
+    "emission_type": "standard",
     "created_at": "2019-01-31T14:05:11.733-03:00",
     "updated_at": "2019-01-31T14:05:11.733-03:00"
   }
@@ -270,17 +274,20 @@ EXEMPLO DE RETORNO DE ERROS
             ],
             "last_number": [
                 "não pode ficar em branco"
+            ],
+            "emission_type": [
+                "não pode ficar em branco"
             ]
         }
     ]
 }
 ```
 
-    Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
---------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
-    serie                       |  Sim          |     Numérico            |                              |                                                
-    last_number                 |  Sim          |     Numérico            |                              |  
-
+    Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho                  |   Observações
+--------------------------------|---------------|-------------------------|---------------------------------------|-----------------------------------------------------------
+    serie                       |  Sim          |     Numérico            |                                       |
+    last_number                 |  Sim          |     Numérico            |                                       |
+    emission_type               |  Sim          |     Texto               |  'standard' ou 'offline_contingency'  |   Indica o tipo de emissão:<br> standard = Emissão Normal;<br>  offline_contingency = Emissão em Contingência Offline.
 ## Exibir série NFC-e
 
 Para exibir uma série de NFC-e, é necessário realizar uma requisição GET para o seguinte endereço:
@@ -292,7 +299,7 @@ Para exibir uma série de NFC-e, é necessário realizar uma requisição GET pa
     </div>
 </div>
 
-Veja a seguir um exemplo do corpo da requisição:  
+Veja a seguir um exemplo do corpo da requisição:
 
 ```shell
 EXEMPLO DE REQUISIÇÃO
@@ -308,6 +315,7 @@ EXEMPLO DE RESPOSTA
   "nfce_numeration": {
     "id": 1,
     "serie": 1,
+    "emission_type": "standard",
     "last_number": 100,
     "created_at": "2019-01-31T14:05:11.733-03:00",
     "updated_at": "2019-01-31T14:05:11.733-03:00"
