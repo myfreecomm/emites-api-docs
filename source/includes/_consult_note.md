@@ -37,14 +37,22 @@ ou pela chave de acesso:
 </div>
 
 
-### Para consultar o Valor Total por tipo de operação (CFOP) em determinado período fixo (dia ou mês)
+### Para consultar o Valor Total por código de operação (CFOP) em um determinado período fixo (dia ou mês):
 
 <div class="api-endpoint">
   <div class="endpoint-data">
     <i class="label label-get">GET</i>
-    <h6>/api/v1/organizations/{organization_id}/document_totals?cfpo=5000&date=30%2F08%2F2019&date_type=day   </h6>
+    <h6>/api/v1/organizations/{organization_id}/document_totals</h6>
   </div>
 </div>
+
+```shell
+{
+  "cfop": "5000",
+  "date": "08/2019",
+  "date_type": "month"
+}
+```
 
 ## Consulta NF-e Emitida
 
@@ -1492,9 +1500,7 @@ EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
   https://app.production.emites.com.br/api/v1/organizations/11/document_totals \
-  -d cfop=5000 \
-  -d date=30/08/2019 \
-  -d date_type=month \
+  -d '{"cfop":"5000", "date": "08/2019", "date_type": "day"}'
   -H 'authorization: Bearer 6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -1516,8 +1522,8 @@ Segue abaixo um exemplo de requisição para consultar o valor total de vendas e
 EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
-  https://app.production.emites.com.br/api/v1/organizations/11/document_totals?cfpo=5000&date=08%2F2019&date_type=month \
-  -d '' \
+  https://app.production.emites.com.br/api/v1/organizations/11/document_totals \
+  -d '{"cfop:"5000","date":"30/08/2019", "date_type": "month"}'
   -H 'authorization: Bearer 6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
