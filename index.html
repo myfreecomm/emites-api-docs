@@ -148,13 +148,405 @@
 
 </code></pre>
 
-          <h1 id="cria-o-de-organiza-es">Criação de organizações</h1>
+          <h1 id="s-rie-de-notas-fiscais">Série de notas fiscais</h1>
 
-<p>Para emissão de NF-e ou NFC-e, é necessário possuir ao menos uma organização criada no Emites. Para realizar a criação de uma organização via API, o processo consiste em dois passos:  </p>
+<p>Para criar séries de notas fiscais você precisa ter ao menos uma organização cadastrada.
+<p>Você pode verificar como criar organizações em <a href="#cria-o-de-organiza-es">Criação de organizações</a></p></p>
 
-<h2 id="1-passo-cria-o-da-organiza-o">1º Passo: Criação da Organização</h2>
+<h2 id="listar-s-ries-nf-e">Listar séries NF-e</h2>
 
-<p>Para criar uma organização, é necessário realizar uma requisição POST para o seguinte endereço:  </p>
+<p>Para listar séries de NF-e, é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe_numerations</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1/nfe_numerations <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfe_numeration"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: 1,
+      <span class="s2">"serie"</span>: 1,
+      <span class="s2">"last_number"</span>: 10,
+      <span class="s2">"created_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>
+    <span class="o">}</span>,
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: 2,
+      <span class="s2">"serie"</span>: 2,
+      <span class="s2">"last_number"</span>: 20,
+      <span class="s2">"created_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="criar-s-rie-nf-e">Criar série NF-e</h2>
+
+<p>Para criar uma série de NF-e, é necessário realizar uma requisição POST para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe_numerations</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1/nfe_numerations <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+      "nfe_numeration": {
+        "serie": 1,
+        "last_number": "100",
+      }
+    }'</span>
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfe_numeration"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 1,
+    <span class="s2">"serie"</span>: 1,
+    <span class="s2">"last_number"</span>: 100,
+    <span class="s2">"created_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+    <span class="s2">"errors"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"serie"</span>: <span class="o">[</span>
+                <span class="s2">"não pode ficar em branco"</span>
+            <span class="o">]</span>,
+            <span class="s2">"last_number"</span>: <span class="o">[</span>
+                <span class="s2">"não pode ficar em branco"</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>serie</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>last_number</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="exibir-s-rie-nf-e">Exibir série NF-e</h2>
+
+<p>Para exibir uma série de NF-e, é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe_numerations/:id</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1/nfe_numerations/1 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfe_numeration"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 1,
+    <span class="s2">"serie"</span>: 1,
+    <span class="s2">"last_number"</span>: 100,
+    <span class="s2">"created_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="excluir-s-rie-nf-e">Excluir série NF-e</h2>
+
+<p>Para excluir uma série de NF-e, é necessário realizar uma requisição DELETE para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-warning">DELETE</i>
+        <h6>/api/v1/organizations/{organization_id}/nfe_numerations/{id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X DELETE <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1/nfe_numerations/1 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+
+<aside class="notice">
+  Não é possível remover uma <strong>série</strong> caso a mesma esteja vinculada a um <strong>documento</strong>.
+</aside>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Não foi possível excluir essa série de notas pois ela está vinculada a um documento"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="listar-s-ries-nfc-e">Listar séries NFC-e</h2>
+
+<p>Para listar séries de NFC-e, é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce_numerations</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1/nfce_numerations <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfce_numeration"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: 1,
+      <span class="s2">"serie"</span>: 1,
+      <span class="s2">"emission_type"</span>: <span class="s2">"standard"</span>,
+      <span class="s2">"last_number"</span>: 10,
+      <span class="s2">"created_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>
+    <span class="o">}</span>,
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: 2,
+      <span class="s2">"serie"</span>: 2,
+      <span class="s2">"emission_type"</span>: <span class="s2">"offline_contingency"</span>,
+      <span class="s2">"last_number"</span>: 20,
+      <span class="s2">"created_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="criar-s-rie-nfc-e">Criar série NFC-e</h2>
+
+<p>Para criar uma série de NFC-e, é necessário realizar uma requisição POST para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce_numerations</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1/nfce_numerations <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+      "nfce_numeration": {
+        "serie": 1,
+        "emission_type": "standard",
+        "last_number": "100"
+      }
+    }'</span>
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfce_numeration"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 1,
+    <span class="s2">"serie"</span>: 1,
+    <span class="s2">"last_number"</span>: 100,
+    <span class="s2">"emission_type"</span>: <span class="s2">"standard"</span>,
+    <span class="s2">"created_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+    <span class="s2">"errors"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"serie"</span>: <span class="o">[</span>
+                <span class="s2">"não pode ficar em branco"</span>
+            <span class="o">]</span>,
+            <span class="s2">"last_number"</span>: <span class="o">[</span>
+                <span class="s2">"não pode ficar em branco"</span>
+            <span class="o">]</span>,
+            <span class="s2">"emission_type"</span>: <span class="o">[</span>
+                <span class="s2">"não pode ficar em branco"</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>serie</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>last_number</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>emission_type</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>&lsquo;standard&rsquo; ou &#39;offline_contingency&rsquo;</td>
+<td>Indica o tipo de emissão:<br> standard = Emissão Normal;<br>  offline_contingency = Emissão em Contingência Offline.</td>
+</tr>
+</tbody></table>
+
+<h2 id="exibir-s-rie-nfc-e">Exibir série NFC-e</h2>
+
+<p>Para exibir uma série de NFC-e, é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce_numerations/:id</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1/nfce_numerations/1 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfce_numeration"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 1,
+    <span class="s2">"serie"</span>: 1,
+    <span class="s2">"emission_type"</span>: <span class="s2">"standard"</span>,
+    <span class="s2">"last_number"</span>: 100,
+    <span class="s2">"created_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2019-01-31T14:05:11.733-03:00"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="excluir-s-rie-nfc-e">Excluir série NFC-e</h2>
+
+<p>Para excluir uma série de NFC-e, é necessário realizar uma requisição DELETE para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-warning">DELETE</i>
+        <h6>/api/v1/organizations/{organization_id}/nfce_numerations/{id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X DELETE <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1/nfce_numerations/1 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+
+<aside class="notice">
+  Não é possível remover uma <strong>série</strong> caso a mesma esteja vinculada a um <strong>documento</strong>.
+</aside>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Não foi possível excluir essa série de notas pois ela está vinculada a um documento"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+          <h1 id="organiza-es">Organizações</h1>
+
+<h2 id="cria-o-de-organiza-es">Criação de Organizações</h2>
+
+<p>Para emissão de NF-e ou NFC-e, é necessário possuir ao menos uma organização criada no Emites. Para realizar a criação de uma organização via API, o processo consiste em dois passos:</p>
+
+<h3 id="1-passo-cria-o-da-organiza-o">1º Passo: Criação da Organização</h3>
+
+<p>Para criar uma organização, é necessário realizar uma requisição POST para o seguinte endereço:</p>
 
 <div class="api-endpoint">
     <div class="endpoint-data">
@@ -163,7 +555,7 @@
     </div>
 </div>
 
-<p>Veja a seguir um exemplo do corpo da requisição:  </p>
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
@@ -250,7 +642,7 @@ EXEMPLO DE RESPOSTA
 <td></td>
 </tr>
 <tr>
-<td>cnpj</td>
+<td>document</td>
 <td>Sim</td>
 <td>Numérico</td>
 <td>14 dígitos</td>
@@ -286,9 +678,9 @@ EXEMPLO DE RESPOSTA
 </tr>
 </tbody></table>
 
-<h3 id="address">address</h3>
+<h4 id="address">address</h4>
 
-<p>Grupo de informações relacionadas ao endereço da organização. Seus atributos são:  </p>
+<p>Grupo de informações relacionadas ao endereço da organização. Seus atributos são:</p>
 
 <table><thead>
 <tr>
@@ -364,7 +756,7 @@ EXEMPLO DE RESPOSTA
 </tr>
 </tbody></table>
 
-<h2 id="2-passo-atualiza-o-upload-do-certificado-da-organiza-o">2º Passo: Atualização/Upload do Certificado da Organização</h2>
+<h3 id="2-passo-atualiza-o-upload-do-certificado-da-organiza-o">2º Passo: Atualização/Upload do Certificado da Organização</h3>
 
 <p>A inclusão de certificado digital vigente da organização é obrigatório para a emissão da nota. Para criar ou atualizar um certificado, é necessário realizar uma requisição POST para o seguinte endereço:</p>
 
@@ -380,7 +772,7 @@ EXEMPLO DE RESPOSTA
     Ex: <b>/api/v1/organizations/CNPJ58521175000124IE787811920</b>
 </aside>
 
-<p>Veja a seguir um exemplo do corpo da requisição:  </p>
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
 <pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
 
 curl -X POST <span class="se">\</span>
@@ -404,6 +796,411 @@ EXEMPLO DE RESPOSTA
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
+
+<h2 id="atualiza-o-de-organiza-es">Atualização de Organizações</h2>
+
+<p>Para atualizar uma organização, é necessário realizar uma requisição PATCH para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH</i>
+        <h6>/api/v1/organizations/{:organization_id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X PATCH <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/5 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+      "organization": {
+        "company_name": "Update company_name",
+        "email": "foo2@bar.com"
+      }
+    }'</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"organization"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 5,
+      <span class="s2">"document"</span>: <span class="s2">"58521175000124"</span>,
+      <span class="s2">"name"</span>: <span class="s2">"Foo"</span>,
+      <span class="s2">"inscricao_municipal"</span>: <span class="s2">"13213213"</span>,
+      <span class="s2">"company_name"</span>: <span class="s2">"Update company_name"</span>,
+      <span class="s2">"email"</span>: <span class="s2">"foo2@bar.com"</span>,
+      <span class="s2">"logo_file_name"</span>: null,
+      <span class="s2">"logo_url"</span>: <span class="s2">""</span>,
+      <span class="s2">"address"</span>: <span class="o">{</span>
+        <span class="s2">"zipcode"</span>: <span class="s2">"04552000"</span>,
+        <span class="s2">"address"</span>: <span class="s2">"Rua do Rocio"</span>,
+        <span class="s2">"number"</span>: <span class="s2">"199"</span>,
+        <span class="s2">"complement"</span>: <span class="s2">"Conj. 91"</span>,
+        <span class="s2">"district"</span>: <span class="s2">"Vila Olimpia"</span>,
+        <span class="s2">"city"</span>: <span class="s2">"Sao Paulo"</span>,
+        <span class="s2">"state"</span>: <span class="s2">"SP"</span>,
+        <span class="s2">"phone"</span>: <span class="s2">"1133333333"</span>,
+        <span class="s2">"city_code"</span>: <span class="s2">"812938"</span>
+      <span class="o">}</span>,
+      <span class="s2">"inscricao_estadual"</span>: <span class="s2">"787811920"</span>,
+      <span class="s2">"codigo_regime_tributario"</span>: <span class="s2">"simples_nacional"</span>,
+      <span class="s2">"cnae"</span>: null,
+      <span class="s2">"certificate"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>codigo_regime_tributario</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>1 dígito</td>
+<td>1 = Simples Nacional;<br>2 = Simples Nacional, excesso sublimite de receita bruta;<br>3 = Regime Normal.</td>
+</tr>
+<tr>
+<td>razao_social</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>document</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>14 dígitos</td>
+<td>CNPJ da empresa emitente, somente números.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>inscricao_estadual</td>
+<td>sim</td>
+<td>Texto</td>
+<td>Até 14 caracteres</td>
+<td>Informar somente os algarismos, sem ponto, hífen, barra, etc. Na emissão de NF-e avulsa pode ser informado o texto ISENTO para os contribuintes do ICMS isentos de inscrição no cadastro de contribuintes do ICMS.</td>
+</tr>
+<tr>
+<td>inscricao_municipal</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 15 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>nome_fantasia</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="address">address</h4>
+
+<p>Grupo de informações relacionadas ao endereço da organização. Seus atributos são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>city</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>city_code</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>7 dígitos</td>
+<td></td>
+</tr>
+<tr>
+<td>complement</td>
+<td>Não</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>district</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>number</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>De 6 a 14 carateres</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>2 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>zipcode</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>8 dígitos</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="exclus-o-de-organiza-es">Exclusão de Organizações</h2>
+
+<p>Para excluir uma organização da conta, é necessário realizar uma requisição DELETE para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-warning">DELETE</i>
+        <h6>/api/v1/organizations/{:organization_id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+curl -X DELETE <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations/1 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+
+<h2 id="listagem-de-organiza-es">Listagem de Organizações</h2>
+
+<p>Para listar todas as organizações da conta, é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>api/v1/organizations</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+curl -X GET <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+<pre class="highlight shell"><code>EXEMPLO DE RESPOSTA
+<span class="o">{</span>
+    <span class="s2">"organizations"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"id"</span>: 1,
+            <span class="s2">"document"</span>: <span class="s2">"12345678000000"</span>,
+            <span class="s2">"name"</span>: <span class="s2">"Fulano de tal"</span>,
+            <span class="s2">"inscricao_municipal"</span>: <span class="s2">"123456"</span>,
+            <span class="s2">"company_name"</span>: <span class="s2">"F Comp"</span>,
+            <span class="s2">"email"</span>: <span class="s2">"fulano.de.tal@nexaas.com"</span>,
+            <span class="s2">"logo_file_name"</span>: null,
+            <span class="s2">"logo_url"</span>: <span class="s2">""</span>,
+            <span class="s2">"address"</span>: <span class="o">{</span>
+                <span class="s2">"address"</span>: <span class="s2">"Rua 1"</span>,
+                <span class="s2">"city"</span>: <span class="s2">"Rio de Janeiro"</span>,
+                <span class="s2">"city_code"</span>: <span class="s2">"3301009"</span>,
+                <span class="s2">"complement"</span>: <span class="s2">"-"</span>,
+                <span class="s2">"district"</span>: <span class="s2">"Parque 2"</span>,
+                <span class="s2">"number"</span>: <span class="s2">"119"</span>,
+                <span class="s2">"phone"</span>: <span class="s2">"21999999999"</span>,
+                <span class="s2">"state"</span>: <span class="s2">"RJ"</span>,
+                <span class="s2">"zipcode"</span>: <span class="s2">"28000200"</span>
+            <span class="o">}</span>,
+            <span class="s2">"inscricao_estadual"</span>: <span class="s2">"123456"</span>,
+            <span class="s2">"codigo_regime_tributario"</span>: <span class="s2">"simples_nacional"</span>,
+            <span class="s2">"regime_tributario_diferenciado"</span>: <span class="s2">"LFEM"</span>,
+            <span class="s2">"cnae"</span>: <span class="s2">"14.02/951180002"</span>,
+            <span class="s2">"csc_id"</span>: <span class="s2">"120"</span>,
+            <span class="s2">"csc_token"</span>: <span class="s2">"Lorem Ipsum"</span>,
+            <span class="s2">"certificate_expires_at"</span>: null,
+            <span class="s2">"certificate"</span>: null
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="consulta-de-organiza-es">Consulta de Organizações</h2>
+
+<p>Para listar uma organização da conta, é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>api/v1/organizations/{:organization_id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+curl -X GET <span class="se">\</span>
+  http://localhost:3000/api/v1/organizations <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+<pre class="highlight shell"><code>EXEMPLO DE RESPOSTA
+<span class="o">{</span>
+    <span class="s2">"organization"</span>: <span class="o">{</span>
+        <span class="s2">"id"</span>: 1,
+        <span class="s2">"document"</span>: <span class="s2">"12345678000000"</span>,
+        <span class="s2">"name"</span>: <span class="s2">"Fulano de tal"</span>,
+        <span class="s2">"inscricao_municipal"</span>: <span class="s2">"123456"</span>,
+        <span class="s2">"company_name"</span>: <span class="s2">"F Comp"</span>,
+        <span class="s2">"email"</span>: <span class="s2">"fulano.de.tal@nexaas.com"</span>,
+        <span class="s2">"logo_file_name"</span>: null,
+        <span class="s2">"logo_url"</span>: <span class="s2">""</span>,
+        <span class="s2">"address"</span>: <span class="o">{</span>
+            <span class="s2">"address"</span>: <span class="s2">"Rua 1"</span>,
+            <span class="s2">"city"</span>: <span class="s2">"Rio de Janeiro"</span>,
+            <span class="s2">"city_code"</span>: <span class="s2">"3301009"</span>,
+            <span class="s2">"complement"</span>: <span class="s2">"-"</span>,
+            <span class="s2">"district"</span>: <span class="s2">"Parque 2"</span>,
+            <span class="s2">"number"</span>: <span class="s2">"119"</span>,
+            <span class="s2">"phone"</span>: <span class="s2">"21999999999"</span>,
+            <span class="s2">"state"</span>: <span class="s2">"RJ"</span>,
+            <span class="s2">"zipcode"</span>: <span class="s2">"28000200"</span>
+        <span class="o">}</span>,
+        <span class="s2">"inscricao_estadual"</span>: <span class="s2">"123456"</span>,
+        <span class="s2">"codigo_regime_tributario"</span>: <span class="s2">"simples_nacional"</span>,
+        <span class="s2">"regime_tributario_diferenciado"</span>: <span class="s2">"LFEM"</span>,
+        <span class="s2">"cnae"</span>: <span class="s2">"14.02/951180002"</span>,
+        <span class="s2">"csc_id"</span>: <span class="s2">"120"</span>,
+        <span class="s2">"csc_token"</span>: <span class="s2">"Lorem Ipsum"</span>,
+        <span class="s2">"certificate_expires_at"</span>: null,
+        <span class="s2">"certificate"</span>: null
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+          <h1 id="contas">Contas</h1>
+
+<h2 id="cria-o-de-conta">Criação de conta</h2>
+
+<p>É possível criar uma conta via API do Emites já com um usuário administrador.</p>
+
+<aside class="notice">
+  É necessário que a conta autenticada (dona do Token enviado na requisição) tenha permissão para criar outras contas.
+</aside>
+
+<p>Uma vez que a conta esteja autorizada, é necessário realizar uma requisição POST para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/accounts</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  http://localhost:3000/api/v1/accounts/ <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+      "account": {
+        "name": "Nome da conta",
+        "admin_email": "foo@bar.com"
+      }
+    }'</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"account"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 8,
+    <span class="s2">"name"</span>: <span class="s2">"Nome da conta"</span>,
+    <span class="s2">"user_id"</span>: 6,
+    <span class="s2">"user_ids"</span>: <span class="o">[]</span>,
+    <span class="s2">"api_token"</span>: <span class="s2">"552a0d7d67d2f77b6b6908a3070b5a06"</span>,
+    <span class="s2">"created_at"</span>: <span class="s2">"2019-06-24T15:58:51.866-03:00"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2019-06-24T15:58:51.866-03:00"</span>,
+    <span class="s2">"account_creator"</span>: <span class="nb">false</span>,
+    <span class="s2">"account_id"</span>: 1,
+    <span class="s2">"admin"</span>: <span class="o">{</span>
+      <span class="s2">"id"</span>: 6,
+      <span class="s2">"name"</span>: <span class="s2">"foo@bar.com"</span>,
+      <span class="s2">"email"</span>: <span class="s2">"foo@bar.com"</span>,
+      <span class="s2">"auth_provider"</span>: <span class="s2">"nexaas_id"</span>,
+      <span class="s2">"created_at"</span>: <span class="s2">"2019-06-24T15:58:51.855-03:00"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2019-06-24T15:58:51.855-03:00"</span>,
+      <span class="s2">"uuid"</span>: <span class="s2">"47d4738f-db19-46e9-a305-7bfbbb964f77"</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Sim</td>
+<td>Texto</td>
+<td></td>
+<td>Nome para identificação da conta.</td>
+</tr>
+<tr>
+<td>admin_email</td>
+<td>Sim</td>
+<td>Texto</td>
+<td></td>
+<td>E-mail válido do usuário administrador que será criado ou vinculado à nova conta.</td>
+</tr>
+</tbody></table>
 
           <h1 id="tipos-de-emiss-o">Tipos de emissão</h1>
 
@@ -4302,6 +5099,54 @@ EXEMPLO DE RESPOSTA
 <td>1 dígito</td>
 <td>Indica onde ocorreu a fabricação do produto (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>0 - Própria<br>1 - Terceiros</td>
 </tr>
+<tr>
+<td>indFarmaciaPopular</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>1 dígito</td>
+<td>(<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não</td>
+</tr>
+<tr>
+<td>praticaRepasse</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>1 dígito</td>
+<td>(<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não</td>
+</tr>
+<tr>
+<td>praticaPMC</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>1 dígito</td>
+<td>(<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não</td>
+</tr>
+<tr>
+<td>listaCMED</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>-</td>
+<td>Valor do medicamento da lista, expresso em reais. (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>).</td>
+</tr>
+<tr>
+<td>listaFarmaceutica</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>1 dígito</td>
+<td>(<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>S - Sim<br>N - Não</td>
+</tr>
+<tr>
+<td>tpProdMed</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>1 dígito</td>
+<td>(<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>0 - Similar<br>1 - Genérico<br>2 - Referência<br>3 - Outros</td>
+</tr>
 </tbody></table>
 
 <h2 id="tributa-o-xml-imposto">tributação (XML: imposto)</h2>
@@ -7095,6 +7940,62 @@ EXEMPLO DE RESPOSTA
 <td>Sim</td>
 <td>Texto</td>
 <td>1 a 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="rastreabilidade-xml-rastro">rastreabilidade (XML: rastro)</h2>
+
+<p>Grupo criado para permitir a rastreabilidade de qualquer produto sujeito a regulações sanitárias, casos de recolhimento/recall, além de defensivos agrícolas, produtos veterinários, odontológicos, medicamentos, bebidas, águas envasadas, embalagens, etc., a partir da indicação de informações de número de lote, data de fabricação/produção, data de validade, etc. <strong>Obrigatório o preenchimento deste grupo no caso de medicamentos e produtos farmacêuticos.</strong></p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>XML</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>numero_lote</td>
+<td>nLote</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>1 a 20 caracteres</td>
+<td></td>
+</tr>
+<tr>
+<td>quantidade_lote</td>
+<td>qLote</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td>Até 8 digitos, 3 casas decimais</td>
+<td></td>
+</tr>
+<tr>
+<td>data_fabricacao</td>
+<td>dFab</td>
+<td>Sim</td>
+<td>Data</td>
+<td>&ldquo;AAAA-MM-DD&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>data_validade</td>
+<td>dVal</td>
+<td>Sim</td>
+<td>Data</td>
+<td>&ldquo;AAAA-MM-DD&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>codigo_agregacao</td>
+<td>cAgreg</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>1 a 20 dígitos</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -12111,6 +13012,87 @@ EXEMPLO DE RESPOSTA
         <span class="o">]</span>
     <span class="o">}</span>
 <span class="o">}</span>
+</code></pre>
+
+          <h1 id="usu-rios">Usuários</h1>
+
+<h2 id="cria-o-de-usu-rio">Criação de Usuário</h2>
+
+<p>Para criar um usuário, é necessário realizar uma requisição POST para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/users</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  http://localhost:3000/api/v1/users/ <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+      "user": {
+        "email": "foo@bar.com",
+      }
+    }'</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"user"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 2,
+    <span class="s2">"name"</span>: <span class="s2">"foo@bar.com"</span>,
+    <span class="s2">"email"</span>: <span class="s2">"foo@bar.com"</span>,
+    <span class="s2">"auth_provider"</span>: <span class="s2">"nexaas_id"</span>,
+    <span class="s2">"uuid"</span>: <span class="s2">"4dc677bd-c23e-4618-911c-a6c80d5797b4"</span>,
+    <span class="s2">"created_at"</span>: <span class="s2">"2019-06-17T09:51:51.558-03:00"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2019-06-17T09:51:51.558-03:00"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 60 caracteres</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="exclus-o-de-usu-rio">Exclusão de Usuário</h2>
+
+<p>Para excluir um usuário da conta, é necessário realizar uma requisição DELETE para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-warning">DELETE</i>
+        <h6>/api/v1/users/{:user_id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X DELETE <span class="se">\</span>
+  http://localhost:3000/api/v1/users/1 <span class="se">\</span>
+  -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
 </code></pre>
 
           <h1 id="webhooks">Webhooks</h1>
