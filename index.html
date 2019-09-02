@@ -9216,6 +9216,21 @@ EXEMPLO DE RESPOSTA:
   </div>
 </div>
 
+<h3 id="para-consultar-o-valor-total-por-c-digo-de-opera-o-cfop-em-um-determinado-per-odo-fixo">Para consultar o Valor Total por código de operação (CFOP) em um determinado período fixo:</h3>
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/document_totals</h6>
+  </div>
+</div>
+<pre class="highlight shell"><code><span class="o">{</span>
+  <span class="s2">"cfop"</span>: <span class="s2">"5000"</span>,
+  <span class="s2">"date"</span>: <span class="s2">"20/08/2019"</span>,
+  <span class="s2">"date_type"</span>: <span class="s2">"day"</span>
+<span class="o">}</span>
+</code></pre>
+
 <h2 id="consulta-nf-e-emitida">Consulta NF-e Emitida</h2>
 
 <p>Segue abaixo um exemplo de requisição de emissão em lote com sucesso que será utilizado para posterior consulta:</p>
@@ -10618,6 +10633,28 @@ EXEMPLO DE RESPOSTA:
     <span class="s2">"xml_url"</span>: <span class="s2">""</span>,
     <span class="s2">"taxrules_calculation_log"</span>: null
   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<h2 id="valor-total-por-per-odo-fixo">Valor Total por Período Fixo</h2>
+
+<p>Segue abaixo um exemplo de requisição para consultar o valor total de vendas em um determinado dia:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X GET <span class="se">\</span>
+  https://app.production.emites.com.br/api/v1/organizations/11/document_totals <span class="se">\</span>
+  -d <span class="s1">'{"cfop":"5000", "date": "20/08/2019", "date_type": "day"}'</span>
+  -H <span class="s1">'authorization: Bearer 6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+
+EXEMPLO DE RESPOSTA:
+
+<span class="o">{</span>
+  <span class="s2">"vICMS"</span>: 2000.00,
+  <span class="s2">"vII"</span>: 0.00,
+  <span class="s2">"vCOFINS"</span>: 2987.65,
+  <span class="s2">"vPIS"</span>: 4500.40,
+  <span class="s2">"vNF"</span>: 10000.00
 <span class="o">}</span>
 </code></pre>
 
