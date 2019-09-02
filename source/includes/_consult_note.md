@@ -37,7 +37,7 @@ ou pela chave de acesso:
 </div>
 
 
-### Para consultar o Valor Total por código de operação (CFOP) em um determinado período fixo (dia ou mês):
+### Para consultar o Valor Total por código de operação (CFOP) em um determinado período fixo:
 
 <div class="api-endpoint">
   <div class="endpoint-data">
@@ -49,8 +49,8 @@ ou pela chave de acesso:
 ```shell
 {
   "cfop": "5000",
-  "date": "08/2019",
-  "date_type": "month"
+  "date": "20/08/2019",
+  "date_type": "day"
 }
 ```
 
