@@ -1500,7 +1500,7 @@ EXEMPLO DE REQUISIÇÃO
 
 curl -X GET \
   https://app.production.emites.com.br/api/v1/organizations/11/document_totals \
-  -d '{"cfop":"5000", "date": "08/2019", "date_type": "day"}'
+  -d '{"cfop":"5000", "date": "20/08/2019", "date_type": "day"}'
   -H 'authorization: Bearer 6f42433270bc61d746556b17605db1s4' \
   -H 'content-type: application/json'
 
@@ -1512,28 +1512,5 @@ EXEMPLO DE RESPOSTA:
   "vCOFINS": 2987.65,
   "vPIS": 4500.40,
   "vNF": 10000.00
-}
-```
-
-<br>
-Segue abaixo um exemplo de requisição para consultar o valor total de vendas em um determinado mês:
-
-```shell
-EXEMPLO DE REQUISIÇÃO
-
-curl -X GET \
-  https://app.production.emites.com.br/api/v1/organizations/11/document_totals \
-  -d '{"cfop:"5000","date":"30/08/2019", "date_type": "month"}'
-  -H 'authorization: Bearer 6f42433270bc61d746556b17605db1s4' \
-  -H 'content-type: application/json'
-
-EXEMPLO DE RESPOSTA:
-
-{
-  "vICMS": 40000.00,
-  "vII": 0.00,
-  "vCOFINS": 4987.65,
-  "vPIS": 90000.40,
-  "vNF": 200000.00
 }
 ```
