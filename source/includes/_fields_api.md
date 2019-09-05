@@ -155,6 +155,10 @@ Conjunto de pessoas ou empresas autorizadas a obter o XML. Seus atributos são:
 
 Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:
 
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
+
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho              |   Observações
 --------------------------------|-----------------|---------------|-------------------------|-----------------------------------|-----------------------------------------------------------
     codigo_produto              |    cProd        |  Sim          |     Texto e/ou número   |  Até 60 caracteres                |  Codificação própria da empresa. Preencher com CFOP, caso se trate de itens não relacionados com mercadorias/produtos e se o contribuinte não possuir codificação própria. Caso preenchido com CFOP, utilizar o formato "CFOP9999".
@@ -197,6 +201,10 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
 ## tributação (XML: imposto)
 
 Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
@@ -844,6 +852,10 @@ valor_iof                       |  vIOF         |  Sim          |  Decimal   |  
 
 Contém informações sobre as declarações de importação contidos na NF-e. No XML, o nó DI é subitem do nó prod e pode conter uma ou mais ocorrência. Seus atributos são:
 
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
+
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 documento_importacao            |  nDI          |  Sim          |  Numérico  |  De 1 a 12 dígitos
@@ -874,6 +886,10 @@ codigo_agregacao                | cAgreg        | Não           | Numérico   |
 
 Contém informações sobre detalhamento de medicamentos e de matérias-primas farmacêuticas
 
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
+
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 codigo_anvisa | cProdANVISA | Sim | Texto | 6 a 13 caracteres
@@ -884,6 +900,10 @@ preco_maximo | vPMC | Sim | Decimal | Até 13 dígitos, 2 casas decimais
 ### adicoes (XML: adi)
 
 Contém informações sobre adições de uma declaração de importacao. No XML, o nó adi é subitem do nó DI e pode conter uma ou mais ocorrência. Seus atributos são:
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
@@ -897,6 +917,10 @@ numero_drawback                 |  nDraw        |  Não          |  Numérico  |
 ## transporte (XML: transp)
 
 Contém informações sobre o frete e o transporte dos produtos ou serviços.
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
 Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
@@ -967,6 +991,10 @@ Cada volume transportador pode conter lacres, sendo até 5.000 por volume.
 
 Informações opcionais de cobrança. Seus atributos são:
 
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
+
 ### fatura (XML: fat)
 
 Subgrupo de informações relacionadas aos dados da fatura. Possui somente uma ocorrência. Apresenta os seguintes atributos:
@@ -1034,6 +1062,10 @@ Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguint
 
 ## retencao_tributos (XML: retTrib)
 
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
+
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
     valor_retido_pis            |  vRetPIS        |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
@@ -1057,6 +1089,10 @@ Informações de comércio exterior.
 ## forma_de_pagamento (XML: pag)
 
 Grupo de Detalhamento da Forma de Pagamento. No XML, o nó detPag é subitem do nó pag e pode conter uma ou mais ocorrência. Seus atributos são:
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
