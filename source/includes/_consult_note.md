@@ -36,6 +36,24 @@ ou pela chave de acesso:
   </div>
 </div>
 
+
+### Para consultar o Valor Total por código de operação (CFOP) em um determinado período fixo:
+
+<div class="api-endpoint">
+  <div class="endpoint-data">
+    <i class="label label-get">GET</i>
+    <h6>/api/v1/organizations/{organization_id}/document_totals</h6>
+  </div>
+</div>
+
+```shell
+{
+  "cfop": "5000",
+  "date": "20/08/2019",
+  "date_type": "day"
+}
+```
+
 ## Consulta NF-e Emitida
 
 Segue abaixo um exemplo de requisição de emissão em lote com sucesso que será utilizado para posterior consulta:
@@ -1470,5 +1488,29 @@ EXEMPLO DE RESPOSTA:
     "xml_url": "",
     "taxrules_calculation_log": null
   }
+}
+```
+
+## Valor Total por Período Fixo
+
+Segue abaixo um exemplo de requisição para consultar o valor total de vendas em um determinado dia:
+
+```shell
+EXEMPLO DE REQUISIÇÃO
+
+curl -X GET \
+  https://app.production.emites.com.br/api/v1/organizations/11/document_totals \
+  -d '{"cfop":"5000", "date": "20/08/2019", "date_type": "day"}'
+  -H 'authorization: Bearer 6f42433270bc61d746556b17605db1s4' \
+  -H 'content-type: application/json'
+
+EXEMPLO DE RESPOSTA:
+
+{
+  "vICMS": 2000.00,
+  "vII": 0.00,
+  "vCOFINS": 2987.65,
+  "vPIS": 4500.40,
+  "vNF": 10000.00
 }
 ```

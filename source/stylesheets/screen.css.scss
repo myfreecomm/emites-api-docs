@@ -473,8 +473,7 @@ html, body {
     padding-top: 1em;
     padding-bottom: 1em;
     text-shadow: 0 1px 0 lighten($aside-notice-bg, 15%);
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
+    margin: 1.5em $main-padding;
     background: $aside-notice-bg;
     line-height: 1.6;
 
@@ -550,6 +549,7 @@ html, body {
 
   pre {
     @extend %code-font;
+    float: none;
   }
 
   blockquote {
@@ -676,8 +676,13 @@ html, body {
   text-transform: uppercase;
   font-style: normal;
   white-space: nowrap;
-  background: #00c952;
+  background: $bg-label;
 }
+
+.label-warning {
+  background: $bg-label-warning;
+}
+
 .api-endpoint .endpoint-data h6 {
   margin: 0;
   text-transform: lowercase;

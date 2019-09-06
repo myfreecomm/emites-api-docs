@@ -78,7 +78,7 @@ Grupo de informações relacionadas ao endereço do destinatário. Seus atributo
     nome_municipio              |  xMun           |  Sim          |  Texto                  |  Até 60 caracteres           |
     cep                         |  CEP            |  Sim          |  Numérico               |  8 dígitos                   |
     uf                          |  UF             |  Sim          |  Texto                  |  2 caracteres                |
-    codigo_pais                 |  cPais          |  Não          |  Numérico               |  4 dígitos                   |
+    codigo_pais                 |  cPais          |  Condicional          |  Numérico               |  4 dígitos                   | Condicional em razão do desejo do contribuinte ou do valor máximo do documento, conforme cada UF
     nome_pais                   |  xPais          |  Não          |  Texto                  |  Até 60 caracteres           |
     telefone                    |  fone           |  Não          |  Numérico               |  De 6 a 14 carateres         |
 
@@ -155,14 +155,18 @@ Conjunto de pessoas ou empresas autorizadas a obter o XML. Seus atributos são:
 
 Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  é subitem do nó  det  e pode conter uma ou mais ocorrência. Seus atributos são:
 
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
+
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho              |   Observações
 --------------------------------|-----------------|---------------|-------------------------|-----------------------------------|-----------------------------------------------------------
     codigo_produto              |    cProd        |  Sim          |     Texto e/ou número   |  Até 60 caracteres                |  Codificação própria da empresa. Preencher com CFOP, caso se trate de itens não relacionados com mercadorias/produtos e se o contribuinte não possuir codificação própria. Caso preenchido com CFOP, utilizar o formato "CFOP9999".
     codigo_ean                  |    cEAN         |  Não          |     Numérico            |  8, 12, 13 ou 14 dígitos          |  Código de barras. Preencher com o código de barra GTIN-8, GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN- 14). Não informar este campo se o produto não possuir este código.
     descricao                   |    xProd        |  Sim          |     Texto               |  Até 120 caracteres               |  Descrição do produto.
     ncm                         |    NCM          |  Sim          |     Numérico            |  8 dígitos                        |  Nomenclatura comum do Mercosul. Itens específicos que não possuem NCM podem informar somente o código “00”.
-    exncm                         |    -          |  Não          |     Numérico            |  2 dígitos                        |  Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb destinado à detalhar a característica do produto. (Ex. pauta fiscal etc).
-    cest                        |    CEST         |               |                         |                                   |  Código Especificador de Substituição Tributária.
+    exncm                       |    -            |  Não          |     Numérico            |  2 dígitos                        |  Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb destinado à detalhar a característica do produto. (Ex. pauta fiscal etc).
+    cest                        |    CEST         |  Não          |     Numérico            |  7 dígitos                        |  Código Especificador de Substituição Tributária.
     extipi                      |    EXTIPI       |  Não          |     Numérico            |  De 2 a 3 dígitos                 |
     cfop                        |    CFOP         |  Sim          |     Numérico            |  4 dígitos                        |  Código Fiscal de Operações e Prestações.
     produto_especifico          |         -       |       -       |            -            |          -                        |  -
@@ -187,10 +191,20 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     codigo_beneficio_fiscal     |  cBenef         |  Não          |     Texto               |  10 dígitos                       |  Código de Benefício Fiscal utilizado pela UF, aplicado ao item.
     aplicacao     |     -     |  Não          |     Texto               |  1 dígito                       |  Aplicação do Produto (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>I - Industrialização<br>C - Comercialização<br>U - Uso e Consumo<br>A - Ativo Imobilizado
     fabricacao     |     -     |  Não          |     Numérico               |  1 dígito                       |  Indica onde ocorreu a fabricação do produto (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>0 - Própria<br>1 - Terceiros
+    indFarmaciaPopular     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não
+    praticaRepasse     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não
+    praticaPMC     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre:<br>S - Sim<br>N - Não
+    listaCMED     |     -     |  Não          |     Texto               |  -                       |  Valor do medicamento da lista, expresso em reais. (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>).
+    listaFarmaceutica     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>S - Sim<br>N - Não
+    tpProdMed     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>0 - Similar<br>1 - Genérico<br>2 - Referência<br>3 - Outros
 
 ## tributação (XML: imposto)
 
 Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
     Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
@@ -830,13 +844,17 @@ Contém informações sobre imposto de importação. Informar apenas quando o it
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
 base_calculo_importacao         |  vBC          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
-valor_despesas_aduaneiras       |  vDespAdu     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_despesas_aduaneiras       |  vDespAdu     |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais | **Obrigatório quando usar engine de cálculo taxweb** |
 valor_imposto_importacao        |  vII          |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
-valor_iof                       |  vIOF         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais
+valor_iof                       |  vIOF         |  Sim          |  Decimal   |  Até 13 dígitos, 2 casas decimais | **Obrigatório quando usar engine de cálculo taxweb** |
 
 ## declaracao_importacao (XML: DI)
 
 Contém informações sobre as declarações de importação contidos na NF-e. No XML, o nó DI é subitem do nó prod e pode conter uma ou mais ocorrência. Seus atributos são:
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
@@ -852,9 +870,25 @@ cnpj                            |  CNPJ         |  Não          |  Numérico  |
 uf_adquirente                   |  UFTerceiro   |  Não          |  Decimal   |  2 dígitos
 codigo_exportador               |  cExportador  |  Sim          |  Texto     |  1 a 60 caracteres
 
+## rastreabilidade (XML: rastro)
+
+Grupo criado para permitir a rastreabilidade de qualquer produto sujeito a regulações sanitárias, casos de recolhimento/recall, além de defensivos agrícolas, produtos veterinários, odontológicos, medicamentos, bebidas, águas envasadas, embalagens, etc., a partir da indicação de informações de número de lote, data de fabricação/produção, data de validade, etc. <strong>Obrigatório o preenchimento deste grupo no caso de medicamentos e produtos farmacêuticos.</strong>
+
+ Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
+--------------------------------|---------------|---------------|------------|------------------------------------------|------------
+numero_lote                     | nLote         | Sim           | Texto      | 1 a 20 caracteres
+quantidade_lote                 | qLote         | Sim           | Numérico   | Até 8 digitos, 3 casas decimais
+data_fabricacao                 | dFab          | Sim           | Data       | "AAAA-MM-DD"
+data_validade                   | dVal          | Sim           | Data       | "AAAA-MM-DD"
+codigo_agregacao                | cAgreg        | Não           | Numérico   | 1 a 20 dígitos
+
 ## medicamento (XML: med)
 
 Contém informações sobre detalhamento de medicamentos e de matérias-primas farmacêuticas
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
@@ -866,6 +900,10 @@ preco_maximo | vPMC | Sim | Decimal | Até 13 dígitos, 2 casas decimais
 ### adicoes (XML: adi)
 
 Contém informações sobre adições de uma declaração de importacao. No XML, o nó adi é subitem do nó DI e pode conter uma ou mais ocorrência. Seus atributos são:
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
  Campo                          |  XML          |  Obrigatório  |  Tipo      |  Formato e tamanho                       |  Observações
 --------------------------------|---------------|---------------|------------|------------------------------------------|------------
@@ -879,6 +917,10 @@ numero_drawback                 |  nDraw        |  Não          |  Numérico  |
 ## transporte (XML: transp)
 
 Contém informações sobre o frete e o transporte dos produtos ou serviços.
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
 Campo                       |  Campo no XML   |  Obrigatório  |     Tipo                |    Formato e tamanho               |   Observações
 --------------------------------|-----------------|---------------|-------------------------|------------------------------------|-----------------------------------------------------------
@@ -949,6 +991,10 @@ Cada volume transportador pode conter lacres, sendo até 5.000 por volume.
 
 Informações opcionais de cobrança. Seus atributos são:
 
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
+
 ### fatura (XML: fat)
 
 Subgrupo de informações relacionadas aos dados da fatura. Possui somente uma ocorrência. Apresenta os seguintes atributos:
@@ -1016,6 +1062,10 @@ Além dos campos similares à nota fiscal física, o cupom fiscal tem os seguint
 
 ## retencao_tributos (XML: retTrib)
 
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
+
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
     valor_retido_pis            |  vRetPIS        |  Não                |  Decimal                |  13 dígitos, 2 casas decimais      |
@@ -1039,6 +1089,10 @@ Informações de comércio exterior.
 ## forma_de_pagamento (XML: pag)
 
 Grupo de Detalhamento da Forma de Pagamento. No XML, o nó detPag é subitem do nó pag e pode conter uma ou mais ocorrência. Seus atributos são:
+
+<aside class="notice">
+  Campos decimais devem ser separados por ponto
+</aside>
 
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
