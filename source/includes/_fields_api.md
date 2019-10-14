@@ -45,6 +45,7 @@ Contém informações gerais e metadados sobre a NF-e. Seus atributos são:
     finalidade_nfe              |   finNFe        |  Sim          |     Numérico            |    1 dígito                  |   Finalidade de emissão da NF-e. Seleção entre:   1 - NF-e normal   2 - NF-e complementar   3 - NF-e de ajuste
     csc             |   -        |  Não          |     Numérico            |    6 dígitos                  |   Identificador do CSC <br><strong>* Somente para NFC-e. Não obrigatório caso seja informado no cadastro da organização.</strong>
     id_token               |   -        |  Não          |     Texto e/ou número            |    36 caracteres                  |   Código de Segurança do Contribuinte (antigo Token)<br><strong>* Somente para NFC-e. Não obrigatório caso seja informado no cadastro da organização.</strong>
+    tp_emis                     |   tpEmis     |  Sim quando Contingência     |     Numérico        |    1 dígito | 4=EPEC; <br>6= SVC-AN; <br>7=SVC-RS. <br><br>(Default: 1=Normal)
     just_contingencia           |   xJust      |  Sim quando Contingência     |     Texto e/ou número        |    15 a 256 caracteres   | Justificativa da entrada em contingência
     data_hora_contingencia      |   dhCont     |  Sim quando Contingência     |     Data    |  aaaa-mm-ddThh:mm:ss-03:00 | Data e Hora da entrada em contingência
 
