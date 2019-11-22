@@ -198,7 +198,7 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     listaCMED     |     -     |  Não          |     Texto               |  -                       |  Valor do medicamento da lista, expresso em reais. (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>).
     listaFarmaceutica     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>S - Sim<br>N - Não
     tpProdMed     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>0 - Similar<br>1 - Genérico<br>2 - Referência<br>3 - Outros
-
+    cdu1                        |     -           |  Não          |     Texto               |  2 caracteres                      | Sigla dos Estados do Brasil. Ex.: RJ <br> (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). 
 ## tributação (XML: imposto)
 
 Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.
