@@ -198,7 +198,7 @@ Contém informações sobre os produtos contidos na NF-e. No XML, o nó  prod  �
     listaCMED     |     -     |  Não          |     Texto               |  -                       |  Valor do medicamento da lista, expresso em reais. (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>).
     listaFarmaceutica     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>S - Sim<br>N - Não
     tpProdMed     |     -     |  Não          |     Texto               |  1 dígito                       |  (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). Seleção entre: <br>0 - Similar<br>1 - Genérico<br>2 - Referência<br>3 - Outros
-    cdu1                        |     -           |  Não          |     Texto               |  2 caracteres                      | Sigla dos Estados do Brasil. Ex.: RJ <br> (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>). 
+    cdu1                        |     -           |  Não          |     Texto               |  2 caracteres                      | Sigla dos Estados do Brasil. Ex.: RJ <br> (<i>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb.</i>).
 ## tributação (XML: imposto)
 
 Grupo de informações relacionadas à tributação de ICMS, IPI, PIS, COFINS e Importação.
@@ -1107,9 +1107,11 @@ Grupo de Cartões. No XML, o nó card é subitem do nó detPag e pode conter ape
     Campo                       |  Campo no XML   |  Obrigatório        |     Tipo                |    Formato e tamanho               |  Observações
 --------------------------------|-----------------|---------------------|-------------------------|------------------------------------|-----------------------------------------------------------
     tipo_de_integracao          |  tpIntegra      |  Sim                |  Numérico               | 1 dígito                           | 1=Pagamento integrado com o sistema de automação da empresa (Ex.: equipamento TEF, Comércio Eletrônico);<br>2= Pagamento não integrado com o sistema de automação da empresa (Ex.: equipamento POS);
-    cnpj_credenciadora          |  CNPJ           |  Não                |  Numérico               | 14 dígitos                         |
-    bandeira_operadora          |  tBand          |  Não                |  Numérico               | 2 caracteres                       | 01=Visa;<br>02=Mastercard;<br>03=American Express;<br>04=Sorocred;<br>05=Diners Club;<br>06=Elo;<br>07=Hipercard;<br>08=Aura;<br>09=Cabal;<br>99=Outros.
-    numero_autorizacao_operacao |  cAut           |  Não                |  Numérico               | Até 20 caracteres                  |
+    cnpj_credenciadora          |  CNPJ           |  Condicional*                 |  Numérico               | 14 dígitos                         |
+    bandeira_operadora          |  tBand          |  Condicional*                 |  Numérico               | 2 caracteres                       | 01=Visa;<br>02=Mastercard;<br>03=American Express;<br>04=Sorocred;<br>05=Diners Club;<br>06=Elo;<br>07=Hipercard;<br>08=Aura;<br>09=Cabal;<br>99=Outros.
+    numero_autorizacao_operacao |  cAut           |  Condicional*                 |  Numérico               | Até 20 caracteres                  |
+
+*Obrigatório para emissões realizadas nas seguintes UFs: CE; PE; RN; AL; BA; ES; MS; PB; PR; RJ; TO.
 
 ## informacoes_adicionais (XML: infAdic)
 
