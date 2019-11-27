@@ -82,5 +82,20 @@ EXEMPLO DE REQUISIÇÃO
 curl -X DELETE \
   http://localhost:3000/api/v1/users/1 \
   -H 'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da' \
-  -H 'content-type: application/json' \
+  -H 'content-type: application/json'
+
+
+EXEMPLO DE RETORNO DE ERROS
+
+{
+    "errors": { "base": "Não foi possível remover usuário." },
+    "error_details": [
+        {
+            "base": [
+                { "error": "default" }
+            ]
+        }
+    ]
+}
+
 ```
