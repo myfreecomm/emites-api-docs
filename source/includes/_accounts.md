@@ -58,6 +58,27 @@ EXEMPLO DE RESPOSTA
     }
   }
 }
+
+EXEMPLO DE RETORNO DE ERROS
+
+{
+    "errors": [
+        {
+            "name": ["não pode ficar em branco"],
+            "admin_email": ["não pode ficar em branco", "não é válido"]
+        }
+    ],
+    "error_details": [
+        {
+            "name": [
+                { "error": "blank" }
+            ],
+            "admin_email": [
+                { "error": "blank" }, { "error": "invalid" }
+            ]
+        }
+    ]
+}
 ```
 
 
