@@ -41,6 +41,20 @@ EXEMPLO DE RESPOSTA
   }
 }
 
+EXEMPLO DE RETORNO DE ERROS
+
+{
+    "errors": "E-mail para convite não é válido",
+    "error_details": [
+        {
+            "email": [
+                { "error":  "invalid" }
+            ]
+        }
+    ]
+}
+
+
 ```
 
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
@@ -70,4 +84,3 @@ curl -X DELETE \
   -H 'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da' \
   -H 'content-type: application/json' \
 ```
-
