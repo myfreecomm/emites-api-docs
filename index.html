@@ -231,6 +231,7 @@ EXEMPLO DE RESPOSTA
   <span class="o">}</span>
 <span class="o">}</span>
 
+
 EXEMPLO DE RETORNO DE ERROS
 
 <span class="o">{</span>
@@ -241,6 +242,16 @@ EXEMPLO DE RETORNO DE ERROS
             <span class="o">]</span>,
             <span class="s2">"last_number"</span>: <span class="o">[</span>
                 <span class="s2">"não pode ficar em branco"</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"error_details"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"serie"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"blank"</span> <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"last_number"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"blank"</span> <span class="o">}</span>
             <span class="o">]</span>
         <span class="o">}</span>
     <span class="o">]</span>
@@ -329,11 +340,18 @@ curl -X DELETE <span class="se">\</span>
 </aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"Não foi possível excluir essa série de notas pois ela está vinculada a um documento"</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"Não foi possível excluir essa série de notas pois ela está vinculada a um documento"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"error_details"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w"> </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="w"> </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -435,6 +453,16 @@ EXEMPLO DE RETORNO DE ERROS
                 <span class="s2">"não pode ficar em branco"</span>
             <span class="o">]</span>
         <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"error_details"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"serie"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"blank"</span> <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"last_number"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"blank"</span> <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
     <span class="o">]</span>
 <span class="o">}</span>
 </code></pre>
@@ -529,11 +557,18 @@ curl -X DELETE <span class="se">\</span>
 </aside>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"Não foi possível excluir essa série de notas pois ela está vinculada a um documento"</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"Não foi possível excluir essa série de notas pois ela está vinculada a um documento"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"error_details"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w"> </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="w"> </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -615,6 +650,19 @@ EXEMPLO DE RESPOSTA
       <span class="s2">"cnae"</span>: null,
       <span class="s2">"certificate"</span>: null
   <span class="o">}</span>
+<span class="o">}</span>
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+    <span class="s2">"errors"</span>: <span class="o">{</span> <span class="s2">"document"</span>: <span class="o">[</span><span class="s2">"não é válido"</span><span class="o">]</span> <span class="o">}</span>,
+    <span class="s2">"error_details"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"document"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"invalid"</span> <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
 <span class="o">}</span>
 </code></pre>
 
@@ -852,6 +900,19 @@ EXEMPLO DE RESPOSTA
       <span class="s2">"certificate"</span>: null
   <span class="o">}</span>
 <span class="o">}</span>
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+    <span class="s2">"errors"</span>: <span class="o">{</span> <span class="s2">"document"</span>: <span class="o">[</span><span class="s2">"não é válido"</span><span class="o">]</span> <span class="o">}</span>,
+    <span class="s2">"error_details"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"document"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"invalid"</span> <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
 </code></pre>
 
 <table><thead>
@@ -1009,6 +1070,20 @@ curl -X DELETE <span class="se">\</span>
   http://localhost:3000/api/v1/organizations/1 <span class="se">\</span>
   -H <span class="s1">'authorization: Token token=c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+    <span class="s2">"errors"</span>: <span class="o">[</span><span class="s2">"A conta deve possuir ao menos uma organização"</span><span class="o">]</span>,
+    <span class="s2">"error_details"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"base"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"last_organization"</span> <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
 </code></pre>
 
 <h2 id="listagem-de-organiza-es">Listagem de Organizações</h2>
@@ -1174,6 +1249,27 @@ EXEMPLO DE RESPOSTA
       <span class="s2">"uuid"</span>: <span class="s2">"47d4738f-db19-46e9-a305-7bfbbb964f77"</span>
     <span class="o">}</span>
   <span class="o">}</span>
+<span class="o">}</span>
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+    <span class="s2">"errors"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"name"</span>: <span class="o">[</span><span class="s2">"não pode ficar em branco"</span><span class="o">]</span>,
+            <span class="s2">"admin_email"</span>: <span class="o">[</span><span class="s2">"não pode ficar em branco"</span>, <span class="s2">"não é válido"</span><span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"error_details"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"name"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"blank"</span> <span class="o">}</span>
+            <span class="o">]</span>,
+            <span class="s2">"admin_email"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"blank"</span> <span class="o">}</span>, <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"invalid"</span> <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
 <span class="o">}</span>
 </code></pre>
 
@@ -8830,7 +8926,7 @@ placa</p>
 <tr>
 <td>cnpj_credenciadora</td>
 <td>CNPJ</td>
-<td>Não</td>
+<td>Condicional*</td>
 <td>Numérico</td>
 <td>14 dígitos</td>
 <td></td>
@@ -8838,7 +8934,7 @@ placa</p>
 <tr>
 <td>bandeira_operadora</td>
 <td>tBand</td>
-<td>Não</td>
+<td>Condicional*</td>
 <td>Numérico</td>
 <td>2 caracteres</td>
 <td>01=Visa;<br>02=Mastercard;<br>03=American Express;<br>04=Sorocred;<br>05=Diners Club;<br>06=Elo;<br>07=Hipercard;<br>08=Aura;<br>09=Cabal;<br>99=Outros.</td>
@@ -8846,12 +8942,14 @@ placa</p>
 <tr>
 <td>numero_autorizacao_operacao</td>
 <td>cAut</td>
-<td>Não</td>
+<td>Condicional*</td>
 <td>Numérico</td>
 <td>Até 20 caracteres</td>
 <td></td>
 </tr>
 </tbody></table>
+
+<p>*Obrigatório para emissões realizadas nas seguintes UFs: CE; PE; RN; AL; BA; ES; MS; PB; PR; RJ; TO.</p>
 
 <h2 id="informacoes_adicionais-xml-infadic">informacoes_adicionais (XML: infAdic)</h2>
 
@@ -13143,6 +13241,20 @@ EXEMPLO DE RESPOSTA
     <span class="s2">"updated_at"</span>: <span class="s2">"2019-06-17T09:51:51.558-03:00"</span>
   <span class="o">}</span>
 <span class="o">}</span>
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+    <span class="s2">"errors"</span>: <span class="s2">"E-mail para convite não é válido"</span>,
+    <span class="s2">"error_details"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"email"</span>: <span class="o">[</span>
+                <span class="o">{</span> <span class="s2">"error"</span>:  <span class="s2">"invalid"</span> <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+
 
 </code></pre>
 
