@@ -166,3 +166,56 @@ Após o processamento da solicitação de cancelamento da NFC-e, o XML do evento
   }
 }
 ```
+
+## Cancelamento por Substituição de NFC-e
+
+Para cancelar por substituição uma NFC-e, envie a seguinte requisição:
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH </i>
+        <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}/replacement_cancel </h6>
+    </div>
+</div>
+
+<aside class="notice">
+    Atenção: Um documento fiscal eletrônico só pode ser cancelado se (i) tiver sido previamente autorizado pelo Fisco e (ii) desde que ainda não tenha ocorrido a saída da mercadoria do estabelecimento. O cancelamento pode ser do tipo "normal" (NF-e, CF-e e NF-e) ou por "substituição" (NFC-e). Atualmente, o prazo máximo para cancelamento do tipo "normal" é de 30 minutos (NFC-e, CF-e) e de 24 horas (NF-e) e o prazo máximo para cancelamento do tipo "substituição" é de 168 horas (NFC-e). O cancelamento, quando realizado, não pode ser desfeito.<br><br>
+    <b>O motivo (opcional) deve possuir entre 15 e 255 caracteres.</b></br><br>
+    O campo <b>ch_nfe_ref</b> é obrigatório, preencha com a chave de acesso a
+    ser substituida
+</aside>
+
+```shell
+EXEMPLO DE REQUISIÇÃO
+
+# Motivo padrão: "Cancelamento por substituição devido duplicidade de emissão para a mesma operação fiscal"
+curl -X PATCH \
+    https://app.production.emites.com.br/api/v1/organizations/11/nfe/53190222769530000131556110000002041100341123/replacement_cancel \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -H 'content-type: application/json' \
+    -d '{
+          "ch_nfe_ref": "35191135402759007600551130000205421006450377"
+        }'
+
+# Motivo personalizado
+curl -X PATCH \
+    https://app.production.emites.com.br/api/v1/organizations/53190222769530000131556110000002041100341123/nfe/10990/replacement_cancel \
+    -H 'authorization: Token token=6f42433270bc61d746556b17605db1s4' \
+    -d '{
+          "motivo": "Cancelamento por substituição",
+          "ch_nfe_ref": "35191135402759007600551130000205421006450377"
+        }'
+
+EXEMPLO DE RESPOSTA
+
+{
+  "nfe": {
+    "id": 10990,
+    "status": "processing",
+    "data": {...},
+    "danfe_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719",
+    "xml_url": "http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379",
+    "taxrules_calculation_log": null
+  }
+}
+```
