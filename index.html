@@ -4189,17 +4189,11 @@ EXEMPLO DE RESPOSTA
 <td>Não</td>
 <td>Texto</td>
 <td>-</td>
-<td>Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada</td>
-</tr>
-<tr>
-<td><strong>nfe</strong> ou <strong>nfce</strong></td>
-<td>NF-e</td>
-<td>Sim</td>
-<td>Objeto</td>
-<td></td>
-<td>Conjunto de informações de apenas um documento.</td>
+<td>Campo interno do Emites para indicar o engine de cálculo tributário desejado pelo emissor.<br>Ex:<br><strong>&ldquo;taxweb&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o TaxRules <br><strong>&ldquo;nexaas&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o Template Tributário Nexaas <br>Observação: Nos casos onde a request já está calculada, este atributo <strong>não</strong> deve ser enviado na request.</td>
 </tr>
 </tbody></table>
+
+<p><strong>nfe</strong> ou <strong>nfce</strong>               | NF-e            |   Sim         |     Objeto               |                  |    Conjunto de informações de apenas um documento.</p>
 
 <h2 id="emiss-o-em-lote">Emissão em lote</h2>
 
@@ -4253,7 +4247,7 @@ EXEMPLO DE RESPOSTA
 <td>Não</td>
 <td>Texto</td>
 <td>-</td>
-<td>Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada</td>
+<td>Campo interno do Emites para indicar o engine de cálculo tributário desejado pelo emissor.<br>Ex:<br><strong>&ldquo;taxweb&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o TaxRules <br><strong>&ldquo;nexaas&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o Template Tributário Nexaas <br>Observação: Nos casos onde a request já está calculada, este atributo <strong>não</strong> deve ser enviado na request.</td>
 </tr>
 <tr>
 <td><strong>nfes</strong> ou <strong>nfces</strong></td>
@@ -10976,57 +10970,6 @@ EXEMPLO DE RESPOSTA
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
-<h2 id="cancelamento-por-substitui-o-de-nfc-e">Cancelamento por Substituição de NFC-e</h2>
-
-<p>Para cancelar por substituição uma NFC-e, envie a seguinte requisição:</p>
-
-<div class="api-endpoint">
-    <div class="endpoint-data">
-        <i class="label label-get">PATCH </i>
-        <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}/replacement_cancel </h6>
-    </div>
-</div>
-
-<aside class="notice">
-    Atenção: Um documento fiscal eletrônico só pode ser cancelado se (i) tiver sido previamente autorizado pelo Fisco e (ii) desde que ainda não tenha ocorrido a saída da mercadoria do estabelecimento. O cancelamento pode ser do tipo &ldquo;normal&rdquo; (NF-e, CF-e e NF-e) ou por &ldquo;substituição&rdquo; (NFC-e). Atualmente, o prazo máximo para cancelamento do tipo &ldquo;normal&rdquo; é de 30 minutos (NFC-e, CF-e) e de 24 horas (NF-e) e o prazo máximo para cancelamento do tipo &ldquo;substituição&rdquo; é de 168 horas (NFC-e). O cancelamento, quando realizado, não pode ser desfeito.<br><br>
-    <b>O motivo (opcional) deve possuir entre 15 e 255 caracteres.</b></br><br>
-    O campo <b>ch_nfe_ref</b> é obrigatório, preencha com a chave de acesso a
-    ser substituida
-</aside>
-<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
-
-<span class="c"># Motivo padrão: "Cancelamento por substituição devido duplicidade de emissão para a mesma operação fiscal"</span>
-curl -X PATCH <span class="se">\</span>
-    https://app.production.emites.com.br/api/v1/organizations/11/nfe/53190222769530000131556110000002041100341123/replacement_cancel <span class="se">\</span>
-    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
-    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-    -d <span class="s1">'{
-          "ch_nfe_ref": "35191135402759007600551130000205421006450377"
-        }'</span>
-
-<span class="c"># Motivo personalizado</span>
-curl -X PATCH <span class="se">\</span>
-    https://app.production.emites.com.br/api/v1/organizations/53190222769530000131556110000002041100341123/nfe/10990/replacement_cancel <span class="se">\</span>
-    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
-    -d <span class="s1">'{
-          "motivo": "Cancelamento por substituição",
-          "ch_nfe_ref": "35191135402759007600551130000205421006450377"
-        }'</span>
-
-EXEMPLO DE RESPOSTA
-
-<span class="o">{</span>
-  <span class="s2">"nfe"</span>: <span class="o">{</span>
-    <span class="s2">"id"</span>: 10990,
-    <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
-    <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
-    <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span>,
-    <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379"</span>,
-    <span class="s2">"taxrules_calculation_log"</span>: null
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre>
 
           <h1 id="inutiliza-o">Inutilização</h1>
 
