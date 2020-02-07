@@ -4189,11 +4189,17 @@ EXEMPLO DE RESPOSTA
 <td>Não</td>
 <td>Texto</td>
 <td>-</td>
-<td>Campo interno do Emites para indicar o engine de cálculo tributário desejado pelo emissor.<br>Ex:<br><strong>&ldquo;taxweb&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o TaxRules <br><strong>&ldquo;nexaas&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o Template Tributário Nexaas <br>Observação: Nos casos onde a request já está calculada, este atributo <strong>não</strong> deve ser enviado na request.</td>
+<td>Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada</td>
+</tr>
+<tr>
+<td><strong>nfe</strong> ou <strong>nfce</strong></td>
+<td>NF-e</td>
+<td>Sim</td>
+<td>Objeto</td>
+<td></td>
+<td>Conjunto de informações de apenas um documento.</td>
 </tr>
 </tbody></table>
-
-<p><strong>nfe</strong> ou <strong>nfce</strong>               | NF-e            |   Sim         |     Objeto               |                  |    Conjunto de informações de apenas um documento.</p>
 
 <h2 id="emiss-o-em-lote">Emissão em lote</h2>
 
@@ -4247,7 +4253,7 @@ EXEMPLO DE RESPOSTA
 <td>Não</td>
 <td>Texto</td>
 <td>-</td>
-<td>Campo interno do Emites para indicar o engine de cálculo tributário desejado pelo emissor.<br>Ex:<br><strong>&ldquo;taxweb&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o TaxRules <br><strong>&ldquo;nexaas&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o Template Tributário Nexaas <br>Observação: Nos casos onde a request já está calculada, este atributo <strong>não</strong> deve ser enviado na request.</td>
+<td>Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada</td>
 </tr>
 <tr>
 <td><strong>nfes</strong> ou <strong>nfces</strong></td>
@@ -10971,6 +10977,57 @@ EXEMPLO DE RESPOSTA
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<h2 id="cancelamento-por-substitui-o-de-nfc-e">Cancelamento por Substituição de NFC-e</h2>
+
+<p>Para cancelar por substituição uma NFC-e, envie a seguinte requisição:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PATCH </i>
+        <h6>/api/v1/organizations/{organization_id}/nfce/{nfce_id}/replacement_cancel </h6>
+    </div>
+</div>
+
+<aside class="notice">
+    Atenção: Um documento fiscal eletrônico só pode ser cancelado se (i) tiver sido previamente autorizado pelo Fisco e (ii) desde que ainda não tenha ocorrido a saída da mercadoria do estabelecimento. O cancelamento pode ser do tipo &ldquo;normal&rdquo; (NF-e, CF-e e NF-e) ou por &ldquo;substituição&rdquo; (NFC-e). Atualmente, o prazo máximo para cancelamento do tipo &ldquo;normal&rdquo; é de 30 minutos (NFC-e, CF-e) e de 24 horas (NF-e) e o prazo máximo para cancelamento do tipo &ldquo;substituição&rdquo; é de 168 horas (NFC-e). O cancelamento, quando realizado, não pode ser desfeito.<br><br>
+    <b>O motivo (opcional) deve possuir entre 15 e 255 caracteres.</b></br><br>
+    O campo <b>ch_nfe_ref</b> é obrigatório, preencha com a chave de acesso a
+    ser substituida
+</aside>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+<span class="c"># Motivo padrão: "Cancelamento por substituição devido duplicidade de emissão para a mesma operação fiscal"</span>
+curl -X PATCH <span class="se">\</span>
+    https://app.production.emites.com.br/api/v1/organizations/11/nfe/53190222769530000131556110000002041100341123/replacement_cancel <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "ch_nfe_ref": "35191135402759007600551130000205421006450377"
+        }'</span>
+
+<span class="c"># Motivo personalizado</span>
+curl -X PATCH <span class="se">\</span>
+    https://app.production.emites.com.br/api/v1/organizations/53190222769530000131556110000002041100341123/nfe/10990/replacement_cancel <span class="se">\</span>
+    -H <span class="s1">'authorization: Token token=6f42433270bc61d746556b17605db1s4'</span> <span class="se">\</span>
+    -d <span class="s1">'{
+          "motivo": "Cancelamento por substituição",
+          "ch_nfe_ref": "35191135402759007600551130000205421006450377"
+        }'</span>
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"nfe"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 10990,
+    <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
+    <span class="s2">"data"</span>: <span class="o">{</span>...<span class="o">}</span>,
+    <span class="s2">"danfe_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/pdf_files/000/015/761/original/danfe.pdf?153719"</span>,
+    <span class="s2">"xml_url"</span>: <span class="s2">"http://emites-ruby-sandbox.s3.amazonaws.com/nfe/xml_files/000/015/761/original/nfe.xml?15379"</span>,
+    <span class="s2">"taxrules_calculation_log"</span>: null
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
           <h1 id="inutiliza-o">Inutilização</h1>
 
 <h2 id="inutiliza-o-de-nf-e">Inutilização de NF-e</h2>
@@ -13200,6 +13257,623 @@ EXEMPLO DE RESPOSTA
             <span class="o">}</span>
         <span class="o">]</span>
     <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+          <h1 id="terminais">Terminais</h1>
+
+<h2 id="cria-o-de-terminal">Criação de terminal</h2>
+
+<p>Para criar um terminal, é necessário realizar uma requisição POST para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">POST</i>
+        <h6>/api/v1/organizations/CNPJ${:cnpj}IE${:ie}/terminals</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X POST <span class="se">\</span>
+  http://app.homologation.emites.com.br/api/v1/organizations/CNPJ22769530000131IE772733700120/terminals <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+        "terminal": {
+          "name": "ABC001",
+            "id_pos": "xxxxyyy001",
+            "nfce_online_serial_number": 233,
+            "nfce_contingency_serial_number": 765,
+            "cashier_number": "001",
+            "ip": "127.0.0.1",
+            "sats_attributes": [
+                {
+                    "activation_code": "123456789",
+                    "device_serial": "123",
+                    "sat_device_model": "SDK-1000"
+                }
+            ]
+        }
+    }'</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"id"</span>: <span class="s2">"7039ea4c-1ecc-478a-8218-1dbb5a4fa483"</span>,
+  <span class="s2">"organization_id"</span>: <span class="s2">"886dbbeb-801e-4d2f-a81f-358754a1195c"</span>,
+  <span class="s2">"name"</span>: <span class="s2">"ABC002"</span>,
+  <span class="s2">"id_pos"</span>: <span class="s2">"xxxxyyy002"</span>,
+  <span class="s2">"status"</span>: <span class="s2">"inactivated"</span>,
+  <span class="s2">"terminal_type"</span>: <span class="s2">"pc"</span>,
+  <span class="s2">"token"</span>: <span class="s2">"b82efa9181f689138ab76791bcc55400"</span>,
+  <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:57:03.773Z"</span>,
+  <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T14:57:03.773Z"</span>,
+  <span class="s2">"sat_device_id"</span>: null,
+  <span class="s2">"contingency_serial"</span>: null,
+  <span class="s2">"discarded_at"</span>: null,
+  <span class="s2">"notified_at"</span>: null,
+  <span class="s2">"online_serial"</span>: null,
+  <span class="s2">"online_last_number"</span>: null,
+  <span class="s2">"contingency_last_number"</span>: null,
+  <span class="s2">"ip"</span>: <span class="s2">"127.0.0.2"</span>,
+  <span class="s2">"sat_emission"</span>: <span class="nb">false</span>,
+  <span class="s2">"datasource_url"</span>: <span class="s2">"jdbc:sqlite:file:emites.db"</span>,
+  <span class="s2">"cashier_number"</span>: <span class="s2">"002"</span>,
+  <span class="s2">"nfce_online_serial_id"</span>: <span class="s2">"eb2f81bd-a1ee-4a58-8051-d9bac1bd734f"</span>,
+  <span class="s2">"nfce_contingency_serial_id"</span>: <span class="s2">"63e1c52a-90c1-435b-b0b9-197bb9d033c8"</span>,
+  <span class="s2">"ipc_acceptor"</span>: null,
+  <span class="s2">"ipc_taxengine"</span>: null,
+  <span class="s2">"ipc_publisher"</span>: null,
+  <span class="s2">"nfe_online_serial_id"</span>: null,
+  <span class="s2">"client_version_update"</span>: <span class="nb">false</span>,
+  <span class="s2">"sats"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"427f3aaf-5842-4291-aca9-15349f453fcf"</span>,
+      <span class="s2">"uri"</span>: <span class="s2">"file:///opt/local/emites-client/libsat.so"</span>,
+      <span class="s2">"activation_code"</span>: <span class="s2">"123456789"</span>,
+      <span class="s2">"priority"</span>: null,
+      <span class="s2">"device_serial"</span>: <span class="s2">"123"</span>,
+      <span class="s2">"terminal_id"</span>: <span class="s2">"7039ea4c-1ecc-478a-8218-1dbb5a4fa483"</span>,
+      <span class="s2">"sat_device_id"</span>: <span class="s2">"810b922f-db26-455a-a5e0-7e17198a7240"</span>,
+      <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:57:03.777Z"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T14:57:03.777Z"</span>,
+      <span class="s2">"access_key_validator"</span>: null
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+  <span class="s2">"errors"</span>: <span class="o">{</span>
+    <span class="s2">"messages"</span>: <span class="o">{</span>
+      <span class="s2">"id_pos"</span>: <span class="o">[</span>
+        <span class="s2">"já está em uso"</span>
+      <span class="o">]</span>,
+      <span class="s2">"cashier_number"</span>: <span class="o">[</span>
+        <span class="s2">"já está em uso"</span>
+      <span class="o">]</span>,
+      <span class="s2">"ip"</span>: <span class="o">[</span>
+        <span class="s2">"já está em uso"</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Sim</td>
+<td>Text</td>
+<td></td>
+<td>Identificação do terminal</td>
+</tr>
+<tr>
+<td>id_pos</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 51 caracteres</td>
+<td>Série/identificador do terminal</td>
+</tr>
+<tr>
+<td>cashier_number</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>/\A\d{3}\z/</td>
+<td>Número do caixa</td>
+</tr>
+<tr>
+<td>nfce_online_serial_number</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td>Número da série de emissão online</td>
+</tr>
+<tr>
+<td>nfce_contingency_serial_number</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td>Número da série de emissão offline (Contingência)</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>Não</td>
+<td>Texto</td>
+<td></td>
+<td>IP</td>
+</tr>
+<tr>
+<td>client_version_update</td>
+<td>Não</td>
+<td>Booleano</td>
+<td></td>
+<td>Flag para atualização da versão do Emites Client</td>
+</tr>
+<tr>
+<td>sat_emission</td>
+<td>Não</td>
+<td>Booleano</td>
+<td></td>
+<td>Flag para informar se SAT/MFE é a emissão principal</td>
+</tr>
+</tbody></table>
+
+<h4 id="sats">sats</h4>
+
+<p>Grupo de informações relacionadas ao disposito SAT/MFE do terminal. Seus atributos são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sat_device_model</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>[&ldquo;SDK-1000&rdquo;, &ldquo;MDK-1000 L&rdquo;]</td>
+<td>Modelo do dispositivo SAT/MFE</td>
+</tr>
+<tr>
+<td>activation_code</td>
+<td>Sim</td>
+<td>Texto</td>
+<td></td>
+<td>Código de ativação</td>
+</tr>
+<tr>
+<td>device_serial</td>
+<td>Sim</td>
+<td>Texto</td>
+<td></td>
+<td>Série do dispositivo</td>
+</tr>
+<tr>
+<td>access_key_validator</td>
+<td>Não</td>
+<td>Texto</td>
+<td>UUID4</td>
+<td>Obrigatório somente para MFE</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Não</td>
+<td>Numérico</td>
+<td></td>
+<td>Prioridade/Ordenação do dispositivo</td>
+</tr>
+</tbody></table>
+
+<h2 id="atualiza-o-de-terminais">Atualização de Terminais</h2>
+
+<p>Para atualizar um terminal, é necessário realizar uma requisição PUT para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">PUT</i>
+        <h6>/api/v1/organizations/CNPJ{:cnpj}IE{:ie}/terminals/{:terminal_id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl -X PUT <span class="se">\</span>
+  http://app.homologation.emites.com.br/api/v1/organizations/CNPJ22769530000131IE772733700120/terminals/d4b6f53d-c6b9-47a9-a256-5db679ccc8e4 <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+          "terminal": {
+              "name": "ABC007",
+              "id_pos": "xxxxxx001",
+              "nfce_online_serial_number": 233,
+              "nfce_contingency_serial_number": 765,
+              "cashier_number": "005",
+              "ip": "127.0.0.1",
+              "client_version_update": true,
+              "sats_attributes": [
+                  {
+                      "activation_code": "123456789",
+                      "device_serial": "777",
+                      "sat_device_model": "SDK-1000"
+                  }
+              ]
+          }
+      }
+    }'</span>
+
+
+EXEMPLO DE RESPOSTA
+
+<span class="o">{</span>
+  <span class="s2">"organization_id"</span>: <span class="s2">"886dbbeb-801e-4d2f-a81f-358754a1195c"</span>,
+  <span class="s2">"id_pos"</span>: <span class="s2">"xxxxyyy001"</span>,
+  <span class="s2">"name"</span>: <span class="s2">"ABC007"</span>,
+  <span class="s2">"terminal_type"</span>: <span class="s2">"pc"</span>,
+  <span class="s2">"sat_emission"</span>: <span class="nb">false</span>,
+  <span class="s2">"client_version_update"</span>: <span class="nb">true</span>,
+  <span class="s2">"ip"</span>: <span class="s2">"127.0.0.1"</span>,
+  <span class="s2">"cashier_number"</span>: <span class="s2">"005"</span>,
+  <span class="s2">"datasource_url"</span>: <span class="s2">"jdbc:sqlite:file:emites.db"</span>,
+  <span class="s2">"nfce_online_serial_id"</span>: <span class="s2">"eb2f81bd-a1ee-4a58-8051-d9bac1bd734f"</span>,
+  <span class="s2">"nfce_contingency_serial_id"</span>: <span class="s2">"63e1c52a-90c1-435b-b0b9-197bb9d033c8"</span>,
+  <span class="s2">"nfe_online_serial_id"</span>: null,
+  <span class="s2">"id"</span>: <span class="s2">"d4b6f53d-c6b9-47a9-a256-5db679ccc8e4"</span>,
+  <span class="s2">"status"</span>: <span class="s2">"inactivated"</span>,
+  <span class="s2">"token"</span>: <span class="s2">"fafc11a7d96d20423641ddc8e9002a0c"</span>,
+  <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:29:50.452Z"</span>,
+  <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T16:07:17.518Z"</span>,
+  <span class="s2">"sat_device_id"</span>: null,
+  <span class="s2">"contingency_serial"</span>: null,
+  <span class="s2">"discarded_at"</span>: null,
+  <span class="s2">"notified_at"</span>: null,
+  <span class="s2">"online_serial"</span>: null,
+  <span class="s2">"online_last_number"</span>: null,
+  <span class="s2">"contingency_last_number"</span>: null,
+  <span class="s2">"ipc_acceptor"</span>: null,
+  <span class="s2">"ipc_taxengine"</span>: null,
+  <span class="s2">"ipc_publisher"</span>: null,
+  <span class="s2">"sats"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"terminal_id"</span>: <span class="s2">"d4b6f53d-c6b9-47a9-a256-5db679ccc8e4"</span>,
+      <span class="s2">"id"</span>: <span class="s2">"7c374ab9-ddb4-4215-b7db-37957f54639c"</span>,
+      <span class="s2">"sat_device_id"</span>: <span class="s2">"810b922f-db26-455a-a5e0-7e17198a7240"</span>,
+      <span class="s2">"priority"</span>: null,
+      <span class="s2">"activation_code"</span>: <span class="s2">"123456789"</span>,
+      <span class="s2">"device_serial"</span>: <span class="s2">"123"</span>,
+      <span class="s2">"access_key_validator"</span>: null,
+      <span class="s2">"uri"</span>: <span class="s2">"file:///opt/local/emites-client/libsat.so"</span>,
+      <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:29:50.455Z"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T14:29:50.455Z"</span>
+    <span class="o">}</span>,
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"06d14c89-e380-4685-a53c-f1b3ddaa8394"</span>,
+      <span class="s2">"uri"</span>: <span class="s2">"file:///opt/local/emites-client/libsat.so"</span>,
+      <span class="s2">"activation_code"</span>: <span class="s2">"123456789"</span>,
+      <span class="s2">"priority"</span>: null,
+      <span class="s2">"device_serial"</span>: <span class="s2">"777"</span>,
+      <span class="s2">"terminal_id"</span>: <span class="s2">"d4b6f53d-c6b9-47a9-a256-5db679ccc8e4"</span>,
+      <span class="s2">"sat_device_id"</span>: <span class="s2">"810b922f-db26-455a-a5e0-7e17198a7240"</span>,
+      <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T16:07:17.503Z"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T16:07:17.503Z"</span>,
+      <span class="s2">"access_key_validator"</span>: null
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+
+EXEMPLO DE RETORNO DE ERROS
+
+<span class="o">{</span>
+  <span class="s2">"errors"</span>: <span class="o">{</span>
+    <span class="s2">"messages"</span>: <span class="o">{</span>
+      <span class="s2">"cashier_number"</span>: <span class="o">[</span>
+        <span class="s2">"não é válido"</span>
+      <span class="o">]</span>,
+      <span class="s2">"nfce_online_serial_id"</span>: <span class="o">[</span>
+        <span class="s2">"não pode ficar em branco"</span>
+      <span class="o">]</span>,
+      <span class="s2">"nfce_online_serial_number"</span>: <span class="o">[</span>
+        <span class="s2">"não pode ficar em branco"</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Sim</td>
+<td>Text</td>
+<td></td>
+<td>Identificação do terminal</td>
+</tr>
+<tr>
+<td>id_pos</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>Até 51 caracteres</td>
+<td>Série/identificador do terminal</td>
+</tr>
+<tr>
+<td>cashier_number</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>/\A\d{3}\z/</td>
+<td>Número do caixa</td>
+</tr>
+<tr>
+<td>nfce_online_serial_number</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td>Número da série de emissão online</td>
+</tr>
+<tr>
+<td>nfce_contingency_serial_number</td>
+<td>Sim</td>
+<td>Numérico</td>
+<td></td>
+<td>Número da série de emissão offline (Contingência)</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>Não</td>
+<td>Texto</td>
+<td></td>
+<td>IP</td>
+</tr>
+<tr>
+<td>client_version_update</td>
+<td>Não</td>
+<td>Booleano</td>
+<td></td>
+<td>Flag para atualização da versão do Emites Client</td>
+</tr>
+<tr>
+<td>sat_emission</td>
+<td>Não</td>
+<td>Booleano</td>
+<td></td>
+<td>Flag para informar se SAT/MFE é a emissão principal</td>
+</tr>
+</tbody></table>
+
+<h4 id="sats">sats</h4>
+
+<p>Grupo de informações relacionadas ao disposito SAT/MFE do terminal. Seus atributos são:</p>
+
+<table><thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Tipo</th>
+<th>Formato e tamanho</th>
+<th>Observações</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sat_device_model</td>
+<td>Sim</td>
+<td>Texto</td>
+<td>[&ldquo;SDK-1000&rdquo;, &ldquo;MDK-1000 L&rdquo;]</td>
+<td>Modelo do dispositivo SAT/MFE</td>
+</tr>
+<tr>
+<td>activation_code</td>
+<td>Sim</td>
+<td>Texto</td>
+<td></td>
+<td>Código de ativação</td>
+</tr>
+<tr>
+<td>device_serial</td>
+<td>Sim</td>
+<td>Texto</td>
+<td></td>
+<td>Série do dispositivo</td>
+</tr>
+<tr>
+<td>access_key_validator</td>
+<td>Não</td>
+<td>Texto</td>
+<td>UUID4</td>
+<td>Obrigatório somente para MFE</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Não</td>
+<td>Numérico</td>
+<td></td>
+<td>Prioridade/Ordenação do dispositivo</td>
+</tr>
+</tbody></table>
+
+<h2 id="exclus-o-de-terminais">Exclusão de Terminais</h2>
+
+<p>Para excluir um terminal da organização, é necessário realizar uma requisição DELETE para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-warning">DELETE</i>
+        <h6>/api/v1/organizations/CNPJ{:cnpj}IE{:ie}/terminals/{:terminal_id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+curl -X DELETE <span class="se">\</span>
+  http://app.homologation.emites.com.br/api/v1/organizations/CNPJ22769530000131IE772733700120/terminals/d7d6e731-df61-4b0d-9468-29c09b295391 <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span>
+</code></pre>
+
+<h2 id="listagem-de-terminais">Listagem de Terminais</h2>
+
+<p>Para listar todas os terminais de uma organização, é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>api/v1/organizations/CNPJ{:cnpj}IE{:ie}/terminals</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+curl -X GET <span class="se">\</span>
+  http://app.homologation.emites.com.br/api/v1/organizations/CNPJ22769530000131IE772733700120/terminals <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+<pre class="highlight shell"><code>EXEMPLO DE RESPOSTA
+<span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">"id"</span>: <span class="s2">"d4b6f53d-c6b9-47a9-a256-5db679ccc8e4"</span>,
+    <span class="s2">"organization_id"</span>: <span class="s2">"886dbbeb-801e-4d2f-a81f-358754a1195c"</span>,
+    <span class="s2">"name"</span>: <span class="s2">"ABC001"</span>,
+    <span class="s2">"id_pos"</span>: <span class="s2">"xxxxyyy001"</span>,
+    <span class="s2">"status"</span>: <span class="s2">"inactivated"</span>,
+    <span class="s2">"terminal_type"</span>: <span class="s2">"pc"</span>,
+    <span class="s2">"token"</span>: <span class="s2">"fafc11a7d96d20423641ddc8e9002a0c"</span>,
+    <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:29:50.452Z"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T14:29:50.452Z"</span>,
+    <span class="s2">"sat_device_id"</span>: null,
+    <span class="s2">"contingency_serial"</span>: null,
+    <span class="s2">"discarded_at"</span>: null,
+    <span class="s2">"notified_at"</span>: null,
+    <span class="s2">"online_serial"</span>: null,
+    <span class="s2">"online_last_number"</span>: null,
+    <span class="s2">"contingency_last_number"</span>: null,
+    <span class="s2">"ip"</span>: <span class="s2">"127.0.0.1"</span>,
+    <span class="s2">"sat_emission"</span>: <span class="nb">false</span>,
+    <span class="s2">"datasource_url"</span>: <span class="s2">"jdbc:sqlite:file:emites.db"</span>,
+    <span class="s2">"cashier_number"</span>: <span class="s2">"001"</span>,
+    <span class="s2">"nfce_online_serial_id"</span>: <span class="s2">"eb2f81bd-a1ee-4a58-8051-d9bac1bd734f"</span>,
+    <span class="s2">"nfce_contingency_serial_id"</span>: <span class="s2">"63e1c52a-90c1-435b-b0b9-197bb9d033c8"</span>,
+    <span class="s2">"ipc_acceptor"</span>: null,
+    <span class="s2">"ipc_taxengine"</span>: null,
+    <span class="s2">"ipc_publisher"</span>: null,
+    <span class="s2">"nfe_online_serial_id"</span>: null,
+    <span class="s2">"client_version_update"</span>: <span class="nb">false</span>,
+    <span class="s2">"sats"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"id"</span>: <span class="s2">"7c374ab9-ddb4-4215-b7db-37957f54639c"</span>,
+        <span class="s2">"uri"</span>: <span class="s2">"file:///opt/local/emites-client/libsat.so"</span>,
+        <span class="s2">"activation_code"</span>: <span class="s2">"123456789"</span>,
+        <span class="s2">"priority"</span>: null,
+        <span class="s2">"device_serial"</span>: <span class="s2">"123"</span>,
+        <span class="s2">"terminal_id"</span>: <span class="s2">"d4b6f53d-c6b9-47a9-a256-5db679ccc8e4"</span>,
+        <span class="s2">"sat_device_id"</span>: <span class="s2">"810b922f-db26-455a-a5e0-7e17198a7240"</span>,
+        <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:29:50.455Z"</span>,
+        <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T14:29:50.455Z"</span>,
+        <span class="s2">"access_key_validator"</span>: null
+      <span class="o">}</span>
+    <span class="o">]</span>
+  <span class="o">}</span>,
+  ...
+<span class="o">]</span>
+</code></pre>
+
+<h2 id="consulta-de-terminais">Consulta de Terminais</h2>
+
+<p>Para listar um terminal da organização, é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>api/v1/organizations/CNPJ{:cnpj}IE{:ie}/terminals/{:terminal_id}</h6>
+    </div>
+</div>
+
+<p>Veja a seguir um exemplo do corpo da requisição:</p>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+curl -X GET <span class="se">\</span>
+  http://app.homologation.emites.com.br/api/v1/organizations/CNPJ22769530000131IE772733700120/terminals/d7d6e731-df61-4b0d-9468-29c09b295391 <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer c3b1164e8ae17f6d9712730ec75be6da'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+<pre class="highlight shell"><code>EXEMPLO DE RESPOSTA
+<span class="o">{</span>
+  <span class="s2">"id"</span>: <span class="s2">"d7d6e731-df61-4b0d-9468-29c09b295391"</span>,
+  <span class="s2">"organization_id"</span>: <span class="s2">"886dbbeb-801e-4d2f-a81f-358754a1195c"</span>,
+  <span class="s2">"name"</span>: <span class="s2">"ABC007"</span>,
+  <span class="s2">"id_pos"</span>: <span class="s2">"xxxxyyy001"</span>,
+  <span class="s2">"status"</span>: <span class="s2">"inactivated"</span>,
+  <span class="s2">"terminal_type"</span>: <span class="s2">"pc"</span>,
+  <span class="s2">"token"</span>: <span class="s2">"73c7aaf05da0f2bf20e1381ce891c6d3"</span>,
+  <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:27:09.368Z"</span>,
+  <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T14:27:56.889Z"</span>,
+  <span class="s2">"sat_device_id"</span>: null,
+  <span class="s2">"contingency_serial"</span>: null,
+  <span class="s2">"discarded_at"</span>: null,
+  <span class="s2">"notified_at"</span>: null,
+  <span class="s2">"online_serial"</span>: null,
+  <span class="s2">"online_last_number"</span>: null,
+  <span class="s2">"contingency_last_number"</span>: null,
+  <span class="s2">"ip"</span>: <span class="s2">"127.0.0.1"</span>,
+  <span class="s2">"sat_emission"</span>: <span class="nb">false</span>,
+  <span class="s2">"datasource_url"</span>: <span class="s2">"jdbc:sqlite:file:emites.db"</span>,
+  <span class="s2">"cashier_number"</span>: <span class="s2">"005"</span>,
+  <span class="s2">"nfce_online_serial_id"</span>: <span class="s2">"eb2f81bd-a1ee-4a58-8051-d9bac1bd734f"</span>,
+  <span class="s2">"nfce_contingency_serial_id"</span>: <span class="s2">"63e1c52a-90c1-435b-b0b9-197bb9d033c8"</span>,
+  <span class="s2">"ipc_acceptor"</span>: null,
+  <span class="s2">"ipc_taxengine"</span>: null,
+  <span class="s2">"ipc_publisher"</span>: null,
+  <span class="s2">"nfe_online_serial_id"</span>: null,
+  <span class="s2">"client_version_update"</span>: <span class="nb">false</span>,
+  <span class="s2">"sats"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"f4777547-8ffd-4554-a78f-9adfee8bec97"</span>,
+      <span class="s2">"uri"</span>: <span class="s2">"file:///opt/local/emites-client/libsat.so"</span>,
+      <span class="s2">"activation_code"</span>: <span class="s2">"123456789"</span>,
+      <span class="s2">"priority"</span>: null,
+      <span class="s2">"device_serial"</span>: <span class="s2">"123"</span>,
+      <span class="s2">"terminal_id"</span>: <span class="s2">"d7d6e731-df61-4b0d-9468-29c09b295391"</span>,
+      <span class="s2">"sat_device_id"</span>: <span class="s2">"810b922f-db26-455a-a5e0-7e17198a7240"</span>,
+      <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:27:09.375Z"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T14:27:09.375Z"</span>,
+      <span class="s2">"access_key_validator"</span>: null
+    <span class="o">}</span>,
+    <span class="o">{</span>
+      <span class="s2">"id"</span>: <span class="s2">"bd442833-20ab-4c0a-b339-63e7a59b295e"</span>,
+      <span class="s2">"uri"</span>: <span class="s2">"file:///opt/local/emites-client/libsat.so"</span>,
+      <span class="s2">"activation_code"</span>: <span class="s2">"123456789"</span>,
+      <span class="s2">"priority"</span>: null,
+      <span class="s2">"device_serial"</span>: <span class="s2">"777"</span>,
+      <span class="s2">"terminal_id"</span>: <span class="s2">"d7d6e731-df61-4b0d-9468-29c09b295391"</span>,
+      <span class="s2">"sat_device_id"</span>: <span class="s2">"810b922f-db26-455a-a5e0-7e17198a7240"</span>,
+      <span class="s2">"created_at"</span>: <span class="s2">"2020-02-07T14:27:56.877Z"</span>,
+      <span class="s2">"updated_at"</span>: <span class="s2">"2020-02-07T14:27:56.877Z"</span>,
+      <span class="s2">"access_key_validator"</span>: null
+    <span class="o">}</span>
+  <span class="o">]</span>
 <span class="o">}</span>
 </code></pre>
 
