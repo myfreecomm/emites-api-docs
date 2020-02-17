@@ -235,6 +235,7 @@ Grupo a ser informado nas vendas interestaduais para consumidor final, não cont
   valor_uf_destinatario_interestadual   |  vICMSUFDest    |  Não          |  Decimal  | Até 13 dígitos, 2 casas decimais   |
   perc_fcp_interestadual                |  pFCPUFDest     |  Não          |  Decimal  | Até 3 dígitos, 4 casas decimais    |
   valor_fcp_interestadual               |  vFCPUFDest     |  Não          |  Decimal  | Até 13 dígitos, 2 casas decimais   |
+  valor_base_calculo_fcp_dest           |  vBCFCPUFDest   |  Não          |  Decimal  | Até 13 dígitos, 2 casas decimais   |
 
 ### ICMSST (XML: ICMSST) | situacao_tributaria = 41 e 60
 
