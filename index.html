@@ -4189,17 +4189,11 @@ EXEMPLO DE RESPOSTA
 <td>Não</td>
 <td>Texto</td>
 <td>-</td>
-<td>Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada</td>
-</tr>
-<tr>
-<td><strong>nfe</strong> ou <strong>nfce</strong></td>
-<td>NF-e</td>
-<td>Sim</td>
-<td>Objeto</td>
-<td></td>
-<td>Conjunto de informações de apenas um documento.</td>
+<td>Campo interno do Emites para indicar o engine de cálculo tributário desejado pelo emissor.<br>Ex:<br><strong>&ldquo;taxweb&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o TaxRules <br><strong>&ldquo;nexaas&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o Template Tributário Nexaas <br>Observação: Nos casos onde a request já está calculada, este atributo <strong>não</strong> deve ser enviado na request.</td>
 </tr>
 </tbody></table>
+
+<p><strong>nfe</strong> ou <strong>nfce</strong>               | NF-e            |   Sim         |     Objeto               |                  |    Conjunto de informações de apenas um documento.</p>
 
 <h2 id="emiss-o-em-lote">Emissão em lote</h2>
 
@@ -4253,7 +4247,7 @@ EXEMPLO DE RESPOSTA
 <td>Não</td>
 <td>Texto</td>
 <td>-</td>
-<td>Campo interno do Emites para indicar a engine de cálculo a ser utilizada caso habilitada</td>
+<td>Campo interno do Emites para indicar o engine de cálculo tributário desejado pelo emissor.<br>Ex:<br><strong>&ldquo;taxweb&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o TaxRules <br><strong>&ldquo;nexaas&rdquo;</strong>: Exclusivamente para casos onde o taxengine será o Template Tributário Nexaas <br>Observação: Nos casos onde a request já está calculada, este atributo <strong>não</strong> deve ser enviado na request.</td>
 </tr>
 <tr>
 <td><strong>nfes</strong> ou <strong>nfces</strong></td>
@@ -4506,6 +4500,14 @@ EXEMPLO DE RESPOSTA
 <td>Texto</td>
 <td>De 3 a 4 caracteres</td>
 <td>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb. <br>Preencher se a organização não tiver nenhum regime tributário diferenciado. <br><strong>Valores válidos: LFEM, LFDES e ISENLF.</strong><br><br><i>É importante que o regime tributário diferenciado (emitente) também esteja configurado na organização.</i></td>
+</tr>
+<tr>
+<td>substituto_st</td>
+<td>-</td>
+<td>Não</td>
+<td>Texto</td>
+<td>1 caractere</td>
+<td>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb. <strong>Valores válidos: S ou N</strong></td>
 </tr>
 </tbody></table>
 
@@ -5003,8 +5005,8 @@ EXEMPLO DE RESPOSTA
 <td>exncm</td>
 <td>-</td>
 <td>Não</td>
-<td>Numérico</td>
-<td>2 dígitos</td>
+<td>Texto</td>
+<td>-</td>
 <td>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb destinado à detalhar a característica do produto. (Ex. pauta fiscal etc).</td>
 </tr>
 <tr>
