@@ -28,7 +28,8 @@ curl -X POST \
   -H 'content-type: application/json' \
   -d '{
       "account": {
-        "name": "Nome da conta"
+        "name": "Nome da conta",
+        "email": "foo@bar.com"
       }
     }'
 
@@ -80,3 +81,4 @@ EXEMPLO DE RETORNO DE ERROS
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     name                        |  Sim          |     Texto               |                              |   Nome para identificação da conta.
+    email                       |  Não          |     Texto               |                              |   E-mail válido do primeiro usuário que será criado ou vinculado à nova conta.
