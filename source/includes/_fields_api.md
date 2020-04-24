@@ -65,7 +65,7 @@ Contém informações sobre o destinatário da aquisição dos produtos do emite
     indicador_inscricao_estadual|   indIEDest     |  Sim          |  Numérico               |  1 dígito                    |  Indica se o destinatário é contribuinte do ICMS. Seleção entre:<br>1 = Contribuinte ICMS (informar a IE do destinatário);<br> 2  = Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS;<br>9 = Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS.<br><strong>Para NFC-e esse campo sempre terá o valor 9, por isso pode ser ignorado.<strong>
     email                       |   email         |  Não          |  Texto                  |  Até 60 caracteres           |
     regime_tributario_diferenciado         |   -            |  Não          |  Texto                  |  De 3 a 4 caracteres           |  Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb. <br>Preencher se a organização não tiver nenhum regime tributário diferenciado. <br><strong>Valores válidos: LFEM, LFDES e ISENLF.</strong><br><br><i>É importante que o regime tributário diferenciado (emitente) também esteja configurado na organização.</i>
-    cnae (cdAtividadeEconomica) |   -            |  Não           |  Numérico               |  -                           |  Trata-se de um atributo específico (cdAtividadeEconomica) para uso do engine de cálculo TaxRules da TaxWeb
+    cd_atividade_economica      |   -            |  Não           |  Numérico               |  -                           |  Trata-se de um atributo específico (cdAtividadeEconomica) para uso do engine de cálculo TaxRules da TaxWeb
 
 ### endereco (XML: enderDest)
 
