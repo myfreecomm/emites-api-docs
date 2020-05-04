@@ -29,7 +29,7 @@ curl -X POST \
   -d '{
       "account": {
         "name": "Nome da conta",
-        "admin_email": "foo@bar.com"
+        "email": "foo@bar.com"
       }
     }'
 
@@ -64,17 +64,13 @@ EXEMPLO DE RETORNO DE ERROS
 {
     "errors": [
         {
-            "name": ["não pode ficar em branco"],
-            "admin_email": ["não pode ficar em branco", "não é válido"]
+            "name": ["não pode ficar em branco"]
         }
     ],
     "error_details": [
         {
             "name": [
                 { "error": "blank" }
-            ],
-            "admin_email": [
-                { "error": "blank" }, { "error": "invalid" }
             ]
         }
     ]
@@ -85,4 +81,4 @@ EXEMPLO DE RETORNO DE ERROS
     Campo                       |  Obrigatório  |     Tipo                |    Formato e tamanho         |   Observações
 --------------------------------|---------------|-------------------------|------------------------------|-----------------------------------------------------------
     name                        |  Sim          |     Texto               |                              |   Nome para identificação da conta.
-    admin_email                 |  Sim          |     Texto               |                              |   E-mail válido do usuário administrador que será criado ou vinculado à nova conta.
+    email                       |  Não          |     Texto               |                              |   E-mail válido do primeiro usuário que será criado ou vinculado à nova conta.
