@@ -1221,7 +1221,7 @@ curl -X POST <span class="se">\</span>
   -d <span class="s1">'{
       "account": {
         "name": "Nome da conta",
-        "admin_email": "foo@bar.com"
+        "email": "foo@bar.com"
       }
     }'</span>
 
@@ -1256,17 +1256,13 @@ EXEMPLO DE RETORNO DE ERROS
 <span class="o">{</span>
     <span class="s2">"errors"</span>: <span class="o">[</span>
         <span class="o">{</span>
-            <span class="s2">"name"</span>: <span class="o">[</span><span class="s2">"não pode ficar em branco"</span><span class="o">]</span>,
-            <span class="s2">"admin_email"</span>: <span class="o">[</span><span class="s2">"não pode ficar em branco"</span>, <span class="s2">"não é válido"</span><span class="o">]</span>
+            <span class="s2">"name"</span>: <span class="o">[</span><span class="s2">"não pode ficar em branco"</span><span class="o">]</span>
         <span class="o">}</span>
     <span class="o">]</span>,
     <span class="s2">"error_details"</span>: <span class="o">[</span>
         <span class="o">{</span>
             <span class="s2">"name"</span>: <span class="o">[</span>
                 <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"blank"</span> <span class="o">}</span>
-            <span class="o">]</span>,
-            <span class="s2">"admin_email"</span>: <span class="o">[</span>
-                <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"blank"</span> <span class="o">}</span>, <span class="o">{</span> <span class="s2">"error"</span>: <span class="s2">"invalid"</span> <span class="o">}</span>
             <span class="o">]</span>
         <span class="o">}</span>
     <span class="o">]</span>
@@ -1290,11 +1286,11 @@ EXEMPLO DE RETORNO DE ERROS
 <td>Nome para identificação da conta.</td>
 </tr>
 <tr>
-<td>admin_email</td>
-<td>Sim</td>
+<td>email</td>
+<td>Não</td>
 <td>Texto</td>
 <td></td>
-<td>E-mail válido do usuário administrador que será criado ou vinculado à nova conta.</td>
+<td>E-mail válido do primeiro usuário que será criado ou vinculado à nova conta.</td>
 </tr>
 </tbody></table>
 
@@ -4501,6 +4497,14 @@ EXEMPLO DE RESPOSTA
 <td>De 3 a 4 caracteres</td>
 <td>Trata-se de um atributo específico para uso do engine de cálculo TaxRules da TaxWeb. <br>Preencher se a organização não tiver nenhum regime tributário diferenciado. <br><strong>Valores válidos: LFEM, LFDES e ISENLF.</strong><br><br><i>É importante que o regime tributário diferenciado (emitente) também esteja configurado na organização.</i></td>
 </tr>
+<tr>
+<td>cd_atividade_economica</td>
+<td>-</td>
+<td>Não</td>
+<td>Numérico</td>
+<td>-</td>
+<td>Trata-se de um atributo específico (cdAtividadeEconomica) para uso do engine de cálculo TaxRules da TaxWeb</td>
+</tr>
 </tbody></table>
 
 <h3 id="endereco-xml-enderdest">endereco (XML: enderDest)</h3>
@@ -5652,7 +5656,7 @@ EXEMPLO DE RESPOSTA
 <td>Sim</td>
 <td>Numérico</td>
 <td>1 dígito</td>
-<td>0=Preço tabelado ou máximo sugerido; <br>1=Lista Negativa (valor); <br>2=Lista Positiva (valor); <br>3=Lista Neutra (valor);  4=Margem Valor Agregado (%); 5=Pauta (valor).</td>
+<td>0=Preço tabelado ou máximo sugerido; <br>1=Lista Negativa (valor); <br>2=Lista Positiva (valor); <br>3=Lista Neutra (valor);  <br>4=Margem Valor Agregado (%); <br>5=Pauta (valor).</td>
 </tr>
 <tr>
 <td>valor_base_calculo_st</td>
@@ -11784,6 +11788,39 @@ EXEMPLO DE RESPOSTA
     <span class="s2">"id"</span>: 10990,
     <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
     <span class="s2">"data"</span>:  <span class="o">{</span>...<span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+          <h1 id="request-tracker-request-id">Request Tracker (Request ID)</h1>
+
+<p>Para consultar as informações de um documento fiscal ou mais pelo ID da requisição (Request ID), é necessário realizar uma requisição GET para o seguinte endereço:</p>
+
+<div class="api-endpoint">
+    <div class="endpoint-data">
+        <i class="label label-get">GET</i>
+        <h6>/api/v1/request_tracker/{request_id}</h6>
+    </div>
+</div>
+<pre class="highlight shell"><code>EXEMPLO DE REQUISIÇÃO
+
+curl --request GET <span class="se">\</span>
+  --url http://app.production.emites.com.br/api/v1/request_tracker/491dd276-b7d9-4623-beb1-234c66a80be3 <span class="se">\</span>
+  --header <span class="s1">'authorization: Bearer 6f42433270bc61d746556b17605db05a'</span> <span class="se">\</span>
+  --header <span class="s1">'content-type: application/json'</span>
+
+
+EXEMPLO DE RESPOSTA
+<span class="o">{</span>
+  <span class="s2">"request_tracker"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: <span class="s2">"491dd276-b7d9-4623-beb1-234c66a80be3"</span>,
+    <span class="s2">"nfces"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"status"</span>: <span class="s2">"processing"</span>,
+        <span class="s2">"id"</span>: 7569,
+        <span class="s2">"organization_id"</span>: 399
+      <span class="o">}</span>
+    <span class="o">]</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
