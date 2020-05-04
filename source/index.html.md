@@ -26,6 +26,7 @@ includes:
   - disabled_note
   - correction_note
   - cfe_storage
+  - request_tracker
   - tax_calculator
   - terminals
   - users
